@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  atom-game-management:
+    container_name: atom-game-management
+    stdin_open: true
+    tty: true
+    build: .
+    ports:
+      - '9001:9001'
+    volumes:
+      - ${PWD}/src:/app/src
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - COMPOSE_CONVERT_WINDOWS_PATHS=1

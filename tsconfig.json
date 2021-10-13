@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      // This paths synchronized with webpack shared config
+      "@/*": ["*"]
+    },
+    "target": "ESNext",
+    "module": "esnext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "types": ["reflect-metadata"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true
+  },
+  "include": ["src/**/*", "node_modules/@types"],
+  "exclude": ["src/**/*.test*"],
+  "typeAcquisition": { "enable": true }
+}
