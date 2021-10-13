@@ -13,8 +13,8 @@ RUN yarn
 # Copy all files to working directory
 COPY . .
 
-# Expose 9001 port
-EXPOSE 9001
+# Expose 9002 port
+EXPOSE 9002
 
 # Start application
 CMD ["yarn", "start"]
