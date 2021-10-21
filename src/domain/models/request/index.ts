@@ -1,3 +1,2 @@
-export * from './AddProviderRequestModel'
-export * from './GetProviderRequestModel'
-
+export * from './AddProviderRequestModel';
+export * from './GetProviderRequestModel';
