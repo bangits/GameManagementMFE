@@ -1,16 +1,16 @@
 import { injectable } from 'inversify';
 import { IAuthRepository } from '../boundaries';
 import { UserEntity } from '../entities';
-import { LoginRequestModel } from '../types';
+import { AddProviderRequestModel } from '../models';
 
 @injectable()
 export class AuthRepository implements IAuthRepository {
-  login = async (loginRequestModel: LoginRequestModel) => {
-    console.log(loginRequestModel);
+  login = async (AddProviderRequestModel: AddProviderRequestModel) => {
+    console.log(AddProviderRequestModel);
 
     return new UserEntity({
       id: '1',
-      name: loginRequestModel.username
+      name: AddProviderRequestModel.logo
     }).user;
   };
 }

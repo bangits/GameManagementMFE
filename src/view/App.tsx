@@ -3,6 +3,7 @@ import { DiContainer } from '@/di';
 import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { AddProviderContainer } from './addProvider';
 
 const App = () => {
   const [store, setStore] = useState(null);
@@ -37,7 +38,7 @@ const App = () => {
                 </Route>
 
                 <Route path={`${url}/add`} exact>
-                  <div>Provider add</div>
+                  <AddProviderContainer />
                 </Route>
               </>
             )}

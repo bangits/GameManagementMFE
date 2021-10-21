@@ -1,6 +1,6 @@
 import { User } from '../entities';
-import { LoginRequestModel } from '../types';
+import { AddProviderRequestModel } from '../models';
 
 export interface IAuthRepository {
-  login(loginRequestModel: LoginRequestModel): Promise<User>;
+  login(AddProviderRequestModel: AddProviderRequestModel): Promise<User>;
 }
