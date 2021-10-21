@@ -37,7 +37,8 @@ module.exports = (webpackConfigEnv, argv) => {
     },
     devServer: {
       port: webpackConfigEnv.port || 9002,
-      host: '0.0.0.0' // To accept connections from outside container
+      host: '0.0.0.0', // To accept connections from outside container
+      hot: false
     },
     externals: !isDevelopment ? ['react', 'react-dom'] : [],
     plugins: [
