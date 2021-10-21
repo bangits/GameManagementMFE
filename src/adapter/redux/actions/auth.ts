@@ -1,4 +1,4 @@
-import { LoginRequestModel } from '@/domain/types';
+import { AddProviderViewModel } from '@/models';
 import { InferValueTypes } from '../types';
 
 const MODULE_NAME = 'AUTH';
@@ -8,9 +8,9 @@ export const authTypes = {
 } as const;
 
 export const authActions = {
-  loginRequest: (loginRequestModel: LoginRequestModel) => ({
+  loginRequest: (addProviderViewModel: AddProviderViewModel) => ({
     type: authTypes.LOGIN_REQUEST,
-    payload: loginRequestModel
+    payload: addProviderViewModel
   })
 };
 

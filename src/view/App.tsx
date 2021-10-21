@@ -2,7 +2,7 @@ import createStore from '@/adapter/redux/store/store';
 import { DiContainer } from '@/di';
 import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
-import { SignInContainer } from './auth';
+import { AddProviderContainer } from './addProvider';
 
 const App = () => {
   const [store, setStore] = useState(null);
@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <SignInContainer />
+      <AddProviderContainer />
     </Provider>
   );
 };
