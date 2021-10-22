@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "atomaks-ef8e"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "atomaks-ef8e"
+  template:
+    metadata:
+      labels:
+        app: "atomaks-ef8e"
+    spec:
+      containers:
+        - name: "atomaks-ef8e"
+          image: "atomfrontcr.azurecr.io/atomaks"
+          ports:
+          - containerPort: 9002
