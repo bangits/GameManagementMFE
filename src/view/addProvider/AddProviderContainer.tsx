@@ -140,6 +140,7 @@ const AddProviderContainer: FC<AuthContainerProps> = () => {
       validateOnBlur={false}
       validateOnChange={false}>
       <Form noValidate>
+        {/* <CountriesSelect /> */}
         <AtomForm renderInputs={SelectComponent} {...atomFormProps} />
       </Form>
     </Formik>
