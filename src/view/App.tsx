@@ -39,14 +39,11 @@ const App = () => {
               render={({ match: { url } }) => (
                 <>
                   <Route path={`${url}/`} exact>
-                    <div>Providers</div>
+                    <ProviderList />
                   </Route>
 
                   <Route path={`${url}/add`} exact>
                     <AddProviderContainer />
-                  </Route>
-                  <Route path={`${url}/provider-list`} exact>
-                    <ProviderList />
                   </Route>
                 </>
               )}
