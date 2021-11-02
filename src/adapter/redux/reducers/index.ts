@@ -1,1 +1,2 @@
-export * from './auth';
+export { providerReducer as provider } from './providers';
+

@@ -1,25 +1,16 @@
 import createStore from '@/adapter/redux/store/store';
-import { DiContainer } from '@/di';
+import { containerInstance } from '@/di';
 import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { AddProviderContainer } from './addProvider';
+import { AddProviderContainer, ProviderListContainer } from './components';
 
 const App = () => {
   const [store, setStore] = useState(null);
 
   useEffect(() => {
-    const containerInstance = new DiContainer();
-
     containerInstance.configure(diFiles).then(() => {
-      setStore(
-        createStore(
-          containerInstance.diFiles.map(({ name }) => ({
-            module: containerInstance.diContainer.get(name),
-            name
-          }))
-        )
-      );
+      setStore(createStore());
     });
   }, []);
 
@@ -34,7 +25,7 @@ const App = () => {
             render={({ match: { url } }) => (
               <>
                 <Route path={`${url}/`} exact>
-                  <div>Providers</div>
+                  <ProviderListContainer />
                 </Route>
 
                 <Route path={`${url}/add`} exact>
@@ -43,7 +34,6 @@ const App = () => {
               </>
             )}
           />
-
           <Redirect to='/providers' />
         </Switch>
       </Router>
