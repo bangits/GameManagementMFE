@@ -3,7 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { provider } from '../reducers';
 
 const rootReducer = combineReducers({
-    provider,
+  provider,
   [providerApi.reducerPath]: providerApi.reducer
 });
 export default rootReducer;

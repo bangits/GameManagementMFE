@@ -2,9 +2,7 @@
 import { DataTable } from '@atom/design-system';
 import React, { FC, useEffect } from 'react';
 
-export type ProviderListActions = {
-    
-};
+export type ProviderListActions = {};
 
 export type ProviderListState = {};
 
@@ -12,7 +10,7 @@ export type ProviderListProps = ProviderListActions & ProviderListState;
 
 const ProviderList: FC<ProviderListProps> = () => {
   useEffect(() => {}, []);
-console.log('ProviderListProps');
+  console.log('ProviderListProps');
 
   return (
     <div>

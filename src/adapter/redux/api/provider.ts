@@ -9,11 +9,10 @@ export const providerApi = createApi({
   endpoints: (build) => ({
     getProvider: build.query({
       query: (getProviderRequestModel: GetProviderRequestModel) => {
-        
-        return ({
+        return {
           methodName: 'getProviders',
           methodArguments: [getProviderRequestModel]
-        })
+        };
       }
     })
   })
