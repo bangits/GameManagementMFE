@@ -1,4 +1,4 @@
-import { PrimaryKey } from '@/types';
+import { PrimaryKey } from '@atom/common';
 
 export interface AddProviderViewModel {
   name: string;

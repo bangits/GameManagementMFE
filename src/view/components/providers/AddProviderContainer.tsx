@@ -1,16 +1,14 @@
-import { authActions } from '@/adapter/redux/actions';
+import { addProviderValidationSchema } from '@/validators/addProviderValidations';
 // @ts-ignore
 import { Form as AtomForm } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
 import { FC, useCallback, useMemo } from 'react';
-import { connect } from 'react-redux';
-import { addProviderValidationSchema } from '../../validators/addProviderValidations';
 
-type AuthActions = {};
+type ProviderActions = {};
 
-type AuthContainerProps = {} & AuthActions;
+type ProviderContainerProps = {} & ProviderActions;
 
-const AddProviderContainer: FC<AuthContainerProps> = () => {
+const AddProviderContainer: FC<ProviderContainerProps> = () => {
   const SelectComponent = useCallback((Component, name) => {
     return (
       <FastField name={name}>
@@ -147,6 +145,4 @@ const AddProviderContainer: FC<AuthContainerProps> = () => {
   );
 };
 
-export default connect<null, AuthActions>(null, {
-  onSubmit: authActions.loginRequest
-})(AddProviderContainer);
+export default AddProviderContainer;

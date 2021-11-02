@@ -1,4 +1,4 @@
-import { asyncForeach } from 'atom-shared';
+import { asyncForeach, CacheService, httpService } from '@atom/common';
 import { Container } from 'inversify';
 
 export type DiConfig = {
@@ -20,6 +20,9 @@ export class DiContainer {
       defaultScope: 'Singleton'
     });
 
+    this.diContainer.bind('ICacheService').to(CacheService);
+    this.diContainer.bind('IHttpService').toDynamicValue(() => httpService);
+
     await asyncForeach(diConfigs, async ({ moduleName, modulePath }) => {
       const module = await import(`../${modulePath}`);
 
@@ -30,3 +33,5 @@ export class DiContainer {
     });
   };
 }
+
+export const containerInstance = new DiContainer();
