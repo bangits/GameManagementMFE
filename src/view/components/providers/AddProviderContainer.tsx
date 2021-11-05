@@ -1,38 +1,16 @@
 import { addProviderValidationSchema } from '@/validators/addProviderValidations';
+import { CountriesSelect, CustomSelectProps, CurrencySelect } from '@atom/common';
 // @ts-ignore
 import { Form as AtomForm } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
+import { DefaultCurrencyField } from './DefaultCurrencyField';
 
 type ProviderActions = {};
 
 type ProviderContainerProps = {} & ProviderActions;
 
 const AddProviderContainer: FC<ProviderContainerProps> = () => {
-  const SelectComponent = useCallback((Component, name) => {
-    return (
-      <FastField name={name}>
-        {({ field, meta }) => {
-          console.log(meta, name, field);
-
-          return (
-            <>
-              <Component
-                {...field}
-                name={name}
-                error={true}
-                explanation={meta.touched && meta.error}
-                color={meta.error && meta.touched ? 'danger' : ''}
-              />
-
-              {/* <p>error - {meta.error}</p> */}
-            </>
-          );
-        }}
-      </FastField>
-    );
-  }, []);
-
   const atomFormProps = useMemo(
     () => ({
       title: 'Add provider',
@@ -47,56 +25,35 @@ const AddProviderContainer: FC<ProviderContainerProps> = () => {
         {
           type: 'select',
           name: 'targetMarkets',
-          props: {
-            inputLabel: 'Target market',
-            options: [
-              { label: 'market 1', value: 1 },
-              { label: 'market 2', value: 2 },
-              { label: 'market 3', value: 3 }
-            ],
-            isSearchable: true,
-            isMulti: true
-          }
+          isSearchable: true,
+          isMulti: true,
+          component: (props: CustomSelectProps) => <CountriesSelect {...props} inputLabel='Target Markets' />
         },
         {
           type: 'select',
           name: 'certifiedCountries',
-          props: {
-            inputLabel: 'Certified countries',
-            options: [
-              { label: 'Certified country 1', value: 1 },
-              { label: 'Certified country 2', value: 2 },
-              { label: 'Certified country 3', value: 3 }
-            ],
-            isSearchable: true,
-            isMulti: true
-          }
+          isSearchable: true,
+          isMulti: true,
+          component: (props: CustomSelectProps) => <CountriesSelect {...props} inputLabel='Certified Countries' />
         },
         {
           type: 'select',
-          name: 'certifiedCountries',
-          props: {
-            inputLabel: 'Restricted countries',
-            options: [
-              { label: 'Restricted country 1', value: 1 },
-              { label: 'Restricted country 2', value: 2 },
-              { label: 'Restricted country 3', value: 3 }
-            ],
-            isSearchable: true,
-            isMulti: true
-          }
+          name: 'restrictedCountries',
+          isSearchable: true,
+          isMulti: true,
+          component: (props: CustomSelectProps) => <CountriesSelect {...props} inputLabel='Restricted Countries' />
         },
         {
           type: 'select',
           name: 'providerCurrencies',
+          isMulti: true,
           props: {
-            inputLabel: 'Currency',
             options: [
-              { label: 'Currency 1', value: 1 },
-              { label: 'Currency 2', value: 2 },
-              { label: 'Currency 3', value: 3 }
+              {
+                label: 'Test',
+                value: 1
+              }
             ],
-            isSearchable: true,
             isMulti: true
           }
         },
@@ -124,6 +81,30 @@ const AddProviderContainer: FC<ProviderContainerProps> = () => {
     []
   );
 
+  const renderInputs = useCallback((Component: (props: any) => JSX.Element, name: string, fieldType: string) => {
+    return (
+      <FastField name={name}>
+        {({ field, meta, form }) => {
+          return (
+            <>
+              <Component
+                {...field}
+                onChange={(evt) => {
+                  form.setFieldValue(field.name, fieldType === 'input' ? evt.target.value : evt);
+                  form.setFieldTouched(field.name, true);
+                }}
+                name={name}
+                error={true}
+                explanation={meta.touched && meta.error}
+                color={meta.error && meta.touched ? 'danger' : ''}
+              />
+            </>
+          );
+        }}
+      </FastField>
+    );
+  }, []);
+
   return (
     <Formik
       initialValues={{
@@ -131,15 +112,15 @@ const AddProviderContainer: FC<ProviderContainerProps> = () => {
         providerCurrencies: '',
         defaultCurrency: '',
         targetMarkets: '',
-        restrictedCountries: ''
+        restrictedCountries: '',
+        certifiedCountries: ''
       }}
       validationSchema={addProviderValidationSchema}
       onSubmit={() => console.log('submited')}
       validateOnBlur={false}
       validateOnChange={false}>
       <Form noValidate>
-        {/* <CountriesSelect /> */}
-        <AtomForm renderInputs={SelectComponent} {...atomFormProps} />
+        <AtomForm renderInputs={renderInputs} {...atomFormProps} />
       </Form>
     </Formik>
   );
