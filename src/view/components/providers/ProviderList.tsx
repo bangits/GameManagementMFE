@@ -1,5 +1,4 @@
 //@ts-ignore
-import { DataTable } from '@atom/design-system';
 import React, { FC, useEffect } from 'react';
 
 export type ProviderListActions = {};
@@ -14,7 +13,7 @@ const ProviderList: FC<ProviderListProps> = () => {
 
   return (
     <div>
-      <DataTable
+      {/* <DataTable
         filterProps={{
           defaultOpened: true,
           initialValues: {
@@ -403,7 +402,7 @@ const ProviderList: FC<ProviderListProps> = () => {
           data: [],
           columns: []
         }}
-      />
+      /> */}
     </div>
   );
 };

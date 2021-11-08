@@ -1,6 +1,4 @@
 import { providerApi } from '@/adapter/redux/api';
-//@ts-ignore
-import { DataTable } from '@atom/design-system';
 
 // export default connect<ProviderState, ProviderActions>((state: ReduxStore) => ({
 //   providers: providerActions.getProviderRequest(state)
@@ -31,7 +29,7 @@ const ProviderContainer = () => {
   return (
     <>
       <div style={{ marginLeft: '10rem' }}>
-        <DataTable
+        {/* <DataTable
           filterProps={{
             defaultOpened: true,
             initialValues: {
@@ -498,7 +496,7 @@ const ProviderContainer = () => {
               }
             ]
           }}
-        />
+        /> */}
       </div>
     </>
   );
