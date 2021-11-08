@@ -1,4 +1,4 @@
-import { GetProviderRequestModel } from '@/domain/models';
+import { GetProviderRequestModel, AddProviderRequestModel } from '@/domain/models';
 import { inject, injectable } from 'inversify';
 import { IProviderRepository } from './../boundaries';
 import { GetProviderResponseModel } from './../models/response/GetProviderResponseModel';
@@ -10,5 +10,9 @@ export class ProviderUseCase {
 
   getProviders = async (providerRequestModel: GetProviderRequestModel): Promise<GetProviderResponseModel> => {
     return this.providerRepository.getProviders(providerRequestModel);
+  };
+
+  addProviders = async (AddProviderRequestModel: AddProviderRequestModel): Promise<void> => {
+    return this.providerRepository.addProviders(AddProviderRequestModel);
   };
 }

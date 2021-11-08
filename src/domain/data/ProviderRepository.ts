@@ -1,7 +1,7 @@
 import { cachedFn, ICacheService, IHttpService } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IProviderRepository } from '../boundaries/IProviderRepository';
-import { GetProviderRequestModel, GetProviderResponseModel } from '../models';
+import { GetProviderRequestModel, GetProviderResponseModel, AddProviderRequestModel } from '../models';
 
 @injectable()
 export class ProviderRepository implements IProviderRepository {
@@ -82,4 +82,13 @@ export class ProviderRepository implements IProviderRepository {
       };
     }
   ).bind(this);
+
+  addProviders = cachedFn('addProvider', async (addProviderRequestModel: AddProviderRequestModel) => {
+    const addProvider = await this.httpService.post<void, {}, AddProviderRequestModel>({
+      url: '/Providers',
+      body: addProviderRequestModel
+    });
+
+    return addProvider;
+  }).bind(this);
 }

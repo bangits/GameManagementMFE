@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@atom/common@^1.9.1":
-  version "1.9.1"
-  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/common/-/common-1.9.1.tgz#ee91dddf881bf49092a543cc9bd3ef163ce5fb86"
-  integrity sha1-7pHd34gb9JCSpUPMm9PvFjzl+4Y=
+"@atom/common@^1.9.2":
+  version "1.9.2"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/common/-/common-1.9.2.tgz#f5d3b41163e9afadc7a5405b2b4ab4b20fcc0b62"
+  integrity sha1-9dO0EWPpr63HpUBbK0q0sg/MC2I=
   dependencies:
     axios "^0.23.0"
     react "^17.0.2"
     rxjs "^7.4.0"
     single-spa "^5.9.3"
 
-"@atom/design-system@^1.6.1":
-  version "1.6.1"
-  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/design-system/-/design-system-1.6.1.tgz#c53ac59b2176eb722ae13a898c0be9fc9f60d243"
-  integrity sha1-xTrFmyF263Iq4TqJjAvp/J9g0kM=
+"@atom/design-system@^1.6.2":
+  version "1.6.2"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/design-system/-/design-system-1.6.2.tgz#73e4d430374118fa4d2e2c3a20e7d5a5b7a8e6ff"
+  integrity sha1-c+TUMDdBGPpNLiw6IOfVpbeo5v8=
   dependencies:
     "@my-ui/core" "^2.12.2"
     classnames "^2.3.1"

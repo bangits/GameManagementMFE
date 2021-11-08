@@ -1,4 +1,5 @@
 import { GetProviderRequestModel } from '@/domain/models/request/GetProviderRequestModel';
+import { AddProviderRequestModel } from './../../../domain/models/request/AddProviderRequestModel';
 import { ProviderUseCase } from '@/domain/use-case/ProviderUseCase';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../helpers';
@@ -12,6 +13,14 @@ export const providerApi = createApi({
         return {
           methodName: 'getProviders',
           methodArguments: [getProviderRequestModel]
+        };
+      }
+    }),
+    addProvider: build.mutation({
+      query: (addProviderRequestModel: AddProviderRequestModel) => {
+        return {
+          methodName: 'addProviders',
+          methodArguments: [addProviderRequestModel]
         };
       }
     })

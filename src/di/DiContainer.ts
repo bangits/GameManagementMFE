@@ -1,4 +1,4 @@
-import { asyncForeach, CacheService, httpService } from '@atom/common';
+import { asyncForeach, CacheService, HttpService, httpService } from '@atom/common';
 import { Container } from 'inversify';
 
 export type DiConfig = {
@@ -21,7 +21,12 @@ export class DiContainer {
     });
 
     this.diContainer.bind('ICacheService').to(CacheService);
-    this.diContainer.bind('IHttpService').toDynamicValue(() => httpService);
+    this.diContainer.bind('IHttpService').toDynamicValue(
+      () =>
+        new HttpService({
+          baseURL: 'http://52.188.142.151/api/v1'
+        })
+    );
 
     await asyncForeach(diConfigs, async ({ moduleName, modulePath }) => {
       const module = await import(`../${modulePath}`);

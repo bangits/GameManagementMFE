@@ -4,6 +4,7 @@ import { CountriesSelect, CurrencySelect, CustomSelectProps, SelectOptionType } 
 import { Form as AtomForm } from '@atom/design-system';
 import { Field, FieldProps, Form, Formik, FormikProps } from 'formik';
 import { FC, useCallback, useMemo, useState } from 'react';
+import { providerApi } from '@/adapter/redux/api';
 
 type ProviderActions = {};
 
@@ -20,7 +21,9 @@ const initialValues = {
 };
 
 const AddProviderContainer: FC<ProviderContainerProps> = () => {
-  const [selectedProviderCurrencies, setSelecetedProviderCurrencies] = useState<SelectOptionType[]>([]);
+  const [addProvider] = providerApi.useAddProviderMutation();
+
+  const [selectedProviderCurrencies, setSelectedProviderCurrencies] = useState<SelectOptionType[]>([]);
 
   const atomFormProps = useMemo(
     () => ({
@@ -61,7 +64,7 @@ const AddProviderContainer: FC<ProviderContainerProps> = () => {
                 if (!updatedOptions.find((o) => o.value === form.values.defaultCurrency))
                   await form.setFieldValue('defaultCurrency', 0);
 
-                setSelecetedProviderCurrencies(updatedOptions);
+                setSelectedProviderCurrencies(updatedOptions);
               }}
             />
           )
@@ -120,15 +123,8 @@ const AddProviderContainer: FC<ProviderContainerProps> = () => {
   );
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={addProviderValidationSchema}
-      onSubmit={(value) => {
-        console.log(value);
-      }}>
-      {(form) => {
-        console.log(form);
-
+    <Formik initialValues={initialValues} validationSchema={addProviderValidationSchema} onSubmit={addProvider}>
+      {() => {
         return (
           <Form noValidate>
             <AtomForm renderInputs={renderInputs} {...atomFormProps} />
