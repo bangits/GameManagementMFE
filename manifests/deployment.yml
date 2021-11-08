@@ -1,19 +1,19 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "atomaks-f452"
+  name: 'atomaks-f452'
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: "atomaks-f452"
+      app: 'atomaks-f452'
   template:
     metadata:
       labels:
-        app: "atomaks-f452"
+        app: 'atomaks-f452'
     spec:
       containers:
-        - name: "atomaks-f452"
-          image: "atomfrontcr.azurecr.io/atomaks"
+        - name: 'atomaks-f452'
+          image: 'atomfrontcr.azurecr.io/atomaks'
           ports:
-          - containerPort: 9002
+            - containerPort: 9002
