@@ -8,12 +8,11 @@ export class ProviderUseCase {
   @inject('IProviderRepository')
   private readonly providerRepository: IProviderRepository;
 
-
   getProviders = async (providerRequestModel: GetProviderRequestModel): Promise<GetProviderResponseModel> => {
     return this.providerRepository.getProviders(providerRequestModel);
   };
 
   getProviderNames = async (): Promise<GetProviderNamesResponseModel> => {
-    return this.providerRepository.getProviderNames()
+    return this.providerRepository.getProviderNames();
   };
 }

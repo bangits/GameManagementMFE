@@ -21,9 +21,12 @@ export class DiContainer {
     });
 
     this.diContainer.bind('ICacheService').to(CacheService);
-    this.diContainer.bind('IHttpService').toDynamicValue(() => new HttpService({
-      baseURL:'http://20.83.131.132/api/v1'
-    }));
+    this.diContainer.bind('IHttpService').toDynamicValue(
+      () =>
+        new HttpService({
+          baseURL: 'http://20.83.131.132/api/v1'
+        })
+    );
 
     await asyncForeach(diConfigs, async ({ moduleName, modulePath }) => {
       const module = await import(`../${modulePath}`);

@@ -158,4 +158,3 @@ const ProviderList: FC<ProviderListProps> = () => {
 };
 
 export default ProviderList;
-
