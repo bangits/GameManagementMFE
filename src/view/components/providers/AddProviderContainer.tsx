@@ -139,6 +139,7 @@ const AddProviderContainer: FC<ProviderContainerProps> = () => {
       validateOnChange={false}>
       <Form noValidate>
         {/* <CountriesSelect /> */}
+        {/*@ts-ignore*/}
         <AtomForm renderInputs={SelectComponent} {...atomFormProps} />
       </Form>
     </Formik>

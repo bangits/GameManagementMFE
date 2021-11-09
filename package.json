@@ -72,6 +72,8 @@
   },
   "dependencies": {
     "@atom/common": "^1.9.1",
+    "@atom/design-system": "^1.4.3",
+    "@my-ui/core": "^2.11.0",
     "@reduxjs/toolkit": "^1.6.2",
     "formik": "^2.2.9",
     "immer": "^9.0.6",
