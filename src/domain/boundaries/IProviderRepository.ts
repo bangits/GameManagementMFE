@@ -1,6 +1,13 @@
-import { GetProviderRequestModel, GetProviderResponseModel, AddProviderRequestModel } from '../models';
+import {
+  AddProviderRequestModel,
+  GetProviderNamesResponseModel,
+  GetProviderRequestModel,
+  GetProviderResponseModel
+} from '../models';
 
 export interface IProviderRepository {
-  getProviders(getProviderRequestModel: GetProviderRequestModel): Promise<GetProviderResponseModel>;
+  getProviders(getProviderRequestModel: Partial<GetProviderRequestModel>): Promise<GetProviderResponseModel>;
+  getProviderNames(): Promise<GetProviderNamesResponseModel>;
+
   addProviders(getProviderRequestModel: AddProviderRequestModel): Promise<void>;
 }

@@ -1,18 +1,16 @@
-export interface GetProviderRequestModel {
+import { SortModel } from '../models/SortModel';
+
+export interface GetProviderRequestModel extends SortModel {
   providerId: number;
   name: string;
   gameCountFrom: number;
-  gameToFrom: number;
+  gameCountTo: number;
   statusId: number;
-  providerDefaultCurrencyIds: [];
-  providerCurrenyIds: [];
-  targetMarketsIds: [];
-  certifiedCountryIds: [];
-  restrictedCountryIds: [];
-  pageNumber: number;
-  pageSize: number;
-  direction: number;
-  property: string;
+  providerDefaultCurrencyIds: number[];
+  providerCurrenyIds: number[];
+  targetMarketsIds: number[];
+  certifiedCountryIds: number[];
+  restrictedCountryIds: number[];
   lastUpdatedDateFrom: string;
   lastUpdatedDateTo: string;
   registrationDateFrom: string;

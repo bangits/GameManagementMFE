@@ -2,22 +2,22 @@
 # yarn lockfile v1
 
 
-"@atom/common@^1.9.2":
-  version "1.9.2"
-  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/common/-/common-1.9.2.tgz#f5d3b41163e9afadc7a5405b2b4ab4b20fcc0b62"
-  integrity sha1-9dO0EWPpr63HpUBbK0q0sg/MC2I=
+"@atom/common@^1.9.4":
+  version "1.9.4"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/common/-/common-1.9.4.tgz#e5571d146ff89f46204f3f009cb4449077ba21c9"
+  integrity sha1-5VcdFG/4n0YgTz8AnLREkHe6Ick=
   dependencies:
     axios "^0.23.0"
     react "^17.0.2"
     rxjs "^7.4.0"
     single-spa "^5.9.3"
 
-"@atom/design-system@^1.6.2":
-  version "1.6.2"
-  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/design-system/-/design-system-1.6.2.tgz#73e4d430374118fa4d2e2c3a20e7d5a5b7a8e6ff"
-  integrity sha1-c+TUMDdBGPpNLiw6IOfVpbeo5v8=
+"@atom/design-system@^1.8.2":
+  version "1.8.2"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/design-system/-/design-system-1.8.2.tgz#81dc307d6a1bd1f38b90e6a5b300c49285539db6"
+  integrity sha1-gdwwfWob0fOLkOalswDEkoVTnbY=
   dependencies:
-    "@my-ui/core" "^2.12.2"
+    "@my-ui/core" "^2.13.3"
     classnames "^2.3.1"
     react "^17.0.2"
     react-dom "^17.0.2"
@@ -1350,10 +1350,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@my-ui/core@^2.12.2":
-  version "2.12.2"
-  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/ui-libs/npm/registry/@my-ui/core/-/core-2.12.2.tgz#b8ac373df12c900a7f57387f7daee023e0dafaba"
-  integrity sha1-uKw3PfEskAp/Vzh/fa7gI+Da+ro=
+"@my-ui/core@^2.13.3":
+  version "2.13.3"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/ui-libs/npm/registry/@my-ui/core/-/core-2.13.3.tgz#94c175fb2dc86da59636d156b3975e5c8093550d"
+  integrity sha1-lMF1+y3IbaWWNtFWs5deXICTVQ0=
   dependencies:
     "@my-ui/react-datepicker" "^1.5.0"
     "@my-ui/react-select" "1.1.6"
@@ -1361,6 +1361,7 @@
     "@my-ui/scrollbar" "^1.0.2"
     classnames "^2.3.1"
     react-jss "^10.8.0"
+    react-paginate "^7.1.5"
 
 "@my-ui/react-datepicker@^1.5.0":
   version "1.5.0"
@@ -6595,7 +6596,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -6750,6 +6751,13 @@ react-onclickoutside@^6.10.0:
   resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/react-onclickoutside/-/react-onclickoutside-6.12.0.tgz#c63db2e3c2c852b288160cdb6cff443604e28db4"
   integrity sha1-xj2y48LIUrKIFgzbbP9ENgTijbQ=
 
+react-paginate@^7.1.5:
+  version "7.1.5"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/react-paginate/-/react-paginate-7.1.5.tgz#fac437f67fbeb5bfa688a175142839d94240a58b"
+  integrity sha1-+sQ39n++tb+miKF1FCg52UJApYs=
+  dependencies:
+    prop-types "^15.6.1"
+
 react-popper@^2.2.5:
   version "2.2.5"
   resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/react-popper/-/react-popper-2.2.5.tgz#1214ef3cec86330a171671a4fbcbeeb65ee58e96"
@@ -6811,8 +6819,8 @@ react-transition-group@^4.3.0:
 
 react@^17.0.2:
   version "17.0.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
-  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
+  integrity sha1-0LXMUW0p6z7uOD91tihkz7aAADc=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"

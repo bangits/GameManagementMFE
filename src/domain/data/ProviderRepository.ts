@@ -1,7 +1,12 @@
 import { cachedFn, ICacheService, IHttpService } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IProviderRepository } from '../boundaries/IProviderRepository';
-import { GetProviderRequestModel, GetProviderResponseModel, AddProviderRequestModel } from '../models';
+import {
+  AddProviderRequestModel,
+  GetProviderNamesResponseModel,
+  GetProviderRequestModel,
+  GetProviderResponseModel
+} from '../models';
 
 @injectable()
 export class ProviderRepository implements IProviderRepository {
@@ -13,73 +18,13 @@ export class ProviderRepository implements IProviderRepository {
 
   getProviders = cachedFn(
     'GetProviderResponse',
-    async (getProviderRequestModel: GetProviderRequestModel): Promise<GetProviderResponseModel> => {
-      // const providers = await this.httpService.post<GetProviderResponseModel, {}, {}>({
-      //   url: '/Providers',
-      //   body: getProviderRequestModel
-      // });
+    async (getProviderRequestModel: Partial<GetProviderRequestModel>): Promise<GetProviderResponseModel> => {
+      const providers = await this.httpService.get<GetProviderResponseModel, Partial<GetProviderRequestModel>>({
+        url: '/Providers',
+        query: getProviderRequestModel
+      });
 
-      // return providers;
-      return {
-        results: [
-          {
-            id: 8,
-            name: 'Test',
-            logo: 'string',
-            gameCount: 10,
-            lastUpdatedDate: '2021-11-01T13:07:16.2093269',
-            creationDate: '2021-11-01T13:07:16.2093262',
-            defaultCurrency: null,
-            status: {
-              id: 2,
-              name: 'Inactive'
-            }
-          },
-          {
-            id: 7,
-            name: '999',
-            logo: 'string',
-            gameCount: 14,
-            lastUpdatedDate: '2021-10-08T14:05:49.0204521',
-            creationDate: '2021-10-08T14:05:49.0204519',
-            defaultCurrency: null,
-            status: {
-              id: 2,
-              name: 'Inactive'
-            }
-          },
-          {
-            id: 6,
-            name: '888',
-            logo: 'string',
-            gameCount: 0,
-            lastUpdatedDate: '2021-10-08T14:05:18.1647391',
-            creationDate: '2021-10-08T14:05:18.1647388',
-            defaultCurrency: null,
-            status: {
-              id: 2,
-              name: 'Inactive'
-            }
-          },
-          {
-            id: 5,
-            name: 'string',
-            logo: 'string',
-            gameCount: 1,
-            lastUpdatedDate: '2021-10-08T12:00:24.8067919',
-            creationDate: '2021-10-08T12:00:24.8067906',
-            defaultCurrency: null,
-            status: {
-              id: 2,
-              name: 'Inactive'
-            }
-          }
-        ],
-        currentPage: 1,
-        pageCount: 1,
-        pageSize: 30,
-        rowCount: 4
-      };
+      return providers;
     }
   ).bind(this);
 
@@ -90,5 +35,13 @@ export class ProviderRepository implements IProviderRepository {
     });
 
     return addProvider;
+  }).bind(this);
+
+  getProviderNames = cachedFn('GetProviderNamesResponse', async (): Promise<GetProviderNamesResponseModel> => {
+    const providerNames = await this.httpService.get<GetProviderNamesResponseModel, {}>({
+      url: '/Providers/ProvidersName'
+    });
+
+    return providerNames;
   }).bind(this);
 }

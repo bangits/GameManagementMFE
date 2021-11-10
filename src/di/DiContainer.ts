@@ -1,4 +1,4 @@
-import { asyncForeach, CacheService, HttpService, httpService } from '@atom/common';
+import { asyncForeach, CacheService, HttpService } from '@atom/common';
 import { Container } from 'inversify';
 
 export type DiConfig = {
