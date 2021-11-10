@@ -1,5 +1,4 @@
-import { SortModel } from '../models/SortModel';
-
+import { SortModel } from '@atom/common';
 export interface GetProviderRequestModel extends SortModel {
   providerId: number;
   name: string;

@@ -2,12 +2,13 @@
 # yarn lockfile v1
 
 
-"@atom/common@^1.9.4":
-  version "1.9.4"
-  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/common/-/common-1.9.4.tgz#e5571d146ff89f46204f3f009cb4449077ba21c9"
-  integrity sha1-5VcdFG/4n0YgTz8AnLREkHe6Ick=
+"@atom/common@^1.9.5":
+  version "1.9.5"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/@atom/common/-/common-1.9.5.tgz#c5e70c6674c79efa8d72fcc139f039c9092b2f74"
+  integrity sha1-xecMZnTHnvqNcvzBOfA5yQkrL3Q=
   dependencies:
     axios "^0.23.0"
+    qs-stringify "^1.2.1"
     react "^17.0.2"
     rxjs "^7.4.0"
     single-spa "^5.9.3"
@@ -6640,6 +6641,11 @@ punycode@^2.1.0, punycode@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+qs-stringify@^1.2.1:
+  version "1.2.1"
+  resolved "https://pkgs.dev.azure.com/bangitsgroup/Common/_packaging/atom-common/npm/registry/qs-stringify/-/qs-stringify-1.2.1.tgz#9b39ef6b816bd83309628fc9dad435fc0eccc28b"
+  integrity sha1-mznva4Fr2DMJYo/J2tQ1/A7Mwos=
 
 qs@6.7.0:
   version "6.7.0"
