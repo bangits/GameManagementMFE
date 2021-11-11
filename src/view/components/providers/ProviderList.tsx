@@ -2,7 +2,7 @@ import { GetProviderRequestModel } from '@/domain/models';
 import { CurrencySelect } from '@atom/common';
 import { DataTable } from '@atom/design-system';
 import React, { FC, useState } from 'react';
-import { ProvidersSelect } from '../selects/ProviderSelect';
+import { ProviderSelect } from '../selects/ProviderSelect';
 
 export type ProviderListActions = {};
 
@@ -37,7 +37,7 @@ const ProviderList: FC<ProviderListProps> = () => {
 
   return (
     <div>
-      <ProvidersSelect />
+      <ProviderSelect />
       {/* @ts-ignore */}
       <CurrencySelect />
       <DataTable

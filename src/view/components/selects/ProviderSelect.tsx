@@ -1,11 +1,10 @@
-import { containerInstance } from '@/di';
+import { GameManagementContext } from '@/adapter/react-context';
 import { ProviderNames } from '@/domain/entities';
-import { ProviderUseCase } from '@/domain/use-case';
 import { CustomSelect, CustomSelectProps } from '@atom/common';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
-export const ProvidersSelect = (props: Omit<CustomSelectProps, 'options'>) => {
-  const providerUseCase = containerInstance.diContainer.get<ProviderUseCase>('ProviderUseCase');
+export const ProviderSelect = (props: Omit<CustomSelectProps, 'options'>) => {
+  const { providerUseCase } = useContext(GameManagementContext);
 
   const [providers, setProviders] = useState<ProviderNames[]>([]);
 
