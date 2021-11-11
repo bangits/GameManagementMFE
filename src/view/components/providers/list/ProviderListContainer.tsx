@@ -31,12 +31,13 @@ const ProviderContainer = () => {
 
   const { data } = providerApi.useGetProviderQuery(transformedFilters);
 
-  const { results } = data || ({} as GetProviderResponseModel);
+  const { results, rowCount } = (data || {}) as GetProviderResponseModel;
 
   return (
     <>
       <ProviderList
         results={results || []}
+        rowCount={rowCount}
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy
             ? {

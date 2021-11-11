@@ -8,9 +8,10 @@ export interface ProviderListProps<T, K> {
   onFiltersChange: (parameters: FetchDataParameters<T, K>) => void;
   filters: K;
   results: T[];
+  rowCount: number;
 }
 
-function ProviderList<T extends {}, K>({ filters, results, onFiltersChange }: ProviderListProps<T, K>) {
+function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowCount }: ProviderListProps<T, K>) {
   const tableColumns = useMemo(
     () => [
       {
@@ -124,7 +125,7 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange }: Pr
           initialValues: filters,
           filters: filtersList,
           checkboxFilters: [],
-          resultLabel: '1062 users found',
+          resultLabel: `${rowCount} users found`,
           applyLabel: 'Apply',
           clearLabel: 'Clear'
         }}
