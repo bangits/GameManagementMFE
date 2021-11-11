@@ -29,13 +29,13 @@ const App = () => {
                   <Route path={`${url}/`} exact>
                     <ProviderListContainer />
                   </Route>
+
                   <Route path={`${url}/add`} exact>
                     <AddProviderContainer />
                   </Route>
                 </>
               )}
             />
-
             <Redirect to='/providers' />
           </Switch>
         </Router>

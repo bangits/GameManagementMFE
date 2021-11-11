@@ -45,11 +45,6 @@ declare module '*.scss' {
   export default content;
 }
 
-declare module '@atom/design-system' {
-  let _sql: any;
-  export = _sql;
-}
-
 declare global {
   let diFiles: DiConfig[];
 }
