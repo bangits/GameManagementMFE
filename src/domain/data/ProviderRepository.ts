@@ -16,18 +16,6 @@ export class ProviderRepository implements IProviderRepository {
   @inject('ICacheService')
   private readonly cacheService: ICacheService;
 
-  getProviders = cachedFn(
-    'GetProviderResponse',
-    async (getProviderRequestModel: Partial<GetProviderRequestModel>): Promise<GetProviderResponseModel> => {
-      const providers = await this.httpService.get<GetProviderResponseModel, Partial<GetProviderRequestModel>>({
-        url: '/Providers',
-        query: getProviderRequestModel
-      });
-
-      return providers;
-    }
-  ).bind(this);
-
   addProviders = cachedFn('addProvider', async (addProviderRequestModel: AddProviderRequestModel) => {
     const addProvider = await this.httpService.post<void, {}, AddProviderRequestModel>({
       url: '/Providers',
@@ -44,4 +32,15 @@ export class ProviderRepository implements IProviderRepository {
 
     return providerNames;
   }).bind(this);
+
+  getProviders = async (
+    getProviderRequestModel: Partial<GetProviderRequestModel>
+  ): Promise<GetProviderResponseModel> => {
+    const providers = await this.httpService.get<GetProviderResponseModel, Partial<GetProviderRequestModel>>({
+      url: '/Providers',
+      query: getProviderRequestModel
+    });
+
+    return providers;
+  };
 }

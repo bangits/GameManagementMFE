@@ -1,3 +1,4 @@
+import { ProviderStatusesEnum } from '@/domain/entities';
 import { CurrencySelect } from '@atom/common';
 import { DataTable, FetchDataParameters, PageWrapper } from '@atom/design-system';
 import React, { useMemo } from 'react';
@@ -18,23 +19,32 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange }: Pr
       },
       {
         Header: 'Logo',
-        accessor: 'logo' as const
+        accessor: 'logo' as const,
+        disableSortBy: true,
+        variant: 'image' as const
       },
       {
         Header: 'Provider name',
-        accessor: 'name' as const
+        accessor: 'name' as const,
+        sortingId: 'Name'
       },
       {
         Header: 'Total game count',
-        accessor: 'gameCount' as const
+        accessor: 'gameCount' as const,
+        sortingId: 'GameCount'
       },
       {
         Header: 'Default currency',
-        accessor: 'defaultCurrency.code' as const
+        accessor: 'defaultCurrency.code' as const,
+        disableSortBy: true
       },
       {
         Header: 'Status',
-        accessor: 'status.name' as const
+        accessor: 'status.id' as const,
+        disableSortBy: true,
+        variant: 'status' as const,
+        getVariant: (value: number) => (value === ProviderStatusesEnum.Active ? 'active' : 'blocked'),
+        getVariantName: (value: number) => (value === ProviderStatusesEnum.Active ? 'Active' : 'Blocked')
       }
     ],
     []
@@ -120,9 +130,10 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange }: Pr
         }}
         tableProps={{
           data: results,
-          // @ts-ignore
           columns: tableColumns
         }}
+        onEditButtonClick={() => {}}
+        onViewButtonClick={() => {}}
       />
     </PageWrapper>
   );

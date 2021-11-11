@@ -1,7 +1,8 @@
 import { providerApi } from '@/adapter/redux/api';
 import { GetProviderResponseModel } from '@/domain/models';
 import { GetProvidersViewModel } from '@/view/models';
-import { useState } from 'react';
+import { SortTypesEnum } from '@atom/common';
+import { useMemo, useState } from 'react';
 import ProviderList from './ProviderList';
 
 const ProviderContainer = () => {
@@ -12,16 +13,23 @@ const ProviderContainer = () => {
       from: null,
       to: null
     },
-    status: []
+    status: [],
+    sorting: null
   });
 
-  const { data } = providerApi.useGetProviderQuery({
-    providerId: filters.providerId,
-    providerCurrenyIds: [filters.currency],
-    gameCountFrom: filters.gameCount.from,
-    gameCountTo: filters.gameCount.to,
-    statusId: null
-  });
+  const transformedFilters = useMemo(
+    () => ({
+      providerId: +filters.providerId || null,
+      providerCurrenyIds: +filters.currency ? [+filters.currency] : [],
+      gameCountFrom: +filters.gameCount.from || null,
+      gameCountTo: +filters.gameCount.to || null,
+      statusId: null,
+      sorting: filters.sorting
+    }),
+    [filters]
+  );
+
+  const { data } = providerApi.useGetProviderQuery(transformedFilters);
 
   const { results } = data || ({} as GetProviderResponseModel);
 
@@ -32,15 +40,15 @@ const ProviderContainer = () => {
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy
             ? {
-                direction: parameters.sortedBy.desc ? 1 : 0,
+                direction: parameters.sortedBy.desc ? SortTypesEnum.DESC : SortTypesEnum.ASC,
                 property: parameters.sortedBy.id
               }
-            : {};
+            : null;
 
           setFilters({
             ...filters,
             ...parameters.filters,
-            ...sorting
+            sorting
           });
         }}
         filters={filters}
