@@ -5,7 +5,7 @@ import { SortTypesEnum } from '@atom/common';
 import { useMemo, useState } from 'react';
 import ProviderList from './ProviderList';
 
-const ProviderContainer = () => {
+const ProviderListContainer = () => {
   const [filters, setFilters] = useState<GetProvidersViewModel>({
     providerId: null,
     currency: null,
@@ -58,4 +58,4 @@ const ProviderContainer = () => {
   );
 };
 
-export default ProviderContainer;
+export default ProviderListContainer;

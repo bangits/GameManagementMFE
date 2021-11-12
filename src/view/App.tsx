@@ -1,4 +1,5 @@
 import createStore from '@/adapter/redux/store/store';
+import { GameManagementProvider } from '@/atom-game-management';
 import { containerInstance } from '@/di';
 import { AtomCommonProvider } from '@atom/common';
 import { useEffect, useState } from 'react';
@@ -20,25 +21,27 @@ const App = () => {
   return (
     <Provider store={store}>
       <AtomCommonProvider>
-        <Router basename='/game'>
-          <Switch>
-            <Route
-              path='/providers'
-              render={({ match: { url } }) => (
-                <>
-                  <Route path={`${url}/`} exact>
-                    <ProviderListContainer />
-                  </Route>
+        <GameManagementProvider>
+          <Router basename='/game'>
+            <Switch>
+              <Route
+                path='/providers'
+                render={({ match: { url } }) => (
+                  <>
+                    <Route path={`${url}/`} exact>
+                      <ProviderListContainer />
+                    </Route>
 
-                  <Route path={`${url}/add`} exact>
-                    <AddProviderContainer />
-                  </Route>
-                </>
-              )}
-            />
-            <Redirect to='/providers' />
-          </Switch>
-        </Router>
+                    <Route path={`${url}/add`} exact>
+                      <AddProviderContainer />
+                    </Route>
+                  </>
+                )}
+              />
+              <Redirect to='/providers' />
+            </Switch>
+          </Router>
+        </GameManagementProvider>
       </AtomCommonProvider>
     </Provider>
   );

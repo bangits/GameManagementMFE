@@ -2,7 +2,7 @@ import { ProviderStatusesEnum } from '@/domain/entities';
 import { CurrencySelect } from '@atom/common';
 import { DataTable, FetchDataParameters, PageWrapper } from '@atom/design-system';
 import React, { useMemo } from 'react';
-import { ProvidersSelect } from '../..';
+import { ProviderSelect } from '../..';
 
 export interface ProviderListProps<T, K> {
   onFiltersChange: (parameters: FetchDataParameters<T, K>) => void;
@@ -58,7 +58,7 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
         type: 'custom' as const,
         label: 'Provider Name',
         component: ({ onChange }) => (
-          <ProvidersSelect
+          <ProviderSelect
             inputLabel='Provider Name'
             fullWidth
             onChange={(changedValue) => onChange('providerName', changedValue)}
