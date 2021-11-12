@@ -8,6 +8,7 @@ import ProviderList from './ProviderList';
 const ProviderContainer = () => {
   const [filters, setFilters] = useState<GetProvidersViewModel>({
     providerId: null,
+    providerName: null,
     currency: null,
     gameCount: {
       from: null,
@@ -19,6 +20,7 @@ const ProviderContainer = () => {
 
   const transformedFilters = useMemo(
     () => ({
+      providerName: filters.providerName || null,
       providerId: +filters.providerId || null,
       providerCurrenyIds: +filters.currency ? [+filters.currency] : [],
       gameCountFrom: +filters.gameCount.from || null,

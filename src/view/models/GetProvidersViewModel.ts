@@ -6,4 +6,6 @@ export interface GetProvidersViewModel extends SortModel {
   currency: number;
   gameCount: { from: number; to: number };
   providerId: number;
+  providerName: string;
+
 }
