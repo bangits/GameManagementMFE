@@ -22,7 +22,7 @@ const ProviderListContainer = () => {
     () => ({
       providerName: filters.providerName || null,
       providerId: +filters.providerId || null,
-      providerCurrenyIds: +filters.currency ? [+filters.currency] : [],
+      providerDefaultCurrencyIds: filters.currency ? filters.currency : [],
       gameCountFrom: +filters.gameCount.from || null,
       gameCountTo: +filters.gameCount.to || null,
       statusId: null,

@@ -92,6 +92,7 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
         type: 'custom' as const,
         component: ({ onChange }) => (
           <CurrencySelect
+            isMulti
             inputLabel='Default currency'
             fullWidth
             onChange={(changedValue) => onChange('currency', changedValue)}
