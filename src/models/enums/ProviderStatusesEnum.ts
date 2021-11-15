@@ -4,8 +4,3 @@ export enum ProviderStatusesEnum {
   Blocked = 3,
   Removed = 4
 }
-
-export interface ProviderStatus {
-  id: ProviderStatusesEnum;
-  name: string;
-}

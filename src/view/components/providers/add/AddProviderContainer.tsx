@@ -1,10 +1,10 @@
+import { providerApi } from '@/adapter/redux/api';
 import { addProviderValidationSchema } from '@/validators/addProviderValidations';
 import { ChangedSelect } from '@/view';
 import { CountriesSelect, CurrencySelect, CustomSelectProps, SelectOptionType } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
 import { Field, FieldProps, Form, Formik, FormikProps } from 'formik';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { providerApi } from '@/adapter/redux/api';
 
 type ProviderActions = {};
 
@@ -126,7 +126,7 @@ const AddProviderContainer: FC<ProviderContainerProps> = () => {
     <Formik initialValues={initialValues} validationSchema={addProviderValidationSchema} onSubmit={addProvider}>
       {() => {
         return (
-          <Form noValidate>
+          <Form noValidate className='min-height-content-wrapper'>
             <AtomForm renderInputs={renderInputs} {...atomFormProps} />
           </Form>
         );
