@@ -1,5 +1,5 @@
+import { ProviderStatusesEnum } from '@/models';
 import { BaseEntity } from './BaseEntity';
-import { ProviderStatus } from './ProviderStatusesEntity';
 
 export interface Provider extends BaseEntity {
   name: string;
@@ -12,7 +12,7 @@ export interface Provider extends BaseEntity {
     name: string;
     code: string;
   };
-  status: ProviderStatus;
+  status: ProviderStatusesEnum;
 }
 
 export class ProviderEntity {

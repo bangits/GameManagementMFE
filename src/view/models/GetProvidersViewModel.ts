@@ -1,4 +1,4 @@
-import { ProviderStatusesEnum } from '@/domain/entities';
+import { ProviderStatusesEnum } from '@/models';
 import { SortModel } from '@atom/common';
 
 export interface GetProvidersViewModel extends SortModel {

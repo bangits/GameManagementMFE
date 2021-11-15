@@ -1,6 +1,6 @@
-import { ProviderStatusesEnum } from '@/domain/entities';
-import { CurrencySelect } from '@atom/common';
-import { DataTable, FetchDataParameters, PageWrapper } from '@atom/design-system';
+import { ProviderStatusesEnum } from '@/models';
+import { CurrencySelect, redirectToURL } from '@atom/common';
+import { DataTable, FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import React, { useMemo } from 'react';
 import { ProviderSelect } from '../..';
 
@@ -106,9 +106,10 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
         props: {
           inputLabel: 'Status',
           options: [
-            { label: 'Active', value: 1 },
-            { label: 'Blocked', value: 2 },
-            { label: 'Blocked2', value: 3 }
+            { label: 'Active', value: ProviderStatusesEnum.Active },
+            { label: 'Blocked', value: ProviderStatusesEnum.Blocked },
+            { label: 'Inactive', value: ProviderStatusesEnum.Inactive },
+            { label: 'Removed', value: ProviderStatusesEnum.Removed }
           ],
           isSearchable: true,
           isMulti: true
@@ -119,7 +120,14 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
   );
 
   return (
-    <PageWrapper title='Providers'>
+    <PageWrapper
+      title='Providers'
+      showButton
+      buttonProps={{
+        children: 'Add Provider',
+        startIcon: <Icons.PlusCircle />,
+        onClick: () => redirectToURL('/game/providers/add')
+      }}>
       <DataTable
         fetchData={onFiltersChange}
         filterProps={{
