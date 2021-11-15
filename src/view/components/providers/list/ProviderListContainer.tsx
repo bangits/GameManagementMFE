@@ -9,7 +9,7 @@ const ProviderListContainer = () => {
   const [filters, setFilters] = useState<GetProvidersViewModel>({
     providerId: null,
     providerName: null,
-    currency: null,
+    currency: [],
     gameCount: {
       from: null,
       to: null

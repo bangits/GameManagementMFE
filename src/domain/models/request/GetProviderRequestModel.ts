@@ -4,9 +4,9 @@ export interface GetProviderRequestModel extends SortModel {
   name: string;
   gameCountFrom: number;
   gameCountTo: number;
-  statusId: number;
+  statusId: number[];
   providerDefaultCurrencyIds: number[];
-  providerCurrenyIds: number[];
+  providerCurrencyIds: number[];
   targetMarketsIds: number[];
   certifiedCountryIds: number[];
   restrictedCountryIds: number[];

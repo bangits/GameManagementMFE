@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <AtomCommonProvider>
+      <AtomCommonProvider initializeLanguage>
         <GameManagementProvider>
           <Router basename='/game'>
             <Switch>

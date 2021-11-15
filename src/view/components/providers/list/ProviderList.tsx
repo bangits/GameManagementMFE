@@ -107,7 +107,9 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
           inputLabel: 'Status',
           options: [
             { label: 'Active', value: 1 },
-            { label: 'Blocked', value: 2 }
+            { label: 'Blocked', value: 2 },
+            { label: 'Blocked2', value: 3 }
+
           ],
           isSearchable: true,
           isMulti: true
