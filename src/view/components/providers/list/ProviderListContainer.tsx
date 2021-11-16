@@ -47,7 +47,6 @@ const ProviderListContainer = () => {
                 property: parameters.sortedBy.id
               }
             : null;
-
           setFilters({
             ...filters,
             ...parameters.filters,

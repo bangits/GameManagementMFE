@@ -1,5 +1,5 @@
 import { ProviderStatusesEnum } from '@/models';
-import { CurrencySelect, redirectToURL } from '@atom/common';
+import { CurrencySelect, redirectToURL, useTranslation } from '@atom/common';
 import { DataTable, FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import React, { useMemo } from 'react';
 import { ProviderSelect } from '../..';
@@ -50,13 +50,14 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
     ],
     []
   );
+  const t = useTranslation();
 
   const filtersList = useMemo(
     () => [
       {
         name: 'providerName',
         type: 'custom' as const,
-        label: 'Provider Name',
+        label: t.get('provider.fields.providerName'),
         component: ({ onChange }) => (
           <ProviderSelect
             inputLabel='Provider Name'
@@ -67,7 +68,7 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
       },
       {
         label: 'Provider ID',
-        name: 'providerId',
+        name: t.get('provider.fields.providerId'),
         type: 'input' as const,
         props: {
           label: 'Provider ID'
@@ -78,11 +79,11 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
         type: 'from-to' as const,
         name: 'gameCount',
         fromInputProps: {
-          label: 'Game Count - From',
+          label: t.get('provider.providerList.fields.gameCount.to'),
           type: 'number'
         },
         toInputProps: {
-          label: 'Game Count - To',
+          label: t.get('provider.providerList.fields.gameCount.from'),
           type: 'number'
         }
       },
@@ -93,7 +94,7 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
         component: ({ onChange }) => (
           <CurrencySelect
             isMulti
-            inputLabel='Default currency'
+            inputLabel={t.get('provider.providerList.fields.currency')}
             fullWidth
             onChange={(changedValue) => onChange('currency', changedValue)}
           />
@@ -104,12 +105,12 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
         name: 'status',
         type: 'select' as const,
         props: {
-          inputLabel: 'Status',
+          inputLabel: t.get('provider.providerList.fields.status'),
           options: [
-            { label: 'Active', value: ProviderStatusesEnum.Active },
-            { label: 'Blocked', value: ProviderStatusesEnum.Blocked },
-            { label: 'Inactive', value: ProviderStatusesEnum.Inactive },
-            { label: 'Removed', value: ProviderStatusesEnum.Removed }
+            { label: t.get('statuses.active'), value: ProviderStatusesEnum.Active },
+            { label: t.get('statuses.blocked'), value: ProviderStatusesEnum.Blocked },
+            { label: t.get('statuses.inActive'), value: ProviderStatusesEnum.Inactive },
+            { label: t.get('statuses.removed'), value: ProviderStatusesEnum.Removed }
           ],
           isSearchable: true,
           isMulti: true
@@ -119,12 +120,13 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
     []
   );
 
+
   return (
     <PageWrapper
-      title='Providers'
+      title={t.get('provider.providerList.title')}
       showButton
       buttonProps={{
-        children: 'Add Provider',
+        children: t.get('provider.addProvider'),
         startIcon: <Icons.PlusCircle />,
         onClick: () => redirectToURL('/game/providers/add')
       }}>
@@ -135,9 +137,9 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
           initialValues: filters,
           filters: filtersList,
           checkboxFilters: [],
-          resultLabel: `${rowCount} users found`,
-          applyLabel: 'Apply',
-          clearLabel: 'Clear'
+          resultLabel: `${rowCount} ${t.get('provider.providerList.usersFound')}`,
+          applyLabel: t.get('provider.applyLabel'),
+          clearLabel: t.get('provider.clearLabel')
         }}
         tableProps={{
           data: results,
