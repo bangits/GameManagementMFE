@@ -16,31 +16,27 @@ export class ProviderRepository implements IProviderRepository {
   @inject('ICacheService')
   private readonly cacheService: ICacheService;
 
-  addProviders = cachedFn('addProvider', async (addProviderRequestModel: AddProviderRequestModel) => {
-    const addProvider = await this.httpService.post<void, {}, AddProviderRequestModel>({
+  getProviderNames = cachedFn('GetProviderNamesResponse', async (): Promise<GetProviderNamesResponseModel> => {
+    return await this.httpService.get<GetProviderNamesResponseModel, {}>({
+      url: '/Providers/ProvidersName'
+    });
+  }).bind(this);
+
+  addProviders = async (addProviderRequestModel: AddProviderRequestModel) => {
+    await this.httpService.post<void, {}, AddProviderRequestModel>({
       url: '/Providers',
       body: addProviderRequestModel
     });
 
-    return addProvider;
-  }).bind(this);
-
-  getProviderNames = cachedFn('GetProviderNamesResponse', async (): Promise<GetProviderNamesResponseModel> => {
-    const providerNames = await this.httpService.get<GetProviderNamesResponseModel, {}>({
-      url: '/Providers/ProvidersName'
-    });
-
-    return providerNames;
-  }).bind(this);
+    return true;
+  };
 
   getProviders = async (
     getProviderRequestModel: Partial<GetProviderRequestModel>
   ): Promise<GetProviderResponseModel> => {
-    const providers = await this.httpService.get<GetProviderResponseModel, Partial<GetProviderRequestModel>>({
+    return await this.httpService.get<GetProviderResponseModel, Partial<GetProviderRequestModel>>({
       url: '/Providers',
       query: getProviderRequestModel
     });
-
-    return providers;
   };
 }

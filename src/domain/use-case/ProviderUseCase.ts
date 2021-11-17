@@ -12,8 +12,8 @@ export class ProviderUseCase {
     return this.providerRepository.getProviders(providerRequestModel);
   };
 
-  addProviders = async (AddProviderRequestModel: AddProviderRequestModel): Promise<void> => {
-    return this.providerRepository.addProviders(AddProviderRequestModel);
+  addProviders = async (addProviderRequestModel: AddProviderRequestModel): Promise<boolean> => {
+    return this.providerRepository.addProviders(addProviderRequestModel);
   };
 
   getProviderNames = async (): Promise<GetProviderNamesResponseModel> => {

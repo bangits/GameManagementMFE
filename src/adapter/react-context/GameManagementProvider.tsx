@@ -10,9 +10,7 @@ export const GameManagementProvider: FC<GameManagementProviderProps> = ({ childr
   useEffect(() => {
     const containerInstance = new DiContainer();
 
-    containerInstance.configure(diFiles).then(async () => {
-      setContainerInstance(containerInstance);
-    });
+    containerInstance.configure(diFiles).then(() => setContainerInstance(containerInstance));
   }, []);
 
   if (!containerInstance) return null;

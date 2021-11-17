@@ -25,7 +25,7 @@ const ProviderListContainer = () => {
       providerDefaultCurrencyIds: filters.currency ? filters.currency : [],
       gameCountFrom: +filters.gameCount.from || null,
       gameCountTo: +filters.gameCount.to || null,
-      statusId: null,
+      statusIds: filters.status,
       sorting: filters.sorting
     }),
     [filters]

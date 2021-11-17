@@ -1,4 +1,4 @@
-import { AddProviderViewModel } from '@/models';
+import { AddProviderViewModel } from '@/view/models';
 import { array, number, object, SchemaOf, string } from 'yup';
 
 export const addProviderValidationSchema: SchemaOf<AddProviderViewModel> = object({

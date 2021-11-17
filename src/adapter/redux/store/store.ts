@@ -4,15 +4,13 @@ import * as apiReducers from '../api';
 import rootReducer from './rootReducer';
 
 const createStore = () => {
-  const store = configureStore({
+  return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
       [...getDefaultMiddleware(), ...Object.values(apiReducers).map((api) => api.middleware), logger] as ReturnType<
         typeof getDefaultMiddleware
       >
   });
-
-  return store;
 };
 
 export default createStore;
