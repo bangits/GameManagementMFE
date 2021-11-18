@@ -1,14 +1,20 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint", "react", "jsx-a11y", "optimize-regex", "sonarjs", "no-loops", "promise"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:sonarjs/recommended",
+    "plugin:promise/recommended"
+  ],
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-funcyarntion-return-type": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/member-ordering": "error",
@@ -16,7 +22,10 @@
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/prefer-interface": "off",
     "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "promise/catch-or-return": "warn",
+    "sonarjs/no-duplicate-string": "warn",
     "no-console": "error",
     "sort-keys": "off"
   }
