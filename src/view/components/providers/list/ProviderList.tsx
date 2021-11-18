@@ -120,7 +120,6 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
     []
   );
 
-
   return (
     <PageWrapper
       title={t.get('provider.providerList.title')}
@@ -145,8 +144,12 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
           data: results,
           columns: tableColumns
         }}
-        onEditButtonClick={() => {}}
-        onViewButtonClick={() => {}}
+        onEditButtonClick={() => {
+          const mockEdit = {};
+        }}
+        onViewButtonClick={() => {
+          const mockView = {};
+        }}
       />
     </PageWrapper>
   );

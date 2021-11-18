@@ -1,3 +1,4 @@
+//@ts-ignore
 import { AddProviderViewModel } from '@/models';
 import { UseValidationTranslationReturnValue } from '@atom/common';
 import { array, number, object, SchemaOf, string } from 'yup';
