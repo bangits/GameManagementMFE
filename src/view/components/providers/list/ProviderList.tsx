@@ -1,7 +1,7 @@
 import { ProviderStatusesEnum } from '@/models';
 import { CurrencySelect, redirectToURL, useTranslation } from '@atom/common';
 import { DataTable, FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { ProviderSelect } from '../..';
 
 export interface ProviderListProps<T, K> {
@@ -50,6 +50,7 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
     ],
     []
   );
+
   const t = useTranslation();
 
   const filtersList = useMemo(

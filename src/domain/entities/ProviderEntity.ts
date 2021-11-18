@@ -1,4 +1,5 @@
 import { ProviderStatusesEnum } from '@/models';
+import { PrimaryKey } from '@atom/common';
 import { BaseEntity } from './BaseEntity';
 
 export interface Provider extends BaseEntity {
@@ -8,7 +9,7 @@ export interface Provider extends BaseEntity {
   lastUpdatedDate: string;
   creationDate: string;
   defaultCurrency: {
-    id: number;
+    id: PrimaryKey;
     name: string;
     code: string;
   };

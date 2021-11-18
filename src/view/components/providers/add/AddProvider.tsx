@@ -1,5 +1,4 @@
 import { ROUTES } from '@/constants';
-import { addProviderValidationSchema } from '@/validators/addProviderValidations';
 import { ChangedSelect } from '@/view';
 import {
   CountriesSelect,

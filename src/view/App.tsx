@@ -1,4 +1,4 @@
-import createStore from '@/adapter/redux/store/store';
+import createStore from '@/adapter/redux/store';
 import { GameManagementProvider } from '@/atom-game-management';
 import { ROUTES } from '@/constants';
 import { containerInstance } from '@/di';
