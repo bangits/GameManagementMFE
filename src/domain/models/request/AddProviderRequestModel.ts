@@ -1,4 +1,4 @@
-import { CountryModel } from '../models';
+import { CountryModel } from '..';
 
 export interface AddProviderRequestModel {
   name: string;

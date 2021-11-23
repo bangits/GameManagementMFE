@@ -1,10 +1,4 @@
-import { ProviderStatusesEnum } from '@/models';
-import { SortModel } from '@atom/common';
+import { PagedResult } from '@atom/common';
+import { ProvidersViewModel } from './ProvidersViewModel';
 
-export interface GetProvidersViewModel extends SortModel {
-  status: ProviderStatusesEnum[];
-  currency: number[];
-  gameCount: { from: number; to: number };
-  providerId: number;
-  providerName: string;
-}
+export class GetProvidersViewModel extends PagedResult<ProvidersViewModel> {}

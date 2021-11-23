@@ -1,12 +1,11 @@
 import { providerApi } from '@/adapter/redux/api';
-import { GetProviderResponseModel } from '@/domain/models';
-import { GetProvidersViewModel } from '@/view/models';
+import { GetProvidersViewModel, ProvidersFiltersViewModel } from '@/view/models';
 import { SortTypesEnum } from '@atom/common';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import ProviderList from './ProviderList';
 
 const ProviderListContainer = () => {
-  const [filters, setFilters] = useState<GetProvidersViewModel>({
+  const [filters, setFilters] = useState<ProvidersFiltersViewModel>({
     providerId: null,
     providerName: null,
     currency: [],
@@ -18,22 +17,9 @@ const ProviderListContainer = () => {
     sorting: null
   });
 
-  const transformedFilters = useMemo(
-    () => ({
-      providerName: filters.providerName || null,
-      providerId: +filters.providerId || null,
-      providerDefaultCurrencyIds: filters.currency ? filters.currency : [],
-      gameCountFrom: +filters.gameCount.from || null,
-      gameCountTo: +filters.gameCount.to || null,
-      statusIds: filters.status,
-      sorting: filters.sorting
-    }),
-    [filters]
-  );
+  const { data } = providerApi.useGetProviderQuery(filters);
 
-  const { data } = providerApi.useGetProviderQuery(transformedFilters);
-
-  const { results, rowCount } = (data || {}) as GetProviderResponseModel;
+  const { results, rowCount } = (data || {}) as GetProvidersViewModel;
 
   return (
     <>

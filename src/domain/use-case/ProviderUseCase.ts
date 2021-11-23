@@ -1,15 +1,26 @@
-import { AddProviderRequestModel, GetProviderRequestModel } from '@/domain/models';
+import { DI_CONSTANTS } from '@/di/constants';
+import { AddProviderRequestModel, GetProviderRequestModel, GetProviderResponseModel } from '@/domain/models';
+import { mapper } from '@/mapper';
+import { GetProvidersViewModel, ProvidersFiltersViewModel } from '@/view/models';
 import { inject, injectable } from 'inversify';
-import { GetProviderNamesResponseModel, GetProviderResponseModel } from '../models';
+import { GetProviderNamesResponseModel } from '../models';
 import { IProviderRepository } from './../boundaries';
 
 @injectable()
 export class ProviderUseCase {
-  @inject('IProviderRepository')
+  @inject(DI_CONSTANTS.ProviderRepository)
   private readonly providerRepository: IProviderRepository;
 
-  getProviders = async (providerRequestModel: Partial<GetProviderRequestModel>): Promise<GetProviderResponseModel> => {
-    return this.providerRepository.getProviders(providerRequestModel);
+  getProviders = async (providersFiltersViewModel: ProvidersFiltersViewModel): Promise<GetProvidersViewModel> => {
+    const getProviderRequestModel = mapper.map(
+      providersFiltersViewModel,
+      GetProviderRequestModel,
+      ProvidersFiltersViewModel
+    );
+
+    const getProviderResponseModel = await this.providerRepository.getProviders(getProviderRequestModel);
+
+    return mapper.map(getProviderResponseModel, GetProvidersViewModel, GetProviderResponseModel);
   };
 
   addProviders = async (addProviderRequestModel: AddProviderRequestModel): Promise<boolean> => {

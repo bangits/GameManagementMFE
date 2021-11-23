@@ -1,4 +1,5 @@
 import { DiContainer } from '@/di';
+import { DI_CONSTANTS } from '@/di/constants';
 import { FC, useEffect, useState } from 'react';
 import { GameManagementContext } from './GameManagementContext';
 
@@ -10,7 +11,9 @@ export const GameManagementProvider: FC<GameManagementProviderProps> = ({ childr
   useEffect(() => {
     const containerInstance = new DiContainer();
 
-    containerInstance.configure(diFiles).then(() => setContainerInstance(containerInstance));
+    containerInstance.configure();
+
+    setContainerInstance(containerInstance);
   }, []);
 
   if (!containerInstance) return null;
@@ -18,7 +21,7 @@ export const GameManagementProvider: FC<GameManagementProviderProps> = ({ childr
   return (
     <GameManagementContext.Provider
       value={{
-        providerUseCase: containerInstance.diContainer.get('ProviderUseCase')
+        providerRepository: containerInstance.diContainer.get(DI_CONSTANTS.ProviderRepository)
       }}>
       {children}
     </GameManagementContext.Provider>

@@ -1,5 +1,8 @@
-import { asyncForeach, CacheService, HttpService } from '@atom/common';
+import { ProviderRepository } from '@/data';
+import { ProviderUseCase } from '@/domain/use-case';
+import { CacheService, HttpService } from '@atom/common';
 import { Container } from 'inversify';
+import { DI_CONSTANTS } from './constants';
 
 export type DiConfig = {
   modulePath: string;
@@ -15,27 +18,25 @@ export class DiContainer {
   public diContainer: Container;
   public diFiles: DiFiles[] = [];
 
-  public configure = async (diConfigs: DiConfig[]) => {
+  public configure = () => {
     this.diContainer = new Container({
       defaultScope: 'Singleton'
     });
 
-    this.diContainer.bind('ICacheService').to(CacheService);
-    this.diContainer.bind('IHttpService').toDynamicValue(
+    // Services
+    this.diContainer.bind(DI_CONSTANTS.CacheService).to(CacheService);
+    this.diContainer.bind(DI_CONSTANTS.HttpService).toDynamicValue(
       () =>
         new HttpService({
           baseURL: 'http://52.170.166.223/api/v1'
         })
     );
 
-    await asyncForeach(diConfigs, async ({ moduleName, modulePath }) => {
-      const module = await import(`../${modulePath}`);
+    // Repositories
+    this.diContainer.bind(DI_CONSTANTS.ProviderRepository).to(ProviderRepository);
 
-      this.diContainer.bind(`I${moduleName}`).to(module[moduleName]);
-      this.diContainer.bind(moduleName).to(module[moduleName]);
-
-      this.diFiles.push({ name: moduleName, module: module });
-    });
+    // Use cases
+    this.diContainer.bind(DI_CONSTANTS.ProviderUseCase).to(ProviderUseCase);
   };
 }
 

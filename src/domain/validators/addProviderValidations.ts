@@ -2,7 +2,7 @@ import { AddProviderViewModel } from '@/view/models';
 import { UseValidationTranslationReturnValue } from '@atom/common';
 import { array, number, object, SchemaOf, string } from 'yup';
 
-export const getLoginValidationSchema = async (
+export const getAddProviderValidationSchema = async (
   t: UseValidationTranslationReturnValue
 ): Promise<SchemaOf<AddProviderViewModel>> => {
   return object({

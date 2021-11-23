@@ -1,21 +1,25 @@
-import { ProviderStatusesEnum } from '@/models';
 import { PrimaryKey } from '@atom/common';
+import { AutoMap } from '@automapper/classes';
+import { ProviderStatusesEnum } from '../models';
 import { BaseEntity } from './BaseEntity';
 
-export interface Provider extends BaseEntity {
-  name: string;
+export class Provider extends BaseEntity {
+  status: {
+    id: ProviderStatusesEnum;
+    name: string;
+  };
+
+  @AutoMap()
   logo: string;
+
+  name: string;
   gameCount: number;
   lastUpdatedDate: string;
   creationDate: string;
-  defaultCurrency: {
+
+  defaultCurrency?: {
     id: PrimaryKey;
     name: string;
     code: string;
   };
-  status: ProviderStatusesEnum;
-}
-
-export class ProviderEntity {
-  constructor(public provider: Provider) {}
 }

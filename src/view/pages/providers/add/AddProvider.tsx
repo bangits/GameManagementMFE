@@ -1,7 +1,9 @@
-import { ROUTES } from '@/constants';
-import { ChangedSelect } from '@/view';
+import { ROUTES } from '@/view/constants';
+import { AddProviderViewModel } from '@/view/models';
 import {
+  ChangedSelect,
   CountriesSelect,
+  createRenderInputs,
   CurrencySelect,
   CustomSelectProps,
   redirectToURL,
@@ -9,15 +11,17 @@ import {
   useTranslation
 } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
-import { Field, FieldProps, Form, Formik, FormikProps } from 'formik';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FastField, Field, Form, Formik, FormikProps } from 'formik';
+import { FC, useMemo, useState } from 'react';
+import { SchemaOf } from 'yup';
 import { initialValues } from './initialValues';
 
 export interface AddProviderProps {
   onSubmit: (data: typeof initialValues) => void;
+  validationSchema: SchemaOf<AddProviderViewModel> | null;
 }
 
-const AddProvider: FC<AddProviderProps> = ({ onSubmit }) => {
+const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
   const t = useTranslation();
 
   const [selectedProviderCurrencies, setSelectedProviderCurrencies] = useState<SelectOptionType[]>([]);
@@ -28,28 +32,28 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit }) => {
         type: 'input' as const,
         name: 'name',
         props: {
-          label: t.get('providers.add.fields.providerName')
+          label: t.get('providers.fields.providerName')
         }
       },
       {
         type: 'select' as const,
         name: 'targetMarkets',
         component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.add.fields.targetMarkets')} />
+          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.fields.targetMarkets')} />
         )
       },
       {
         type: 'select' as const,
         name: 'certifiedCountries',
         component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.add.fields.certifiedCountries')} />
+          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.fields.certifiedCountries')} />
         )
       },
       {
         type: 'select' as const,
         name: 'restrictedCountries',
         component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.add.fields.restrictedCountries')} />
+          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.fields.restrictedCountries')} />
         )
       },
       {
@@ -57,8 +61,9 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit }) => {
         name: 'providerCurrencies',
         component: () => (
           <ChangedSelect
+            field={FastField}
             name='providerCurrencies'
-            inputLabel={t.get('providers.add.fields.providerCurrencies')}
+            inputLabel={t.get('providers.fields.providerCurrencies')}
             component={CurrencySelect}
             isMulti
             onChangeOptions={async (updatedOptions, form: FormikProps<typeof initialValues>) => {
@@ -74,16 +79,19 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit }) => {
         type: 'select' as const,
         name: 'defaultCurrency',
         props: {
-          inputLabel: t.get('providers.add.fields.defaultCurrency'),
+          inputLabel: t.get('providers.fields.defaultCurrency'),
           options: selectedProviderCurrencies,
           isSearchable: true
+        },
+        additionalProps: {
+          field: Field
         }
       },
       {
         type: 'input' as const,
         name: 'logo',
         props: {
-          label: t.get('providers.add.fields.logo')
+          label: t.get('providers.fields.logo')
         }
       }
     ],
@@ -105,31 +113,10 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit }) => {
     [t]
   );
 
-  const renderInputs = useCallback((Component: (props: any) => JSX.Element, name: string, fieldType: string) => {
-    return (
-      <Field name={name}>
-        {({ field, meta, form }: FieldProps) => {
-          return (
-            <>
-              <Component
-                {...field}
-                onChange={async (evt) => {
-                  await form.setFieldValue(name, fieldType === 'input' ? evt.target.value : evt);
-                  form.setFieldTouched(name, true);
-                }}
-                name={name}
-                explanation={meta.touched && meta.error}
-                color={meta.error && meta.touched ? 'danger' : undefined}
-              />
-            </>
-          );
-        }}
-      </Field>
-    );
-  }, []);
+  const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
   return (
-    <Formik initialValues={initialValues} validationSchema={addProviderValidationSchema} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {() => {
         return (
           <Form noValidate className='min-height-content-wrapper'>

@@ -1,11 +1,19 @@
 import { providerApi } from '@/adapter/redux/api';
 import { CountryModel } from '@/domain/models';
-import { PrimaryKey } from '@atom/common';
+import { getAddProviderValidationSchema } from '@/domain/validators';
+import { PrimaryKey, useAsync, useLoading, useValidationTranslation } from '@atom/common';
+import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import { FC, useCallback, useEffect } from 'react';
 import AddProvider, { AddProviderProps } from './AddProvider';
 
 const AddProviderContainer: FC = () => {
   const [addProvider, { status }] = providerApi.useAddProviderMutation();
+
+  const changeAppLoading = useLoading();
+
+  const t = useValidationTranslation();
+
+  const addProviderValidationSchema = useAsync(() => getAddProviderValidationSchema(t), [t], null);
 
   const transformToCountryModel = useCallback(
     (array: PrimaryKey[], defaultCountryId?: PrimaryKey): CountryModel[] =>
@@ -27,11 +35,11 @@ const AddProviderContainer: FC = () => {
   );
 
   useEffect(() => {
-    // if (status === QueryStatus.pending) console.log('loading');
-    // if (status === QueryStatus.fulfilled) console.log('done');
+    if (status === QueryStatus.pending) changeAppLoading(true);
+    if (status === QueryStatus.fulfilled) changeAppLoading(false);
   }, [status]);
 
-  return <AddProvider onSubmit={onSubmit} />;
+  return <AddProvider validationSchema={addProviderValidationSchema} onSubmit={onSubmit} />;
 };
 
 export default AddProviderContainer;

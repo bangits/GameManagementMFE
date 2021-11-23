@@ -1,47 +1,49 @@
-import { ProviderStatusesEnum } from '@/models';
-import { CurrencySelect, redirectToURL, useTranslation } from '@atom/common';
-import { DataTable, FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
+import { ProviderStatusesEnum } from '@/domain/models/enums';
+import { ProviderSelect } from '@/view';
+import { ROUTES } from '@/view/constants';
+import { ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
+import { CurrencySelect, redirectToURL, TablePage, useTranslation } from '@atom/common';
+import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
-import { ProviderSelect } from '../..';
 
-export interface ProviderListProps<T, K> {
-  onFiltersChange: (parameters: FetchDataParameters<T, K>) => void;
-  filters: K;
-  results: T[];
+export interface ProviderListProps {
+  onFiltersChange: (parameters: FetchDataParameters<ProvidersViewModel, ProvidersFiltersViewModel>) => void;
+  filters: ProvidersFiltersViewModel;
+  results: ProvidersViewModel[];
   rowCount: number;
 }
 
-function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowCount }: ProviderListProps<T, K>) {
+function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderListProps) {
   const tableColumns = useMemo(
     () => [
       {
         Header: 'Provider ID',
-        accessor: 'id' as const
+        accessor: 'providerId' as keyof ProvidersViewModel
       },
       {
         Header: 'Logo',
-        accessor: 'logo' as const,
+        accessor: 'logo' as keyof ProvidersViewModel,
         disableSortBy: true,
         variant: 'image' as const
       },
       {
         Header: 'Provider name',
-        accessor: 'name' as const,
+        accessor: 'providerName' as keyof ProvidersViewModel,
         sortingId: 'Name'
       },
       {
         Header: 'Total game count',
-        accessor: 'gameCount' as const,
+        accessor: 'totalGameCount' as keyof ProvidersViewModel,
         sortingId: 'GameCount'
       },
       {
         Header: 'Default currency',
-        accessor: 'defaultCurrency.code' as const,
+        accessor: 'defaultCurrency' as keyof ProvidersViewModel,
         disableSortBy: true
       },
       {
         Header: 'Status',
-        accessor: 'status.id' as const,
+        accessor: 'status' as keyof ProvidersViewModel,
         disableSortBy: true,
         variant: 'status' as const,
         getVariant: (value: number) => (value === ProviderStatusesEnum.Active ? 'active' : 'blocked'),
@@ -58,55 +60,55 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
       {
         name: 'providerName',
         type: 'custom' as const,
-        label: t.get('provider.fields.providerName'),
+        label: t.get('providers.fields.providerName'),
         component: ({ onChange }) => (
           <ProviderSelect
-            inputLabel='Provider Name'
+            inputLabel={t.get('providers.fields.providerName')}
             fullWidth
             onChange={(changedValue) => onChange('providerName', changedValue)}
           />
         )
       },
       {
-        label: 'Provider ID',
-        name: t.get('provider.fields.providerId'),
+        label: t.get('providers.fields.providerId'),
+        name: 'providerId',
         type: 'input' as const,
         props: {
-          label: 'Provider ID'
+          label: t.get('providers.fields.providerId')
         }
       },
       {
-        label: 'Game Count',
+        label: t.get('providers.fields.gameCount'),
         type: 'from-to' as const,
         name: 'gameCount',
         fromInputProps: {
-          label: t.get('provider.providerList.fields.gameCount.to'),
+          label: t.get('providers.fields.gameCountFrom'),
           type: 'number'
         },
         toInputProps: {
-          label: t.get('provider.providerList.fields.gameCount.from'),
+          label: t.get('providers.fields.gameCountTo'),
           type: 'number'
         }
       },
       {
-        label: 'Default currency',
+        label: t.get('providers.fields.defaultCurrency'),
         name: 'currency',
         type: 'custom' as const,
         component: ({ onChange }) => (
           <CurrencySelect
             isMulti
-            inputLabel={t.get('provider.providerList.fields.currency')}
+            inputLabel={t.get('providers.fields.defaultCurrency')}
             fullWidth
             onChange={(changedValue) => onChange('currency', changedValue)}
           />
         )
       },
       {
-        label: 'Status',
+        label: t.get('statuses.name'),
         name: 'status',
         type: 'select' as const,
         props: {
-          inputLabel: t.get('provider.providerList.fields.status'),
+          inputLabel: t.get('statuses.name'),
           options: [
             { label: t.get('statuses.active'), value: ProviderStatusesEnum.Active },
             { label: t.get('statuses.blocked'), value: ProviderStatusesEnum.Blocked },
@@ -121,30 +123,31 @@ function ProviderList<T extends {}, K>({ filters, results, onFiltersChange, rowC
     []
   );
 
+  const addProviderButtonProps = useMemo(
+    () => ({
+      children: t.get('providers.list.addProviderButton'),
+      startIcon: <Icons.PlusCircle />,
+      onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.providers + ROUTES.providersAdd)
+    }),
+    [t]
+  );
+
   return (
-    <PageWrapper
-      title={t.get('provider.providerList.title')}
-      showButton
-      buttonProps={{
-        children: t.get('provider.addProvider'),
-        startIcon: <Icons.PlusCircle />,
-        onClick: () => redirectToURL('/game/providers/add')
-      }}>
-      <DataTable
+    <PageWrapper title={t.get('providers.list.title')} showButton buttonProps={addProviderButtonProps}>
+      <TablePage
         fetchData={onFiltersChange}
         filterProps={{
           defaultOpened: true,
           initialValues: filters,
           filters: filtersList,
-          checkboxFilters: [],
-          resultLabel: `${rowCount} ${t.get('provider.providerList.usersFound')}`,
-          applyLabel: t.get('provider.applyLabel'),
-          clearLabel: t.get('provider.clearLabel')
+          checkboxFilters: []
         }}
         tableProps={{
+          // @ts-expect-error Disabled typescript, because ObjectMock[] is ProvidersViewModel[]
           data: results,
           columns: tableColumns
         }}
+        rowCount={rowCount}
         onEditButtonClick={() => {
           const mockEdit = {};
         }}

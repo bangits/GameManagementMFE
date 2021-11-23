@@ -1,8 +1,8 @@
-import { ProviderUseCase } from '@/domain/use-case';
+import { IProviderRepository } from '@/domain/boundaries';
 import { createContext } from 'react';
 
 export interface IGameManagementContext {
-  providerUseCase: ProviderUseCase;
+  providerRepository: IProviderRepository;
 }
 
 export const GameManagementContext = createContext<IGameManagementContext>(null);

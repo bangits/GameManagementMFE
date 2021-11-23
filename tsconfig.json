@@ -13,7 +13,7 @@
     "types": ["reflect-metadata"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "allowJs": true
+    "allowJs": false
   },
   "typeAcquisition": { "enable": true }
 }

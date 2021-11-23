@@ -1,18 +1,20 @@
 import createStore from '@/adapter/redux/store';
 import { GameManagementProvider } from '@/atom-game-management';
-import { ROUTES } from '@/constants';
 import { containerInstance } from '@/di';
 import { AtomCommonProvider } from '@atom/common';
 import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { AddProviderContainer, ProviderListContainer } from './components';
+import { ROUTES } from './constants';
+import { AddProviderContainer, ProviderListContainer } from './pages';
 
 const App = () => {
   const [store, setStore] = useState(null);
 
   useEffect(() => {
-    containerInstance.configure(diFiles).then(() => setStore(createStore()));
+    containerInstance.configure();
+
+    setStore(createStore());
   }, []);
 
   if (!store) return null;

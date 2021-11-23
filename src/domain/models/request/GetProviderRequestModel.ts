@@ -1,17 +1,13 @@
-import { SortModel } from '@atom/common';
-export interface GetProviderRequestModel extends SortModel {
-  providerId: number;
+import { PrimaryKey, SortModel } from '@atom/common';
+import { AutoMap } from '@automapper/classes';
+import { ProviderStatusesEnum } from '..';
+export class GetProviderRequestModel extends SortModel {
+  @AutoMap()
+  providerId: PrimaryKey;
+
   name: string;
   gameCountFrom: number;
   gameCountTo: number;
-  statusIds: number[];
+  statusIds: ProviderStatusesEnum[];
   providerDefaultCurrencyIds: number[];
-  providerCurrencyIds: number[];
-  targetMarketsIds: number[];
-  certifiedCountryIds: number[];
-  restrictedCountryIds: number[];
-  lastUpdatedDateFrom: string;
-  lastUpdatedDateTo: string;
-  registrationDateFrom: string;
-  registrationDateTo: string;
 }

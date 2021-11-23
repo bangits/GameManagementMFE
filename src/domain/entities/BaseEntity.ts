@@ -1,5 +1,6 @@
 import { PrimaryKey } from '@atom/common';
-
-export interface BaseEntity {
+import { AutoMap } from '@automapper/classes';
+export class BaseEntity {
+  @AutoMap()
   id: PrimaryKey;
 }
