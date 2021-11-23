@@ -1,8 +1,14 @@
 import { Provider } from '@/domain/entities';
-import { GetProviderRequestModel, GetProviderResponseModel } from '@/domain/models';
-import { GetProvidersViewModel, ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
+import { AddProviderRequestModel, GetProviderRequestModel, GetProviderResponseModel } from '@/domain/models';
+import {
+  AddProviderViewModel,
+  GetProvidersViewModel,
+  ProvidersFiltersViewModel,
+  ProvidersViewModel
+} from '@/view/models';
 import type { MappingProfile } from '@automapper/core';
 import autoMapper from '@automapper/core';
+import { transformToCountryModel } from './transformFunctions';
 
 const { mapFrom, mapWith } = autoMapper;
 
@@ -60,7 +66,26 @@ export const baseProfile: MappingProfile = (mapper) => {
 
   mapper.createMap(GetProviderResponseModel, GetProvidersViewModel).forMember(
     (destination) => destination.results,
-    mapWith(ProvidersViewModel, Provider, (s) => s.results)
+    mapWith(ProvidersViewModel, Provider, (source) => source.results)
   );
+
+  mapper
+    .createMap(AddProviderViewModel, AddProviderRequestModel)
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) => transformToCountryModel(source.certifiedCountries))
+    )
+    .forMember(
+      (destination) => destination.providerCurrencies,
+      mapFrom((source) => transformToCountryModel(source.providerCurrencies, source.defaultCurrency))
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) => transformToCountryModel(source.restrictedCountries))
+    )
+    .forMember(
+      (destination) => destination.targetMarkets,
+      mapFrom((source) => transformToCountryModel(source.targetMarkets))
+    );
   //#endregion
 };

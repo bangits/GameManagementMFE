@@ -31,9 +31,7 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
       {
         type: 'input' as const,
         name: 'name',
-        props: {
-          label: t.get('providers.fields.providerName')
-        }
+        label: t.get('providers.fields.providerName')
       },
       {
         type: 'select' as const,
@@ -90,9 +88,7 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
       {
         type: 'input' as const,
         name: 'logo',
-        props: {
-          label: t.get('providers.fields.logo')
-        }
+        label: t.get('providers.fields.logo')
       }
     ],
     [selectedProviderCurrencies, t]

@@ -1,8 +1,13 @@
-import { CountryModel } from '..';
+import { CountryModel } from '@atom/common';
+import { AutoMap } from '@automapper/classes';
 
-export interface AddProviderRequestModel {
+export class AddProviderRequestModel {
+  @AutoMap()
   name: string;
+
+  @AutoMap()
   logo: string;
+
   providerCurrencies: CountryModel[];
   targetMarkets: CountryModel[];
   certifiedCountries: CountryModel[];
