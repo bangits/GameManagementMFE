@@ -6,7 +6,7 @@ export const getAddProviderValidationSchema = async (
   t: UseValidationTranslationReturnValue
 ): Promise<SchemaOf<AddProviderViewModel>> => {
   return object({
-    name: string().required(t.required()).max(40, t.max(40)).min(7, t.min(6)),
+    name: string().required(t.required()).max(40, t.max(40)),
     logo: string().required(t.required()),
     providerCurrencies: array().of(number()).min(1, t.required()).required(t.required()),
     defaultCurrency: number().min(1, t.required()).required(t.required()),
