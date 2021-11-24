@@ -77,6 +77,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@atom/authorization": "^1.2.3",
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
     "@reduxjs/toolkit": "^1.6.2",
