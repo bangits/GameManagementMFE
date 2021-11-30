@@ -1,8 +1,8 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
-import { PrimaryKey, SortModel } from '@atom/common';
+import { PagedModel, PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 
-export class ProvidersFiltersViewModel extends SortModel {
+export class ProvidersFiltersViewModel extends PagedModel {
   @AutoMap()
   providerId: PrimaryKey;
 

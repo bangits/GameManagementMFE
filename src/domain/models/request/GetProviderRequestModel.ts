@@ -1,7 +1,7 @@
-import { PrimaryKey, SortModel } from '@atom/common';
+import { PagedModel, PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 import { ProviderStatusesEnum } from '..';
-export class GetProviderRequestModel extends SortModel {
+export class GetProviderRequestModel extends PagedModel {
   @AutoMap()
   providerId: PrimaryKey;
 

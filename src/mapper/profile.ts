@@ -33,8 +33,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.currency)
     )
     .forMember(
-      (destination) => destination.sorting,
-      mapFrom((source) => source.sorting)
+      (destination) => destination.pagination,
+      mapFrom((source) => source.pagination)
     )
     .forMember(
       (destination) => destination.statusIds,

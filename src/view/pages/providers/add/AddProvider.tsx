@@ -37,21 +37,21 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
         type: 'select' as const,
         name: 'targetMarkets',
         component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.fields.targetMarkets')} />
+          <CountriesSelect {...props} isMulti fullWidth inputLabel={t.get('providers.fields.targetMarkets')} />
         )
       },
       {
         type: 'select' as const,
         name: 'certifiedCountries',
         component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.fields.certifiedCountries')} />
+          <CountriesSelect {...props} isMulti fullWidth inputLabel={t.get('providers.fields.certifiedCountries')} />
         )
       },
       {
         type: 'select' as const,
         name: 'restrictedCountries',
         component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti inputLabel={t.get('providers.fields.restrictedCountries')} />
+          <CountriesSelect {...props} isMulti fullWidth inputLabel={t.get('providers.fields.restrictedCountries')} />
         )
       },
       {
@@ -64,6 +64,7 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
             inputLabel={t.get('providers.fields.providerCurrencies')}
             component={CurrencySelect}
             isMulti
+            fullWidth
             onChangeOptions={async (updatedOptions, form: FormikProps<typeof initialValues>) => {
               if (!updatedOptions.find((o) => o.value === form.values.defaultCurrency))
                 await form.setFieldValue('defaultCurrency', 0);

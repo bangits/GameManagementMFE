@@ -1,3 +1,4 @@
+import { DI_CONSTANTS } from '@/di/constants';
 import { IProviderRepository } from '@/domain/boundaries';
 import {
   AddProviderRequestModel,
@@ -11,10 +12,10 @@ import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 
 @injectable()
 export class ProviderRepository implements IProviderRepository {
-  @inject('IHttpService')
+  @inject(DI_CONSTANTS.HttpService)
   private readonly httpService: IHttpService;
 
-  @inject('ICacheService')
+  @inject(DI_CONSTANTS.CacheService)
   private readonly cacheService: ICacheService;
 
   getProviderNames = cachedFn(

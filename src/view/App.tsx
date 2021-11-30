@@ -47,6 +47,10 @@ const App = () => {
                   render={({ match: { url } }) => {
                     return (
                       <>
+                        <Route path={`${url}${ROUTES.gamesList}`} exact>
+                          Game List
+                        </Route>
+
                         <Route path={`${url}${ROUTES.gameAdd}`} exact>
                           <AddGameContainer />
                         </Route>

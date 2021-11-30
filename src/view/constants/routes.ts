@@ -8,5 +8,6 @@ export const ROUTES = {
 
   // Games
   game: '/',
-  gameAdd: 'add'
+  gameAdd: 'add',
+  gamesList: '/'
 };

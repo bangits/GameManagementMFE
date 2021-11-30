@@ -18,8 +18,8 @@
     "pre-push": "yarn format"
   },
   "devDependencies": {
-    "@atom/common": "^2.2.1",
-    "@atom/design-system": "1.9.4",
+    "@atom/common": "^2.2.3",
+    "@atom/design-system": "^1.9.8",
     "@babel/core": "^7.14.6",
     "@babel/eslint-parser": "^7.14.7",
     "@babel/plugin-proposal-decorators": "^7.15.8",
@@ -82,6 +82,7 @@
     "@automapper/core": "^7.0.2",
     "@reduxjs/toolkit": "^1.6.2",
     "formik": "^2.2.9",
+    "immer": "^9.0.7",
     "inversify": "^5.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

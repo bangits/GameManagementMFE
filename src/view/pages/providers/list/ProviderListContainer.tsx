@@ -1,21 +1,30 @@
 import { providerApi } from '@/adapter/redux/api';
 import { GetProvidersViewModel, ProvidersFiltersViewModel } from '@/view/models';
 import { SortTypesEnum } from '@atom/common';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import ProviderList from './ProviderList';
 
 const ProviderListContainer = () => {
-  const [filters, setFilters] = useState<ProvidersFiltersViewModel>({
-    providerId: null,
-    providerName: null,
-    currency: [],
-    gameCount: {
-      from: null,
-      to: null
-    },
-    status: [],
-    sorting: null
-  });
+  const initialFilters = useMemo<ProvidersFiltersViewModel>(
+    () => ({
+      providerId: null,
+      providerName: null,
+      currency: [],
+      gameCount: {
+        from: null,
+        to: null
+      },
+      status: [],
+      sorting: null,
+      pagination: {
+        page: 1,
+        pageSize: 20
+      }
+    }),
+    []
+  );
+
+  const [filters, setFilters] = useState<ProvidersFiltersViewModel>(initialFilters);
 
   const { data } = providerApi.useGetProviderQuery(filters);
 
@@ -25,7 +34,7 @@ const ProviderListContainer = () => {
     <>
       <ProviderList
         results={results || []}
-        rowCount={rowCount}
+        rowCount={rowCount || 1}
         filters={filters}
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy

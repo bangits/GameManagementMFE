@@ -9,5 +9,5 @@ export interface IProviderRepository {
   getProviders(getProviderRequestModel: GetProviderRequestModel): Promise<GetProviderResponseModel>;
   getProviderNames(): Promise<GetProviderNamesResponseModel>;
 
-  addProviders(getProviderRequestModel: AddProviderRequestModel): Promise<boolean>;
+  addProviders(addProviderRequestModel: AddProviderRequestModel): Promise<boolean>;
 }

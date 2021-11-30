@@ -5,7 +5,6 @@ import { ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
 import { CurrencySelect, redirectToURL, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
-
 export interface ProviderListProps {
   onFiltersChange: (parameters: FetchDataParameters<ProvidersViewModel, ProvidersFiltersViewModel>) => void;
   filters: ProvidersFiltersViewModel;
@@ -120,7 +119,7 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
         }
       }
     ],
-    []
+    [t]
   );
 
   const addProviderButtonProps = useMemo(
@@ -139,8 +138,8 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
         filterProps={{
           defaultOpened: true,
           initialValues: filters,
-          filters: filtersList,
-          checkboxFilters: []
+          filters: filtersList
+          // checkboxFilters: []
         }}
         tableProps={{
           // @ts-expect-error Disabled typescript, because ObjectMock[] is ProvidersViewModel[]
