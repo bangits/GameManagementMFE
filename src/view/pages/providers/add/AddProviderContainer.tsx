@@ -1,5 +1,5 @@
 import { providerApi } from '@/adapter/redux/api';
-import { getAddProviderValidationSchema } from '@/domain/validators';
+import { AddProviderValidationSchema } from '@/domain/validators';
 import { useAsync, useLoading, useValidationTranslation } from '@atom/common';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import { FC, useCallback, useEffect } from 'react';
@@ -12,7 +12,7 @@ const AddProviderContainer: FC = () => {
 
   const t = useValidationTranslation();
 
-  const addProviderValidationSchema = useAsync(() => getAddProviderValidationSchema(t), [t], null);
+  const addProviderValidationSchema = useAsync(() => AddProviderValidationSchema(t), [t], null);
 
   const onSubmit = useCallback<AddProviderProps['onSubmit']>((data) => addProvider(data), [addProvider]);
 
