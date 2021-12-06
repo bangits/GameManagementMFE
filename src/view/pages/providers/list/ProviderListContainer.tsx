@@ -34,7 +34,7 @@ const ProviderListContainer = () => {
     <>
       <ProviderList
         results={results || []}
-        rowCount={rowCount || 1}
+        rowCount={rowCount}
         filters={filters}
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy
