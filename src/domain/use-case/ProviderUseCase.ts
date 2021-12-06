@@ -25,7 +25,6 @@ export class ProviderUseCase {
 
   addProviders = async (addProviderViewModel: AddProviderViewModel): Promise<boolean> => {
     const addProviderRequestModel = mapper.map(addProviderViewModel, AddProviderRequestModel, AddProviderViewModel);
-
     return this.providerRepository.addProviders(addProviderRequestModel);
   };
 
