@@ -1,10 +1,11 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
 import { ProviderSelect } from '@/view';
 import { ROUTES } from '@/view/constants';
-import { ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
+import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
 import { CurrencySelect, redirectToURL, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
+
 export interface ProviderListProps {
   onFiltersChange: (parameters: FetchDataParameters<ProvidersViewModel, ProvidersFiltersViewModel>) => void;
   filters: ProvidersFiltersViewModel;
@@ -17,34 +18,42 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
     () => [
       {
         Header: 'Provider ID',
-        accessor: 'providerId' as keyof ProvidersViewModel
+        accessor: 'providerId' as keyof ProvidersViewModel,
+        sortingId:ProviderStatusesSortingEnum.PROVIDER_ID
       },
       {
         Header: 'Logo',
         accessor: 'logo' as keyof ProvidersViewModel,
         disableSortBy: true,
-        variant: 'image' as const
+        variant: 'image' as const,
+        sortingId:ProviderStatusesSortingEnum.LOGO
+
       },
       {
         Header: 'Provider name',
         accessor: 'providerName' as keyof ProvidersViewModel,
-        sortingId: 'Name'
+        sortingId:ProviderStatusesSortingEnum.PROVIDER_NAME
+
       },
       {
         Header: 'Total game count',
         accessor: 'totalGameCount' as keyof ProvidersViewModel,
-        sortingId: 'GameCount'
+        sortingId:ProviderStatusesSortingEnum.GAME_COUNT
+
       },
       {
         Header: 'Default currency',
         accessor: 'defaultCurrency' as keyof ProvidersViewModel,
-        disableSortBy: true
+        disableSortBy: true,
+        sortingId:ProviderStatusesSortingEnum.DEFAULT_CURRENCY
+
       },
       {
         Header: 'Status',
         accessor: 'status' as keyof ProvidersViewModel,
         disableSortBy: true,
         variant: 'status' as const,
+        sortingId:ProviderStatusesSortingEnum.STATUS,
         getVariant: (value: number) => (value === ProviderStatusesEnum.Active ? 'active' : 'blocked'),
         getVariantName: (value: number) => (value === ProviderStatusesEnum.Active ? 'Active' : 'Blocked')
       }
@@ -107,7 +116,9 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
         name: 'status',
         type: 'select' as const,
         props: {
+          selectAll: true,
           inputLabel: t.get('statuses.name'),
+          selectAllLabel: t.get('statuses.all'),
           options: [
             { label: t.get('statuses.active'), value: ProviderStatusesEnum.Active },
             { label: t.get('statuses.blocked'), value: ProviderStatusesEnum.Blocked },

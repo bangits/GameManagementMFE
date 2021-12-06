@@ -6,7 +6,7 @@ import { createBaseQuery } from '../helpers';
 
 export const providerApi = createApi({
   reducerPath: 'providerApi',
-  baseQuery: createBaseQuery<ProviderUseCase>({ useCaseName: DI_CONSTANTS.ProviderUseCase }),
+  baseQuery: createBaseQuery<ProviderUseCase>({ useCaseName: DI_CONSTANTS.PROVIDER.ProviderUseCase }),
   endpoints: (build) => ({
     getProvider: build.query({
       query: (ProvidersFiltersViewModel: ProvidersFiltersViewModel) => {

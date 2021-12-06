@@ -1,14 +1,16 @@
+
+
 import { DI_CONSTANTS } from '@/di/constants';
 import { AddProviderRequestModel, GetProviderRequestModel, GetProviderResponseModel } from '@/domain/models';
 import { mapper } from '@/mapper';
 import { AddProviderViewModel, GetProvidersViewModel, ProvidersFiltersViewModel } from '@/view/models';
 import { inject, injectable } from 'inversify';
+import { IProviderRepository } from '../boundaries';
 import { GetProviderNamesResponseModel } from '../models';
-import { IProviderRepository } from './../boundaries';
 
 @injectable()
 export class ProviderUseCase {
-  @inject(DI_CONSTANTS.ProviderRepository)
+  @inject(DI_CONSTANTS.PROVIDER.ProviderRepository)
   private readonly providerRepository: IProviderRepository;
 
   getProviders = async (providersFiltersViewModel: ProvidersFiltersViewModel): Promise<GetProvidersViewModel> => {

@@ -1,14 +1,14 @@
-import { providerApi } from '@/adapter/redux/api';
-import { GetProvidersViewModel, ProvidersFiltersViewModel } from '@/view/models';
+import { gameApi } from '@/adapter/redux/api';
+import { GamesFiltersViewModel, GetGamesViewModel } from '@/view/models';
 import { SortTypesEnum } from '@atom/common';
 import { useMemo, useState } from 'react';
-import ProviderList from './ProviderList';
+import GameList from './GameList';
 
-const ProviderListContainer = () => {
-  const initialFilters = useMemo<ProvidersFiltersViewModel>(
+const GameListContainer = () => {
+  const initialFilters = useMemo<GamesFiltersViewModel>(
     () => ({
-      providerId: null,
-      providerName: null,
+      gameId: null,
+      gameName: null,
       currency: [],
       gameCount: {
         from: null,
@@ -24,15 +24,15 @@ const ProviderListContainer = () => {
     []
   );
 
-  const [filters, setFilters] = useState<ProvidersFiltersViewModel>(initialFilters);
+  const [filters, setFilters] = useState<GamesFiltersViewModel>(initialFilters);
 
-  const { data } = providerApi.useGetProviderQuery(filters);
+  const { data } = gameApi.useGetGameQuery(filters);
 
-  const { results, rowCount } = (data || {}) as GetProvidersViewModel;
+  const { results, rowCount } = (data || {}) as GetGamesViewModel;
 
   return (
     <>
-      <ProviderList
+      <GameList
         results={results || []}
         rowCount={rowCount || 1}
         filters={filters}
@@ -40,7 +40,7 @@ const ProviderListContainer = () => {
           const sorting = parameters.sortedBy
             ? {
                 direction: parameters.sortedBy.desc ? SortTypesEnum.DESC : SortTypesEnum.ASC,
-                property: parameters.sortedBy.id
+                propertyId: parameters.sortedBy.id
               }
             : null;
 
@@ -55,4 +55,4 @@ const ProviderListContainer = () => {
   );
 };
 
-export default ProviderListContainer;
+export default GameListContainer;

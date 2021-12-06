@@ -1,2 +1,3 @@
 export * from './game';
-export * from './providers';
+export * from './provider';
+
