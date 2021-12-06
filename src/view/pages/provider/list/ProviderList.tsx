@@ -149,7 +149,6 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
           // checkboxFilters: []
         }}
         tableProps={{
-          // @ts-expect-error Disabled typescript, because ObjectMock[] is ProvidersViewModel[]
           data: results,
           columns: tableColumns
         }}
