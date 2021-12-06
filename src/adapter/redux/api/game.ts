@@ -15,7 +15,7 @@ export const gameApi = createApi({
           methodArguments: [GamesFiltersViewModel]
         };
       }
-    }),
+    })
     // addGame: build.mutation({
     //   query: (addGameViewModel: AddGameViewModel) => {
     //     return {

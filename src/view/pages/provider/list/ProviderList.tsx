@@ -19,41 +19,37 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
       {
         Header: 'Provider ID',
         accessor: 'providerId' as keyof ProvidersViewModel,
-        sortingId:ProviderStatusesSortingEnum.PROVIDER_ID
+        sortingId: ProviderStatusesSortingEnum.PROVIDER_ID
       },
       {
         Header: 'Logo',
         accessor: 'logo' as keyof ProvidersViewModel,
         disableSortBy: true,
         variant: 'image' as const,
-        sortingId:ProviderStatusesSortingEnum.LOGO
-
+        sortingId: ProviderStatusesSortingEnum.LOGO
       },
       {
         Header: 'Provider name',
         accessor: 'providerName' as keyof ProvidersViewModel,
-        sortingId:ProviderStatusesSortingEnum.PROVIDER_NAME
-
+        sortingId: ProviderStatusesSortingEnum.PROVIDER_NAME
       },
       {
         Header: 'Total game count',
         accessor: 'totalGameCount' as keyof ProvidersViewModel,
-        sortingId:ProviderStatusesSortingEnum.GAME_COUNT
-
+        sortingId: ProviderStatusesSortingEnum.GAME_COUNT
       },
       {
         Header: 'Default currency',
         accessor: 'defaultCurrency' as keyof ProvidersViewModel,
         disableSortBy: true,
-        sortingId:ProviderStatusesSortingEnum.DEFAULT_CURRENCY
-
+        sortingId: ProviderStatusesSortingEnum.DEFAULT_CURRENCY
       },
       {
         Header: 'Status',
         accessor: 'status' as keyof ProvidersViewModel,
         disableSortBy: true,
         variant: 'status' as const,
-        sortingId:ProviderStatusesSortingEnum.STATUS,
+        sortingId: ProviderStatusesSortingEnum.STATUS,
         getVariant: (value: number) => (value === ProviderStatusesEnum.Active ? 'active' : 'blocked'),
         getVariantName: (value: number) => (value === ProviderStatusesEnum.Active ? 'Active' : 'Blocked')
       }

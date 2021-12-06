@@ -11,11 +11,7 @@ export class GameUseCase {
   private readonly gameRepository: IGameRepository;
 
   getGames = async (gamesFiltersViewModel: GamesFiltersViewModel): Promise<GetGamesViewModel> => {
-    const getGameRequestModel = mapper.map(
-      gamesFiltersViewModel,
-      GetGameRequestModel,
-      GamesFiltersViewModel
-    );
+    const getGameRequestModel = mapper.map(gamesFiltersViewModel, GetGameRequestModel, GamesFiltersViewModel);
 
     const getGameResponseModel = await this.gameRepository.getGames(getGameRequestModel);
 
@@ -31,4 +27,3 @@ export class GameUseCase {
   //   return this.providerRepository.getGameNames();
   // };
 }
-

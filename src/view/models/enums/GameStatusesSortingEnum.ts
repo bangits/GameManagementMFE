@@ -1,4 +1,3 @@
 export enum GameStatusesSortingEnum {
-    GAME_ID = 1,
-  }
-  
+  GAME_ID = 1
+}
