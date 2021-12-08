@@ -5,9 +5,3 @@ export * from './GetGameSupportedBrowsersViewModel';
 export * from './GetGamesViewModel';
 export * from './GetGameThemesViewModel';
 export * from './GetGameVolatilitiesViewModel';
-
-
-
-
-
-

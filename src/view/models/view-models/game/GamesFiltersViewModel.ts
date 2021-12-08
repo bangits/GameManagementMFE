@@ -29,7 +29,7 @@ export class GamesFiltersViewModel extends PagedModel {
   gameId: PrimaryKey | '';
   @AutoMap()
   createdBy: string;
-  
+
   restrictedCountries: string[] | '';
   certifiedCountries: String[] | '';
   supportedCurrencies: String[] | '';

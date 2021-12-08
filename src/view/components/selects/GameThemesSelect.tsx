@@ -8,7 +8,12 @@ export const GameThemesSelect = (props: CustomSelectProps) => {
 
   return (
     <>
-      <CustomSelect {...props} fullWidth options={gameThemes || []} inputLabel={t.get('games.list.fields.gameThemes')} />
+      <CustomSelect
+        {...props}
+        fullWidth
+        options={gameThemes || []}
+        inputLabel={t.get('games.list.fields.gameThemes')}
+      />
     </>
   );
 };

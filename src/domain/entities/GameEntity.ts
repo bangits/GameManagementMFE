@@ -27,4 +27,3 @@ export class Game extends BaseEntity {
   volatility: PrimaryKey;
   subType: PrimaryKey;
 }
-

@@ -136,8 +136,8 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.gameCurrencyIds,
       mapFrom((source) => source.supportedCurrencies)
-    )
-  
+    );
+
   mapper
     .createMap(Game, GamesViewModel)
     .forMember(

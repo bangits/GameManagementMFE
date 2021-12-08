@@ -17,8 +17,4 @@ export interface IGameRepository {
   getGameFeatures(): Promise<GetGameFeaturesResponseModel>;
   getGameVolatilities(): Promise<GetGameVolatilitiesResponseModel>;
   getGameSupportedBrowsers(): Promise<GetGameSupportedBrowsersResponseModel>;
-
-
-
-  
 }
