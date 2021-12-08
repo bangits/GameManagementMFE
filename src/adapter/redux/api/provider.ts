@@ -1,6 +1,9 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { ProviderUseCase } from '@/domain/use-case';
-import { AddProviderViewModel, ProvidersFiltersViewModel } from '@/view/models';
+import {
+  AddProviderViewModel, GetProviderNamesViewModel,
+  ProvidersFiltersViewModel
+} from '@/view/models';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../helpers';
 
@@ -16,6 +19,15 @@ export const providerApi = createApi({
         };
       }
     }),
+    getProviderNames: build.query<GetProviderNamesViewModel, {}>({
+      query: () => {
+        return {
+          methodName: 'getProviderNames',
+          methodArguments: []
+        };
+      }
+    }),
+  
     addProvider: build.mutation({
       query: (addProviderViewModel: AddProviderViewModel) => {
         return {

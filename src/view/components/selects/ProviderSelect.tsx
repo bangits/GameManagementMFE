@@ -1,22 +1,19 @@
-import { GameManagementContext } from '@/adapter/react-context';
-import { GetProviderNamesViewModel } from '@/view/models';
-import { CustomSelect, CustomSelectProps } from '@atom/common';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { providerApi } from '@/adapter/redux/api';
+import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
 
 export const ProviderSelect = (props: Omit<CustomSelectProps, 'options'>) => {
-  const { providerRepository } = useContext(GameManagementContext);
+  const t = useTranslation();
 
-  const [providers, setProviders] = useState<GetProviderNamesViewModel>([]);
-
-  const selectOptions = useMemo(() => providers.map((c) => ({ value: c.id, label: c.name })), [providers]);
-
-  useEffect(() => {
-    providerRepository.getProviderNames().then((getProvidersResponse) => setProviders(getProvidersResponse));
-  }, []);
+  const { data: providerNames } = providerApi.useGetProviderNamesQuery({});
 
   return (
     <>
-      <CustomSelect {...props} options={selectOptions} />
+      <CustomSelect
+        {...props}
+        fullWidth
+        options={providerNames || []}
+        inputLabel={t.get('games.list.fields.providerName')}
+      />
     </>
   );
 };

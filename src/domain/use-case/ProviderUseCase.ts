@@ -1,10 +1,14 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { AddProviderRequestModel, GetProviderRequestModel, GetProviderResponseModel } from '@/domain/models';
 import { mapper } from '@/mapper';
-import { AddProviderViewModel, GetProvidersViewModel, ProvidersFiltersViewModel } from '@/view/models';
+import {
+  AddProviderViewModel,
+  GetProviderNamesViewModel,
+  GetProvidersViewModel,
+  ProvidersFiltersViewModel
+} from '@/view/models';
 import { inject, injectable } from 'inversify';
 import { IProviderRepository } from '../boundaries';
-import { GetProviderNamesResponseModel } from '../models';
 
 @injectable()
 export class ProviderUseCase {
@@ -23,12 +27,14 @@ export class ProviderUseCase {
     return mapper.map(getProviderResponseModel, GetProvidersViewModel, GetProviderResponseModel);
   };
 
+  getProviderNames = async (): Promise<GetProviderNamesViewModel> => {
+    const getProviderNamesResponse = await this.providerRepository.getProviderNames();
+
+    return getProviderNamesResponse.map((r) => ({ value: r.id, label: r.name }));
+  };
+
   addProviders = async (addProviderViewModel: AddProviderViewModel): Promise<boolean> => {
     const addProviderRequestModel = mapper.map(addProviderViewModel, AddProviderRequestModel, AddProviderViewModel);
     return this.providerRepository.addProviders(addProviderRequestModel);
-  };
-
-  getProviderNames = async (): Promise<GetProviderNamesResponseModel> => {
-    return this.providerRepository.getProviderNames();
   };
 }

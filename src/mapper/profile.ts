@@ -136,7 +136,8 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.gameCurrencyIds,
       mapFrom((source) => source.supportedCurrencies)
-    );
+    )
+  
   mapper
     .createMap(Game, GamesViewModel)
     .forMember(
@@ -153,5 +154,5 @@ export const baseProfile: MappingProfile = (mapper) => {
     (destination) => destination.results,
     mapWith(GamesViewModel, Game, (source) => source.results)
   );
-  //to be continued
+  //to be continued ...
 };

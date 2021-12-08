@@ -44,7 +44,8 @@ function ProviderList({
       {
         Header: 'Partner ID',
         accessor: 'partnerId' as keyof ProvidersViewModel,
-        disableSortBy: true
+        sortingId: ProviderStatusesSortingEnum.PARTNER_ID
+
       },
       {
         Header: 'Total game count',

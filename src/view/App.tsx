@@ -1,5 +1,4 @@
 import createStore from '@/adapter/redux/store';
-import { GameManagementProvider } from '@/atom-game-management';
 import { containerInstance } from '@/di';
 import { AuthenticatedProvider } from '@atom/authorization';
 import { AtomCommonProvider } from '@atom/common';
@@ -24,45 +23,43 @@ const App = () => {
     <AuthenticatedProvider>
       <Provider store={store}>
         <AtomCommonProvider initializeLanguage={true}>
-          <GameManagementProvider>
-            <Router basename={ROUTES.baseUrl}>
-              <Switch>
-                <Route
-                  path={ROUTES.providers}
-                  render={({ match: { url } }) => (
+          <Router basename={ROUTES.baseUrl}>
+            <Switch>
+              <Route
+                path={ROUTES.providers}
+                render={({ match: { url } }) => (
+                  <>
+                    <Route path={`${url}${ROUTES.providersList}`} exact>
+                      <ProviderListContainer />
+                    </Route>
+
+                    <Route path={`${url}${ROUTES.providersAdd}`} exact>
+                      <AddProviderContainer />
+                    </Route>
+                  </>
+                )}
+              />
+
+              <Route
+                path={ROUTES.game}
+                render={({ match: { url } }) => {
+                  return (
                     <>
-                      <Route path={`${url}${ROUTES.providersList}`} exact>
-                        <ProviderListContainer />
+                      <Route path={`${url}${ROUTES.gamesList}`} exact>
+                        <GameListContainer />
                       </Route>
 
-                      <Route path={`${url}${ROUTES.providersAdd}`} exact>
-                        <AddProviderContainer />
+                      <Route path={`${url}${ROUTES.gameAdd}`} exact>
+                        <AddGameContainer />
                       </Route>
                     </>
-                  )}
-                />
+                  );
+                }}
+              />
 
-                <Route
-                  path={ROUTES.game}
-                  render={({ match: { url } }) => {
-                    return (
-                      <>
-                        <Route path={`${url}${ROUTES.gamesList}`} exact>
-                          <GameListContainer />
-                        </Route>
-
-                        <Route path={`${url}${ROUTES.gameAdd}`} exact>
-                          <AddGameContainer />
-                        </Route>
-                      </>
-                    );
-                  }}
-                />
-
-                <Redirect to={ROUTES.providers + ROUTES.providersList} />
-              </Switch>
-            </Router>
-          </GameManagementProvider>
+              <Redirect to={ROUTES.providers + ROUTES.providersList} />
+            </Switch>
+          </Router>
         </AtomCommonProvider>
       </Provider>
     </AuthenticatedProvider>

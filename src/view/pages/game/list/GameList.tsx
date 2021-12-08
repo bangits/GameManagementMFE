@@ -1,11 +1,26 @@
 import { GameStatusesEnum } from '@/domain/models/enums';
-import { ProviderSelect } from '@/view';
+import {
+  GameClassSelect,
+  GameFeaturesSelect,
+  GameSupportedBrowsersSelect,
+  GameThemesSelect,
+  GameTypesSelect,
+  GameVolatilitiesSelect,
+  ProviderSelect
+} from '@/view';
 import { ROUTES } from '@/view/constants';
 import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel, HasDemoEnum } from '@/view/models';
-import { CountriesSelect, CurrencySelect, redirectToURL, TablePage, useTranslation } from '@atom/common';
+import {
+  CountriesSelect,
+  CurrencySelect,
+  LanguageSelect,
+  redirectToURL,
+  TablePage,
+  useTranslation
+} from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo, useState } from 'react';
-GamesFiltersViewModel;
+
 export interface GameListProps {
   onFiltersChange: (parameters: FetchDataParameters<GamesViewModel, GamesFiltersViewModel>) => void;
   filters: GamesFiltersViewModel;
@@ -122,7 +137,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         }
       },
       {
-        name: 'gameName',
+        name: 'name',
         type: 'input' as const,
         props: {
           label: t.get('games.list.fields.gameName')
@@ -130,15 +145,14 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
       },
 
       {
-        name: 'providerId',
+        name: 'providerName',
         type: 'custom' as const,
-        label: t.get('providers.fields.providerName'),
         component: ({ onChange }) => (
           <ProviderSelect
             isMulti
-            inputLabel={t.get('providers.fields.providerName')}
+            inputLabel={t.get('games.fields.providerName')}
             fullWidth
-            onChange={(changedValue) => onChange('providerId', changedValue)}
+            onChange={(changedValue) => onChange('providerName', changedValue)}
           />
         )
       },
@@ -147,24 +161,17 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         type: 'custom' as const,
         label: t.get('games.list.fields.type'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <GameTypesSelect
             inputLabel={t.get('games.list.fields.type')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            onChange={(changedValue) => onChange('type', changedValue)}
           />
         )
       },
       {
         name: 'subType',
         type: 'custom' as const,
-        label: t.get('games.list.fields.subType'),
-        component: ({ onChange }) => (
-          <ProviderSelect
-            inputLabel={t.get('games.list.fields.subType')}
-            fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
-          />
-        )
+        component: ({ onChange }) => 'SubType'
       },
       {
         label: t.get('games.fields.rtp.title'),
@@ -195,26 +202,24 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
       {
         name: 'class',
         type: 'custom' as const,
-        label: t.get('games.list.fields.class'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <GameClassSelect
             inputLabel={t.get('games.list.fields.class')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            onChange={(changedValue) => onChange('class', changedValue)}
           />
         )
       },
       {
-        label: t.get('games.list.fields.hasDemo'),
         name: 'hasDemo',
         type: 'select' as const,
         props: {
           selectAll: true,
-          inputLabel: t.get('statuses.name'),
-          selectAllLabel: t.get('statuses.all'),
+          inputLabel: t.get('games.list.fields.hasDemo.title'),
+          selectAllLabel: t.get('games.list.fields.hasDemo.all'),
           options: [
-            { label: t.get('statuses.yes'), value: HasDemoEnum.YES },
-            { label: t.get('statuses.no'), value: HasDemoEnum.NO }
+            { label: t.get('games.list.fields.hasDemo.yes'), value: HasDemoEnum.YES },
+            { label: t.get('games.list.fields.hasDemo.no'), value: HasDemoEnum.NO }
           ],
           isSearchable: true,
           isMulti: true
@@ -223,24 +228,22 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
       {
         name: 'theme',
         type: 'custom' as const,
-        label: t.get('games.list.fields.theme'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <GameThemesSelect
             inputLabel={t.get('games.list.fields.theme')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            onChange={(changedValue) => onChange('theme', changedValue)}
           />
         )
       },
       {
         name: 'feature',
         type: 'custom' as const,
-        label: t.get('games.list.fields.feature'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <GameFeaturesSelect
             inputLabel={t.get('games.list.fields.feature')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            onChange={(changedValue) => onChange('feature', changedValue)}
           />
         )
       },
@@ -274,7 +277,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         type: 'custom' as const,
         label: t.get('games.list.fields.supportedBrowsers'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <GameSupportedBrowsersSelect
             isMulti
             inputLabel={t.get('games.list.fields.supportedBrowsers')}
             fullWidth
@@ -314,7 +317,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         type: 'custom' as const,
         label: t.get('games.list.fields.volatility'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <GameVolatilitiesSelect
             isMulti
             inputLabel={t.get('games.list.fields.volatility')}
             fullWidth
@@ -327,7 +330,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         type: 'custom' as const,
         label: t.get('games.list.fields.uILanguages'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <LanguageSelect
             isMulti
             inputLabel={t.get('games.list.fields.uILanguages')}
             fullWidth
@@ -340,7 +343,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         type: 'custom' as const,
         label: t.get('games.list.fields.operatingLanguages'),
         component: ({ onChange }) => (
-          <ProviderSelect
+          <LanguageSelect
             isMulti
             inputLabel={t.get('games.list.fields.operatingLanguages')}
             fullWidth

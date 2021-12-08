@@ -1,6 +1,6 @@
 import { PrimaryKey } from '@atom/common';
 
-export type GetProviderNamesViewModel = {
+export type GetGameThemesViewModel = {
   value: PrimaryKey;
   label: string;
 }[];
