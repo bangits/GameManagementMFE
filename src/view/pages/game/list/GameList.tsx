@@ -348,7 +348,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
           />
         )
       },
-      //date picker is not finished 
+      //date picker is not finished
       {
         type: 'datepicker',
         name: 'creationDate',

@@ -15,7 +15,14 @@ export interface ProviderListProps {
   filtersInitialValues: ProvidersFiltersViewModel;
 }
 
-function ProviderList({ filters, results, onFiltersChange, rowCount, isFilteredData, filtersInitialValues }: ProviderListProps) {
+function ProviderList({
+  filters,
+  results,
+  onFiltersChange,
+  rowCount,
+  isFilteredData,
+  filtersInitialValues
+}: ProviderListProps) {
   const tableColumns = useMemo(
     () => [
       {
@@ -59,24 +66,24 @@ function ProviderList({ filters, results, onFiltersChange, rowCount, isFilteredD
   const t = useTranslation();
 
   const providerStatusesConfig = useMemo<
-  Record<ProviderStatusesEnum, { variant: 'active' | 'inactive' | 'blocked'; translationKey: string }>
->(
-  () => ({
-    [ProviderStatusesEnum.Inactive]: {
-      variant: 'inactive',
-      translationKey: 'providers.statuses.inActive'
-    },
-    [ProviderStatusesEnum.Blocked]: {
-      variant: 'blocked',
-      translationKey: 'providers.statuses.blocked'
-    },
-    [ProviderStatusesEnum.Active]: {
-      variant: 'active',
-      translationKey: 'providers.statuses.active'
-    }
-  }),
-  []
-);
+    Record<ProviderStatusesEnum, { variant: 'active' | 'inactive' | 'blocked'; translationKey: string }>
+  >(
+    () => ({
+      [ProviderStatusesEnum.Inactive]: {
+        variant: 'inactive',
+        translationKey: 'providers.statuses.inActive'
+      },
+      [ProviderStatusesEnum.Blocked]: {
+        variant: 'blocked',
+        translationKey: 'providers.statuses.blocked'
+      },
+      [ProviderStatusesEnum.Active]: {
+        variant: 'active',
+        translationKey: 'providers.statuses.active'
+      }
+    }),
+    []
+  );
   const filtersList = useMemo(
     () => [
       {
@@ -196,4 +203,3 @@ function ProviderList({ filters, results, onFiltersChange, rowCount, isFilteredD
 }
 
 export default ProviderList;
-

@@ -25,11 +25,9 @@ export class DiContainer {
     this.diContainer.bind(DI_CONSTANTS.PROVIDER.ProviderRepository).to(ProviderRepository);
     this.diContainer.bind(DI_CONSTANTS.GAME.GameRepository).to(GameRepository);
 
-
     // Use cases
     this.diContainer.bind(DI_CONSTANTS.PROVIDER.ProviderUseCase).to(ProviderUseCase);
     this.diContainer.bind(DI_CONSTANTS.GAME.GameUseCase).to(GameUseCase);
-
   };
 }
 

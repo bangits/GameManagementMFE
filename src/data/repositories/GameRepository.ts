@@ -1,9 +1,6 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { IGameRepository } from '@/domain/boundaries';
-import {
-  GetGameRequestModel,
-  GetGameResponseModel
-} from '@/domain/models';
+import { GetGameRequestModel, GetGameResponseModel } from '@/domain/models';
 import { ICacheService, IHttpService } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES } from '../constants';

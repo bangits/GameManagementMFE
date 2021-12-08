@@ -23,7 +23,6 @@ export const GameManagementProvider: FC<GameManagementProviderProps> = ({ childr
       value={{
         providerRepository: containerInstance.diContainer.get(DI_CONSTANTS.PROVIDER.ProviderRepository),
         gameRepository: containerInstance.diContainer.get(DI_CONSTANTS.GAME.GameRepository)
-
       }}>
       {children}
     </GameManagementContext.Provider>

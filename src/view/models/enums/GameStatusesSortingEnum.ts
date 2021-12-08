@@ -1,7 +1,7 @@
 export enum GameStatusesSortingEnum {
   LOGO = 1,
-  GAME_ID ,
-  GAME_NAME ,
+  GAME_ID,
+  GAME_NAME,
   EXTERNAL_ID,
   PROVIDER_NAME,
   PROVIDER_ID,
@@ -14,5 +14,4 @@ export enum GameStatusesSortingEnum {
   CREATION_DATE,
   CREATED_BY,
   STATUS
-
 }
