@@ -8,11 +8,11 @@ export const gameApi = createApi({
   reducerPath: 'gameApi',
   baseQuery: createBaseQuery<GameUseCase>({ useCaseName: DI_CONSTANTS.GAME.GameUseCase }),
   endpoints: (build) => ({
-    getGame: build.query({
-      query: (GamesFiltersViewModel: GamesFiltersViewModel) => {
+    getGames: build.query({
+      query: (gamesFiltersViewModel: GamesFiltersViewModel) => {
         return {
           methodName: 'getGames',
-          methodArguments: [GamesFiltersViewModel]
+          methodArguments: [gamesFiltersViewModel]
         };
       }
     })

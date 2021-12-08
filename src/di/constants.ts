@@ -8,5 +8,7 @@ export const DI_CONSTANTS = {
     GameRepository: 'IGameRepository'
   },
   CacheService: 'ICacheService',
-  HttpService: 'IHttpService'
+  HttpService: 'IHttpService',
+  TranslationUseCase: 'TranslationUseCase',
+  LocalStorageService: 'LocalStorageService'
 };

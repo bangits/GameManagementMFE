@@ -2,7 +2,7 @@ import { ProviderStatusesEnum } from '@/domain/models/enums';
 import { ProviderSelect } from '@/view';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
-import { CurrencySelect, redirectToURL, TablePage, useTranslation } from '@atom/common';
+import { redirectToURL, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
 
@@ -11,22 +11,18 @@ export interface ProviderListProps {
   filters: ProvidersFiltersViewModel;
   results: ProvidersViewModel[];
   rowCount: number;
+  isFilteredData: boolean;
+  filtersInitialValues: ProvidersFiltersViewModel;
 }
 
-function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderListProps) {
+function ProviderList({ filters, results, onFiltersChange, rowCount, isFilteredData, filtersInitialValues }: ProviderListProps) {
   const tableColumns = useMemo(
     () => [
-      {
-        Header: 'Provider ID',
-        accessor: 'providerId' as keyof ProvidersViewModel,
-        sortingId: ProviderStatusesSortingEnum.PROVIDER_ID
-      },
       {
         Header: 'Logo',
         accessor: 'logo' as keyof ProvidersViewModel,
         disableSortBy: true,
-        variant: 'image' as const,
-        sortingId: ProviderStatusesSortingEnum.LOGO
+        variant: 'image' as const
       },
       {
         Header: 'Provider name',
@@ -34,24 +30,27 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
         sortingId: ProviderStatusesSortingEnum.PROVIDER_NAME
       },
       {
+        Header: 'Provider ID',
+        accessor: 'providerId' as keyof ProvidersViewModel,
+        sortingId: ProviderStatusesSortingEnum.ID
+      },
+      {
+        Header: 'Partner ID',
+        accessor: 'partnerId' as keyof ProvidersViewModel,
+        disableSortBy: true
+      },
+      {
         Header: 'Total game count',
         accessor: 'totalGameCount' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.GAME_COUNT
       },
-      {
-        Header: 'Default currency',
-        accessor: 'defaultCurrency' as keyof ProvidersViewModel,
-        disableSortBy: true,
-        sortingId: ProviderStatusesSortingEnum.DEFAULT_CURRENCY
-      },
+
       {
         Header: 'Status',
         accessor: 'status' as keyof ProvidersViewModel,
-        disableSortBy: true,
         variant: 'status' as const,
-        sortingId: ProviderStatusesSortingEnum.STATUS,
-        getVariant: (value: number) => (value === ProviderStatusesEnum.Active ? 'active' : 'blocked'),
-        getVariantName: (value: number) => (value === ProviderStatusesEnum.Active ? 'Active' : 'Blocked')
+        getVariant: (value: ProviderStatusesEnum) => providerStatusesConfig[value].variant,
+        getVariantName: (value: ProviderStatusesEnum) => t.get(providerStatusesConfig[value].translationKey)
       }
     ],
     []
@@ -59,8 +58,43 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
 
   const t = useTranslation();
 
+  const providerStatusesConfig = useMemo<
+  Record<ProviderStatusesEnum, { variant: 'active' | 'inactive' | 'blocked'; translationKey: string }>
+>(
+  () => ({
+    [ProviderStatusesEnum.Inactive]: {
+      variant: 'inactive',
+      translationKey: 'providers.statuses.inActive'
+    },
+    [ProviderStatusesEnum.Blocked]: {
+      variant: 'blocked',
+      translationKey: 'providers.statuses.blocked'
+    },
+    [ProviderStatusesEnum.Active]: {
+      variant: 'active',
+      translationKey: 'providers.statuses.active'
+    }
+  }),
+  []
+);
   const filtersList = useMemo(
     () => [
+      {
+        label: t.get('providers.fields.providerId'),
+        name: 'providerId',
+        type: 'input' as const,
+        props: {
+          label: t.get('providers.fields.providerId')
+        }
+      },
+      {
+        label: t.get('providers.fields.partnerId'),
+        name: 'partnerId',
+        type: 'input' as const,
+        props: {
+          label: t.get('providers.fields.partnerId')
+        }
+      },
       {
         name: 'providerName',
         type: 'custom' as const,
@@ -73,40 +107,33 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
           />
         )
       },
-      {
-        label: t.get('providers.fields.providerId'),
-        name: 'providerId',
-        type: 'input' as const,
-        props: {
-          label: t.get('providers.fields.providerId')
-        }
-      },
-      {
-        label: t.get('providers.fields.gameCount'),
-        type: 'from-to' as const,
-        name: 'gameCount',
-        fromInputProps: {
-          label: t.get('providers.fields.gameCountFrom'),
-          type: 'number'
-        },
-        toInputProps: {
-          label: t.get('providers.fields.gameCountTo'),
-          type: 'number'
-        }
-      },
-      {
-        label: t.get('providers.fields.defaultCurrency'),
-        name: 'currency',
-        type: 'custom' as const,
-        component: ({ onChange }) => (
-          <CurrencySelect
-            isMulti
-            inputLabel={t.get('providers.fields.defaultCurrency')}
-            fullWidth
-            onChange={(changedValue) => onChange('currency', changedValue)}
-          />
-        )
-      },
+
+      // {
+      //   label: t.get('providers.fields.gameCount'),
+      //   type: 'from-to' as const,
+      //   name: 'gameCount',
+      //   fromInputProps: {
+      //     label: t.get('providers.fields.gameCountFrom'),
+      //     type: 'number'
+      //   },
+      //   toInputProps: {
+      //     label: t.get('providers.fields.gameCountTo'),
+      //     type: 'number'
+      //   }
+      // },
+      // {
+      //   label: t.get('providers.fields.defaultCurrency'),
+      //   name: 'currency',
+      //   type: 'custom' as const,
+      //   component: ({ onChange }) => (
+      //     <CurrencySelect
+      //       isMulti
+      //       inputLabel={t.get('providers.fields.defaultCurrency')}
+      //       fullWidth
+      //       onChange={(changedValue) => onChange('currency', changedValue)}
+      //     />
+      //   )
+      // },
       {
         label: t.get('statuses.name'),
         name: 'status',
@@ -144,13 +171,17 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
         fetchData={onFiltersChange}
         filterProps={{
           defaultOpened: true,
-          initialValues: filters,
+          initialValues: filtersInitialValues,
           filters: filtersList
-          // checkboxFilters: []
         }}
         tableProps={{
           data: results,
-          columns: tableColumns
+          columns: tableColumns,
+          actions: [],
+
+          illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
+          emptyText: isFilteredData ? 'Please make a different filter selection.' : 'You don’t have any partners added!'
+          // emptyText: isFilteredData ? <>Please make a different filter selection.<br/>Please add a partner.</> : <>Sorry no data found!<br/>Please make a different filter selection.</>
         }}
         rowCount={rowCount}
         onEditButtonClick={() => {
@@ -165,3 +196,4 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
 }
 
 export default ProviderList;
+

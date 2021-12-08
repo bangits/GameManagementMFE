@@ -1,7 +1,16 @@
-import { Provider } from '@/domain/entities';
-import { AddProviderRequestModel, GetProviderRequestModel, GetProviderResponseModel } from '@/domain/models';
+import { Game, Provider } from '@/domain/entities';
+import {
+  AddProviderRequestModel,
+  GetGameRequestModel,
+  GetGameResponseModel,
+  GetProviderRequestModel,
+  GetProviderResponseModel
+} from '@/domain/models';
 import {
   AddProviderViewModel,
+  GamesFiltersViewModel,
+  GamesViewModel,
+  GetGamesViewModel,
   GetProvidersViewModel,
   ProvidersFiltersViewModel,
   ProvidersViewModel
@@ -23,10 +32,6 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.gameCountTo,
       mapFrom((source) => source.gameCount.to)
-    )
-    .forMember(
-      (destination) => destination.name,
-      mapFrom((source) => source.providerName)
     )
     .forMember(
       (destination) => destination.providerDefaultCurrencyIds,
@@ -55,6 +60,7 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.providerId,
       mapFrom((source) => source.id)
     )
+
     .forMember(
       (destination) => destination.providerName,
       mapFrom((source) => source.name)
@@ -63,11 +69,6 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.totalGameCount,
       mapFrom((source) => source.gameCount)
     );
-
-  mapper.createMap(GetProviderResponseModel, GetProvidersViewModel).forMember(
-    (destination) => destination.results,
-    mapWith(ProvidersViewModel, Provider, (source) => source.results)
-  );
 
   mapper
     .createMap(AddProviderViewModel, AddProviderRequestModel)
@@ -88,4 +89,69 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => transformToCountryModel(source.targetMarkets))
     );
   //#endregion
+
+  mapper.createMap(GetProviderResponseModel, GetProvidersViewModel).forMember(
+    (destination) => destination.results,
+    mapWith(ProvidersViewModel, Provider, (source) => source.results)
+  );
+  //#region Games
+  mapper
+    .createMap(GamesFiltersViewModel, GetGameRequestModel)
+    .forMember(
+      (destination) => destination.subTypeId,
+      mapFrom((source) => source.subType)
+    )
+    .forMember(
+      (destination) => destination.statusId,
+      mapFrom((source) => source.status)
+    )
+    .forMember(
+      (destination) => destination.pagination,
+      mapFrom((source) => source.pagination)
+    )
+    .forMember(
+      (destination) => destination.sorting,
+      mapFrom((source) => source.sorting)
+    )
+    .forMember(
+      (destination) => destination.rtpFrom,
+      mapFrom((source) => source.rtp.from)
+    )
+    .forMember(
+      (destination) => destination.rtpTo,
+      mapFrom((source) => source.rtp.to)
+    )
+    .forMember(
+      (destination) => destination.createdByUserEmail,
+      mapFrom((source) => source.createdBy)
+    )
+    .forMember(
+      (destination) => destination.gameCertifiedCountries,
+      mapFrom((source) => source.certifiedCountries)
+    )
+    .forMember(
+      (destination) => destination.gameRestrictedCountryIds,
+      mapFrom((source) => source.restrictedCountries)
+    )
+    .forMember(
+      (destination) => destination.gameCurrencyIds,
+      mapFrom((source) => source.supportedCurrencies)
+    );
+  mapper
+    .createMap(Game, GamesViewModel)
+    .forMember(
+      (destination) => destination.gameId,
+      mapFrom((source) => source.id)
+    )
+    .forMember(
+      (destination) => destination.status.id,
+      mapFrom((source) => source.status)
+    );
+
+  //#endregion
+  mapper.createMap(GetGameResponseModel, GetGamesViewModel).forMember(
+    (destination) => destination.results,
+    mapWith(GamesViewModel, Game, (source) => source.results)
+  );
+  //to be continued
 };

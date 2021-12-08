@@ -1,14 +1,15 @@
 import { providerApi } from '@/adapter/redux/api';
 import { GetProvidersViewModel, ProvidersFiltersViewModel } from '@/view/models';
-import { SortTypesEnum } from '@atom/common';
+import { SortTypesEnum, useFirstValue } from '@atom/common';
 import { useMemo, useState } from 'react';
 import ProviderList from './ProviderList';
 
 const ProviderListContainer = () => {
-  const initialFilters = useMemo<ProvidersFiltersViewModel>(
+  const filtersInitialValues = useMemo<ProvidersFiltersViewModel>(
     () => ({
-      providerId: null,
-      providerName: null,
+      providerId: '',
+      partnerId: '',
+      providerName: '',
       currency: [],
       gameCount: {
         from: null,
@@ -24,16 +25,19 @@ const ProviderListContainer = () => {
     []
   );
 
-  const [filters, setFilters] = useState<ProvidersFiltersViewModel>(initialFilters);
+  const [filters, setFilters] = useState<ProvidersFiltersViewModel>(filtersInitialValues);
 
-  const { data } = providerApi.useGetProviderQuery(filters);
+  const { data, requestId } = providerApi.useGetProviderQuery(filters);
 
   const { results, rowCount } = (data || {}) as GetProvidersViewModel;
+
+  const firstRequestId = useFirstValue(requestId);
 
   return (
     <>
       <ProviderList
         results={results || []}
+        isFilteredData={firstRequestId !== requestId}
         rowCount={rowCount}
         filters={filters}
         onFiltersChange={(parameters) => {
@@ -49,6 +53,7 @@ const ProviderListContainer = () => {
             sorting
           });
         }}
+        filtersInitialValues={filtersInitialValues}
       />
     </>
   );

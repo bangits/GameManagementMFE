@@ -4,22 +4,26 @@ import { GameStatusesEnum } from '../models';
 import { BaseEntity } from './BaseEntity';
 
 export class Game extends BaseEntity {
-  status: {
-    id: GameStatusesEnum;
-    name: string;
-  };
-
   @AutoMap()
-  logo: string;
-
+  externalId: PrimaryKey;
+  @AutoMap()
+  icon: string;
+  @AutoMap()
   name: string;
-  gameCount: number;
-  lastUpdatedDate: string;
+  @AutoMap()
+  providerId: PrimaryKey;
+  @AutoMap()
+  rtp: number;
+  @AutoMap()
+  classId: PrimaryKey;
+  @AutoMap()
+  releaseDate: string;
+  @AutoMap()
   creationDate: string;
 
-  defaultCurrency?: {
-    id: PrimaryKey;
-    name: string;
-    code: string;
-  };
+  typeId: PrimaryKey;
+  providerName: string;
+  status: GameStatusesEnum;
+  volatility: PrimaryKey;
+  subType: PrimaryKey;
 }

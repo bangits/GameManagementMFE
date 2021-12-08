@@ -1,5 +1,5 @@
-import { ProviderRepository } from '@/data';
-import { ProviderUseCase } from '@/domain/use-case';
+import { GameRepository, ProviderRepository } from '@/data';
+import { GameUseCase, ProviderUseCase } from '@/domain/use-case';
 import { CacheService, HttpService } from '@atom/common';
 import { Container } from 'inversify';
 import { DI_CONSTANTS } from './constants';
@@ -17,15 +17,19 @@ export class DiContainer {
     this.diContainer.bind(DI_CONSTANTS.HttpService).toDynamicValue(
       () =>
         new HttpService({
-          baseURL: 'http://52.170.166.223/api/v1'
+          baseURL: 'http://20.120.67.13/api/v1'
         })
     );
 
     // Repositories
-    this.diContainer.bind(DI_CONSTANTS.ProviderRepository).to(ProviderRepository);
+    this.diContainer.bind(DI_CONSTANTS.PROVIDER.ProviderRepository).to(ProviderRepository);
+    this.diContainer.bind(DI_CONSTANTS.GAME.GameRepository).to(GameRepository);
+
 
     // Use cases
-    this.diContainer.bind(DI_CONSTANTS.ProviderUseCase).to(ProviderUseCase);
+    this.diContainer.bind(DI_CONSTANTS.PROVIDER.ProviderUseCase).to(ProviderUseCase);
+    this.diContainer.bind(DI_CONSTANTS.GAME.GameUseCase).to(GameUseCase);
+
   };
 }
 

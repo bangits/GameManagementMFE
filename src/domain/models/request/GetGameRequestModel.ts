@@ -1,12 +1,40 @@
+import { GameStatusesEnum } from '@/domain/models/enums';
 import { PagedModel, PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
-import { GameStatusesEnum } from '..';
 export class GetGameRequestModel extends PagedModel {
   @AutoMap()
-  gameId: PrimaryKey;
+  externalId: PrimaryKey;
+  @AutoMap()
+  icon: string;
+  @AutoMap()
   name: string;
-  gameCountFrom: number;
-  gameCountTo: number;
-  statusIds: GameStatusesEnum[];
-  gameDefaultCurrencyIds: number[];
+  @AutoMap()
+  providerIds: PrimaryKey;
+  @AutoMap()
+  classId: PrimaryKey;
+  @AutoMap()
+  releaseDate: string;
+  @AutoMap()
+  creationDate: string;
+  @AutoMap()
+  volatilityId: number;
+  @AutoMap()
+  gameThemes: String[];
+  @AutoMap()
+  gameFeatures: String[];
+  @AutoMap()
+  gamePlatformGames: String[];
+  @AutoMap()
+  gameId: PrimaryKey;
+  @AutoMap()
+  createdByUserEmail: string;
+
+  gameCertifiedCountries: String[];
+  gameRestrictedCountryIds: String[] | '';
+  gameCurrencyIds: String[] | '';
+
+  rtpFrom: number;
+  rtpTo: number;
+  statusId: GameStatusesEnum;
+  subTypeId: PrimaryKey;
 }

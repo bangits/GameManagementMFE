@@ -4,10 +4,12 @@ import { AutoMap } from '@automapper/classes';
 
 export class ProvidersFiltersViewModel extends PagedModel {
   @AutoMap()
-  providerId: PrimaryKey;
+  providerId: PrimaryKey | '';
+
+  @AutoMap()
+  partnerId: PrimaryKey | '';
 
   status: ProviderStatusesEnum[];
   currency: PrimaryKey[];
   gameCount: { from: number; to: number };
-  providerName: string;
 }
