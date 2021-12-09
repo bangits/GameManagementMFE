@@ -13,7 +13,7 @@ export const addGameValidationSchema = async (
     releaseDate: string(),
     rtp: number().max(10, t.max(10)),
     volatilityId: number(),
-    classId:number().typeError(t.required()),
+    classId: number().typeError(t.required()),
     hasDemo: boolean().required(t.required()),
     createdByUserEmail: string(),
     createdByUserId: number()
