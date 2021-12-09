@@ -39,7 +39,6 @@ const ProviderListContainer = () => {
         results={results || []}
         isFilteredData={firstRequestId !== requestId}
         rowCount={rowCount}
-        filters={filters}
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy
             ? {
@@ -47,6 +46,7 @@ const ProviderListContainer = () => {
                 propertyId: parameters.sortedBy.id
               }
             : null;
+
           setFilters({
             ...filters,
             ...parameters.filters,

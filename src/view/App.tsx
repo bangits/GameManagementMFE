@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { ROUTES } from './constants';
-import { AddGameContainer, AddProviderContainer, GameListContainer, ProviderListContainer } from './pages';
+import { GameListContainer, ProviderListContainer } from './pages';
 
 const App = () => {
   const [store, setStore] = useState(null);
@@ -32,10 +32,6 @@ const App = () => {
                     <Route path={`${url}${ROUTES.providersList}`} exact>
                       <ProviderListContainer />
                     </Route>
-
-                    <Route path={`${url}${ROUTES.providersAdd}`} exact>
-                      <AddProviderContainer />
-                    </Route>
                   </>
                 )}
               />
@@ -47,10 +43,6 @@ const App = () => {
                     <>
                       <Route path={`${url}${ROUTES.gamesList}`} exact>
                         <GameListContainer />
-                      </Route>
-
-                      <Route path={`${url}${ROUTES.gameAdd}`} exact>
-                        <AddGameContainer />
                       </Route>
                     </>
                   );
