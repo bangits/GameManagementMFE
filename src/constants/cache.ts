@@ -1,5 +1,4 @@
 export const CACHE_VARIABLES = {
-    baseUrl: '/',
-    getProviderNamesResponse: '/GetProviderNamesResponse',
-  };
-  
+  baseUrl: '/',
+  getProviderNamesResponse: '/GetProviderNamesResponse'
+};

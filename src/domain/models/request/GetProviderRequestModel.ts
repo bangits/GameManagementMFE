@@ -5,6 +5,9 @@ export class GetProviderRequestModel extends PagedModel {
   @AutoMap()
   providerId: PrimaryKey;
 
+  @AutoMap()
+  partnerId: PrimaryKey;
+
   name: string;
   gameCountFrom: number;
   gameCountTo: number;

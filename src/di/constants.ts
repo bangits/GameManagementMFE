@@ -1,6 +1,14 @@
 export const DI_CONSTANTS = {
-  ProviderRepository: 'IProviderRepository',
-  ProviderUseCase: 'ProviderUseCase',
+  PROVIDER: {
+    ProviderRepository: 'IProviderRepository',
+    ProviderUseCase: 'ProviderUseCase'
+  },
+  GAME: {
+    GameUseCase: 'GameUseCase',
+    GameRepository: 'IGameRepository'
+  },
   CacheService: 'ICacheService',
-  HttpService: 'IHttpService'
+  HttpService: 'IHttpService',
+  TranslationUseCase: 'TranslationUseCase',
+  LocalStorageService: 'LocalStorageService'
 };

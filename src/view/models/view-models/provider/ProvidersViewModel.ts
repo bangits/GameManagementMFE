@@ -10,6 +10,9 @@ export class ProvidersViewModel {
   @AutoMap()
   logo: string;
 
+  @AutoMap()
+  partnerId: PrimaryKey;
+
   providerName: string;
   totalGameCount: number;
   defaultCurrency: string;

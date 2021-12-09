@@ -1,0 +1,17 @@
+export enum GameStatusesSortingEnum {
+  LOGO = 1,
+  GAME_ID,
+  GAME_NAME,
+  EXTERNAL_ID,
+  PROVIDER_NAME,
+  PROVIDER_ID,
+  TYPE,
+  SUBTYPE,
+  VOLATILITY,
+  RTP,
+  CLASS,
+  RELEASE_DATE,
+  CREATION_DATE,
+  CREATED_BY,
+  STATUS
+}
