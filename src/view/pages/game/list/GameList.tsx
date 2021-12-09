@@ -321,7 +321,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
             isMulti
             inputLabel={t.get('games.list.fields.volatility')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            onChange={(changedValue) => onChange('volatility', changedValue)}
           />
         )
       },
