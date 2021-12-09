@@ -7,56 +7,48 @@ import { useMemo } from 'react';
 
 export interface ProviderListProps {
   onFiltersChange: (parameters: FetchDataParameters<ProvidersViewModel, ProvidersFiltersViewModel>) => void;
-  filters: ProvidersFiltersViewModel;
   results: ProvidersViewModel[];
   rowCount: number;
   isFilteredData: boolean;
   filtersInitialValues: ProvidersFiltersViewModel;
 }
 
-function ProviderList({
-  filters,
-  results,
-  onFiltersChange,
-  rowCount,
-  isFilteredData,
-  filtersInitialValues
-}: ProviderListProps) {
+function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filtersInitialValues }: ProviderListProps) {
   const tableColumns = useMemo(
     () => [
       {
         Header: 'Logo',
-        accessor: 'logo' as keyof ProvidersViewModel,
+        accessor: 'logo',
         disableSortBy: true,
         variant: 'image' as const
       },
       {
         Header: 'Provider name',
-        accessor: 'providerName' as keyof ProvidersViewModel,
+        accessor: 'providerName',
         sortingId: ProviderStatusesSortingEnum.PROVIDER_NAME
       },
       {
         Header: 'Provider ID',
-        accessor: 'providerId' as keyof ProvidersViewModel,
+        accessor: 'providerId',
         sortingId: ProviderStatusesSortingEnum.ID
       },
       {
         Header: 'Partner ID',
-        accessor: 'partnerId' as keyof ProvidersViewModel,
+        accessor: 'partnerId',
         sortingId: ProviderStatusesSortingEnum.PARTNER_ID
       },
       {
         Header: 'Total game count',
-        accessor: 'totalGameCount' as keyof ProvidersViewModel,
+        accessor: 'totalGameCount',
         sortingId: ProviderStatusesSortingEnum.GAME_COUNT
       },
 
       {
         Header: 'Status',
-        accessor: 'status' as keyof ProvidersViewModel,
+        accessor: 'status',
         variant: 'status' as const,
-        getVariant: (_, value: ProviderStatusesEnum) => providerStatusesConfig[value].variant,
-        getVariantName: (_, value: ProviderStatusesEnum) => t.get(providerStatusesConfig[value].translationKey)
+        getVariant: (value: string) => providerStatusesConfig[value].variant,
+        getVariantName: (value: string) => t.get(providerStatusesConfig[value].translationKey)
       }
     ],
     []
@@ -83,6 +75,7 @@ function ProviderList({
     }),
     []
   );
+
   const filtersList = useMemo(
     () => [
       {
@@ -172,14 +165,24 @@ function ProviderList({
           filters: filtersList
         }}
         tableProps={{
-          // @ts-expect-error Ignoring ts, cause ObjectMock is ProvidersViewModel
           data: results,
           columns: tableColumns,
           actions: [],
 
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? 'Please make a different filter selection.' : 'You don’t have any partners added!'
-          // emptyText: isFilteredData ? <>Please make a different filter selection.<br/>Please add a partner.</> : <>Sorry no data found!<br/>Please make a different filter selection.</>
+          emptyText: isFilteredData ? (
+            <>
+              {t.get('tables.emptyResultFirstSentence')}
+              <br />
+              {t.get('tables.emptyResultSecondSentence')}
+            </>
+          ) : (
+            <>
+              {t.get('providers.list.emptyResultFirstSentence')}
+              <br />
+              {t.get('providers.list.emptyResultSecondSentence')}
+            </>
+          )
         }}
         rowCount={rowCount}
         onEditButtonClick={() => {

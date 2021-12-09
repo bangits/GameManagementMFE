@@ -17,7 +17,7 @@ export class DiContainer {
     this.diContainer.bind(DI_CONSTANTS.HttpService).toDynamicValue(
       () =>
         new HttpService({
-          baseURL: 'http://20.120.67.13/api/v1'
+          baseURL: 'http://20.120.144.194/api/v1'
         })
     );
 

@@ -42,6 +42,10 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.pagination)
     )
     .forMember(
+      (destination) => destination.sorting,
+      mapFrom((source) => source.sorting)
+    )
+    .forMember(
       (destination) => destination.statusIds,
       mapFrom((source) => source.status)
     );
