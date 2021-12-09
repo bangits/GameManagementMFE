@@ -11,10 +11,10 @@ export const addGameValidationSchema = async (
     name: string().required(t.required()).max(50, t.max(50)),
     subTypeId: number().typeError(t.required()),
     releaseDate: string(),
-    rtp: number(),
+    rtp: number().max(10, t.max(10)),
     volatilityId: number(),
-    classId: number(),
-    hasDemo: boolean(),
+    classId:number().typeError(t.required()),
+    hasDemo: boolean().required(t.required()),
     createdByUserEmail: string(),
     createdByUserId: number()
   });

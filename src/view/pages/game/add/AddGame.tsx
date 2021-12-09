@@ -40,9 +40,8 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'subTypeId' as const,
         type: 'select' as const,
-        label: t.get('games.add.fields.type'),
         component: (props: CustomSelectProps) => (
-          <GameTypesSelect {...props} fullWidth inputLabel={t.get('games.add.fields.type')} />
+          <GameTypesSelect {...props} fullWidth inputLabel={t.get('games.add.fields.subType')} />
         )
       },
       {
