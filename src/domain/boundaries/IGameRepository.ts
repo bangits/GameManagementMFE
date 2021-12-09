@@ -1,4 +1,5 @@
 import {
+  AddGameRequestModel,
   GetClassNamesResponseModel,
   GetGameFeaturesResponseModel,
   GetGameRequestModel,
@@ -11,6 +12,7 @@ import {
 
 export interface IGameRepository {
   getGames(getGameRequestModel: GetGameRequestModel): Promise<GetGameResponseModel>;
+  addGame(addGameRequestModel: AddGameRequestModel): Promise<boolean>;
   getGameTypes(): Promise<GetGameTypesResponseModel>;
   getClassNames(): Promise<GetClassNamesResponseModel>;
   getGameThemes(): Promise<GetGameThemesResponseModel>;

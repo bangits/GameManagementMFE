@@ -1,3 +1,4 @@
+export * from './AddGameViewModel';
 export * from './GamesFiltersViewModel';
 export * from './GamesViewModel';
 export * from './GetGameFeaturesViewModel';
