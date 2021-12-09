@@ -1,10 +1,10 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
 import { ProviderSelect } from '@/view';
-import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
-import { CurrencySelect, redirectToURL, TablePage, useTranslation } from '@atom/common';
-import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
+import { CurrencySelect, TablePage, useTranslation } from '@atom/common';
+import { FetchDataParameters, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
+
 export interface ProviderListProps {
   onFiltersChange: (parameters: FetchDataParameters<ProvidersViewModel, ProvidersFiltersViewModel>) => void;
   filters: ProvidersFiltersViewModel;
@@ -122,17 +122,8 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
     [t]
   );
 
-  const addProviderButtonProps = useMemo(
-    () => ({
-      children: t.get('providers.list.addProviderButton'),
-      startIcon: <Icons.PlusCircle />,
-      onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.providers + ROUTES.providersAdd)
-    }),
-    [t]
-  );
-
   return (
-    <PageWrapper title={t.get('providers.list.title')} showButton buttonProps={addProviderButtonProps}>
+    <PageWrapper title={t.get('providers.list.title')}>
       <TablePage
         fetchData={onFiltersChange}
         filterProps={{
@@ -142,6 +133,7 @@ function ProviderList({ filters, results, onFiltersChange, rowCount }: ProviderL
           // checkboxFilters: []
         }}
         tableProps={{
+          // @ts-expect-error Ignoring ts, cause ObjectMock is ProvidersViewModel
           data: results,
           columns: tableColumns
         }}
