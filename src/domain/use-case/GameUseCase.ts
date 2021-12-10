@@ -1,7 +1,8 @@
 import { DI_CONSTANTS } from '@/di/constants';
-import { GetGameRequestModel, GetGameResponseModel } from '@/domain/models';
+import { AddGameRequestModel, GetGameRequestModel, GetGameResponseModel } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
+  AddGameViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
@@ -25,6 +26,10 @@ export class GameUseCase {
     const getGameResponseModel = await this.gameRepository.getGames(getGameRequestModel);
 
     return mapper.map(getGameResponseModel, GetGamesViewModel, GetGameResponseModel);
+  };
+  addGame = async (addGameViewModel: AddGameViewModel): Promise<boolean> => {
+    const addGameRequestModel = mapper.map(addGameViewModel, AddGameRequestModel, AddGameViewModel);
+    return this.gameRepository.addGame(addGameRequestModel);
   };
 
   getGameTypes = async (): Promise<GetGameTypesViewModel> => {

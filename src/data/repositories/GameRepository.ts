@@ -1,6 +1,7 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { IGameRepository } from '@/domain/boundaries';
 import {
+  AddGameRequestModel,
   GetClassNamesResponseModel,
   GetGameFeaturesResponseModel,
   GetGameRequestModel,
@@ -28,7 +29,14 @@ export class GameRepository implements IGameRepository {
       query: getGameRequestModel
     });
   };
+  addGame = async (addGameRequestModel: AddGameRequestModel) => {
+    await this.httpService.post<void, {}, AddGameRequestModel>({
+      url: API_ROUTES.GAMES.BASE_ROUTE,
+      body: addGameRequestModel
+    });
 
+    return true;
+  };
   getGameTypes = cachedFn(CACHE_CONSTANTS.GetGameTypesResponse, async (): Promise<GetGameTypesResponseModel> => {
     return await this.httpService.get<GetGameTypesResponseModel, {}>({
       url: API_ROUTES.GAMES.GET_GAME_TYPES

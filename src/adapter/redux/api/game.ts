@@ -1,6 +1,7 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { GameUseCase } from '@/domain/use-case';
 import {
+  AddGameViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
@@ -24,14 +25,14 @@ export const gameApi = createApi({
       }
     }),
 
-    // addGame: build.mutation({
-    //   query: (addGameViewModel: AddGameViewModel) => {
-    //     return {
-    //       methodName: 'addGames',
-    //       methodArguments: [addGameViewModel]
-    //     };
-    //   }
-    // })
+    addGame: build.mutation({
+      query: (addGameViewModel: AddGameViewModel) => {
+        return {
+          methodName: 'addGame',
+          methodArguments: [addGameViewModel]
+        };
+      }
+    }),
 
     getGameTypes: build.query<GetGameTypesViewModel, {}>({
       query: () => {

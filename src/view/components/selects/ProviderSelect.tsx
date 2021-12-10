@@ -12,7 +12,7 @@ export const ProviderSelect = (props: Omit<CustomSelectProps, 'options'>) => {
         {...props}
         fullWidth
         options={providerNames || []}
-        inputLabel={t.get('games.list.fields.providerName')}
+        inputLabel={t.get('games.add.fields.providerName')}
       />
     </>
   );
