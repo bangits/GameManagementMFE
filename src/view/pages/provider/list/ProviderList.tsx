@@ -1,5 +1,4 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
-import { ProviderSelect } from '@/view';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
 import { TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
@@ -96,43 +95,12 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
       },
       {
         name: 'providerName',
-        type: 'custom' as const,
+        type: 'input' as const,
         label: t.get('providers.fields.providerName'),
-        component: ({ onChange }) => (
-          <ProviderSelect
-            inputLabel={t.get('providers.fields.providerName')}
-            fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
-          />
-        )
+        props: {
+          label: t.get('providers.fields.providerName')
+        }
       },
-
-      // {
-      //   label: t.get('providers.fields.gameCount'),
-      //   type: 'from-to' as const,
-      //   name: 'gameCount',
-      //   fromInputProps: {
-      //     label: t.get('providers.fields.gameCountFrom'),
-      //     type: 'number'
-      //   },
-      //   toInputProps: {
-      //     label: t.get('providers.fields.gameCountTo'),
-      //     type: 'number'
-      //   }
-      // },
-      // {
-      //   label: t.get('providers.fields.defaultCurrency'),
-      //   name: 'currency',
-      //   type: 'custom' as const,
-      //   component: ({ onChange }) => (
-      //     <CurrencySelect
-      //       isMulti
-      //       inputLabel={t.get('providers.fields.defaultCurrency')}
-      //       fullWidth
-      //       onChange={(changedValue) => onChange('currency', changedValue)}
-      //     />
-      //   )
-      // },
       {
         label: t.get('statuses.name'),
         name: 'status',

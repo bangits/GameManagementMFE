@@ -7,6 +7,9 @@ export class ProvidersFiltersViewModel extends PagedModel {
   providerId: PrimaryKey | '';
 
   @AutoMap()
+  providerName: string;
+
+  @AutoMap()
   partnerId: PrimaryKey | '';
 
   status: ProviderStatusesEnum[];

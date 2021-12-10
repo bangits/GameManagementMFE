@@ -8,6 +8,9 @@ export class GetProviderRequestModel extends PagedModel {
   @AutoMap()
   partnerId: PrimaryKey;
 
+  @AutoMap()
+  providerName: string;
+
   name: string;
   gameCountFrom: number;
   gameCountTo: number;

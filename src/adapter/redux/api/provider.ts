@@ -24,7 +24,6 @@ export const providerApi = createApi({
         };
       }
     }),
-
     addProvider: build.mutation({
       query: (addProviderViewModel: AddProviderViewModel) => {
         return {
