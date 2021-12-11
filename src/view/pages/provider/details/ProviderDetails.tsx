@@ -26,7 +26,9 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({ data }) => {
         actions: [
           {
             iconName: 'LogOutIcon',
-            onClick: () => {},
+            onClick: () => {
+              console.log('');
+            },
             tooltipText: 'Terminate'
           }
         ]
