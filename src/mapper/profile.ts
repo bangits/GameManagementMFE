@@ -5,7 +5,8 @@ import {
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderRequestModel,
-  GetProviderResponseModel
+  GetProviderResponseModel,
+  GetProvidersByIdResponseModel
 } from '@/domain/models';
 import {
   AddProviderViewModel,
@@ -19,6 +20,7 @@ import {
 } from '@/view/models';
 import type { MappingProfile } from '@automapper/core';
 import autoMapper from '@automapper/core';
+import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
 import { transformToCountryModel } from './transformFunctions';
 
 const { mapFrom, mapWith } = autoMapper;
@@ -104,6 +106,73 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.lastUpdatedByUserEmail,
       mapFrom((source) => 'aaaaa@aaaa.aaa')
     );
+
+  mapper
+    .createMap(GetProvidersByIdResponseModel, GetProvidersByIdViewModel)
+    .forMember(
+      (destination) => destination.targetMarkets,
+      mapFrom((source) => source.targetMarkets)
+    )
+    .forMember(
+      (destination) => destination.providerCurrencies,
+      mapFrom((source) => source.providerCurrencies)
+    )
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) => source.certifiedCountries)
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) => source.restrictedCountries)
+    )
+    .forMember(
+      (destination) => destination.status,
+      mapFrom((source) => source.status)
+    )
+    .forMember(
+      (destination) => destination.providerLicenses,
+      mapFrom((source) => source.providerLicenses)
+    )
+    .forMember(
+      (destination) => destination.name,
+      mapFrom((source) => source.name)
+    )
+    .forMember(
+      (destination) => destination.gameCount,
+      mapFrom((source) => source.gameCount)
+    )
+    .forMember(
+      (destination) => destination.absoluteUrl,
+      mapFrom((source) => source.absoluteUrl)
+    )
+    .forMember(
+      (destination) => destination.absoluteDemoUrl,
+      mapFrom((source) => source.absoluteDemoUrl)
+    )
+    .forMember(
+      (destination) => destination.createdByUserId,
+      mapFrom((source) => source.createdByUserId)
+    )
+    .forMember(
+      (destination) => destination.creationDate,
+      mapFrom((source) => source.creationDate)
+    )
+    .forMember(
+      (destination) => destination.createdByUserEmail,
+      mapFrom((source) => source.createdByUserEmail)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserId,
+      mapFrom((source) => source.lastUpdatedByUserId)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedDate,
+      mapFrom((source) => source.lastUpdatedDate)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserEmail,
+      mapFrom((source) => source.lastUpdatedByUserEmail)
+    );
   //#endregion
 
   //#region Games
@@ -170,6 +239,4 @@ export const baseProfile: MappingProfile = (mapper) => {
     (destination) => destination.results,
     mapWith(GamesViewModel, Game, (source) => source.results)
   );
-
-  //#endregion
 };

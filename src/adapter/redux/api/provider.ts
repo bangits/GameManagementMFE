@@ -4,9 +4,10 @@ import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
   GetProviderNamesViewModel,
+  GetProvidersByIdViewModel,
   ProvidersFiltersViewModel
 } from '@/view/models';
-import { ActionResponseModel } from '@atom/common';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../helpers';
 
@@ -43,6 +44,14 @@ export const providerApi = createApi({
         return {
           methodName: 'addProviders',
           methodArguments: [addProviderViewModel]
+        };
+      }
+    }),
+    getProvidersById: build.query<GetProvidersByIdViewModel, {}>({
+      query: (partnerId: PrimaryKey) => {
+        return {
+          methodName: 'getProvidersById',
+          methodArguments: [partnerId]
         };
       }
     })

@@ -3,17 +3,19 @@ import {
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
   GetProviderRequestModel,
-  GetProviderResponseModel
+  GetProviderResponseModel,
+  GetProvidersByIdResponseModel
 } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
   GetProviderNamesViewModel,
+  GetProvidersByIdViewModel,
   GetProvidersViewModel,
   ProvidersFiltersViewModel
 } from '@/view/models';
-import { ActionResponseModel } from '@atom/common';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IProviderRepository } from '../boundaries';
 
@@ -55,5 +57,11 @@ export class ProviderUseCase {
     );
 
     return this.providerRepository.changeProviderStatus(changeProviderStatusRequestModel);
+  };
+
+  getProvidersById = async (providerId: PrimaryKey): Promise<GetProvidersByIdViewModel> => {
+    const getProvidersByIdResponseModel = await this.providerRepository.getProvidersById(providerId);
+
+    return await mapper.map(getProvidersByIdResponseModel, GetProvidersByIdViewModel, GetProvidersByIdResponseModel);
   };
 }
