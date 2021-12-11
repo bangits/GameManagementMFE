@@ -1,6 +1,7 @@
 import { Game, Provider } from '@/domain/entities';
 import {
   AddProviderRequestModel,
+  ChangeProviderStatusRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderRequestModel,
@@ -8,6 +9,7 @@ import {
 } from '@/domain/models';
 import {
   AddProviderViewModel,
+  ChangeProviderStatusViewModel,
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
@@ -64,7 +66,6 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.providerId,
       mapFrom((source) => source.id)
     )
-
     .forMember(
       (destination) => destination.providerName,
       mapFrom((source) => source.name)
@@ -92,13 +93,25 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.targetMarkets,
       mapFrom((source) => transformToCountryModel(source.targetMarkets))
     );
+
+  mapper
+    .createMap(ChangeProviderStatusViewModel, ChangeProviderStatusRequestModel)
+    .forMember(
+      (destination) => destination.lastUpdatedByUserId,
+      mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserEmail,
+      mapFrom((source) => 'aaaaa@aaaa.aaa')
+    );
   //#endregion
 
+  //#region Games
   mapper.createMap(GetProviderResponseModel, GetProvidersViewModel).forMember(
     (destination) => destination.results,
     mapWith(ProvidersViewModel, Provider, (source) => source.results)
   );
-  //#region Games
+
   mapper
     .createMap(GamesFiltersViewModel, GetGameRequestModel)
     .forMember(
@@ -153,10 +166,10 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.status)
     );
 
-  //#endregion
   mapper.createMap(GetGameResponseModel, GetGamesViewModel).forMember(
     (destination) => destination.results,
     mapWith(GamesViewModel, Game, (source) => source.results)
   );
-  //to be continued ...
+
+  //#endregion
 };

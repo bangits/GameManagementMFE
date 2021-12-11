@@ -2,11 +2,12 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { IProviderRepository } from '@/domain/boundaries';
 import {
   AddProviderRequestModel,
+  ChangeProviderStatusRequestModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel
 } from '@/domain/models';
-import { cachedFn, ICacheService, IHttpService } from '@atom/common';
+import { ActionResponseModel, cachedFn, ICacheService, IHttpService } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 
@@ -40,6 +41,15 @@ export class ProviderRepository implements IProviderRepository {
     return await this.httpService.get<GetProviderResponseModel, GetProviderRequestModel>({
       url: API_ROUTES.PROVIDERS.BASE_ROUTE,
       query: getProviderRequestModel
+    });
+  };
+
+  changeProviderStatus = async (
+    changeProviderStatusRequestModel: ChangeProviderStatusRequestModel
+  ): Promise<ActionResponseModel> => {
+    return await this.httpService.put<ActionResponseModel, ChangeProviderStatusRequestModel, {}>({
+      url: API_ROUTES.PROVIDERS.CHANGE_STATUS,
+      body: changeProviderStatusRequestModel
     });
   };
 }

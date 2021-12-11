@@ -4,7 +4,8 @@ export const GAME_ROUTE = '/Games';
 export const API_ROUTES = {
   PROVIDERS: {
     BASE_ROUTE: PROVIDER_ROUTE,
-    GET_PROVIDER_NAMES: PROVIDER_ROUTE + '/ProvidersName'
+    GET_PROVIDER_NAMES: PROVIDER_ROUTE + '/ProvidersName',
+    CHANGE_STATUS: PROVIDER_ROUTE + '/UpdateStatus'
   },
   GAMES: {
     BASE_ROUTE: GAME_ROUTE,

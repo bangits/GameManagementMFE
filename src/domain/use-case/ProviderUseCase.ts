@@ -1,12 +1,19 @@
 import { DI_CONSTANTS } from '@/di/constants';
-import { AddProviderRequestModel, GetProviderRequestModel, GetProviderResponseModel } from '@/domain/models';
+import {
+  AddProviderRequestModel,
+  ChangeProviderStatusRequestModel,
+  GetProviderRequestModel,
+  GetProviderResponseModel
+} from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
   AddProviderViewModel,
+  ChangeProviderStatusViewModel,
   GetProviderNamesViewModel,
   GetProvidersViewModel,
   ProvidersFiltersViewModel
 } from '@/view/models';
+import { ActionResponseModel } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IProviderRepository } from '../boundaries';
 
@@ -36,5 +43,17 @@ export class ProviderUseCase {
   addProviders = async (addProviderViewModel: AddProviderViewModel): Promise<boolean> => {
     const addProviderRequestModel = mapper.map(addProviderViewModel, AddProviderRequestModel, AddProviderViewModel);
     return this.providerRepository.addProviders(addProviderRequestModel);
+  };
+
+  changeProviderStatus = async (
+    changeProviderStatusViewModel: ChangeProviderStatusViewModel
+  ): Promise<ActionResponseModel> => {
+    const changeProviderStatusRequestModel = mapper.map(
+      changeProviderStatusViewModel,
+      ChangeProviderStatusRequestModel,
+      ChangeProviderStatusViewModel
+    );
+
+    return this.providerRepository.changeProviderStatus(changeProviderStatusRequestModel);
   };
 }

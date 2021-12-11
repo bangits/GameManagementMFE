@@ -27,10 +27,12 @@ export interface GameListProps {
   results: GamesViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFetching: boolean;
 }
 
-function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData }: GameListProps) {
+function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData, isFetching }: GameListProps) {
   const t = useTranslation();
+
   const [date, setDate] = useState<Date | null>(null);
 
   const tableColumns = useMemo(
@@ -388,6 +390,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
     <PageWrapper title={t.get('games.list.title')} showButton buttonProps={addGameButtonProps}>
       <TablePage
         fetchData={onFiltersChange}
+        isFetching={isFetching}
+        isFilteredData={isFilteredData}
         filterProps={{
           defaultOpened: true,
           initialValues: filters,

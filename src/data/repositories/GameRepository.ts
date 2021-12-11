@@ -29,6 +29,7 @@ export class GameRepository implements IGameRepository {
       query: getGameRequestModel
     });
   };
+
   addGame = async (addGameRequestModel: AddGameRequestModel) => {
     await this.httpService.post<void, {}, AddGameRequestModel>({
       url: API_ROUTES.GAMES.BASE_ROUTE,
@@ -37,6 +38,7 @@ export class GameRepository implements IGameRepository {
 
     return true;
   };
+
   getGameTypes = cachedFn(CACHE_CONSTANTS.GetGameTypesResponse, async (): Promise<GetGameTypesResponseModel> => {
     return await this.httpService.get<GetGameTypesResponseModel, {}>({
       url: API_ROUTES.GAMES.GET_GAME_TYPES

@@ -1,6 +1,6 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
-import { TablePage, useTranslation } from '@atom/common';
+import { PrimaryKey, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
 
@@ -9,10 +9,31 @@ export interface ProviderListProps {
   results: ProvidersViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFetching: boolean;
   filtersInitialValues: ProvidersFiltersViewModel;
+  partnersTableLoadingIds: PrimaryKey[];
+
+  // actions
+  onActivateButtonClick: (column: ProvidersViewModel | ProvidersViewModel[]) => void;
+  shouldShowActivateButton: (column: ProvidersViewModel) => boolean;
+
+  onInActivateButtonClick: (column: ProvidersViewModel | ProvidersViewModel[]) => void;
+  shouldShowInActivateButton: (column: ProvidersViewModel) => boolean;
 }
 
-function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filtersInitialValues }: ProviderListProps) {
+function ProviderList({
+  results,
+  onFiltersChange,
+  rowCount,
+  isFilteredData,
+  filtersInitialValues,
+  isFetching,
+  onActivateButtonClick,
+  shouldShowActivateButton,
+  onInActivateButtonClick,
+  shouldShowInActivateButton,
+  partnersTableLoadingIds
+}: ProviderListProps) {
   const tableColumns = useMemo(
     () => [
       {
@@ -70,6 +91,10 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
       [ProviderStatusesEnum.Active]: {
         variant: 'active',
         translationKey: 'providers.statuses.active'
+      },
+      [ProviderStatusesEnum.Removed]: {
+        variant: 'blocked',
+        translationKey: 'providers.statuses.removed'
       }
     }),
     []
@@ -127,6 +152,8 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
     <PageWrapper title={t.get('providers.list.title')}>
       <TablePage
         fetchData={onFiltersChange}
+        isFilteredData={isFetching}
+        isFetching={isFetching}
         filterProps={{
           defaultOpened: true,
           initialValues: filtersInitialValues,
@@ -135,7 +162,22 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
         tableProps={{
           data: results,
           columns: tableColumns,
-          actions: [],
+          loadingRowsIds: partnersTableLoadingIds,
+          loadingRowColumnProperty: 'providerId',
+          actions: [
+            {
+              iconName: 'CheckButtonIcon',
+              onClick: onActivateButtonClick,
+              shouldShow: shouldShowActivateButton,
+              tooltipText: t.get('providers.actions.activate')
+            },
+            {
+              iconName: 'BlockButtonIcon',
+              onClick: onInActivateButtonClick,
+              shouldShow: shouldShowInActivateButton,
+              tooltipText: t.get('providers.actions.inActivate')
+            }
+          ],
 
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
           emptyText: isFilteredData ? (
