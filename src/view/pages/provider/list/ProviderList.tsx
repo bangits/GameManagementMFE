@@ -68,7 +68,8 @@ function ProviderList({
         accessor: 'status',
         variant: 'status' as const,
         getVariant: (value: string) => providerStatusesConfig[value].variant,
-        getVariantName: (value: string) => t.get(providerStatusesConfig[value].translationKey)
+        getVariantName: (value: string) => t.get(providerStatusesConfig[value].translationKey),
+        disableSortBy: true
       }
     ],
     []
@@ -82,19 +83,19 @@ function ProviderList({
     () => ({
       [ProviderStatusesEnum.Inactive]: {
         variant: 'inactive',
-        translationKey: 'providers.statuses.inActive'
+        translationKey: 'inActive'
       },
       [ProviderStatusesEnum.Blocked]: {
         variant: 'blocked',
-        translationKey: 'providers.statuses.blocked'
+        translationKey: 'blocked'
       },
       [ProviderStatusesEnum.Active]: {
         variant: 'active',
-        translationKey: 'providers.statuses.active'
+        translationKey: 'active'
       },
       [ProviderStatusesEnum.Removed]: {
         variant: 'blocked',
-        translationKey: 'providers.statuses.removed'
+        translationKey: 'removed'
       }
     }),
     []
@@ -103,27 +104,27 @@ function ProviderList({
   const filtersList = useMemo(
     () => [
       {
-        label: t.get('providers.fields.providerId'),
+        label: t.get('providerId'),
         name: 'providerId',
         type: 'input' as const,
         props: {
-          label: t.get('providers.fields.providerId')
+          label: t.get('providerId')
         }
       },
       {
-        label: t.get('providers.fields.partnerId'),
+        label: t.get('partnerId'),
         name: 'partnerId',
         type: 'input' as const,
         props: {
-          label: t.get('providers.fields.partnerId')
+          label: t.get('partnerId')
         }
       },
       {
         name: 'providerName',
         type: 'input' as const,
-        label: t.get('providers.fields.providerName'),
+        label: t.get('providerName'),
         props: {
-          label: t.get('providers.fields.providerName')
+          label: t.get('providerName')
         }
       },
       {
@@ -149,10 +150,10 @@ function ProviderList({
   );
 
   return (
-    <PageWrapper title={t.get('providers.list.title')}>
+    <PageWrapper title={t.get('providers')}>
       <TablePage
         fetchData={onFiltersChange}
-        isFilteredData={isFetching}
+        isFilteredData={isFilteredData}
         isFetching={isFetching}
         filterProps={{
           defaultOpened: true,
@@ -169,13 +170,13 @@ function ProviderList({
               iconName: 'CheckButtonIcon',
               onClick: onActivateButtonClick,
               shouldShow: shouldShowActivateButton,
-              tooltipText: t.get('providers.actions.activate')
+              tooltipText: t.get('activate')
             },
             {
               iconName: 'BlockButtonIcon',
               onClick: onInActivateButtonClick,
               shouldShow: shouldShowInActivateButton,
-              tooltipText: t.get('providers.actions.inActivate')
+              tooltipText: t.get('inActivate')
             }
           ],
 
@@ -188,9 +189,9 @@ function ProviderList({
             </>
           ) : (
             <>
-              {t.get('providers.list.emptyResultFirstSentence')}
+              {t.get('youDontHaveProvidersAdded')}
               <br />
-              {t.get('providers.list.emptyResultSecondSentence')}
+              {t.get('pleaseAddProvider')}
             </>
           )
         }}

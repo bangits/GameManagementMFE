@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
+import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
 import {
   Countries,
+  CurrencyGroup,
   LabelGroup,
   LicenseGroup,
-  CurrencyGroup,
   ProviderDetails as ProviderDetailsPage
 } from '@atom/design-system';
-import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
+import React, { FC } from 'react';
 
 export interface ProviderDetailsProps {
   data: ProviderDetailsViewModel;

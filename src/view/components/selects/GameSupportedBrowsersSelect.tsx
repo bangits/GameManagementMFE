@@ -12,7 +12,7 @@ export const GameSupportedBrowsersSelect = (props: CustomSelectProps) => {
         {...props}
         fullWidth
         options={gameSupportedBrowsers || []}
-        inputLabel={t.get('games.list.fields.supportedBrowsers')}
+        inputLabel={t.get('supportedBrowsers')}
       />
     </>
   );

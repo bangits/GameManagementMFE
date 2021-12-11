@@ -9,7 +9,7 @@ export interface ProviderInActivateDialogProperties {
 
 export const showProviderInActivateDialog = ({ t, onSubmit, column }: ProviderInActivateDialogProperties) => {
   dialog.acceptionDialog({
-    title: t.get('partners.dialogs.approve.title'),
+    title: t.get('partners.dialogs.approve'),
     description: (
       <>
         {t.get('partners.dialogs.approve.descirptionFirstPart')}

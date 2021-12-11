@@ -37,7 +37,7 @@ const AddGameContainer: FC = () => {
 
     if (status === QueryStatus.fulfilled) {
       alert.success({
-        alertLabel: t.get('partners.add.successMsg')
+        alertLabel: t.get('successAlertMessage')
       });
 
       redirectToURL(ROUTES.baseUrl + ROUTES.game);

@@ -9,10 +9,10 @@ export interface ProviderActivateDialogProperties {
 
 export const showProviderActivateDialog = ({ t, onSubmit, column }: ProviderActivateDialogProperties) => {
   dialog.acceptionDialog({
-    title: t.get('partners.dialogs.approve.title'),
+    title: t.get('approve'),
     description: (
       <>
-        {t.get('partners.dialogs.approve.descirptionFirstPart')}
+        {t.get('partnerApproveDescirptionFirstPart')}
         <strong>
           {Array.isArray(column) ? (
             column.length
@@ -23,11 +23,11 @@ export const showProviderActivateDialog = ({ t, onSubmit, column }: ProviderActi
             </>
           )}
         </strong>
-        {t.get('partners.dialogs.approve.descirptionLastPart')}
+        {t.get('partnerApproveDescirptionLastPart')}
       </>
     ),
-    cancelButtonText: t.get('form.cancel'),
-    submitButtonText: t.get('partners.dialogs.approve.submitButton'),
+    cancelButtonText: t.get('cancel'),
+    submitButtonText: t.get('approve'),
     icon: <Icons.CheckPopupIcon />,
     onSubmit
   });

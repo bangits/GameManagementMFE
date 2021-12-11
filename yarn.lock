@@ -22,17 +22,10 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-<<<<<<< HEAD
 "@atom/common@^2.3.15":
   version "2.3.15"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.3.15.tgz#b8c4125656216f1ef25fb32a52abe6122d401eeb"
   integrity sha1-uMQSVlYhbx7yX7MqUqvmEi1AHus=
-=======
-"@atom/common@^2.3.10", "@atom/common@^2.3.4":
-  version "2.4.5"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.4.5.tgz#bb9c15bdd5039caa3af5dd7d22a37a44a783f7ac"
-  integrity sha1-u5wVvdUDnKo69d19IqN6RKeD96w=
->>>>>>> 2f8ba51a1a46c74a42f3941255cf5952c638a8ef
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
@@ -45,13 +38,29 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/design-system@1.15.3":
-  version "1.15.3"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.3.tgz#4a3da45cc2490a90b00f9629e4e214f0ab0592d9"
-  integrity sha1-Sj2kXMJJCpCwD5Yp5OIU8KsFktk=
+"@atom/common@^2.3.4":
+  version "2.4.5"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.4.5.tgz#bb9c15bdd5039caa3af5dd7d22a37a44a783f7ac"
+  integrity sha1-u5wVvdUDnKo69d19IqN6RKeD96w=
+  dependencies:
+    "@automapper/classes" "^7.0.2"
+    "@automapper/core" "^7.0.2"
+    axios "^0.23.0"
+    dayjs "^1.10.7"
+    formik "^2.2.9"
+    moment "^2.29.1"
+    query-string "^7.0.1"
+    react "^17.0.2"
+    single-spa "^5.9.3"
+    single-spa-react "^4.6.0"
+
+"@atom/design-system@^1.15.4":
+  version "1.15.4"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.4.tgz#478368fe43d7c52f3ca1d45c6a8f6425c4fc399f"
+  integrity sha1-R4No/kPXxS88odRcao9kJcT8OZ8=
   dependencies:
     "@atom/common" "^2.3.4"
-    "@my-ui/core" "^2.23.9"
+    "@my-ui/core" "^2.23.16"
     classnames "^2.3.1"
     react "^17.0.2"
     react-dom "^17.0.2"
@@ -1389,7 +1398,7 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@my-ui/core@^2.23.9":
+"@my-ui/core@^2.23.16":
   version "2.23.16"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.23.16.tgz#c86847e69335efbf4695f2c85e527306a811a980"
   integrity sha1-yGhH5pM1779GlfLIXlJzBqgRqYA=

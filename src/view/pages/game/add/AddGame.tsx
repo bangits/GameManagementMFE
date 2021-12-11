@@ -20,14 +20,12 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         type: 'select' as const,
         name: 'providerId',
-        component: (props: CustomSelectProps) => (
-          <ProviderSelect {...props} fullWidth inputLabel={t.get('games.add.fields.provider')} />
-        )
+        component: (props: CustomSelectProps) => <ProviderSelect {...props} fullWidth inputLabel={t.get('provider')} />
       },
       {
         name: 'externalId',
         type: 'input' as const,
-        label: t.get('games.add.fields.externalId'),
+        label: t.get('externalId'),
         props: {
           type: 'number'
         }
@@ -35,26 +33,22 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'name',
         type: 'input' as const,
-        label: t.get('games.add.fields.gameName')
+        label: t.get('gameName')
       },
       {
         name: 'subTypeId' as const,
         type: 'select' as const,
-        component: (props: CustomSelectProps) => (
-          <GameTypesSelect {...props} fullWidth inputLabel={t.get('games.add.fields.subType')} />
-        )
+        component: (props: CustomSelectProps) => <GameTypesSelect {...props} fullWidth inputLabel={t.get('subType')} />
       },
       {
         type: 'select' as const,
         name: 'subTypeId',
-        component: (props: CustomSelectProps) => (
-          <GameTypesSelect {...props} fullWidth inputLabel={t.get('games.add.fields.type')} />
-        )
+        component: (props: CustomSelectProps) => <GameTypesSelect {...props} fullWidth inputLabel={t.get('type')} />
       },
       {
         type: 'datepicker' as const,
         name: 'releaseDate',
-        label: t.get('games.list.fields.releaseDate'),
+        label: t.get('releaseDate'),
 
         props: {
           onChange: (date: Date) => setDate(date),
@@ -66,16 +60,16 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'rtp',
         type: 'input' as const,
-        label: t.get('games.list.fields.rtp.title')
+        label: t.get('rtp') + '%'
       },
       {
         name: 'volatility',
         type: 'select' as const,
-        label: t.get('games.list.fields.volatility'),
+        label: t.get('volatility'),
         component: ({ onChange }) => (
           <GameVolatilitiesSelect
             isMulti
-            inputLabel={t.get('games.list.fields.volatility')}
+            inputLabel={t.get('volatility')}
             fullWidth
             onChange={(changedValue) => onChange('volatility', changedValue)}
           />
@@ -86,7 +80,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
         type: 'select' as const,
         component: ({ onChange }) => (
           <GameClassSelect
-            inputLabel={t.get('games.list.fields.class')}
+            inputLabel={t.get('class')}
             fullWidth
             onChange={(changedValue) => onChange('class', changedValue)}
           />
@@ -97,11 +91,11 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
         type: 'select' as const,
         props: {
           selectAll: true,
-          inputLabel: t.get('games.list.fields.hasDemo.title'),
-          selectAllLabel: t.get('games.list.fields.hasDemo.all'),
+          inputLabel: t.get('hasDemo'),
+          selectAllLabel: t.get('all'),
           options: [
-            { label: t.get('games.list.fields.hasDemo.yes'), value: HasDemoEnum.YES },
-            { label: t.get('games.list.fields.hasDemo.no'), value: HasDemoEnum.NO }
+            { label: t.get('yes'), value: HasDemoEnum.YES },
+            { label: t.get('no'), value: HasDemoEnum.NO }
           ],
           isSearchable: true,
           isMulti: true
@@ -113,12 +107,12 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
 
   const atomFormProps = useMemo(
     () => ({
-      title: t.get('games.add.title'),
+      title: t.get('addGame'),
       secondButtonProps: {
-        children: t.get('form.save')
+        children: t.get('save')
       },
       firstButtonProps: {
-        children: t.get('form.close'),
+        children: t.get('close'),
         type: 'button' as const,
         onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.gamesList)
       }
