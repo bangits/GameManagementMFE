@@ -1,32 +1,17 @@
+import { ProviderStatusesEnum } from '@/domain/models';
 import { PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
-import { ProviderStatusesEnum } from '../models';
-import { BaseEntity } from './BaseEntity';
 
-export class Provider extends BaseEntity {
-  status: {
-    id: ProviderStatusesEnum;
-    name: string;
-  };
-
+export class ProviderDetailsViewModel {
   @AutoMap()
   logo: string;
 
   @AutoMap()
   partnerId: PrimaryKey;
 
-  name: string;
-  gameCount: number;
-  lastUpdatedDate: string;
-  creationDate: string;
+  @AutoMap()
+  id: PrimaryKey;
 
-  defaultCurrency?: {
-    id: PrimaryKey;
-    name: string;
-    code: string;
-  };
-
-  //Provider Details
   targetMarkets: {
     id: PrimaryKey;
     name: string;
@@ -48,14 +33,23 @@ export class Provider extends BaseEntity {
     name: string;
     isoCode: string;
   }[];
+  status: {
+    id: ProviderStatusesEnum;
+    name: string;
+  };
   providerLicenses: {
     id: PrimaryKey;
     name: string;
   }[];
+
+  name: string;
+  gameCount: PrimaryKey;
   absoluteUrl: string;
   absoluteDemoUrl: string;
   createdByUserId: PrimaryKey;
+  creationDate: string;
   createdByUserEmail: string;
   lastUpdatedByUserId: PrimaryKey;
+  lastUpdatedDate: string;
   lastUpdatedByUserEmail: string;
 }

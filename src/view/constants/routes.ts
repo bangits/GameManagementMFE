@@ -5,6 +5,7 @@ export const ROUTES = {
   providers: '/providers',
   providersAdd: '/add',
   providersList: '/',
+  providerDetails: '/:providerId',
 
   // Games
   game: '/',
