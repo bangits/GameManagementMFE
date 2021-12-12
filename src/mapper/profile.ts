@@ -1,5 +1,6 @@
 import { Game, Provider } from '@/domain/entities';
 import {
+  AddGameRequestModel,
   AddProviderRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
@@ -7,6 +8,7 @@ import {
   GetProviderResponseModel
 } from '@/domain/models';
 import {
+  AddGameViewModel,
   AddProviderViewModel,
   GamesFiltersViewModel,
   GamesViewModel,
@@ -15,6 +17,7 @@ import {
   ProvidersFiltersViewModel,
   ProvidersViewModel
 } from '@/view/models';
+import { convertDate, convertDateForRequestModel } from '@atom/common';
 import type { MappingProfile } from '@automapper/core';
 import autoMapper from '@automapper/core';
 import { transformToCountryModel } from './transformFunctions';
@@ -102,8 +105,8 @@ export const baseProfile: MappingProfile = (mapper) => {
   mapper
     .createMap(GamesFiltersViewModel, GetGameRequestModel)
     .forMember(
-      (destination) => destination.subTypeId,
-      mapFrom((source) => source.subType)
+      (destination) => destination.parentTypeIds,
+      mapFrom((source) => (source.subTypeIds.length ? source.subTypeIds : [source.type]))
     )
     .forMember(
       (destination) => destination.statusId,
@@ -130,16 +133,16 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.createdBy)
     )
     .forMember(
-      (destination) => destination.gameCertifiedCountries,
-      mapFrom((source) => source.certifiedCountries)
+      (destination) => destination.creationDate,
+      mapFrom((source) => source.creationDate[0] && convertDateForRequestModel(source.creationDate[0]))
     )
     .forMember(
-      (destination) => destination.gameRestrictedCountryIds,
-      mapFrom((source) => source.restrictedCountries)
+      (destination) => destination.releaseDate,
+      mapFrom((source) => source.releaseDate && convertDateForRequestModel(source.releaseDate))
     )
     .forMember(
-      (destination) => destination.gameCurrencyIds,
-      mapFrom((source) => source.supportedCurrencies)
+      (destination) => destination.rtpTo,
+      mapFrom((source) => source.rtp.to)
     );
 
   mapper
@@ -149,14 +152,37 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.id)
     )
     .forMember(
+      (destination) => destination.creationDate,
+      mapFrom((source) => source.createdByUserEmail)
+    )
+    .forMember(
       (destination) => destination.status.id,
       mapFrom((source) => source.status)
+    )
+    .forMember(
+      (destination) => destination.creationDate,
+      mapFrom((source) => `${convertDate(source.creationDate)}`)
+    )
+    .forMember(
+      (destination) => destination.releaseDate,
+      mapFrom((source) => `${convertDate(source.releaseDate)}`)
+    );
+
+  mapper
+    .createMap(AddGameViewModel, AddGameRequestModel)
+    .forMember(
+      (destination) => destination.hasDemo,
+      mapFrom((source) => source.hasDemo === '1')
+    )
+    .forMember(
+      (destination) => destination.subTypeId,
+      mapFrom((source) => source.subTypeId || source.typeId)
     );
 
   //#endregion
+
   mapper.createMap(GetGameResponseModel, GetGamesViewModel).forMember(
     (destination) => destination.results,
     mapWith(GamesViewModel, Game, (source) => source.results)
   );
-  //to be continued ...
 };

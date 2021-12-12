@@ -128,7 +128,7 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
       <TablePage
         fetchData={onFiltersChange}
         filterProps={{
-          defaultOpened: true,
+          defaultOpened: false,
           initialValues: filtersInitialValues,
           filters: filtersList
         }}

@@ -12,6 +12,7 @@ import {
   GetGameTypesViewModel,
   GetGameVolatilitiesViewModel
 } from '@/view/models';
+import { PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IGameRepository } from './../boundaries';
 
@@ -32,8 +33,10 @@ export class GameUseCase {
     return this.gameRepository.addGame(addGameRequestModel);
   };
 
-  getGameTypes = async (): Promise<GetGameTypesViewModel> => {
-    const getGameTypesResponse = await this.gameRepository.getGameTypes();
+  getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesViewModel> => {
+    if (parentTypeId !== undefined && !parentTypeId) return [];
+
+    const getGameTypesResponse = await this.gameRepository.getGameTypes(parentTypeId);
 
     return getGameTypesResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };

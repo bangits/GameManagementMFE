@@ -17,10 +17,10 @@ export const providerApi = createApi({
       }
     }),
     getProviderNames: build.query<GetProviderNamesViewModel, {}>({
-      query: () => {
+      query: (isActive?) => {
         return {
           methodName: 'getProviderNames',
-          methodArguments: []
+          methodArguments: [isActive]
         };
       }
     }),

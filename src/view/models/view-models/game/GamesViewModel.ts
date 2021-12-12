@@ -14,19 +14,26 @@ export class GamesViewModel {
   @AutoMap()
   rtp: number;
   @AutoMap()
-  classId: PrimaryKey;
+  className: PrimaryKey;
   @AutoMap()
-  releaseDate: string;
+  providerName: string;
   @AutoMap()
-  creationDate: string;
+  volatilityName: string;
+  @AutoMap()
+  subTypeName: string;
+  @AutoMap()
+  typeName: string;
+  @AutoMap()
+  createdByUserEmail: string;
 
+
+  releaseDate: string;
+  creationDate: string;
   status: {
     id: GameStatusesEnum;
     name: string;
   };
 
   gameId: PrimaryKey;
-  volatilityId: number;
-  subType: PrimaryKey;
   class: number;
 }

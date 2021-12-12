@@ -27,8 +27,10 @@ export class ProviderUseCase {
     return mapper.map(getProviderResponseModel, GetProvidersViewModel, GetProviderResponseModel);
   };
 
-  getProviderNames = async (): Promise<GetProviderNamesViewModel> => {
-    const getProviderNamesResponse = await this.providerRepository.getProviderNames();
+  getProviderNames = async (isActive): Promise<GetProviderNamesViewModel> => {
+    if (isActive !== undefined && !isActive) return [];
+
+    const getProviderNamesResponse = await this.providerRepository.getProviderNames(isActive);
 
     return getProviderNamesResponse.map((r) => ({ value: r.id, label: r.name }));
   };

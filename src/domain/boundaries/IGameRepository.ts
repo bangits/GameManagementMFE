@@ -1,3 +1,4 @@
+import { PrimaryKey } from '@atom/common';
 import {
   AddGameRequestModel,
   GetClassNamesResponseModel,
@@ -13,7 +14,7 @@ import {
 export interface IGameRepository {
   getGames(getGameRequestModel: GetGameRequestModel): Promise<GetGameResponseModel>;
   addGame(addGameRequestModel: AddGameRequestModel): Promise<boolean>;
-  getGameTypes(): Promise<GetGameTypesResponseModel>;
+  getGameTypes(parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel>;
   getClassNames(): Promise<GetClassNamesResponseModel>;
   getGameThemes(): Promise<GetGameThemesResponseModel>;
   getGameFeatures(): Promise<GetGameFeaturesResponseModel>;
