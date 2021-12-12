@@ -19,7 +19,11 @@
   },
   "devDependencies": {
     "@atom/common": "^2.5.7",
+<<<<<<< HEAD
     "@atom/design-system": "^1.15.12",
+=======
+    "@atom/design-system": "^1.15.11",
+>>>>>>> e635d08e187e32cb1016e6e3b996e413b9e9e106
     "@babel/core": "^7.14.6",
     "@babel/eslint-parser": "^7.14.7",
     "@babel/plugin-proposal-decorators": "^7.15.8",

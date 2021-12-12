@@ -9,31 +9,44 @@ export class GamesFiltersViewModel extends PagedModel {
   icon: string;
   @AutoMap()
   name: string;
+
   @AutoMap()
-  providerIds: PrimaryKey | '';
+  classIds: PrimaryKey | '';
   @AutoMap()
-  classId: PrimaryKey | '';
+  volatilityIds: PrimaryKey | '';
   @AutoMap()
-  releaseDate: string;
+  gameThemeIds: String[];
   @AutoMap()
-  creationDate: string;
+  gameFeatureIds: String[];
   @AutoMap()
-  volatilityId: PrimaryKey | '';
+  gamePlatformIds: String[];
   @AutoMap()
-  gameThemes: String[];
-  @AutoMap()
-  gameFeatures: String[];
-  @AutoMap()
-  gamePlatformGames: String[];
+  hasDemo: boolean;
   @AutoMap()
   gameId: PrimaryKey | '';
   @AutoMap()
   createdBy: string;
+  @AutoMap()
+  gameCurrencyIds: String[] | '';
+  @AutoMap()
+  gameSupportedBrowserIds: String[] | '';
+  @AutoMap()
+  gameCertifiedCountries: String[];
+  @AutoMap()
+  gameRestrictedCountryIds: String[] | '';
+  @AutoMap()
+  gameUiLanguageIds: String[] | '';
+  @AutoMap()
+  gameOperatingLanguageIds: String[] | '';
+  @AutoMap()
+  providerIds: String[] | '';
 
-  restrictedCountries: string[] | '';
-  certifiedCountries: String[] | '';
-  supportedCurrencies: String[] | '';
+  releaseDate: Date;
+
+  creationDate: [Date, Date];
+
   rtp: { from: number | ''; to: number | '' };
-  subType: PrimaryKey | '';
+  type: PrimaryKey | '';
+  subTypeIds: PrimaryKey[];
   status: GameStatusesEnum;
 }

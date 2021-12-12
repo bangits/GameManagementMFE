@@ -9,19 +9,19 @@ export class AddGameViewModel {
   @AutoMap()
   name: string;
   @AutoMap()
-  subTypeId: PrimaryKey;
-  @AutoMap()
   releaseDate: string;
   @AutoMap()
-  rtp: PrimaryKey;
+  rtp: PrimaryKey | '';
   @AutoMap()
   volatilityId: PrimaryKey;
   @AutoMap()
   classId: PrimaryKey;
   @AutoMap()
-  hasDemo: boolean;
-  @AutoMap()
   createdByUserId: PrimaryKey;
   @AutoMap()
   createdByUserEmail: string;
+
+  hasDemo: '0' | '1';
+  typeId: PrimaryKey;
+  subTypeId: PrimaryKey;
 }

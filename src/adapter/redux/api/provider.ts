@@ -14,6 +14,7 @@ import { createBaseQuery } from '../helpers';
 export const providerApi = createApi({
   reducerPath: 'providerApi',
   baseQuery: createBaseQuery<ProviderUseCase>({ useCaseName: DI_CONSTANTS.PROVIDER.ProviderUseCase }),
+  tagTypes: ['Providers'],
   endpoints: (build) => ({
     getProvider: build.query({
       query: (providersFiltersViewModel: ProvidersFiltersViewModel) => {
@@ -21,7 +22,8 @@ export const providerApi = createApi({
           methodName: 'getProviders',
           methodArguments: [providersFiltersViewModel]
         };
-      }
+      },
+      providesTags: ['Providers']
     }),
     changeProviderStatus: build.mutation<ActionResponseModel, {}>({
       query: (changeProviderStatusViewModel: ChangeProviderStatusViewModel) => {
@@ -29,13 +31,14 @@ export const providerApi = createApi({
           methodName: 'changeProviderStatus',
           methodArguments: [changeProviderStatusViewModel]
         };
-      }
+      },
+      invalidatesTags: ['Providers']
     }),
     getProviderNames: build.query<GetProviderNamesViewModel, {}>({
-      query: () => {
+      query: (isActive?) => {
         return {
           methodName: 'getProviderNames',
-          methodArguments: []
+          methodArguments: [isActive]
         };
       }
     }),

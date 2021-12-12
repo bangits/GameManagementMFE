@@ -1,34 +1,28 @@
-import { PrimaryKey, UseTranslationReturnValue } from '@atom/common';
+import { UseTranslationReturnValue } from '@atom/common';
 import { dialog, Icons } from '@atom/design-system';
 
 export interface ProviderInActivateDialogProperties {
   t: UseTranslationReturnValue;
   onSubmit: (cancelFn: () => void) => void;
-  column: { providerId: PrimaryKey } | { providerId: PrimaryKey }[];
+  column: { providerName: string } | { providerName: string }[];
 }
 
 export const showProviderInActivateDialog = ({ t, onSubmit, column }: ProviderInActivateDialogProperties) => {
   dialog.acceptionDialog({
-    title: t.get('partners.dialogs.approve'),
+    title: t.get('inActivate'),
     description: (
       <>
-        {t.get('partners.dialogs.approve.descirptionFirstPart')}
-        <strong>
-          {Array.isArray(column) ? (
-            column.length
-          ) : (
-            <>
-              InActivate provider
-              {/* "{t.get('common.id')}: {column.partnerId} {column.legalName} {column.legalEntity}" */}
-            </>
-          )}
-        </strong>
-        {t.get('partners.dialogs.approve.descirptionLastPart')}
+        {t.get('providerInActivateDescirptionFirstPart')}
+        <strong>{Array.isArray(column) ? column.length : <>"{column.providerName}""</>}</strong>
+
+        {Array.isArray(column)
+          ? t.get('multipleProviderInActivateDescirptionLastPart')
+          : t.get('providerInActivateDescirptionLastPart')}
       </>
     ),
-    cancelButtonText: t.get('form.cancel'),
-    submitButtonText: t.get('partners.dialogs.approve.submitButton'),
-    icon: <Icons.CheckPopupIcon />,
+    cancelButtonText: t.get('cancel'),
+    submitButtonText: t.get('inActivate'),
+    icon: <Icons.BlockPopupIcon />,
     onSubmit
   });
 };

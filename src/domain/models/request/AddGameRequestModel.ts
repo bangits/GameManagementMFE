@@ -1,15 +1,26 @@
-import { CountryModel } from '@atom/common';
+import { PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 
 export class AddGameRequestModel {
   @AutoMap()
-  name: string;
-
+  providerId: PrimaryKey;
   @AutoMap()
-  logo: string;
+  externalId: string;
+  @AutoMap()
+  name: string;
+  @AutoMap()
+  releaseDate: string;
+  @AutoMap()
+  rtp: PrimaryKey;
+  @AutoMap()
+  volatilityId: PrimaryKey;
+  @AutoMap()
+  classId: PrimaryKey;
+  @AutoMap()
+  createdByUserId: PrimaryKey;
+  @AutoMap()
+  createdByUserEmail: string;
 
-  providerCurrencies: CountryModel[];
-  targetMarkets: CountryModel[];
-  certifiedCountries: CountryModel[];
-  restrictedCountries: CountryModel[];
+  hasDemo: boolean;
+  subTypeId: PrimaryKey;
 }

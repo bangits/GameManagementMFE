@@ -15,15 +15,19 @@ export class Game extends BaseEntity {
   @AutoMap()
   rtp: number;
   @AutoMap()
-  classId: PrimaryKey;
+  className: PrimaryKey;
   @AutoMap()
-  releaseDate: string;
-  @AutoMap()
-  creationDate: string;
-
-  typeId: PrimaryKey;
   providerName: string;
+  @AutoMap()
+  volatilityName: string;
+  @AutoMap()
+  subTypeName: string;
+  @AutoMap()
+  typeName: string;
+  @AutoMap()
+  createdByUserEmail: string;
+
+  releaseDate: string;
+  creationDate: string;
   status: GameStatusesEnum;
-  volatility: PrimaryKey;
-  subType: PrimaryKey;
 }

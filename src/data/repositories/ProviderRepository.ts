@@ -22,9 +22,12 @@ export class ProviderRepository implements IProviderRepository {
 
   getProviderNames = cachedFn(
     CACHE_CONSTANTS.GetProviderNamesResponse,
-    async (): Promise<GetProviderNamesResponseModel> => {
+    async (isActive): Promise<GetProviderNamesResponseModel> => {
       return await this.httpService.get<GetProviderNamesResponseModel, {}>({
-        url: API_ROUTES.PROVIDERS.GET_PROVIDER_NAMES
+        url: API_ROUTES.PROVIDERS.GET_PROVIDER_NAMES,
+        query: {
+          isActive
+        }
       });
     }
   ).bind(this);

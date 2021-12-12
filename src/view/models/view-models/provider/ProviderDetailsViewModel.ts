@@ -41,12 +41,9 @@ export class ProviderDetailsViewModel {
     name: string;
   }[];
 
-  status: {
-    id: ProviderStatusesEnum;
-    name: string;
-  };
+  statusId: ProviderStatusesEnum;
 
-  name: string;
+  providerName: string;
   gameCount: PrimaryKey;
   absoluteUrl: string;
   absoluteDemoUrl: string;

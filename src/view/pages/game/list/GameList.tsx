@@ -9,18 +9,18 @@ import {
   ProviderSelect
 } from '@/view';
 import { ROUTES } from '@/view/constants';
-import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel, HasDemoEnum } from '@/view/models';
+import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel } from '@/view/models';
 import {
   CountriesSelect,
   CurrencySelect,
+  INPUT_MAX_VALUES,
   LanguageSelect,
   redirectToURL,
   TablePage,
   useTranslation
 } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
-import { useMemo, useState } from 'react';
-
+import { useMemo } from 'react';
 export interface GameListProps {
   onFiltersChange: (parameters: FetchDataParameters<GamesViewModel, GamesFiltersViewModel>) => void;
   filters: GamesFiltersViewModel;
@@ -33,19 +33,16 @@ export interface GameListProps {
 function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData, isFetching }: GameListProps) {
   const t = useTranslation();
 
-  const [date, setDate] = useState<Date | null>(null);
-
   const tableColumns = useMemo(
     () => [
       {
         Header: t.get('logo'),
         accessor: 'logo' as keyof GamesViewModel,
-        variant: 'image' as const,
-        sortingId: GameStatusesSortingEnum.LOGO
+        variant: 'image' as const
       },
       {
-        Header: t.get('gameName'),
-        accessor: 'gameName' as keyof GamesViewModel,
+        Header: t.get('games.list.tableHeaders.gameName'),
+        accessor: 'name' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.GAME_NAME
       },
       {
@@ -70,18 +67,18 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         sortingId: GameStatusesSortingEnum.PROVIDER_ID
       },
       {
-        Header: t.get('type'),
-        accessor: 'type' as keyof GamesViewModel,
+        Header: t.get('games.list.tableHeaders.type'),
+        accessor: 'typeName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.TYPE
       },
       {
-        Header: t.get('subtype'),
-        accessor: 'subtype' as keyof GamesViewModel,
+        Header: t.get('games.list.tableHeaders.subtype'),
+        accessor: 'subTypeName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.SUBTYPE
       },
       {
-        Header: t.get('volatility'),
-        accessor: 'volatility' as keyof GamesViewModel,
+        Header: t.get('games.list.tableHeaders.volatility'),
+        accessor: 'volatilityName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.VOLATILITY
       },
       {
@@ -90,8 +87,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         sortingId: GameStatusesSortingEnum.RTP
       },
       {
-        Header: t.get('class'),
-        accessor: 'class' as keyof GamesViewModel,
+        Header: t.get('games.list.tableHeaders.class'),
+        accessor: 'className' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.CLASS
       },
       {
@@ -105,15 +102,14 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         sortingId: GameStatusesSortingEnum.CREATION_DATE
       },
       {
-        Header: t.get('createdBy'),
-        accessor: 'createdBy' as keyof GamesViewModel,
+        Header: t.get('games.list.tableHeaders.createdBy'),
+        accessor: 'createdByUserEmail' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.CREATED_BY
       },
       {
         Header: t.get('status'),
         accessor: 'status' as keyof GamesViewModel,
         variant: 'status' as const,
-        sortingId: GameStatusesSortingEnum.STATUS,
         getVariant: (value: number) => (value === GameStatusesEnum.Active ? 'active' : 'blocked'),
         getVariantName: (value: number) => (value === GameStatusesEnum.Active ? 'Active' : 'Blocked')
       }
@@ -124,61 +120,81 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
   const filtersList = useMemo(
     () => [
       {
-        name: 'gameId',
+        name: 'gameId' as keyof GamesFiltersViewModel,
         type: 'input' as const,
+        label: t.get('games.list.fields.gameId'),
+
         props: {
           label: t.get('gameId')
         }
       },
 
       {
-        name: 'externalId',
+        name: 'externalId' as keyof GamesFiltersViewModel,
         type: 'input' as const,
+        label: t.get('games.list.fields.externalId'),
+
         props: {
           label: t.get('externalId')
         }
       },
       {
-        name: 'name',
+        name: 'name' as keyof GamesFiltersViewModel,
         type: 'input' as const,
+        label: t.get('games.list.fields.gameName'),
+
         props: {
           label: t.get('gameName')
         }
       },
 
       {
-        name: 'providerName',
+        name: 'providerIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.providerName'),
+        component: ({ onChange, filterValues }) => (
           <ProviderSelect
-            isMulti
-            inputLabel={t.get('games.fields.providerName')}
+            inputLabel={t.get('games.list.fields.providerName')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            isMulti
+            onChange={(changedValue) => onChange('providerIds', changedValue)}
+            value={filterValues.providerIds}
           />
         )
       },
       {
-        name: 'type',
+        name: 'type' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('type'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.type'),
+        component: ({ onChange, filterValues }) => (
           <GameTypesSelect
             inputLabel={t.get('type')}
             fullWidth
             onChange={(changedValue) => onChange('type', changedValue)}
+            showAll
+            value={filterValues.type}
           />
         )
       },
       {
-        name: 'subType',
+        name: 'subTypeIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        component: ({ onChange }) => 'SubType'
+        label: t.get('games.list.fields.subType'),
+        component: ({ onChange, filterValues }) => (
+          <GameTypesSelect
+            inputLabel={t.get('games.list.fields.subType')}
+            fullWidth
+            isMulti
+            value={filterValues.subTypeIds}
+            onChange={(changedValue) => onChange('subTypeIds', changedValue)}
+            gameTypeId={filterValues.type}
+          />
+        )
       },
       {
-        label: t.get('games.fields.rtp.title'),
+        label: t.get('games.list.fields.rtp.title'),
         type: 'from-to' as const,
-        name: 'rtp',
+        name: 'rtp' as keyof GamesFiltersViewModel,
         fromInputProps: {
           label: t.get('rtpFrom'),
           type: 'number'
@@ -189,185 +205,198 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         }
       },
       {
-        type: 'datepicker',
-        name: 'releaseDate',
-        label: t.get('releaseDate'),
-
-        props: {
-          onChange: (date: Date) => setDate(date),
-          placeholderText: 'dd/mm/yyyy',
-          dateFormat: 'dd/MM/yyyy',
-          selected: date || new Date()
-        }
+        type: 'datepicker' as const,
+        name: 'releaseDate' as keyof GamesFiltersViewModel,
+        label: t.get('games.list.fields.releaseDate'),
+        props: {}
       },
       {
-        name: 'class',
+        name: 'classIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.class'),
+
+        component: ({ onChange, filterValues }) => (
           <GameClassSelect
             inputLabel={t.get('class')}
             fullWidth
-            onChange={(changedValue) => onChange('class', changedValue)}
+            value={filterValues.classIds}
+            isMulti
+            onChange={(changedValue) => onChange('classIds', changedValue)}
           />
         )
       },
       {
-        name: 'hasDemo',
-        type: 'select' as const,
+        label: t.get('partners.fields.companyType'),
+        name: 'hasDemo' as keyof GamesFiltersViewModel,
+        type: 'truthly-select' as const,
         props: {
-          selectAll: true,
-          inputLabel: t.get('hasDemo'),
-          selectAllLabel: t.get('all'),
-          options: [
-            { label: t.get('yes'), value: HasDemoEnum.YES },
-            { label: t.get('no'), value: HasDemoEnum.NO }
-          ],
-          isSearchable: true,
-          isMulti: true
+          inputLabel: t.get('games.list.fields.hasDemo.title'),
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
+        },
+        translations: {
+          trueValue: t.get('games.list.fields.hasDemo.yes'),
+          falseValue: t.get('games.list.fields.hasDemo.no'),
+          nullValue: t.get('form.all')
         }
       },
       {
-        name: 'theme',
+        name: 'gameThemeIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.gameThemes'),
+
+        component: ({ onChange, filterValues }) => (
           <GameThemesSelect
-            inputLabel={t.get('theme')}
+            inputLabel={t.get('games.list.fields.gameThemes')}
             fullWidth
-            onChange={(changedValue) => onChange('theme', changedValue)}
+            isMulti
+            value={filterValues.gameThemeIds}
+            onChange={(changedValue) => onChange('gameThemeIds', changedValue)}
           />
         )
       },
       {
-        name: 'feature',
+        name: 'gameFeatureIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.gameFeatures'),
+
+        component: ({ onChange, filterValues }) => (
           <GameFeaturesSelect
-            inputLabel={t.get('feature')}
+            inputLabel={t.get('games.list.fields.gameFeatures')}
             fullWidth
-            onChange={(changedValue) => onChange('feature', changedValue)}
+            isMulti
+            value={filterValues.gameFeatureIds}
+            onChange={(changedValue) => onChange('gameFeatureIds', changedValue)}
           />
         )
       },
+      // {
+      //   label: t.get('game.fields.list.device'),
+      //   name: 'device' as keyof GamesFiltersViewModel,
+      //   type: 'truthly-select' as const,
+      //   props: {
+      //     inputLabel: t.get('games.list.fields.devices.title'),
+      //     maxLength: INPUT_MAX_VALUES.INPUT_FIELD
+      //   },
+      //   translations: {
+      //     trueValue: t.get('games.list.fields.devices.mobile'),
+      //     falseValue: t.get('games.list.fields.devices.tablet'),
+      //     nullValue: t.get('form.all')
+      //   }
+      // },
       {
-        name: 'device',
+        name: 'gameCurrencyIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('device'),
-        component: ({ onChange }) => (
-          <ProviderSelect
-            inputLabel={t.get('device')}
-            fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
-          />
-        )
-      },
-      {
-        name: 'supportedCurrencies',
-        type: 'custom' as const,
-        label: t.get('supportedCurrencies'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.supportedCurrencies'),
+        component: ({ onChange, filterValues }) => (
           <CurrencySelect
             isMulti
             inputLabel={t.get('supportedCurrencies')}
             fullWidth
-            onChange={(changedValue) => onChange('supportedCurrencies', changedValue)}
+            value={filterValues.gameCurrencyIds}
+            onChange={(changedValue) => onChange('gameCurrencyIds', changedValue)}
           />
         )
       },
       {
-        name: 'supportedBrowsers',
+        name: 'gameSupportedBrowserIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('supportedBrowsers'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.supportedBrowsers'),
+        component: ({ onChange, filterValues }) => (
           <GameSupportedBrowsersSelect
             isMulti
-            inputLabel={t.get('supportedBrowsers')}
+            inputLabel={t.get('games.list.fields.gameSupportedBrowserIds')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            value={filterValues.gameSupportedBrowserIds}
+            onChange={(changedValue) => onChange('gameSupportedBrowserIds', changedValue)}
           />
         )
       },
 
       {
-        name: 'certifiedCountries',
+        name: 'gameCertifiedCountries' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('certifiedCountries'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.certifiedCountries'),
+        component: ({ onChange, filterValues }) => (
           <CountriesSelect
             isMulti
             inputLabel={t.get('certifiedCountries')}
             fullWidth
-            onChange={(changedValue) => onChange('certifiedCountries', changedValue)}
+            value={filterValues.gameCertifiedCountries}
+            onChange={(changedValue) => onChange('gameCertifiedCountries', changedValue)}
           />
         )
       },
       {
-        name: 'restrictedCountries',
+        name: 'gameRestrictedCountryIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('restrictedCountries'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.restrictedCountries'),
+        component: ({ onChange, filterValues }) => (
           <CountriesSelect
             isMulti
             inputLabel={t.get('restrictedCountries')}
             fullWidth
-            onChange={(changedValue) => onChange('restrictedCountries', changedValue)}
+            value={filterValues.gameRestrictedCountryIds}
+            onChange={(changedValue) => onChange('gameRestrictedCountryIds', changedValue)}
           />
         )
       },
       {
-        name: 'volatility',
+        name: 'volatilityIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('volatility'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.volatility'),
+        component: ({ onChange, filterValues }) => (
           <GameVolatilitiesSelect
             isMulti
             inputLabel={t.get('volatility')}
             fullWidth
-            onChange={(changedValue) => onChange('volatility', changedValue)}
+            value={filterValues.volatilityIds}
+            onChange={(changedValue) => onChange('volatilityIds', changedValue)}
           />
         )
       },
       {
-        name: 'uILanguages',
+        name: 'gameUiLanguageIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('uILanguages'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.uILanguages'),
+        component: ({ onChange, filterValues }) => (
           <LanguageSelect
             isMulti
             inputLabel={t.get('uILanguages')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            value={filterValues.gameUiLanguageIds}
+            onChange={(changedValue) => onChange('gameUiLanguageIds', changedValue)}
           />
         )
       },
       {
-        name: 'operatingLanguages',
+        name: 'gameOperatingLanguageIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('operatingLanguages'),
-        component: ({ onChange }) => (
+        label: t.get('games.list.fields.operatingLanguages'),
+        component: ({ onChange, filterValues }) => (
           <LanguageSelect
             isMulti
             inputLabel={t.get('operatingLanguages')}
             fullWidth
-            onChange={(changedValue) => onChange('providerName', changedValue)}
+            value={filterValues.gameOperatingLanguageIds}
+            onChange={(changedValue) => onChange('gameOperatingLanguageIds', changedValue)}
           />
         )
       },
-      //date picker is not finished
       {
-        type: 'datepicker',
-        name: 'creationDate',
-        label: t.get('creationDate'),
+        type: 'datepicker' as const,
+        name: 'creationDate' as keyof GamesFiltersViewModel,
+        label: t.get('games.list.fields.creationDate'),
 
         props: {
-          onChange: (date: Date) => setDate(date),
-          placeholderText: 'dd/mm/yyyy',
-          dateFormat: 'dd/MM/yyyy',
-          selected: date || new Date()
+          selectsRange: true,
+          monthsShown: 2
         }
       },
       {
-        name: 'createdBy',
+        name: 'createdBy' as keyof GamesFiltersViewModel,
         type: 'input' as const,
+        label: t.get('games.list.fields.createdBy'),
+
         props: {
           label: t.get('createdBy')
         }
@@ -392,16 +421,17 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         isFetching={isFetching}
         isFilteredData={isFilteredData}
         filterProps={{
-          defaultOpened: true,
+          defaultOpened: false,
           initialValues: filters,
-          //@ts-expect-error asd
           filters: filtersList
         }}
         tableProps={{
           data: results,
           columns: tableColumns,
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? 'Please make a different filter selection.' : 'You don’t have any partners added!'
+          emptyText: isFilteredData
+            ? t.get('common.tables.emptyResultSecondSentence')
+            : t.get('games.list.resultNotFound')
         }}
         rowCount={rowCount}
         onEditButtonClick={() => {

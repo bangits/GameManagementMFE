@@ -1,7 +1,6 @@
 import { gameApi } from '@/adapter/redux/api';
 import { addGameValidationSchema } from '@/domain/validators';
-import { ROUTES } from '@/view/constants';
-import { redirectToURL, useAsync, useLoading, useTranslation, useValidationTranslation } from '@atom/common';
+import { useAsync, useLoading, useTranslation, useValidationTranslation } from '@atom/common';
 import { alert } from '@atom/design-system';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import { FC, useCallback, useEffect } from 'react';
@@ -16,13 +15,11 @@ const AddGameContainer: FC = () => {
   const validationTranslations = useValidationTranslation();
 
   const onSubmit = useCallback<AddGameProps['onSubmit']>(
-    (data) => {
-      addGame(data), console.log(data);
-    },
+    (data, form) => addGame(data).then(() => form.resetForm()),
     [addGame]
   );
 
-  const addPartnerValidationSchema = useAsync(
+  const getAddPartnerValidationSchema = useAsync(
     () => addGameValidationSchema(validationTranslations),
     [validationTranslations],
     null
@@ -37,14 +34,22 @@ const AddGameContainer: FC = () => {
 
     if (status === QueryStatus.fulfilled) {
       alert.success({
-        alertLabel: t.get('successAlertMessage')
+        alertLabel: t.get('games.add.successMsg')
       });
-
-      redirectToURL(ROUTES.baseUrl + ROUTES.game);
+    } else {
+      alert.error({
+        alertLabel: t.get('games.add.errorMsg')
+      });
     }
   }, [status]);
 
-  return <AddGame validationSchema={addPartnerValidationSchema} onSubmit={onSubmit} />;
+  return <AddGame validationSchema={getAddPartnerValidationSchema} onSubmit={onSubmit} />;
 };
 
 export default AddGameContainer;
+// 1. Alert messages
+// 2. User login
+// 3. Provider names
+
+// 1.
+// 2. Type, subtype, Datepickers, class, has demo,  in game list

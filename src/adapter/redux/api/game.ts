@@ -5,10 +5,13 @@ import {
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
+  GetGameSupportedBrowsersViewModel,
   GetGamesViewModel,
   GetGameThemesViewModel,
-  GetGameTypesViewModel
+  GetGameTypesViewModel,
+  GetGameVolatilitiesViewModel
 } from '@/view/models';
+import { PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../helpers';
 
@@ -24,7 +27,6 @@ export const gameApi = createApi({
         };
       }
     }),
-
     addGame: build.mutation({
       query: (addGameViewModel: AddGameViewModel) => {
         return {
@@ -33,12 +35,11 @@ export const gameApi = createApi({
         };
       }
     }),
-
     getGameTypes: build.query<GetGameTypesViewModel, {}>({
-      query: () => {
+      query: (parentTypeId?: PrimaryKey) => {
         return {
           methodName: 'getGameTypes',
-          methodArguments: []
+          methodArguments: [parentTypeId]
         };
       }
     }),
@@ -62,6 +63,22 @@ export const gameApi = createApi({
       query: () => {
         return {
           methodName: 'getGameFeatures',
+          methodArguments: []
+        };
+      }
+    }),
+    getGameSupportedBrowsers: build.query<GetGameSupportedBrowsersViewModel, {}>({
+      query: () => {
+        return {
+          methodName: 'getGameSupportedBrowsers',
+          methodArguments: []
+        };
+      }
+    }),
+    getGameVolatilities: build.query<GetGameVolatilitiesViewModel, {}>({
+      query: () => {
+        return {
+          methodName: 'getGameVolatilities',
           methodArguments: []
         };
       }

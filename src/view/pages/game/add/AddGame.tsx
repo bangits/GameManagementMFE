@@ -1,29 +1,32 @@
 import { GameClassSelect, GameTypesSelect, GameVolatilitiesSelect, ProviderSelect } from '@/view';
-import { ROUTES } from '@/view/constants';
-import { AddGameViewModel, HasDemoEnum } from '@/view/models';
+import { GAME_MIN_RELEASE_DATE, ROUTES } from '@/view/constants';
+import { AddGameViewModel } from '@/view/models';
 import { createRenderInputs, CustomSelectProps, redirectToURL, useTranslation } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
-import { FastField, Form, Formik } from 'formik';
-import { FC, useMemo, useState } from 'react';
+import { FastField, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
+import { FC, useMemo } from 'react';
 import { SchemaOf } from 'yup';
 import { initialValues } from './initialValues';
 export interface AddGameProps {
-  onSubmit: (data: typeof initialValues) => void;
+  onSubmit: (data: AddGameViewModel, form: FormikHelpers<typeof initialValues>) => void;
   validationSchema: SchemaOf<AddGameViewModel> | null;
 }
+
 const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
   const t = useTranslation();
-  const [date, setDate] = useState<Date | null>(null);
 
   const atomFormFields = useMemo(
     () => [
       {
         type: 'select' as const,
-        name: 'providerId',
-        component: (props: CustomSelectProps) => <ProviderSelect {...props} fullWidth inputLabel={t.get('provider')} />
+        name: 'providerId' as keyof AddGameViewModel,
+        label: t.get('games.add.fields.provider'),
+        component: (props: CustomSelectProps) => (
+          <ProviderSelect {...props} isMain fullWidth inputLabel={t.get('games.add.fields.provider')} />
+        )
       },
       {
-        name: 'externalId',
+        name: 'externalId' as keyof AddGameViewModel,
         type: 'input' as const,
         label: t.get('externalId'),
         props: {
@@ -31,74 +34,87 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
         }
       },
       {
-        name: 'name',
+        name: 'name' as keyof AddGameViewModel,
         type: 'input' as const,
         label: t.get('gameName')
       },
       {
-        name: 'subTypeId' as const,
-        type: 'select' as const,
-        component: (props: CustomSelectProps) => <GameTypesSelect {...props} fullWidth inputLabel={t.get('subType')} />
-      },
-      {
-        type: 'select' as const,
-        name: 'subTypeId',
-        component: (props: CustomSelectProps) => <GameTypesSelect {...props} fullWidth inputLabel={t.get('type')} />
-      },
-      {
         type: 'datepicker' as const,
-        name: 'releaseDate',
-        label: t.get('releaseDate'),
-
+        name: 'releaseDate' as keyof AddGameViewModel,
+        label: t.get('games.list.fields.releaseDate'),
         props: {
-          onChange: (date: Date) => setDate(date),
-          placeholderText: 'dd/mm/yyyy',
-          dateFormat: 'dd/MM/yyyy',
-          selected: date || new Date()
+          minDate: new Date(GAME_MIN_RELEASE_DATE)
         }
       },
       {
-        name: 'rtp',
+        name: 'typeId' as keyof AddGameViewModel,
+        type: 'select' as const,
+        inputLabel: t.get('games.list.fields.gameTypes'),
+        component: (props: CustomSelectProps) => {
+          const form = useFormikContext<AddGameViewModel>();
+
+          return (
+            <GameTypesSelect
+              {...props}
+              fullWidth
+              inputLabel={t.get('games.list.fields.type')}
+              onChange={(value, event) => {
+                props.onChange(value, event);
+                form.setFieldValue('subTypeId', null);
+              }}
+            />
+          );
+        }
+      },
+      {
+        type: 'select' as const,
+        name: 'subTypeId' as keyof AddGameViewModel,
+        component: (props: CustomSelectProps) => {
+          const form = useFormikContext<AddGameViewModel>();
+
+          return (
+            <GameTypesSelect
+              {...props}
+              fullWidth
+              isDisabled={!form.values.typeId}
+              gameTypeId={form.values.typeId}
+              inputLabel={t.get('games.list.fields.subType')}
+            />
+          );
+        }
+      },
+
+      {
+        name: 'rtp' as keyof AddGameViewModel,
         type: 'input' as const,
-        label: t.get('rtp') + '%'
+        label: t.get('games.list.fields.rtp.title'),
+        props: { type: 'number', isDecimal: true, maxLength: 7 }
       },
       {
-        name: 'volatility',
+        name: 'volatilityId' as keyof AddGameViewModel,
         type: 'select' as const,
-        label: t.get('volatility'),
-        component: ({ onChange }) => (
-          <GameVolatilitiesSelect
-            isMulti
-            inputLabel={t.get('volatility')}
-            fullWidth
-            onChange={(changedValue) => onChange('volatility', changedValue)}
-          />
-        )
+        component: (props: CustomSelectProps) => <GameVolatilitiesSelect {...props} fullWidth />
       },
       {
-        name: 'class',
+        name: 'classId' as keyof AddGameViewModel,
         type: 'select' as const,
-        component: ({ onChange }) => (
-          <GameClassSelect
-            inputLabel={t.get('class')}
-            fullWidth
-            onChange={(changedValue) => onChange('class', changedValue)}
-          />
-        )
+        component: (props: CustomSelectProps) => <GameClassSelect fullWidth {...props} />
       },
       {
-        name: 'hasDemo',
-        type: 'select' as const,
+        type: 'radio' as const,
+        name: 'hasDemo' as keyof AddGameViewModel,
+        label: t.get('games.list.fields.hasDemo.title'),
         props: {
-          selectAll: true,
-          inputLabel: t.get('hasDemo'),
-          selectAllLabel: t.get('all'),
-          options: [
-            { label: t.get('yes'), value: HasDemoEnum.YES },
-            { label: t.get('no'), value: HasDemoEnum.NO }
-          ],
-          isSearchable: true,
-          isMulti: true
+          radios: [
+            {
+              label: t.get('games.list.fields.hasDemo.yes'),
+              value: 1
+            },
+            {
+              label: t.get('games.list.fields.hasDemo.no'),
+              value: 0
+            }
+          ]
         }
       }
     ],
@@ -123,7 +139,10 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={(data, form) => onSubmit(data, form)}>
       {() => {
         return (
           <Form noValidate className='min-height-content-wrapper'>

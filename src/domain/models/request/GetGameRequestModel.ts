@@ -9,30 +9,41 @@ export class GetGameRequestModel extends PagedModel {
   @AutoMap()
   name: string;
   @AutoMap()
-  providerIds: PrimaryKey;
+  classIds: PrimaryKey;
   @AutoMap()
-  classId: PrimaryKey;
+  volatilityIds: number;
   @AutoMap()
-  releaseDate: string;
+  gameThemeIds: PrimaryKey[];
   @AutoMap()
-  creationDate: string;
+  gameFeatureIds: PrimaryKey[];
   @AutoMap()
-  volatilityId: number;
-  @AutoMap()
-  gameThemes: String[];
-  @AutoMap()
-  gameFeatures: String[];
-  @AutoMap()
-  gamePlatformGames: String[];
+  gamePlatformIds: PrimaryKey[];
   @AutoMap()
   gameId: PrimaryKey;
   @AutoMap()
+  hasDemo: boolean;
+  @AutoMap()
   createdByUserEmail: string;
+  @AutoMap()
+  gameCurrencyIds: PrimaryKey[];
+  @AutoMap()
+  gameSupportedBrowserIds: PrimaryKey[];
+  @AutoMap()
+  gameCertifiedCountries: PrimaryKey[];
+  @AutoMap()
+  gameRestrictedCountryIds: PrimaryKey[];
+  @AutoMap()
+  gameUiLanguageIds: PrimaryKey[];
+  @AutoMap()
+  gameOperatingLanguageIds: PrimaryKey[];
+  @AutoMap()
+  providerIds: PrimaryKey[];
 
-  gameCertifiedCountries: String[];
-  gameRestrictedCountryIds: String[] | '';
-  gameCurrencyIds: String[] | '';
+  releaseDate: string;
 
+  creationDate: string;
+
+  parentTypeIds: PrimaryKey[];
   rtpFrom: number;
   rtpTo: number;
   statusId: GameStatusesEnum;

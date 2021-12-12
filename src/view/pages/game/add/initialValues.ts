@@ -1,13 +1,16 @@
-export const initialValues = {
+import { AddGameViewModel } from '@/view/models';
+
+export const initialValues: AddGameViewModel = {
   providerId: null,
   externalId: '',
   name: '',
+  typeId: null,
   subTypeId: null,
-  releaseDate: '',
-  rtp: null,
-  volatilityId: null,
+  releaseDate: null,
+  rtp: '',
+  volatilityId: 0,
   classId: null,
-  hasDemo: false,
-  createdByUserId: null,
-  createdByUserEmail: ''
+  hasDemo: '1',
+  createdByUserId: 1,
+  createdByUserEmail: 'rabelyan@bangits.com'
 };

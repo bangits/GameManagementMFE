@@ -11,7 +11,7 @@ import {
   GetGameTypesResponseModel,
   GetGameVolatilitiesResponseModel
 } from '@/domain/models';
-import { cachedFn, ICacheService, IHttpService } from '@atom/common';
+import { cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 
@@ -39,11 +39,14 @@ export class GameRepository implements IGameRepository {
     return true;
   };
 
-  getGameTypes = cachedFn(CACHE_CONSTANTS.GetGameTypesResponse, async (): Promise<GetGameTypesResponseModel> => {
+  getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel> => {
     return await this.httpService.get<GetGameTypesResponseModel, {}>({
-      url: API_ROUTES.GAMES.GET_GAME_TYPES
+      url: API_ROUTES.GAMES.GET_GAME_TYPES,
+      query: {
+        parentTypeId
+      }
     });
-  }).bind(this);
+  };
 
   getClassNames = cachedFn(CACHE_CONSTANTS.GetClassNamesResponse, async (): Promise<GetClassNamesResponseModel> => {
     return await this.httpService.get<GetClassNamesResponseModel, {}>({

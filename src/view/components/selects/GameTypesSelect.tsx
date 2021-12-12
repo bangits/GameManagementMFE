@@ -1,14 +1,18 @@
 import { gameApi } from '@/adapter/redux/api';
-import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
+import { CustomSelect, CustomSelectProps, PrimaryKey, useTranslation } from '@atom/common';
 
-export const GameTypesSelect = (props: CustomSelectProps) => {
+export const GameTypesSelect = (props: CustomSelectProps & { gameTypeId?: PrimaryKey; showAll?: boolean }) => {
   const t = useTranslation();
 
-  const { data: gameTypes } = gameApi.useGetGameTypesQuery({});
+  const { data: gameTypes } = gameApi.useGetGameTypesQuery(props.gameTypeId);
 
   return (
     <>
-      <CustomSelect {...props} fullWidth options={gameTypes || []} inputLabel={t.get('type')} />
+      <CustomSelect
+        {...props}
+        fullWidth
+        options={gameTypes ? [...(props.showAll ? [{ label: t.get('form.all'), value: null }] : []), ...gameTypes] : []}
+      />
     </>
   );
 };
