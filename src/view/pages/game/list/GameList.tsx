@@ -159,7 +159,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
             onChange={(changedValue) => onChange('providerIds', changedValue)}
             value={filterValues.providerIds}
           />
-        ),
+        )
       },
       {
         name: 'type' as keyof GamesFiltersViewModel,

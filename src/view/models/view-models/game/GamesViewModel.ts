@@ -26,7 +26,6 @@ export class GamesViewModel {
   @AutoMap()
   createdByUserEmail: string;
 
-
   releaseDate: string;
   creationDate: string;
   status: {

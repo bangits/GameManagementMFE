@@ -51,5 +51,5 @@ export default AddGameContainer;
 // 2. User login
 // 3. Provider names
 
-// 1. 
+// 1.
 // 2. Type, subtype, Datepickers, class, has demo,  in game list
