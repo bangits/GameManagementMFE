@@ -126,18 +126,20 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.restrictedCountries)
     )
     .forMember(
-      (destination) => destination.status,
-      mapFrom((source) => source.status)
+      (destination) => destination.statusId,
+      mapFrom((source) => source.status.id)
     )
     .forMember(
       (destination) => destination.providerLicenses,
-      mapFrom((source) => source.providerLicenses.map(license => ({
-        id: license.id,
-        name: license.name
-      })))
+      mapFrom((source) =>
+        source.providerLicenses.map((license) => ({
+          id: license.id,
+          name: license.name
+        }))
+      )
     )
     .forMember(
-      (destination) => destination.name,
+      (destination) => destination.providerName,
       mapFrom((source) => source.name)
     )
     .forMember(

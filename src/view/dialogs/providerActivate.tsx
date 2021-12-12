@@ -1,10 +1,10 @@
-import { PrimaryKey, UseTranslationReturnValue } from '@atom/common';
+import { UseTranslationReturnValue } from '@atom/common';
 import { dialog, Icons } from '@atom/design-system';
 
 export interface ProviderActivateDialogProperties {
   t: UseTranslationReturnValue;
   onSubmit: (cancelFn: () => void) => void;
-  column: { providerId: PrimaryKey } | { providerId: PrimaryKey }[];
+  column: { providerName: string } | { providerName: string }[];
 }
 
 export const showProviderActivateDialog = ({ t, onSubmit, column }: ProviderActivateDialogProperties) => {
@@ -12,18 +12,12 @@ export const showProviderActivateDialog = ({ t, onSubmit, column }: ProviderActi
     title: t.get('approve'),
     description: (
       <>
-        {t.get('partnerApproveDescirptionFirstPart')}
-        <strong>
-          {Array.isArray(column) ? (
-            column.length
-          ) : (
-            <>
-              Activate provider
-              {/* "{t.get('common.id')}: {column.partnerId} {column.legalName} {column.legalEntity}" */}
-            </>
-          )}
-        </strong>
-        {t.get('partnerApproveDescirptionLastPart')}
+        {t.get('providerActivateDescirptionFirstPart')}
+        <strong>{Array.isArray(column) ? column.length : <>"{column.providerName}"</>}</strong>
+
+        {Array.isArray(column)
+          ? t.get('multipleProviderActivateDescirptionLastPart')
+          : t.get('providerActivateDescirptionLastPart')}
       </>
     ),
     cancelButtonText: t.get('cancel'),

@@ -1,4 +1,5 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
+import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
 import { PrimaryKey, redirectToURL, TablePage, useTranslation } from '@atom/common';
@@ -77,30 +78,6 @@ function ProviderList({
   );
 
   const t = useTranslation();
-
-  const providerStatusesConfig = useMemo<
-    Record<ProviderStatusesEnum, { variant: 'active' | 'inactive' | 'blocked'; translationKey: string }>
-  >(
-    () => ({
-      [ProviderStatusesEnum.Inactive]: {
-        variant: 'inactive',
-        translationKey: 'inActive'
-      },
-      [ProviderStatusesEnum.Blocked]: {
-        variant: 'blocked',
-        translationKey: 'blocked'
-      },
-      [ProviderStatusesEnum.Active]: {
-        variant: 'active',
-        translationKey: 'active'
-      },
-      [ProviderStatusesEnum.Removed]: {
-        variant: 'blocked',
-        translationKey: 'removed'
-      }
-    }),
-    []
-  );
 
   const filtersList = useMemo(
     () => [
@@ -200,7 +177,6 @@ function ProviderList({
         onEditButtonClick={() => {
           const mockEdit = {};
         }}
-        
         onViewButtonClick={(column) =>
           redirectToURL(
             ROUTES.baseUrl +
