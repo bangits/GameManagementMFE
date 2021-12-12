@@ -1,5 +1,5 @@
 import { PrimaryKey } from '@atom/common';
-import { Country, Currency, Licenses } from '@atom/common/dist/domain/entities';
+import { Country, Currency } from '@atom/common/dist/domain/entities';
 import { AutoMap } from '@automapper/classes';
 import { ProviderStatusesEnum } from '../models';
 import { BaseEntity } from './BaseEntity';
@@ -35,7 +35,7 @@ export class Provider extends BaseEntity {
   providerCurrencies: Currency[];
   certifiedCountries: Country[];
   restrictedCountries: Country[];
-  providerLicenses: Licenses[];
+  providerLicenses: Country[];
 
   absoluteUrl: string;
   absoluteDemoUrl: string;

@@ -2,11 +2,7 @@ import { providerStatusesConfig } from '@/view/configs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
 import { redirectToURL, useTranslation } from '@atom/common';
 import {
-  CopyField,
-  Countries,
-  CurrencyGroup,
-  LabelGroup,
-  LicenseGroup,
+  ProvidersGeneralInfo,
   PageWrapper,
   ProviderDetails as ProviderDetailsPage,
   ProviderDetailsProps as ProviderDetailsPageProps
@@ -110,91 +106,51 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         breadCrumb={breadCrumb}
         generalInformationContext={
           <>
-            <LabelGroup title={t.get('totalMarket')} totalLabel={`${data.targetMarkets.length} ${t.get('countries')}`}>
-              <Countries />
-            </LabelGroup>
-
-            <LabelGroup
-              title={t.get('certifiedCountries')}
-              totalLabel={`${data.certifiedCountries.length} ${t.get('countries')}`}>
-              <Countries />
-            </LabelGroup>
-
-            <LabelGroup
-              title={t.get('restrictedCountries')}
-              totalLabel={`${data.restrictedCountries.length} ${t.get('countries')}`}>
-              <Countries />
-            </LabelGroup>
-
-            <LabelGroup
-              title={t.get('supportedCurrencies')}
-              totalLabel={`${data.providerCurrencies.length} ${t.get('supportedCurrencies')}`}>
-              <CurrencyGroup
-                currencies={[
-                  {
-                    title: 'YEN',
-                    inactive: true
-                  },
-                  {
-                    title: 'YEN',
-                    inactive: true
-                  },
-                  {
-                    title: 'YEN',
-                    inactive: true
-                  },
-                  {
-                    title: 'YEN',
-                    inactive: true
-                  },
-                  {
-                    title: 'YEN',
-                    inactive: true
-                  },
-                  {
-                    title: 'YEN',
-                    inactive: true
-                  },
-                  {
-                    title: 'YEN',
-                    inactive: true
-                  }
-                ]}
-              />
-            </LabelGroup>
-
-            <LabelGroup title={t.get('licenses')}>
-              <LicenseGroup
-                tags={[
-                  {
-                    title: 'Malta License',
-                    inactive: true
-                  }
-                ]}
-              />
-            </LabelGroup>
-            <LabelGroup title={t.get('absoluteRealURL')}>
-              <CopyField
-                label={data.absoluteUrl}
-                noDataText={t.get('emptyValue')}
-                tooltip={{
+            <ProvidersGeneralInfo
+              noDataText={t.get('emptyValue')}
+              totalMarket={{
+                title: t.get('totalMarket'),
+                total: `${data.targetMarkets.length} ${t.get('countries')}`,
+                countries: []
+              }}
+              certifiedCountries={{
+                title: t.get('certifiedCountries'),
+                total: `${data.certifiedCountries.length} ${t.get('countries')}`,
+                countries: []
+              }}
+              restrictedtCountries={{
+                title: t.get('restrictedCountries'),
+                total: `${data.restrictedCountries.length} ${t.get('countries')}`,
+                countries: []
+              }}
+              supportedCurrencies={{
+                title: t.get('supportedCurrencies'),
+                total: `${data.providerCurrencies.length} ${t.get('supportedCurrencies')}`,
+                currencies: []
+              }}
+              licenses={{
+                title: t.get('licenses'),
+                licenses: []
+              }}
+              realURL={{
+                URL: data.absoluteUrl,
+                title: t.get('absoluteRealURL'),
+                tooltip: {
                   showEvent: 'click',
                   text: t.get('copied'),
-                  placement: 'top'
-                }}
-              />
-            </LabelGroup>
-            <LabelGroup title={t.get('absoluteDemoURL')}>
-              <CopyField
-                label={data.absoluteDemoUrl}
-                noDataText={t.get('emptyValue')}
-                tooltip={{
+                  placement: 'right'
+                }
+              }}
+              demoURL={{
+                URL: data.absoluteDemoUrl,
+                title: t.get('absoluteDemoURL'),
+                tooltip: {
                   showEvent: 'click',
                   text: t.get('copied'),
-                  placement: 'top'
-                }}
-              />
-            </LabelGroup>
+                  placement: 'right'
+                }
+              }}
+            />
           </>
         }
       />

@@ -22,12 +22,6 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-<<<<<<< HEAD
-"@atom/common@^2.4.3":
-  version "2.4.3"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.4.3.tgz#e77be02a69f7f7986f66dd33648f14fbef02e79d"
-  integrity sha1-53vgKmn395hvZt0zZI8U++8C550=
-=======
 "@atom/common@^2.3.4":
   version "2.4.5"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.4.5.tgz#bb9c15bdd5039caa3af5dd7d22a37a44a783f7ac"
@@ -44,11 +38,10 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/common@^2.5.7":
-  version "2.5.7"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.5.7.tgz#d7be0f517bf5310476f951ba6c625493866ce9f0"
-  integrity sha1-174PUXv1MQR2+VG6bGJUk4Zs6fA=
->>>>>>> 19edfdff79c4240b9d9fbe3036d3495979d96732
+"@atom/common@^2.5.11":
+  version "2.5.11"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.5.11.tgz#ef0073d010acc5eca0e79d977c65ea072ff570d5"
+  integrity sha1-7wBz0BCsxeyg552XfGXqBy/1cNU=
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
@@ -61,17 +54,10 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-<<<<<<< HEAD
 "@atom/design-system@^1.15.12":
   version "1.15.12"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.12.tgz#2f6b06182f465d4d8dccb6982f971044b5cc5acb"
   integrity sha1-L2sGGC9GXU2NzLaYL5cQRLXMWss=
-=======
-"@atom/design-system@^1.15.11":
-  version "1.15.11"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.11.tgz#4201588b692caf731b42aca92a9d53ff0b61bedd"
-  integrity sha1-QgFYi2ksr3MbQqypKp1T/wthvt0=
->>>>>>> e635d08e187e32cb1016e6e3b996e413b9e9e106
   dependencies:
     "@atom/common" "^2.3.4"
     "@my-ui/core" "^2.23.23"
