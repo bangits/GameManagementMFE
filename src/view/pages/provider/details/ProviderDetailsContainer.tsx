@@ -8,10 +8,9 @@ const ProviderDetailsContainer = () => {
 
   const { data } = providerApi.useGetProvidersByIdQuery(+params.providerId);
 
-  if(!data) return null;
+  if (!data) return null;
 
   console.log(data);
-  
 
   return <ProviderDetails data={data} />;
 };

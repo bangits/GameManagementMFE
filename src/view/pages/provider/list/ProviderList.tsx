@@ -200,7 +200,6 @@ function ProviderList({
         onEditButtonClick={() => {
           const mockEdit = {};
         }}
-        
         onViewButtonClick={(column) =>
           redirectToURL(
             ROUTES.baseUrl +
