@@ -131,7 +131,10 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.providerLicenses,
-      mapFrom((source) => source.providerLicenses)
+      mapFrom((source) => source.providerLicenses.map(license => ({
+        id: license.id,
+        name: license.name
+      })))
     )
     .forMember(
       (destination) => destination.name,

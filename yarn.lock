@@ -22,22 +22,6 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-"@atom/common@^2.3.15":
-  version "2.3.15"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.3.15.tgz#b8c4125656216f1ef25fb32a52abe6122d401eeb"
-  integrity sha1-uMQSVlYhbx7yX7MqUqvmEi1AHus=
-  dependencies:
-    "@automapper/classes" "^7.0.2"
-    "@automapper/core" "^7.0.2"
-    axios "^0.23.0"
-    dayjs "^1.10.7"
-    formik "^2.2.9"
-    moment "^2.29.1"
-    query-string "^7.0.1"
-    react "^17.0.2"
-    single-spa "^5.9.3"
-    single-spa-react "^4.6.0"
-
 "@atom/common@^2.3.4":
   version "2.4.5"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.4.5.tgz#bb9c15bdd5039caa3af5dd7d22a37a44a783f7ac"
@@ -54,13 +38,29 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/design-system@^1.15.4":
-  version "1.15.4"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.4.tgz#478368fe43d7c52f3ca1d45c6a8f6425c4fc399f"
-  integrity sha1-R4No/kPXxS88odRcao9kJcT8OZ8=
+"@atom/common@^2.5.7":
+  version "2.5.7"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.5.7.tgz#d7be0f517bf5310476f951ba6c625493866ce9f0"
+  integrity sha1-174PUXv1MQR2+VG6bGJUk4Zs6fA=
+  dependencies:
+    "@automapper/classes" "^7.0.2"
+    "@automapper/core" "^7.0.2"
+    axios "^0.23.0"
+    dayjs "^1.10.7"
+    formik "^2.2.9"
+    moment "^2.29.1"
+    query-string "^7.0.1"
+    react "^17.0.2"
+    single-spa "^5.9.3"
+    single-spa-react "^4.6.0"
+
+"@atom/design-system@1.15.10":
+  version "1.15.10"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.10.tgz#ed0d29de97d62f6d7e3159a5f6f3996921999da7"
+  integrity sha1-7Q0p3pfWL21+MVml9vOZaSGZnac=
   dependencies:
     "@atom/common" "^2.3.4"
-    "@my-ui/core" "^2.23.16"
+    "@my-ui/core" "^2.23.19"
     classnames "^2.3.1"
     react "^17.0.2"
     react-dom "^17.0.2"
@@ -1398,10 +1398,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@my-ui/core@^2.23.16":
-  version "2.23.16"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.23.16.tgz#c86847e69335efbf4695f2c85e527306a811a980"
-  integrity sha1-yGhH5pM1779GlfLIXlJzBqgRqYA=
+"@my-ui/core@^2.23.19":
+  version "2.23.20"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.23.20.tgz#53268f6fd843a55ed8c2259c303edc504624cf5f"
+  integrity sha1-UyaPb9hDpV7YwiWcMD7cUEYkz18=
   dependencies:
     "@my-ui/react-datepicker" "^1.5.0"
     "@my-ui/react-select" "1.1.6"

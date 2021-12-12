@@ -10,6 +10,9 @@ export class ProviderDetailsViewModel {
   partnerId: PrimaryKey;
 
   @AutoMap()
+  providerId: PrimaryKey;
+
+  @AutoMap()
   id: PrimaryKey;
 
   targetMarkets: {
@@ -33,14 +36,15 @@ export class ProviderDetailsViewModel {
     name: string;
     isoCode: string;
   }[];
-  status: {
-    id: ProviderStatusesEnum;
-    name: string;
-  };
   providerLicenses: {
     id: PrimaryKey;
     name: string;
   }[];
+
+  status: {
+    id: ProviderStatusesEnum;
+    name: string;
+  };
 
   name: string;
   gameCount: PrimaryKey;

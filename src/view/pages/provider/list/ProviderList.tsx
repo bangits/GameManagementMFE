@@ -1,6 +1,7 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
+import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
-import { PrimaryKey, TablePage, useTranslation } from '@atom/common';
+import { PrimaryKey, redirectToURL, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
 
@@ -199,9 +200,14 @@ function ProviderList({
         onEditButtonClick={() => {
           const mockEdit = {};
         }}
-        onViewButtonClick={() => {
-          const mockView = {};
-        }}
+        
+        onViewButtonClick={(column) =>
+          redirectToURL(
+            ROUTES.baseUrl +
+              ROUTES.providers +
+              ROUTES.providerDetails.replace(':providerId', column.partnerId.toString())
+          )
+        }
       />
     </PageWrapper>
   );
