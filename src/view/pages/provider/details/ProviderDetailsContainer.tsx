@@ -38,11 +38,6 @@ const ProviderDetailsContainer = () => {
     getColumnId: (column) => column.id
   });
 
-<<<<<<< HEAD
-  if (!data) return null;
-
-  console.log(data);
-=======
   const { openDialogFn: onInActivateButtonClick } = useActionWithDialog<ProviderDetailsViewModel>({
     dialogFn: showProviderInActivateDialog,
     actionFn: (providerIds) => changeProviderStatus({ providerIds, statusId: ProviderStatusesEnum.Inactive }).unwrap(),
@@ -63,7 +58,6 @@ const ProviderDetailsContainer = () => {
   });
 
   if (!data) return null;
->>>>>>> e635d08e187e32cb1016e6e3b996e413b9e9e106
 
   return (
     <ProviderDetails
