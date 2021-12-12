@@ -1,6 +1,8 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
+import { providerStatusesConfig } from '@/view/configs';
+import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
-import { TablePage, useTranslation } from '@atom/common';
+import { PrimaryKey, redirectToURL, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
 
@@ -9,10 +11,31 @@ export interface ProviderListProps {
   results: ProvidersViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFetching: boolean;
   filtersInitialValues: ProvidersFiltersViewModel;
+  partnersTableLoadingIds: PrimaryKey[];
+
+  // actions
+  onActivateButtonClick: (column: ProvidersViewModel | ProvidersViewModel[]) => void;
+  shouldShowActivateButton: (column: ProvidersViewModel) => boolean;
+
+  onInActivateButtonClick: (column: ProvidersViewModel | ProvidersViewModel[]) => void;
+  shouldShowInActivateButton: (column: ProvidersViewModel) => boolean;
 }
 
-function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filtersInitialValues }: ProviderListProps) {
+function ProviderList({
+  results,
+  onFiltersChange,
+  rowCount,
+  isFilteredData,
+  filtersInitialValues,
+  isFetching,
+  onActivateButtonClick,
+  shouldShowActivateButton,
+  onInActivateButtonClick,
+  shouldShowInActivateButton,
+  partnersTableLoadingIds
+}: ProviderListProps) {
   const tableColumns = useMemo(
     () => [
       {
@@ -47,7 +70,8 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
         accessor: 'status',
         variant: 'status' as const,
         getVariant: (value: string) => providerStatusesConfig[value].variant,
-        getVariantName: (value: string) => t.get(providerStatusesConfig[value].translationKey)
+        getVariantName: (value: string) => t.get(providerStatusesConfig[value].translationKey),
+        disableSortBy: true
       }
     ],
     []
@@ -55,50 +79,30 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
 
   const t = useTranslation();
 
-  const providerStatusesConfig = useMemo<
-    Record<ProviderStatusesEnum, { variant: 'active' | 'inactive' | 'blocked'; translationKey: string }>
-  >(
-    () => ({
-      [ProviderStatusesEnum.Inactive]: {
-        variant: 'inactive',
-        translationKey: 'providers.statuses.inActive'
-      },
-      [ProviderStatusesEnum.Blocked]: {
-        variant: 'blocked',
-        translationKey: 'providers.statuses.blocked'
-      },
-      [ProviderStatusesEnum.Active]: {
-        variant: 'active',
-        translationKey: 'providers.statuses.active'
-      }
-    }),
-    []
-  );
-
   const filtersList = useMemo(
     () => [
       {
-        label: t.get('providers.fields.providerId'),
+        label: t.get('providerId'),
         name: 'providerId',
         type: 'input' as const,
         props: {
-          label: t.get('providers.fields.providerId')
+          label: t.get('providerId')
         }
       },
       {
-        label: t.get('providers.fields.partnerId'),
+        label: t.get('partnerId'),
         name: 'partnerId',
         type: 'input' as const,
         props: {
-          label: t.get('providers.fields.partnerId')
+          label: t.get('partnerId')
         }
       },
       {
         name: 'providerName',
         type: 'input' as const,
-        label: t.get('providers.fields.providerName'),
+        label: t.get('providerName'),
         props: {
-          label: t.get('providers.fields.providerName')
+          label: t.get('providerName')
         }
       },
       {
@@ -124,9 +128,11 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
   );
 
   return (
-    <PageWrapper title={t.get('providers.list.title')}>
+    <PageWrapper title={t.get('providers')}>
       <TablePage
         fetchData={onFiltersChange}
+        isFilteredData={isFilteredData}
+        isFetching={isFetching}
         filterProps={{
           defaultOpened: false,
           initialValues: filtersInitialValues,
@@ -135,7 +141,22 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
         tableProps={{
           data: results,
           columns: tableColumns,
-          actions: [],
+          loadingRowsIds: partnersTableLoadingIds,
+          loadingRowColumnProperty: 'providerId',
+          actions: [
+            {
+              iconName: 'CheckButtonIcon',
+              onClick: onActivateButtonClick,
+              shouldShow: shouldShowActivateButton,
+              tooltipText: t.get('activate')
+            },
+            {
+              iconName: 'BlockButtonIcon',
+              onClick: onInActivateButtonClick,
+              shouldShow: shouldShowInActivateButton,
+              tooltipText: t.get('inActivate')
+            }
+          ],
 
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
           emptyText: isFilteredData ? (
@@ -146,9 +167,9 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
             </>
           ) : (
             <>
-              {t.get('providers.list.emptyResultFirstSentence')}
+              {t.get('youDontHaveProvidersAdded')}
               <br />
-              {t.get('providers.list.emptyResultSecondSentence')}
+              {t.get('pleaseAddProvider')}
             </>
           )
         }}
@@ -156,9 +177,13 @@ function ProviderList({ results, onFiltersChange, rowCount, isFilteredData, filt
         onEditButtonClick={() => {
           const mockEdit = {};
         }}
-        onViewButtonClick={() => {
-          const mockView = {};
-        }}
+        onViewButtonClick={(column) =>
+          redirectToURL(
+            ROUTES.baseUrl +
+              ROUTES.providers +
+              ROUTES.providerDetails.replace(':providerId', column.partnerId.toString())
+          )
+        }
       />
     </PageWrapper>
   );

@@ -42,7 +42,7 @@ const GameListContainer = () => {
 
   const [filters, setFilters] = useState<GamesFiltersViewModel>(initialFilters);
 
-  const { data, requestId } = gameApi.useGetGamesQuery(filters);
+  const { data, requestId, isFetching } = gameApi.useGetGamesQuery(filters);
 
   const { results, rowCount } = (data || {}) as GetGamesViewModel;
 
@@ -54,6 +54,7 @@ const GameListContainer = () => {
         results={results || []}
         rowCount={rowCount || 1}
         isFilteredData={firstRequestId !== requestId}
+        isFetching={isFetching}
         filters={filters}
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy

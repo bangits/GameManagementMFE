@@ -2,14 +2,17 @@ import { Game, Provider } from '@/domain/entities';
 import {
   AddGameRequestModel,
   AddProviderRequestModel,
+  ChangeProviderStatusRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderRequestModel,
-  GetProviderResponseModel
+  GetProviderResponseModel,
+  GetProvidersByIdResponseModel
 } from '@/domain/models';
 import {
   AddGameViewModel,
   AddProviderViewModel,
+  ChangeProviderStatusViewModel,
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
@@ -20,6 +23,7 @@ import {
 import { convertDate, convertDateForRequestModel } from '@atom/common';
 import type { MappingProfile } from '@automapper/core';
 import autoMapper from '@automapper/core';
+import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
 import { transformToCountryModel } from './transformFunctions';
 
 const { mapFrom, mapWith } = autoMapper;
@@ -67,7 +71,6 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.providerId,
       mapFrom((source) => source.id)
     )
-
     .forMember(
       (destination) => destination.providerName,
       mapFrom((source) => source.name)
@@ -95,13 +98,97 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.targetMarkets,
       mapFrom((source) => transformToCountryModel(source.targetMarkets))
     );
+
+  mapper
+    .createMap(ChangeProviderStatusViewModel, ChangeProviderStatusRequestModel)
+    .forMember(
+      (destination) => destination.lastUpdatedByUserId,
+      mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserEmail,
+      mapFrom((source) => 'aaaaa@aaaa.aaa')
+    );
+
+  mapper
+    .createMap(GetProvidersByIdResponseModel, GetProvidersByIdViewModel)
+    .forMember(
+      (destination) => destination.targetMarkets,
+      mapFrom((source) => source.targetMarkets)
+    )
+    .forMember(
+      (destination) => destination.providerCurrencies,
+      mapFrom((source) => source.providerCurrencies)
+    )
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) => source.certifiedCountries)
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) => source.restrictedCountries)
+    )
+    .forMember(
+      (destination) => destination.statusId,
+      mapFrom((source) => source.status.id)
+    )
+    .forMember(
+      (destination) => destination.providerLicenses,
+      mapFrom((source) =>
+        source.providerLicenses.map((license) => ({
+          id: license.id,
+          name: license.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.providerName,
+      mapFrom((source) => source.name)
+    )
+    .forMember(
+      (destination) => destination.gameCount,
+      mapFrom((source) => source.gameCount)
+    )
+    .forMember(
+      (destination) => destination.absoluteUrl,
+      mapFrom((source) => source.absoluteUrl)
+    )
+    .forMember(
+      (destination) => destination.absoluteDemoUrl,
+      mapFrom((source) => source.absoluteDemoUrl)
+    )
+    .forMember(
+      (destination) => destination.createdByUserId,
+      mapFrom((source) => source.createdByUserId)
+    )
+    .forMember(
+      (destination) => destination.creationDate,
+      mapFrom((source) => source.creationDate)
+    )
+    .forMember(
+      (destination) => destination.createdByUserEmail,
+      mapFrom((source) => source.createdByUserEmail)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserId,
+      mapFrom((source) => source.lastUpdatedByUserId)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedDate,
+      mapFrom((source) => source.lastUpdatedDate)
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserEmail,
+      mapFrom((source) => source.lastUpdatedByUserEmail)
+    );
   //#endregion
 
+  //#region Games
   mapper.createMap(GetProviderResponseModel, GetProvidersViewModel).forMember(
     (destination) => destination.results,
     mapWith(ProvidersViewModel, Provider, (source) => source.results)
   );
-  //#region Games
+
   mapper
     .createMap(GamesFiltersViewModel, GetGameRequestModel)
     .forMember(
@@ -178,8 +265,6 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.subTypeId,
       mapFrom((source) => source.subTypeId || source.typeId)
     );
-
-  //#endregion
 
   mapper.createMap(GetGameResponseModel, GetGamesViewModel).forMember(
     (destination) => destination.results,

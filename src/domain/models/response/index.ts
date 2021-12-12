@@ -7,3 +7,4 @@ export * from './GetGameTypesResponseModel';
 export * from './GetGameVolatilitiesResponseModel';
 export * from './GetProviderNamesResponseModel';
 export * from './GetProviderResponseModel';
+export * from './GetProvidersByIdResponseModel';

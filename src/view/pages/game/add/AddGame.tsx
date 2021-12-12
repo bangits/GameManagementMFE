@@ -28,7 +28,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'externalId' as keyof AddGameViewModel,
         type: 'input' as const,
-        label: t.get('games.add.fields.externalId'),
+        label: t.get('externalId'),
         props: {
           type: 'number'
         }
@@ -36,7 +36,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'name' as keyof AddGameViewModel,
         type: 'input' as const,
-        label: t.get('games.add.fields.gameName')
+        label: t.get('gameName')
       },
       {
         type: 'datepicker' as const,
@@ -123,12 +123,12 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
 
   const atomFormProps = useMemo(
     () => ({
-      title: t.get('games.add.title'),
+      title: t.get('addGame'),
       secondButtonProps: {
-        children: t.get('form.save')
+        children: t.get('save')
       },
       firstButtonProps: {
-        children: t.get('form.close'),
+        children: t.get('close'),
         type: 'button' as const,
         onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.gamesList)
       }

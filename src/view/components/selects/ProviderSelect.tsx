@@ -8,12 +8,7 @@ export const ProviderSelect = (props: Omit<CustomSelectProps & { isMain?: true }
 
   return (
     <>
-      <CustomSelect
-        {...props}
-        fullWidth
-        options={providerNames || []}
-        inputLabel={t.get('games.add.fields.providerName')}
-      />
+      <CustomSelect {...props} fullWidth options={providerNames || []} inputLabel={t.get('providerName')} />
     </>
   );
 };

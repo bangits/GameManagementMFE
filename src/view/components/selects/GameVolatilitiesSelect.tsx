@@ -8,12 +8,7 @@ export const GameVolatilitiesSelect = (props: CustomSelectProps) => {
 
   return (
     <>
-      <CustomSelect
-        {...props}
-        fullWidth
-        options={gameVolatilities || []}
-        inputLabel={t.get('games.list.fields.volatility')}
-      />
+      <CustomSelect {...props} fullWidth options={gameVolatilities || []} inputLabel={t.get('volatility')} />
     </>
   );
 };

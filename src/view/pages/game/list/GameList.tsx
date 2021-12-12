@@ -27,15 +27,16 @@ export interface GameListProps {
   results: GamesViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFetching: boolean;
 }
 
-function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData }: GameListProps) {
+function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData, isFetching }: GameListProps) {
   const t = useTranslation();
 
   const tableColumns = useMemo(
     () => [
       {
-        Header: t.get('games.list.tableHeaders.logo'),
+        Header: t.get('logo'),
         accessor: 'logo' as keyof GamesViewModel,
         variant: 'image' as const
       },
@@ -45,23 +46,23 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         sortingId: GameStatusesSortingEnum.GAME_NAME
       },
       {
-        Header: t.get('games.list.tableHeaders.gameId'),
+        Header: t.get('gameId'),
         accessor: 'gameId' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.GAME_ID
       },
 
       {
-        Header: t.get('games.list.tableHeaders.externalId'),
+        Header: t.get('externalId'),
         accessor: 'externalId' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.EXTERNAL_ID
       },
       {
-        Header: t.get('games.list.tableHeaders.providerName'),
+        Header: t.get('providerName'),
         accessor: 'providerName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.PROVIDER_NAME
       },
       {
-        Header: t.get('games.list.tableHeaders.providerId'),
+        Header: t.get('providerId'),
         accessor: 'providerId' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.PROVIDER_ID
       },
@@ -81,7 +82,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         sortingId: GameStatusesSortingEnum.VOLATILITY
       },
       {
-        Header: t.get('games.list.tableHeaders.rtp'),
+        Header: t.get('rtp'),
         accessor: 'rtp' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.RTP
       },
@@ -91,12 +92,12 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         sortingId: GameStatusesSortingEnum.CLASS
       },
       {
-        Header: t.get('games.list.tableHeaders.releaseDate'),
+        Header: t.get('releaseDate'),
         accessor: 'releaseDate' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.RELEASE_DATE
       },
       {
-        Header: t.get('games.list.tableHeaders.creationDate'),
+        Header: t.get('creationDate'),
         accessor: 'creationDate' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.CREATION_DATE
       },
@@ -106,7 +107,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         sortingId: GameStatusesSortingEnum.CREATED_BY
       },
       {
-        Header: t.get('games.list.tableHeaders.status'),
+        Header: t.get('status'),
         accessor: 'status' as keyof GamesViewModel,
         variant: 'status' as const,
         getVariant: (value: number) => (value === GameStatusesEnum.Active ? 'active' : 'blocked'),
@@ -124,7 +125,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         label: t.get('games.list.fields.gameId'),
 
         props: {
-          label: t.get('games.list.fields.gameId')
+          label: t.get('gameId')
         }
       },
 
@@ -134,7 +135,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         label: t.get('games.list.fields.externalId'),
 
         props: {
-          label: t.get('games.list.fields.externalId')
+          label: t.get('externalId')
         }
       },
       {
@@ -143,7 +144,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         label: t.get('games.list.fields.gameName'),
 
         props: {
-          label: t.get('games.list.fields.gameName')
+          label: t.get('gameName')
         }
       },
 
@@ -167,7 +168,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         label: t.get('games.list.fields.type'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
-            inputLabel={t.get('games.list.fields.type')}
+            inputLabel={t.get('type')}
             fullWidth
             onChange={(changedValue) => onChange('type', changedValue)}
             showAll
@@ -195,11 +196,11 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         type: 'from-to' as const,
         name: 'rtp' as keyof GamesFiltersViewModel,
         fromInputProps: {
-          label: t.get('games.list.fields.rtp.from'),
+          label: t.get('rtpFrom'),
           type: 'number'
         },
         toInputProps: {
-          label: t.get('games.list.fields.rtp.to'),
+          label: t.get('rtpTo'),
           type: 'number'
         }
       },
@@ -216,7 +217,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
 
         component: ({ onChange, filterValues }) => (
           <GameClassSelect
-            inputLabel={t.get('games.list.fields.class')}
+            inputLabel={t.get('class')}
             fullWidth
             value={filterValues.classIds}
             isMulti
@@ -289,7 +290,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         component: ({ onChange, filterValues }) => (
           <CurrencySelect
             isMulti
-            inputLabel={t.get('games.list.fields.supportedCurrencies')}
+            inputLabel={t.get('supportedCurrencies')}
             fullWidth
             value={filterValues.gameCurrencyIds}
             onChange={(changedValue) => onChange('gameCurrencyIds', changedValue)}
@@ -318,7 +319,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         component: ({ onChange, filterValues }) => (
           <CountriesSelect
             isMulti
-            inputLabel={t.get('games.list.fields.certifiedCountries')}
+            inputLabel={t.get('certifiedCountries')}
             fullWidth
             value={filterValues.gameCertifiedCountries}
             onChange={(changedValue) => onChange('gameCertifiedCountries', changedValue)}
@@ -332,7 +333,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         component: ({ onChange, filterValues }) => (
           <CountriesSelect
             isMulti
-            inputLabel={t.get('games.list.fields.restrictedCountries')}
+            inputLabel={t.get('restrictedCountries')}
             fullWidth
             value={filterValues.gameRestrictedCountryIds}
             onChange={(changedValue) => onChange('gameRestrictedCountryIds', changedValue)}
@@ -346,7 +347,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         component: ({ onChange, filterValues }) => (
           <GameVolatilitiesSelect
             isMulti
-            inputLabel={t.get('games.list.fields.volatility')}
+            inputLabel={t.get('volatility')}
             fullWidth
             value={filterValues.volatilityIds}
             onChange={(changedValue) => onChange('volatilityIds', changedValue)}
@@ -360,7 +361,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         component: ({ onChange, filterValues }) => (
           <LanguageSelect
             isMulti
-            inputLabel={t.get('games.list.fields.uILanguages')}
+            inputLabel={t.get('uILanguages')}
             fullWidth
             value={filterValues.gameUiLanguageIds}
             onChange={(changedValue) => onChange('gameUiLanguageIds', changedValue)}
@@ -374,7 +375,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         component: ({ onChange, filterValues }) => (
           <LanguageSelect
             isMulti
-            inputLabel={t.get('games.list.fields.operatingLanguages')}
+            inputLabel={t.get('operatingLanguages')}
             fullWidth
             value={filterValues.gameOperatingLanguageIds}
             onChange={(changedValue) => onChange('gameOperatingLanguageIds', changedValue)}
@@ -397,7 +398,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
         label: t.get('games.list.fields.createdBy'),
 
         props: {
-          label: t.get('games.list.fields.createdBy')
+          label: t.get('createdBy')
         }
       }
     ],
@@ -406,7 +407,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
 
   const addGameButtonProps = useMemo(
     () => ({
-      children: t.get('games.list.addGameButton'),
+      children: t.get('addGame'),
       startIcon: <Icons.PlusCircle />,
       onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd)
     }),
@@ -414,9 +415,11 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData 
   );
 
   return (
-    <PageWrapper title={t.get('games.list.title')} showButton buttonProps={addGameButtonProps}>
+    <PageWrapper title={t.get('games')} showButton buttonProps={addGameButtonProps}>
       <TablePage
         fetchData={onFiltersChange}
+        isFetching={isFetching}
+        isFilteredData={isFilteredData}
         filterProps={{
           defaultOpened: false,
           initialValues: filters,

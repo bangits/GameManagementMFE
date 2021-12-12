@@ -1,20 +1,38 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { ProviderUseCase } from '@/domain/use-case';
-import { AddProviderViewModel, GetProviderNamesViewModel, ProvidersFiltersViewModel } from '@/view/models';
+import {
+  AddProviderViewModel,
+  ChangeProviderStatusViewModel,
+  GetProviderNamesViewModel,
+  GetProvidersByIdViewModel,
+  ProvidersFiltersViewModel
+} from '@/view/models';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../helpers';
 
 export const providerApi = createApi({
   reducerPath: 'providerApi',
   baseQuery: createBaseQuery<ProviderUseCase>({ useCaseName: DI_CONSTANTS.PROVIDER.ProviderUseCase }),
+  tagTypes: ['Providers'],
   endpoints: (build) => ({
     getProvider: build.query({
-      query: (ProvidersFiltersViewModel: ProvidersFiltersViewModel) => {
+      query: (providersFiltersViewModel: ProvidersFiltersViewModel) => {
         return {
           methodName: 'getProviders',
-          methodArguments: [ProvidersFiltersViewModel]
+          methodArguments: [providersFiltersViewModel]
         };
-      }
+      },
+      providesTags: ['Providers']
+    }),
+    changeProviderStatus: build.mutation<ActionResponseModel, {}>({
+      query: (changeProviderStatusViewModel: ChangeProviderStatusViewModel) => {
+        return {
+          methodName: 'changeProviderStatus',
+          methodArguments: [changeProviderStatusViewModel]
+        };
+      },
+      invalidatesTags: ['Providers']
     }),
     getProviderNames: build.query<GetProviderNamesViewModel, {}>({
       query: (isActive?) => {
@@ -29,6 +47,14 @@ export const providerApi = createApi({
         return {
           methodName: 'addProviders',
           methodArguments: [addProviderViewModel]
+        };
+      }
+    }),
+    getProvidersById: build.query<GetProvidersByIdViewModel, {}>({
+      query: (partnerId: PrimaryKey) => {
+        return {
+          methodName: 'getProvidersById',
+          methodArguments: [partnerId]
         };
       }
     })

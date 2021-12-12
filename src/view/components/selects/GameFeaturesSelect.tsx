@@ -8,12 +8,7 @@ export const GameFeaturesSelect = (props: CustomSelectProps) => {
 
   return (
     <>
-      <CustomSelect
-        {...props}
-        fullWidth
-        options={gameFeatures || []}
-        inputLabel={t.get('games.list.fields.gameFeatures')}
-      />
+      <CustomSelect {...props} fullWidth options={gameFeatures || []} inputLabel={t.get('feature')} />
     </>
   );
 };

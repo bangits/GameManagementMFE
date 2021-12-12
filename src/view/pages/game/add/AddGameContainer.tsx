@@ -19,7 +19,7 @@ const AddGameContainer: FC = () => {
     [addGame]
   );
 
-  const addPartnerValidationSchema = useAsync(
+  const getAddPartnerValidationSchema = useAsync(
     () => addGameValidationSchema(validationTranslations),
     [validationTranslations],
     null
@@ -43,7 +43,7 @@ const AddGameContainer: FC = () => {
     }
   }, [status]);
 
-  return <AddGame validationSchema={addPartnerValidationSchema} onSubmit={onSubmit} />;
+  return <AddGame validationSchema={getAddPartnerValidationSchema} onSubmit={onSubmit} />;
 };
 
 export default AddGameContainer;
