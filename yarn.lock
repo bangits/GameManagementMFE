@@ -22,26 +22,10 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-"@atom/common@2.5.18":
-  version "2.5.18"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.5.18.tgz#a1289f3dbc8803b78c8005cea03fe6964ee8f0c3"
-  integrity sha1-oSifPbyIA7eMgAXOoD/mlk7o8MM=
-  dependencies:
-    "@automapper/classes" "^7.0.2"
-    "@automapper/core" "^7.0.2"
-    axios "^0.23.0"
-    dayjs "^1.10.7"
-    formik "^2.2.9"
-    moment "^2.29.1"
-    query-string "^7.0.1"
-    react "^17.0.2"
-    single-spa "^5.9.3"
-    single-spa-react "^4.6.0"
-
 "@atom/common@^2.3.4":
-  version "2.4.5"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.4.5.tgz#bb9c15bdd5039caa3af5dd7d22a37a44a783f7ac"
-  integrity sha1-u5wVvdUDnKo69d19IqN6RKeD96w=
+  version "2.5.14"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.5.14.tgz#cf2490149f4d93335448695145e508cc6cd11eee"
+  integrity sha1-zySQFJ9NkzNUSGlRReUIzGzRHu4=
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
@@ -54,6 +38,31 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
+"@atom/common@^2.5.16":
+  version "2.5.16"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.5.16.tgz#bd240c051447ff65aa1ef000525d9940e6bff3fd"
+  integrity sha1-vSQMBRRH/2WqHvAAUl2ZQOa/8/0=
+  dependencies:
+    "@automapper/classes" "^7.0.2"
+    "@automapper/core" "^7.0.2"
+    axios "^0.23.0"
+    dayjs "^1.10.7"
+    formik "^2.2.9"
+    moment "^2.29.1"
+    query-string "^7.0.1"
+    react "^17.0.2"
+    single-spa "^5.9.3"
+    single-spa-react "^4.6.0"
+
+<<<<<<< HEAD
+"@atom/design-system@^1.15.15":
+  version "1.15.15"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.15.tgz#61b73e79e7602582898bab3ffb73691d0d7b0f73"
+  integrity sha1-Ybc+eedgJYKJi6s/+3NpHQ17D3M=
+  dependencies:
+    "@atom/common" "^2.3.4"
+    "@my-ui/core" "^2.23.25"
+=======
 "@atom/design-system@1.15.19":
   version "1.15.19"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-1.15.19.tgz#7869e3b0b5044e7c3f5fc33e4ee8b3b760e11b66"
@@ -61,6 +70,7 @@
   dependencies:
     "@atom/common" "^2.3.4"
     "@my-ui/core" "2.23.31"
+>>>>>>> b5384c8e0e8dbba031dc45abe0468e66469bcebe
     classnames "^2.3.1"
     react "^17.0.2"
     react-dom "^17.0.2"
@@ -1096,16 +1106,16 @@
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@discoveryjs/json-ext/-/json-ext-0.5.6.tgz#d5e0706cf8c6acd8c6032f8d54070af261bbbb2f"
   integrity sha1-1eBwbPjGrNjGAy+NVAcK8mG7uy8=
 
-"@emotion/cache@^11.4.0", "@emotion/cache@^11.6.0":
-  version "11.6.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@emotion/cache/-/cache-11.6.0.tgz#65fbdbbe4382f1991d8b20853c38e63ecccec9a1"
-  integrity sha1-ZfvbvkOC8ZkdiyCFPDjmPszOyaE=
+"@emotion/cache@^11.4.0", "@emotion/cache@^11.7.1":
+  version "11.7.1"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@emotion/cache/-/cache-11.7.1.tgz#08d080e396a42e0037848214e8aa7bf879065539"
+  integrity sha1-CNCA45akLgA3hIIU6Kp7+HkGVTk=
   dependencies:
     "@emotion/memoize" "^0.7.4"
     "@emotion/sheet" "^1.1.0"
     "@emotion/utils" "^1.0.0"
     "@emotion/weak-memoize" "^0.2.5"
-    stylis "^4.0.10"
+    stylis "4.0.13"
 
 "@emotion/hash@^0.8.0":
   version "0.8.0"
@@ -1130,12 +1140,12 @@
   integrity sha1-LED4FEmk5VTp/GOWkQ7UhD7CvlA=
 
 "@emotion/react@^11.1.1":
-  version "11.7.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@emotion/react/-/react-11.7.0.tgz#b179da970ac0e8415de3ac165deadf8d9c4bf89f"
-  integrity sha1-sXnalwrA6EFd46wWXerfjZxL+J8=
+  version "11.7.1"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@emotion/react/-/react-11.7.1.tgz#3f800ce9b20317c13e77b8489ac4a0b922b2fe07"
+  integrity sha1-P4AM6bIDF8E+d7hImsSguSKy/gc=
   dependencies:
     "@babel/runtime" "^7.13.10"
-    "@emotion/cache" "^11.6.0"
+    "@emotion/cache" "^11.7.1"
     "@emotion/serialize" "^1.0.2"
     "@emotion/sheet" "^1.1.0"
     "@emotion/utils" "^1.0.0"
@@ -1398,10 +1408,17 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+<<<<<<< HEAD
+"@my-ui/core@^2.23.25":
+  version "2.23.28"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.23.28.tgz#7adc1076f9dffded280e807890b77617c6920aa6"
+  integrity sha1-etwQdvnf/e0oDoB4kLd2F8aSCqY=
+=======
 "@my-ui/core@2.23.31":
   version "2.23.31"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.23.31.tgz#d70e1674bff8f394031e78ede705359b92fac5fd"
   integrity sha1-1w4WdL/485QDHnjt5wU1m5L6xf0=
+>>>>>>> b5384c8e0e8dbba031dc45abe0468e66469bcebe
   dependencies:
     "@my-ui/react-datepicker" "^1.5.0"
     "@my-ui/react-select" "1.1.6"
@@ -6760,9 +6777,9 @@ postcss-value-parser@^4.1.0:
   integrity sha1-cjwJkgg2um0+WvAZ+SvAlxwC5RQ=
 
 postcss@^8.2.15:
-  version "8.4.4"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/postcss/-/postcss-8.4.4.tgz#d53d4ec6a75fd62557a66bb41978bf47ff0c2869"
-  integrity sha1-1T1Oxqdf1iVXpmu0GXi/R/8MKGk=
+  version "8.4.5"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/postcss/-/postcss-8.4.5.tgz#bae665764dfd4c6fcc24dc0fdf7e7aa00cc77f95"
+  integrity sha1-uuZldk39TG/MJNwP3356oAzHf5U=
   dependencies:
     nanoid "^3.1.30"
     picocolors "^1.0.0"
@@ -7989,10 +8006,10 @@ style-loader@^3.0.0, style-loader@^3.2.1:
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/style-loader/-/style-loader-3.3.1.tgz#057dfa6b3d4d7c7064462830f9113ed417d38575"
   integrity sha1-BX36az1NfHBkRigw+RE+1BfThXU=
 
-stylis@^4.0.10:
-  version "4.0.12"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/stylis/-/stylis-4.0.12.tgz#cad79b30964de9a7e3ca92687a0e73718cbf0e17"
-  integrity sha1-ytebMJZN6afjypJoeg5zcYy/Dhc=
+stylis@4.0.13:
+  version "4.0.13"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/stylis/-/stylis-4.0.13.tgz#f5db332e376d13cc84ecfe5dace9a2a51d954c91"
+  integrity sha1-9dszLjdtE8yE7P5drOmipR2VTJE=
 
 supports-color@^5.3.0:
   version "5.5.0"

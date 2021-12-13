@@ -8,7 +8,7 @@ export const initialValues: AddGameViewModel = {
   subTypeId: null,
   releaseDate: null,
   rtp: '',
-  volatilityId: 0,
+  volatilityId: null,
   classId: null,
   hasDemo: '1',
   createdByUserId: 1,
