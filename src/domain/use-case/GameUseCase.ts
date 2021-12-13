@@ -1,5 +1,10 @@
 import { DI_CONSTANTS } from '@/di/constants';
-import { AddGameRequestModel, ChangeGameStatusRequestModel, GetGameRequestModel, GetGameResponseModel } from '@/domain/models';
+import {
+  AddGameRequestModel,
+  ChangeGameStatusRequestModel,
+  GetGameRequestModel,
+  GetGameResponseModel
+} from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
@@ -79,8 +84,12 @@ export class GameUseCase {
   };
 
   changeGameStatus = async (changeGameStatusViewModel: ChangeGameStatusViewModel): Promise<ActionResponseModel> => {
-    const changeGameStatusRequestModel = mapper.map(changeGameStatusViewModel, ChangeGameStatusRequestModel, ChangeGameStatusViewModel);
+    const changeGameStatusRequestModel = mapper.map(
+      changeGameStatusViewModel,
+      ChangeGameStatusRequestModel,
+      ChangeGameStatusViewModel
+    );
 
     return this.changeGameStatus(changeGameStatusRequestModel);
-  }
+  };
 }

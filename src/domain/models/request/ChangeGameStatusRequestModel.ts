@@ -1,16 +1,16 @@
-import { PrimaryKey } from "@atom/common";
-import { AutoMap } from "@automapper/classes";
+import { PrimaryKey } from '@atom/common';
+import { AutoMap } from '@automapper/classes';
 
 export class ChangeGameStatusRequestModel {
-    @AutoMap()
-    gameIds: PrimaryKey[];
+  @AutoMap()
+  gameIds: PrimaryKey[];
 
-    @AutoMap()
-    statusId: PrimaryKey;
+  @AutoMap()
+  statusId: PrimaryKey;
 
-    @AutoMap()
-    lastUpdatedByUserId: PrimaryKey;
+  @AutoMap()
+  lastUpdatedByUserId: PrimaryKey;
 
-    @AutoMap()
-    lastUpdatedByUserEmail: string
+  @AutoMap()
+  lastUpdatedByUserEmail: string;
 }

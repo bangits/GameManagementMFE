@@ -100,8 +100,8 @@ export const gameApi = createApi({
           methodName: 'changeGameStatus',
           methodArguments: [changeGameStatusViewModel]
         };
-      },
-     /*  invalidatesTags: ['Games'] */
-    }),
+      }
+      /*  invalidatesTags: ['Games'] */
+    })
   })
 });
