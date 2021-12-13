@@ -34,11 +34,11 @@ const AddGameContainer: FC = () => {
 
     if (status === QueryStatus.fulfilled) {
       alert.success({
-        alertLabel: t.get('games.add.successMsg')
+        alertLabel: t.get('successAlertMessage')
       });
     } else {
       alert.error({
-        alertLabel: t.get('games.add.errorMsg')
+        alertLabel: t.get('connectionError')
       });
     }
   }, [status]);

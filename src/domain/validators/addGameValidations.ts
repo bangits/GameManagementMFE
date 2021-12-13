@@ -12,7 +12,7 @@ export const addGameValidationSchema = async (
     typeId: number().typeError(t.required()).required(t.required()),
     subTypeId: number().nullable(),
     releaseDate: string().nullable(),
-    rtp: number().max(99, t.max(99)).nullable(),
+    rtp: number().max(99, t.maxValue(99)).min(0.1, t.min(0.1)).nullable(),
     volatilityId: number().nullable(),
     classId: number().typeError(t.required()),
     createdByUserEmail: string(),
