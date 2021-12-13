@@ -9,7 +9,7 @@ export interface ProviderActivateDialogProperties {
 
 export const showProviderActivateDialog = ({ t, onSubmit, column }: ProviderActivateDialogProperties) => {
   dialog.acceptionDialog({
-    title: t.get('approve'),
+    title: t.get('activate'),
     description: (
       <>
         {t.get('providerActivateDescirptionFirstPart')}
@@ -21,7 +21,7 @@ export const showProviderActivateDialog = ({ t, onSubmit, column }: ProviderActi
       </>
     ),
     cancelButtonText: t.get('cancel'),
-    submitButtonText: t.get('approve'),
+    submitButtonText: t.get('activate'),
     icon: <Icons.CheckPopupIcon />,
     onSubmit
   });

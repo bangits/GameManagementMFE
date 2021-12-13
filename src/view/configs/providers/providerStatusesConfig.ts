@@ -2,7 +2,7 @@ import { ProviderStatusesEnum } from '@/domain/models';
 
 export const providerStatusesConfig: Record<
   ProviderStatusesEnum,
-  { variant: 'active' | 'inactive' | 'blocked'; translationKey: string }
+  { variant: 'active' | 'inactive' | 'blocked' | 'expired'; translationKey: string }
 > = {
   [ProviderStatusesEnum.Inactive]: {
     variant: 'inactive',

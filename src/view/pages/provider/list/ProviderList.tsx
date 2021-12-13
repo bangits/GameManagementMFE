@@ -106,18 +106,18 @@ function ProviderList({
         }
       },
       {
-        label: t.get('statuses.name'),
+        label: t.get('status'),
         name: 'status',
         type: 'select' as const,
         props: {
           selectAll: true,
-          inputLabel: t.get('statuses.name'),
-          selectAllLabel: t.get('statuses.all'),
+          inputLabel: t.get('name'),
+          selectAllLabel: t.get('all'),
           options: [
-            { label: t.get('statuses.active'), value: ProviderStatusesEnum.Active },
-            { label: t.get('statuses.blocked'), value: ProviderStatusesEnum.Blocked },
-            { label: t.get('statuses.inActive'), value: ProviderStatusesEnum.Inactive },
-            { label: t.get('statuses.removed'), value: ProviderStatusesEnum.Removed }
+            { label: t.get('active'), value: ProviderStatusesEnum.Active },
+            { label: t.get('blocked'), value: ProviderStatusesEnum.Blocked },
+            { label: t.get('inActive'), value: ProviderStatusesEnum.Inactive },
+            { label: t.get('removed'), value: ProviderStatusesEnum.Removed }
           ],
           isSearchable: true,
           isMulti: true

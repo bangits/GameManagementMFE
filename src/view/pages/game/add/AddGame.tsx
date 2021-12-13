@@ -30,7 +30,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
         type: 'input' as const,
         label: t.get('externalId'),
         props: {
-          type: 'number'
+          type: 'number',
         }
       },
       {
