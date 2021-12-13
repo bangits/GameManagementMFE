@@ -141,10 +141,10 @@ function ProviderList({
         filtersDropdownProps={{
           dropdown: true,
           selectAll: true,
-          selectAllLabel: "All",
+          selectAllLabel: 'All',
           clearButton: true,
-          clearButtonLabel: "Clear",
-          color: "primary"
+          clearButtonLabel: 'Clear',
+          color: 'primary'
         }}
         tableProps={{
           data: results,
