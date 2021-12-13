@@ -433,7 +433,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
           selectAll: true,
           selectAllLabel: 'All',
           clearButton: true,
-          clearButtonLabel: 'Clear'
+          clearButtonLabel: 'Clear',
+          color: 'primary'
         }}
         isFilteredData={isFilteredData}
         filterProps={{

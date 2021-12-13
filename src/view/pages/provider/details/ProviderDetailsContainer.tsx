@@ -22,8 +22,6 @@ const ProviderDetailsContainer = () => {
   const { openDialogFn: onActivateButtonClick } = useActionWithDialog<ProviderDetailsViewModel>({
     dialogFn: showProviderActivateDialog,
     actionFn: (providerIds) => changeProviderStatus({ providerIds, statusId: ProviderStatusesEnum.Active }).unwrap(),
-    successMsg: t.get('successMultipleAlertMessage'),
-    errorMsg: t.get('errorMultipleAlertMessage'),
     isFetching,
     t,
     refetch: () => {
@@ -41,8 +39,6 @@ const ProviderDetailsContainer = () => {
   const { openDialogFn: onInActivateButtonClick } = useActionWithDialog<ProviderDetailsViewModel>({
     dialogFn: showProviderInActivateDialog,
     actionFn: (providerIds) => changeProviderStatus({ providerIds, statusId: ProviderStatusesEnum.Inactive }).unwrap(),
-    successMsg: t.get('successMultipleAlertMessage'),
-    errorMsg: t.get('errorMultipleAlertMessage'),
     isFetching,
     t,
     refetch: () => {
