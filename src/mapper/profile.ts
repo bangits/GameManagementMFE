@@ -212,30 +212,34 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.currencies,
-      mapFrom((source) => source.providerCurrencies.map((currencies) => ({
-        title: currencies.name
-      }))
+      mapFrom((source) =>
+        source.providerCurrencies.map((currencies) => ({
+          title: currencies.name
+        }))
       )
     )
     .forMember(
       (destination) => destination.targetMarkets,
-      mapFrom((source) => source.targetMarkets.map((market) => ({
-        tagName: market.name
-      }))
+      mapFrom((source) =>
+        source.targetMarkets.map((market) => ({
+          tagName: market.name
+        }))
       )
     )
     .forMember(
       (destination) => destination.certifiedCountries,
-      mapFrom((source) => source.certifiedCountries.map((countries) => ({
-        tagName: countries.name
-      }))
+      mapFrom((source) =>
+        source.certifiedCountries.map((countries) => ({
+          tagName: countries.name
+        }))
       )
     )
     .forMember(
       (destination) => destination.restrictedCountries,
-      mapFrom((source) => source.restrictedCountries.map((countries) => ({
-        tagName: countries.name
-      }))
+      mapFrom((source) =>
+        source.restrictedCountries.map((countries) => ({
+          tagName: countries.name
+        }))
       )
     );
   //#endregion
