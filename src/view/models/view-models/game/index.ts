@@ -9,4 +9,3 @@ export * from './GetGamesViewModel';
 export * from './GetGameThemesViewModel';
 export * from './GetGameTypesViewModel';
 export * from './GetGameVolatilitiesViewModel';
-
