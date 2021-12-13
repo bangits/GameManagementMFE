@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { GameUseCase } from '@/domain/use-case';
 import {
   AddGameViewModel,
+  ChangeGameStatusViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
@@ -12,7 +13,7 @@ import {
   GetGameTypesViewModel,
   GetGameVolatilitiesViewModel
 } from '@/view/models';
-import { PrimaryKey } from '@atom/common';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../helpers';
 
@@ -92,6 +93,15 @@ export const gameApi = createApi({
           methodArguments: []
         };
       }
-    })
+    }),
+    changeGameStatus: build.mutation<ActionResponseModel, {}>({
+      query: (changeGameStatusViewModel: ChangeGameStatusViewModel) => {
+        return {
+          methodName: 'changeGameStatus',
+          methodArguments: [changeGameStatusViewModel]
+        };
+      },
+     /*  invalidatesTags: ['Games'] */
+    }),
   })
 });

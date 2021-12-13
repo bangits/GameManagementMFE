@@ -1,7 +1,6 @@
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import {
-  AddProviderRequestModel,
-  ChangeProviderStatusRequestModel,
+  AddProviderRequestModel, ChangeProviderStatusRequestModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,

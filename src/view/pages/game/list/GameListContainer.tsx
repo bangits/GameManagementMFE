@@ -1,10 +1,12 @@
 import { gameApi } from '@/adapter/redux/api';
 import { GamesFiltersViewModel, GetGamesViewModel } from '@/view/models';
-import { SortTypesEnum, useFirstValue } from '@atom/common';
+import { SortTypesEnum, useFirstValue, useTranslation } from '@atom/common';
 import { useMemo, useState } from 'react';
 import GameList from './GameList';
 
 const GameListContainer = () => {
+  const t = useTranslation();
+
   const initialFilters = useMemo<GamesFiltersViewModel>(
     () => ({
       gameId: '',
@@ -44,9 +46,13 @@ const GameListContainer = () => {
 
   const { data, requestId, isFetching } = gameApi.useGetGamesQuery(filters);
 
+  const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
+
   const { results, rowCount } = (data || {}) as GetGamesViewModel;
 
   const firstRequestId = useFirstValue(requestId);
+
+  
 
   return (
     <>

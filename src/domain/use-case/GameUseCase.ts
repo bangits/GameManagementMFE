@@ -1,8 +1,9 @@
 import { DI_CONSTANTS } from '@/di/constants';
-import { AddGameRequestModel, GetGameRequestModel, GetGameResponseModel } from '@/domain/models';
+import { AddGameRequestModel, ChangeGameStatusRequestModel, GetGameRequestModel, GetGameResponseModel } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
+  ChangeGameStatusViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
@@ -13,7 +14,7 @@ import {
   GetGameTypesViewModel,
   GetGameVolatilitiesViewModel
 } from '@/view/models';
-import { PrimaryKey } from '@atom/common';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IGameRepository } from './../boundaries';
 
@@ -76,4 +77,10 @@ export class GameUseCase {
 
     return getGamePlatformsResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };
+
+  changeGameStatus = async (changeGameStatusViewModel: ChangeGameStatusViewModel): Promise<ActionResponseModel> => {
+    const changeGameStatusRequestModel = mapper.map(changeGameStatusViewModel, ChangeGameStatusRequestModel, ChangeGameStatusViewModel);
+
+    return this.changeGameStatus(changeGameStatusRequestModel);
+  }
 }

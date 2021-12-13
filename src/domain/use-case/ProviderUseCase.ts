@@ -1,15 +1,13 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
-  AddProviderRequestModel,
-  ChangeProviderStatusRequestModel,
+  AddProviderRequestModel, ChangeProviderStatusRequestModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
   GetProvidersByIdResponseModel
 } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
-  AddProviderViewModel,
-  ChangeProviderStatusViewModel,
+  AddProviderViewModel, ChangeProviderStatusViewModel,
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
   GetProvidersViewModel,

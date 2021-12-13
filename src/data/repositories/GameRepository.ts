@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { IGameRepository } from '@/domain/boundaries';
 import {
   AddGameRequestModel,
+  ChangeGameStatusRequestModel,
   GetClassNamesResponseModel,
   GetGameFeaturesResponseModel,
   GetGamePlatformsResponseModel,
@@ -12,7 +13,7 @@ import {
   GetGameTypesResponseModel,
   GetGameVolatilitiesResponseModel
 } from '@/domain/models';
-import { cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
+import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 
@@ -95,4 +96,11 @@ export class GameRepository implements IGameRepository {
       });
     }
   ).bind(this);
+
+  changeGameStatus = async (changeGameStatusRequestModel: ChangeGameStatusRequestModel): Promise<ActionResponseModel> => {
+    return await this.httpService.put<ActionResponseModel, ChangeGameStatusRequestModel, {}>({
+      url: API_ROUTES.GAMES.CHANGE_GAME_STATUS,
+      body: changeGameStatusRequestModel
+    })
+  }
 }
