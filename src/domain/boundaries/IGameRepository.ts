@@ -3,6 +3,7 @@ import {
   AddGameRequestModel,
   GetClassNamesResponseModel,
   GetGameFeaturesResponseModel,
+  GetGamePlatformsResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetGameSupportedBrowsersResponseModel,
@@ -20,4 +21,5 @@ export interface IGameRepository {
   getGameFeatures(): Promise<GetGameFeaturesResponseModel>;
   getGameVolatilities(): Promise<GetGameVolatilitiesResponseModel>;
   getGameSupportedBrowsers(): Promise<GetGameSupportedBrowsersResponseModel>;
+  getGamePlatforms(): Promise<GetGamePlatformsResponseModel>;
 }

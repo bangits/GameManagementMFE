@@ -1,5 +1,6 @@
 export * from './GetClassNamesResponseModel';
 export * from './GetGameFeaturesResponseModel';
+export * from './GetGamePlatromsResponseModel';
 export * from './GetGameResponseModel';
 export * from './GetGameSupportedBrowsersResponseModel';
 export * from './GetGameThemesResponseModel';
@@ -8,3 +9,4 @@ export * from './GetGameVolatilitiesResponseModel';
 export * from './GetProviderNamesResponseModel';
 export * from './GetProviderResponseModel';
 export * from './GetProvidersByIdResponseModel';
+

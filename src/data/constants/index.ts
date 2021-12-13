@@ -24,6 +24,7 @@ export const CACHE_CONSTANTS = {
   GetClassNamesResponse: 'GetClassNamesResponse',
   GetGameThemesResponse: 'GetGameThemesResponse',
   GetGameFeaturesResponse: 'GetGameFeaturesResponse',
+  GetGamePlatformsResponse: 'GetGamePlatformsResponse',
   GetGameVolatilitiesResponse: 'GetGameVolatilitiesResponse',
   GetGameSupportedBrowsersResponse: 'GetGameSupportedBrowsersResponse'
 };

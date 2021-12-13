@@ -4,6 +4,7 @@ import {
   AddGameRequestModel,
   GetClassNamesResponseModel,
   GetGameFeaturesResponseModel,
+  GetGamePlatformsResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetGameSupportedBrowsersResponseModel,
@@ -82,6 +83,14 @@ export class GameRepository implements IGameRepository {
     CACHE_CONSTANTS.GetGameSupportedBrowsersResponse,
     async (): Promise<GetGameSupportedBrowsersResponseModel> => {
       return await this.httpService.get<GetGameSupportedBrowsersResponseModel, {}>({
+        url: API_ROUTES.GAMES.GET_GAME_SUPPORTED_BROWSERS
+      });
+    }
+  ).bind(this);
+  getGamePlatforms = cachedFn(
+    CACHE_CONSTANTS.GetGamePlatformsResponse,
+    async (): Promise<GetGamePlatformsResponseModel> => {
+      return await this.httpService.get<GetGamePlatformsResponseModel, {}>({
         url: API_ROUTES.GAMES.GET_GAME_SUPPORTED_BROWSERS
       });
     }

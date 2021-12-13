@@ -40,9 +40,7 @@ export class GetGameRequestModel extends PagedModel {
   providerIds: PrimaryKey[];
 
   releaseDate: string;
-
   creationDate: string;
-
   parentTypeIds: PrimaryKey[];
   rtpFrom: number;
   rtpTo: number;

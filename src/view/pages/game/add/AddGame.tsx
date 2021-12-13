@@ -41,7 +41,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         type: 'datepicker' as const,
         name: 'releaseDate' as keyof AddGameViewModel,
-        label: t.get('games.list.fields.releaseDate'),
+        label: t.get('releaseDate'),
         props: {
           minDate: new Date(GAME_MIN_RELEASE_DATE)
         }
@@ -49,7 +49,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'typeId' as keyof AddGameViewModel,
         type: 'select' as const,
-        inputLabel: t.get('games.list.fields.gameTypes'),
+        inputLabel: t.get('gameTypes'),
         component: (props: CustomSelectProps) => {
           const form = useFormikContext<AddGameViewModel>();
 
@@ -57,7 +57,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
             <GameTypesSelect
               {...props}
               fullWidth
-              inputLabel={t.get('games.list.fields.type')}
+              inputLabel={t.get('type')}
               onChange={(value, event) => {
                 props.onChange(value, event);
                 form.setFieldValue('subTypeId', null);
@@ -78,7 +78,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
               fullWidth
               isDisabled={!form.values.typeId}
               gameTypeId={form.values.typeId}
-              inputLabel={t.get('games.list.fields.subType')}
+              inputLabel={t.get('subType')}
             />
           );
         }
@@ -87,7 +87,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'rtp' as keyof AddGameViewModel,
         type: 'input' as const,
-        label: t.get('games.list.fields.rtp.title'),
+        label: t.get('rtp'),
         props: { type: 'number', isDecimal: true, maxLength: 7 }
       },
       {
@@ -103,15 +103,15 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         type: 'radio' as const,
         name: 'hasDemo' as keyof AddGameViewModel,
-        label: t.get('games.list.fields.hasDemo.title'),
+        label: t.get('hasDemo'),
         props: {
           radios: [
             {
-              label: t.get('games.list.fields.hasDemo.yes'),
+              label: t.get('yes'),
               value: 1
             },
             {
-              label: t.get('games.list.fields.hasDemo.no'),
+              label: t.get('no'),
               value: 0
             }
           ]

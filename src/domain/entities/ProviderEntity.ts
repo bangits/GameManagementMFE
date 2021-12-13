@@ -1,5 +1,6 @@
+//@ts-expect-error asd
+import { Country, Currency, Licenses } from '@/domain/entities';
 import { PrimaryKey } from '@atom/common';
-import { Country, Currency, Licenses } from '@atom/common/dist/domain/entities';
 import { AutoMap } from '@automapper/classes';
 import { ProviderStatusesEnum } from '../models';
 import { BaseEntity } from './BaseEntity';

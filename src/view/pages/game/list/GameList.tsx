@@ -2,6 +2,7 @@ import { GameStatusesEnum } from '@/domain/models/enums';
 import {
   GameClassSelect,
   GameFeaturesSelect,
+  GamePlatformSelect,
   GameSupportedBrowsersSelect,
   GameThemesSelect,
   GameTypesSelect,
@@ -41,7 +42,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         variant: 'image' as const
       },
       {
-        Header: t.get('games.list.tableHeaders.gameName'),
+        Header: t.get('gameName'),
         accessor: 'name' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.GAME_NAME
       },
@@ -67,17 +68,17 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         sortingId: GameStatusesSortingEnum.PROVIDER_ID
       },
       {
-        Header: t.get('games.list.tableHeaders.type'),
+        Header: t.get('type'),
         accessor: 'typeName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.TYPE
       },
       {
-        Header: t.get('games.list.tableHeaders.subtype'),
+        Header: t.get('subtype'),
         accessor: 'subTypeName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.SUBTYPE
       },
       {
-        Header: t.get('games.list.tableHeaders.volatility'),
+        Header: t.get('volatility'),
         accessor: 'volatilityName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.VOLATILITY
       },
@@ -87,7 +88,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         sortingId: GameStatusesSortingEnum.RTP
       },
       {
-        Header: t.get('games.list.tableHeaders.class'),
+        Header: t.get('class'),
         accessor: 'className' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.CLASS
       },
@@ -102,7 +103,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         sortingId: GameStatusesSortingEnum.CREATION_DATE
       },
       {
-        Header: t.get('games.list.tableHeaders.createdBy'),
+        Header: t.get('createdBy'),
         accessor: 'createdByUserEmail' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.CREATED_BY
       },
@@ -122,7 +123,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'gameId' as keyof GamesFiltersViewModel,
         type: 'input' as const,
-        label: t.get('games.list.fields.gameId'),
+        label: t.get('gameId'),
 
         props: {
           label: t.get('gameId')
@@ -132,7 +133,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'externalId' as keyof GamesFiltersViewModel,
         type: 'input' as const,
-        label: t.get('games.list.fields.externalId'),
+        label: t.get('externalId'),
 
         props: {
           label: t.get('externalId')
@@ -141,7 +142,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'name' as keyof GamesFiltersViewModel,
         type: 'input' as const,
-        label: t.get('games.list.fields.gameName'),
+        label: t.get('gameName'),
 
         props: {
           label: t.get('gameName')
@@ -151,10 +152,10 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'providerIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.providerName'),
+        label: t.get('providerName'),
         component: ({ onChange, filterValues }) => (
           <ProviderSelect
-            inputLabel={t.get('games.list.fields.providerName')}
+            inputLabel={t.get('providerName')}
             fullWidth
             isMulti
             onChange={(changedValue) => onChange('providerIds', changedValue)}
@@ -165,7 +166,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'type' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.type'),
+        label: t.get('type'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
             inputLabel={t.get('type')}
@@ -179,10 +180,10 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'subTypeIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.subType'),
+        label: t.get('subType'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
-            inputLabel={t.get('games.list.fields.subType')}
+            inputLabel={t.get('subType')}
             fullWidth
             isMulti
             value={filterValues.subTypeIds}
@@ -192,7 +193,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         )
       },
       {
-        label: t.get('games.list.fields.rtp.title'),
+        label: t.get('rtp.title'),
         type: 'from-to' as const,
         name: 'rtp' as keyof GamesFiltersViewModel,
         fromInputProps: {
@@ -207,13 +208,13 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         type: 'datepicker' as const,
         name: 'releaseDate' as keyof GamesFiltersViewModel,
-        label: t.get('games.list.fields.releaseDate'),
+        label: t.get('releaseDate'),
         props: {}
       },
       {
         name: 'classIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.class'),
+        label: t.get('class'),
 
         component: ({ onChange, filterValues }) => (
           <GameClassSelect
@@ -230,23 +231,23 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         name: 'hasDemo' as keyof GamesFiltersViewModel,
         type: 'truthly-select' as const,
         props: {
-          inputLabel: t.get('games.list.fields.hasDemo.title'),
+          inputLabel: t.get('companyType'),
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD
         },
         translations: {
-          trueValue: t.get('games.list.fields.hasDemo.yes'),
-          falseValue: t.get('games.list.fields.hasDemo.no'),
-          nullValue: t.get('form.all')
+          trueValue: t.get('yes'),
+          falseValue: t.get('no'),
+          nullValue: t.get('all')
         }
       },
       {
         name: 'gameThemeIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.gameThemes'),
+        label: t.get('gameThemes'),
 
         component: ({ onChange, filterValues }) => (
           <GameThemesSelect
-            inputLabel={t.get('games.list.fields.gameThemes')}
+            inputLabel={t.get('gameThemes')}
             fullWidth
             isMulti
             value={filterValues.gameThemeIds}
@@ -257,11 +258,11 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'gameFeatureIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.gameFeatures'),
+        label: t.get('gameFeatures'),
 
         component: ({ onChange, filterValues }) => (
           <GameFeaturesSelect
-            inputLabel={t.get('games.list.fields.gameFeatures')}
+            inputLabel={t.get('gameFeatures')}
             fullWidth
             isMulti
             value={filterValues.gameFeatureIds}
@@ -269,24 +270,25 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
           />
         )
       },
-      // {
-      //   label: t.get('game.fields.list.device'),
-      //   name: 'device' as keyof GamesFiltersViewModel,
-      //   type: 'truthly-select' as const,
-      //   props: {
-      //     inputLabel: t.get('games.list.fields.devices.title'),
-      //     maxLength: INPUT_MAX_VALUES.INPUT_FIELD
-      //   },
-      //   translations: {
-      //     trueValue: t.get('games.list.fields.devices.mobile'),
-      //     falseValue: t.get('games.list.fields.devices.tablet'),
-      //     nullValue: t.get('form.all')
-      //   }
-      // },
+      {
+        name: 'gamePlatformIds' as keyof GamesFiltersViewModel,
+        type: 'custom' as const,
+        label: t.get('gameFeatures'),
+
+        component: ({ onChange, filterValues }) => (
+          <GamePlatformSelect
+            inputLabel={t.get('gamePlatforms')}
+            fullWidth
+            isMulti
+            value={filterValues.gameFeatureIds}
+            onChange={(changedValue) => onChange('gamePlatformIds', changedValue)}
+          />
+        )
+      },
       {
         name: 'gameCurrencyIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.supportedCurrencies'),
+        label: t.get('supportedCurrencies'),
         component: ({ onChange, filterValues }) => (
           <CurrencySelect
             isMulti
@@ -300,11 +302,11 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'gameSupportedBrowserIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.supportedBrowsers'),
+        label: t.get('supportedBrowsers'),
         component: ({ onChange, filterValues }) => (
           <GameSupportedBrowsersSelect
             isMulti
-            inputLabel={t.get('games.list.fields.gameSupportedBrowserIds')}
+            inputLabel={t.get('gameSupportedBrowserIds')}
             fullWidth
             value={filterValues.gameSupportedBrowserIds}
             onChange={(changedValue) => onChange('gameSupportedBrowserIds', changedValue)}
@@ -315,7 +317,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'gameCertifiedCountries' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.certifiedCountries'),
+        label: t.get('certifiedCountries'),
         component: ({ onChange, filterValues }) => (
           <CountriesSelect
             isMulti
@@ -329,7 +331,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'gameRestrictedCountryIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.restrictedCountries'),
+        label: t.get('restrictedCountries'),
         component: ({ onChange, filterValues }) => (
           <CountriesSelect
             isMulti
@@ -343,7 +345,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'volatilityIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.volatility'),
+        label: t.get('volatility'),
         component: ({ onChange, filterValues }) => (
           <GameVolatilitiesSelect
             isMulti
@@ -357,7 +359,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'gameUiLanguageIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.uILanguages'),
+        label: t.get('uILanguages'),
         component: ({ onChange, filterValues }) => (
           <LanguageSelect
             isMulti
@@ -371,7 +373,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'gameOperatingLanguageIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('games.list.fields.operatingLanguages'),
+        label: t.get('operatingLanguages'),
         component: ({ onChange, filterValues }) => (
           <LanguageSelect
             isMulti
@@ -385,7 +387,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         type: 'datepicker' as const,
         name: 'creationDate' as keyof GamesFiltersViewModel,
-        label: t.get('games.list.fields.creationDate'),
+        label: t.get('creationDate'),
 
         props: {
           selectsRange: true,
@@ -395,7 +397,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         name: 'createdBy' as keyof GamesFiltersViewModel,
         type: 'input' as const,
-        label: t.get('games.list.fields.createdBy'),
+        label: t.get('createdBy'),
 
         props: {
           label: t.get('createdBy')

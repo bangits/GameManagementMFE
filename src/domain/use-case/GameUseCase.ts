@@ -6,6 +6,7 @@ import {
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
+  GetGamePlatformsViewModel,
   GetGameSupportedBrowsersViewModel,
   GetGamesViewModel,
   GetGameThemesViewModel,
@@ -69,5 +70,10 @@ export class GameUseCase {
     const getGameSupportedBrowsersResponse = await this.gameRepository.getGameSupportedBrowsers();
 
     return getGameSupportedBrowsersResponse.results.map((r) => ({ value: r.id, label: r.name }));
+  };
+  getGamePlatforms = async (): Promise<GetGamePlatformsViewModel> => {
+    const getGamePlatformsResponse = await this.gameRepository.getGamePlatforms();
+
+    return getGamePlatformsResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };
 }

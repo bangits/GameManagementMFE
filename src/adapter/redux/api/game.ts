@@ -5,6 +5,7 @@ import {
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
+  GetGamePlatformsViewModel,
   GetGameSupportedBrowsersViewModel,
   GetGamesViewModel,
   GetGameThemesViewModel,
@@ -79,6 +80,15 @@ export const gameApi = createApi({
       query: () => {
         return {
           methodName: 'getGameVolatilities',
+          methodArguments: []
+        };
+      }
+    }),
+
+    getGamePlatforms: build.query<GetGamePlatformsViewModel, {}>({
+      query: () => {
+        return {
+          methodName: 'getGamePlatforms',
           methodArguments: []
         };
       }
