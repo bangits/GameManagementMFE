@@ -9,3 +9,4 @@ export * from './GetProviderByPartnerIdResponseModel';
 export * from './GetProviderNamesResponseModel';
 export * from './GetProviderResponseModel';
 export * from './GetProvidersByIdResponseModel';
+
