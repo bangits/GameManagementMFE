@@ -16,29 +16,19 @@ export class ProviderDetailsViewModel {
   id: PrimaryKey;
 
   targetMarkets: {
-    id: PrimaryKey;
-    name: string;
-    isoCode: string;
+    tagName: string;
   }[];
   providerCurrencies: {
-    id: PrimaryKey;
-    name: string;
-    code: string;
-    symbol: string;
+    title: string;
   }[];
   certifiedCountries: {
-    id: PrimaryKey;
-    name: string;
-    isoCode: string;
+    tagName: string;
   }[];
   restrictedCountries: {
-    id: PrimaryKey;
-    name: string;
-    isoCode: string;
+    tagName: string;
   }[];
   providerLicenses: {
-    id: PrimaryKey;
-    name: string;
+    title: string;
   }[];
 
   statusId: ProviderStatusesEnum;

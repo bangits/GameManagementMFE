@@ -1,5 +1,5 @@
 //@ts-expect-error asd
-import { Country, Currency, Licenses } from '@/domain/entities';
+import { Country, Currency } from '@/domain/entities';
 import { PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 import { ProviderStatusesEnum } from '../models';
@@ -36,7 +36,7 @@ export class Provider extends BaseEntity {
   providerCurrencies: Currency[];
   certifiedCountries: Country[];
   restrictedCountries: Country[];
-  providerLicenses: Licenses[];
+  providerLicenses: Country[];
 
   absoluteUrl: string;
   absoluteDemoUrl: string;
