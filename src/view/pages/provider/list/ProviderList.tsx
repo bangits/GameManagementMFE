@@ -143,7 +143,8 @@ function ProviderList({
           selectAll: true,
           selectAllLabel: "All",
           clearButton: true,
-          clearButtonLabel: "Clear"
+          clearButtonLabel: "Clear",
+          color: "primary"
         }}
         tableProps={{
           data: results,
