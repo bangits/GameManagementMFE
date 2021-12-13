@@ -150,7 +150,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     }),
     [t, data]
   );
-  
+
   const demoURL = useMemo<ProvidersGeneralInfoProps['demoURL']>(
     () => ({
       URL: data.absoluteDemoUrl,

@@ -114,27 +114,35 @@ export const baseProfile: MappingProfile = (mapper) => {
     .createMap(GetProvidersByIdResponseModel, GetProvidersByIdViewModel)
     .forMember(
       (destination) => destination.targetMarkets,
-      mapFrom((source) => source.targetMarkets.map(markets => ({
-        tagName: markets.name
-      })))
+      mapFrom((source) =>
+        source.targetMarkets.map((markets) => ({
+          tagName: markets.name
+        }))
+      )
     )
     .forMember(
       (destination) => destination.providerCurrencies,
-      mapFrom((source) => source.providerCurrencies.map(currency => ({
-        title: currency.name
-      })))
+      mapFrom((source) =>
+        source.providerCurrencies.map((currency) => ({
+          title: currency.name
+        }))
+      )
     )
     .forMember(
       (destination) => destination.certifiedCountries,
-      mapFrom((source) => source.certifiedCountries.map(country => ({
-        tagName: country.name
-      })))
+      mapFrom((source) =>
+        source.certifiedCountries.map((country) => ({
+          tagName: country.name
+        }))
+      )
     )
     .forMember(
       (destination) => destination.restrictedCountries,
-      mapFrom((source) => source.restrictedCountries.map(country => ({
-        tagName: country.name
-      })))
+      mapFrom((source) =>
+        source.restrictedCountries.map((country) => ({
+          tagName: country.name
+        }))
+      )
     )
     .forMember(
       (destination) => destination.statusId,
