@@ -422,8 +422,20 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       <TablePage
         fetchData={onFiltersChange}
         isFetching={isFetching}
+        filtersDropdownProps={{
+          selectAll: true,
+          selectAllLabel: "All",
+          clearButton: true,
+          clearButtonLabel: "Clear"
+        }}
         isFilteredData={isFilteredData}
         filterProps={{
+          selectProps: {
+            selectAll: true,
+            selectAllLabel: 'All',
+            clearButton: true,
+            clearButtonLabel: 'Clear'
+          },
           defaultOpened: false,
           initialValues: filters,
           filters: filtersList
