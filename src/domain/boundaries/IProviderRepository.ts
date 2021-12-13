@@ -2,6 +2,7 @@ import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import {
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
+  GetProviderByPartnerIdResponseModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
@@ -14,4 +15,5 @@ export interface IProviderRepository {
   addProviders(addProviderRequestModel: AddProviderRequestModel): Promise<boolean>;
   changeProviderStatus(changeProviderStatus: ChangeProviderStatusRequestModel): Promise<ActionResponseModel>;
   getProvidersById(providerId: PrimaryKey): Promise<GetProvidersByIdResponseModel>;
+  getProviderByPartnerId(partnerId: PrimaryKey): Promise<GetProviderByPartnerIdResponseModel>;
 }

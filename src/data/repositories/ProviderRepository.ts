@@ -3,6 +3,7 @@ import { IProviderRepository } from '@/domain/boundaries';
 import {
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
+  GetProviderByPartnerIdResponseModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
@@ -60,6 +61,15 @@ export class ProviderRepository implements IProviderRepository {
   getProvidersById = async (providerId: PrimaryKey): Promise<GetProvidersByIdResponseModel> => {
     return await this.httpService.get<GetProvidersByIdResponseModel, {}>({
       url: API_ROUTES.PROVIDERS.BASE_ROUTE + `/${providerId}`
+    });
+  };
+
+  getProviderByPartnerId = async (partnerId: PrimaryKey): Promise<GetProviderByPartnerIdResponseModel> => {
+    return await this.httpService.get<GetProviderByPartnerIdResponseModel, {}>({
+      url: API_ROUTES.PROVIDERS.PARTNER_PROVIDER,
+      query: {
+        partnerId: partnerId
+      }
     });
   };
 }
