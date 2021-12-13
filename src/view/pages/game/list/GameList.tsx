@@ -423,9 +423,9 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         isFetching={isFetching}
         filtersDropdownProps={{
           selectAll: true,
-          selectAllLabel: 'All',
+          selectAllLabel: "All",
           clearButton: true,
-          clearButtonLabel: 'Clear'
+          clearButtonLabel: "Clear"
         }}
         isFilteredData={isFilteredData}
         filterProps={{
