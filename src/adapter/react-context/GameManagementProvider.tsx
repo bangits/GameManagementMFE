@@ -6,7 +6,13 @@ import { GameManagementContext } from './GameManagementContext';
 export interface GameManagementProviderProps {}
 
 export const GameManagementProvider: FC<GameManagementProviderProps> = ({ children }) => {
-  const containerInstance = useMemo(() => new DiContainer(), []);
+  const containerInstance = useMemo(() => {
+    const diContainer = new DiContainer();
+
+    diContainer.configure();
+
+    return diContainer;
+  }, []);
 
   if (!containerInstance) return null;
 

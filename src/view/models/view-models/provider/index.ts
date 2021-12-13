@@ -7,3 +7,4 @@ export * from './GetProvidersViewModel';
 export * from './ProviderDetailsViewModel';
 export * from './ProvidersFiltersViewModel';
 export * from './ProvidersViewModel';
+
