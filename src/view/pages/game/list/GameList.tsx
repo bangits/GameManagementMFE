@@ -432,9 +432,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
           data: results,
           columns: tableColumns,
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData
-            ? t.get('emptyResultSecondSentence')
-            : t.get('resultNotFound')
+          emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound')
         }}
         rowCount={rowCount}
         onEditButtonClick={() => {
