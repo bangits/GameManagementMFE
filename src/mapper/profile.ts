@@ -279,6 +279,10 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.subTypeId,
       mapFrom((source) => source.subTypeId || source.typeId)
+    )
+    .forMember(
+      (destination) => destination.rtp,
+      mapFrom((source) => source.rtp || null)
     );
 
   mapper.createMap(GetGameResponseModel, GetGamesViewModel).forMember(
