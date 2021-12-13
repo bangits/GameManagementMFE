@@ -167,6 +167,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
   return (
     <PageWrapper>
       <ProviderDetailsPage
+        gamesTabContent={{}}
         noDataText={t.get('emptyValue')}
         totalGameCount={`${data.gameCount || t.get('emptyValue')}`}
         creationDate={data.creationDate}
