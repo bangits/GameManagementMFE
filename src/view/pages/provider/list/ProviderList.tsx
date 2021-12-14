@@ -111,7 +111,7 @@ function ProviderList({
         type: 'select' as const,
         props: {
           selectAll: true,
-          inputLabel: t.get('name'),
+          inputLabel: t.get('status'),
           selectAllLabel: t.get('all'),
           options: [
             { label: t.get('active'), value: ProviderStatusesEnum.Active },

@@ -203,12 +203,12 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
 
         fromInputProps: {
           label: t.get('rtpFrom'),
-          maxLength: 9,
+          maxLength: 7,
           type: 'number'
         },
         toInputProps: {
           label: t.get('rtpTo'),
-          maxLength: 9,
+          maxLength: 7,
           type: 'number'
         }
       },
