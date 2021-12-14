@@ -39,7 +39,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       {
         Header: t.get('logo'),
         accessor: 'logo' as keyof GamesViewModel,
-        variant: 'image' as const
+        variant: 'image' as const,
+        disableSortBy: true
       },
       {
         Header: t.get('gameName'),
@@ -126,7 +127,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         label: t.get('gameId'),
 
         props: {
-          label: t.get('gameId')
+          label: t.get('gameId'),
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
         }
       },
 
@@ -136,7 +138,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         label: t.get('externalId'),
 
         props: {
-          label: t.get('externalId')
+          label: t.get('externalId'),
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
         }
       },
       {
@@ -145,7 +148,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         label: t.get('gameName'),
 
         props: {
-          label: t.get('gameName')
+          label: t.get('gameName'),
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
         }
       },
 
@@ -193,15 +197,18 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         )
       },
       {
-        label: t.get('rtp.title'),
+        label: t.get('rtp'),
         type: 'from-to' as const,
         name: 'rtp' as keyof GamesFiltersViewModel,
+
         fromInputProps: {
           label: t.get('rtpFrom'),
+          maxLength: 9,
           type: 'number'
         },
         toInputProps: {
           label: t.get('rtpTo'),
+          maxLength: 9,
           type: 'number'
         }
       },
@@ -227,7 +234,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         )
       },
       {
-        label: t.get('partners.fields.companyType'),
+        label: t.get('companyType'),
         name: 'hasDemo' as keyof GamesFiltersViewModel,
         type: 'truthly-select' as const,
         props: {
@@ -400,7 +407,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         label: t.get('createdBy'),
 
         props: {
-          label: t.get('createdBy')
+          label: t.get('createdBy'),
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
         }
       }
     ],
@@ -409,7 +417,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
 
   const addGameButtonProps = useMemo(
     () => ({
-      children: t.get('addGame'),
+      children: t.get('add'),
       startIcon: <Icons.PlusCircle />,
       onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd)
     }),
@@ -421,8 +429,21 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       <TablePage
         fetchData={onFiltersChange}
         isFetching={isFetching}
+        filtersDropdownProps={{
+          selectAll: true,
+          selectAllLabel: 'All',
+          clearButton: true,
+          clearButtonLabel: 'Clear',
+          color: 'primary'
+        }}
         isFilteredData={isFilteredData}
         filterProps={{
+          selectProps: {
+            selectAll: true,
+            selectAllLabel: 'All',
+            clearButton: true,
+            clearButtonLabel: 'Clear'
+          },
           defaultOpened: false,
           initialValues: filters,
           filters: filtersList
@@ -431,9 +452,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
           data: results,
           columns: tableColumns,
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData
-            ? t.get('common.tables.emptyResultSecondSentence')
-            : t.get('games.list.resultNotFound')
+          emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound')
         }}
         rowCount={rowCount}
         onEditButtonClick={() => {

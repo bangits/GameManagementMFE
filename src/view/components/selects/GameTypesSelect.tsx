@@ -11,7 +11,7 @@ export const GameTypesSelect = (props: CustomSelectProps & { gameTypeId?: Primar
       <CustomSelect
         {...props}
         fullWidth
-        options={gameTypes ? [...(props.showAll ? [{ label: t.get('form.all'), value: null }] : []), ...gameTypes] : []}
+        options={gameTypes ? [...(props.showAll ? [{ label: t.get('all'), value: null }] : []), ...gameTypes] : []}
       />
     </>
   );

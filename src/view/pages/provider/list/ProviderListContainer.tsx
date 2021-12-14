@@ -43,8 +43,6 @@ const ProviderListContainer = () => {
     useActionWithDialog<ProvidersViewModel>({
       dialogFn: showProviderActivateDialog,
       actionFn: (providerIds) => changeProviderStatus({ providerIds, statusId: ProviderStatusesEnum.Active }).unwrap(),
-      successMsg: t.get('successMultipleAlertMessage'),
-      errorMsg: t.get('errorMultipleAlertMessage'),
       isFetching,
       t,
       refetch,
@@ -56,8 +54,6 @@ const ProviderListContainer = () => {
       dialogFn: showProviderInActivateDialog,
       actionFn: (providerIds) =>
         changeProviderStatus({ providerIds, statusId: ProviderStatusesEnum.Inactive }).unwrap(),
-      successMsg: t.get('successMultipleAlertMessage'),
-      errorMsg: t.get('errorMultipleAlertMessage'),
       isFetching,
       t,
       refetch,
