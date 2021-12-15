@@ -10,7 +10,7 @@ export const providerStatusesConfig: Record<
   },
   [ProviderStatusesEnum.Blocked]: {
     variant: 'blocked',
-    translationKey: 'blocked' 
+    translationKey: 'blocked'
   },
   [ProviderStatusesEnum.Active]: {
     variant: 'active',

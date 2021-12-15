@@ -263,7 +263,7 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.creationDate,
-      mapFrom((source) => source.creationDate ? `${convertDate(source.creationDate, 'DD/MM/YYYY')}` : 'N/A')
+      mapFrom((source) => (source.creationDate ? `${convertDate(source.creationDate, 'DD/MM/YYYY')}` : 'N/A'))
     )
     .forMember(
       (destination) => destination.releaseDate,
