@@ -28,10 +28,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
       {
         name: 'externalId' as keyof AddGameViewModel,
         type: 'input' as const,
-        label: t.get('externalId'),
-        props: {
-          type: 'number'
-        }
+        label: t.get('externalId')
       },
       {
         name: 'name' as keyof AddGameViewModel,
