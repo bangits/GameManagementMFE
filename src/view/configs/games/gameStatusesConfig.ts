@@ -2,14 +2,18 @@ import { GameStatusesEnum } from '@/domain/models';
 
 export const gameStatusesConfig: Record<
   GameStatusesEnum,
-  { variant: 'active' | 'inactive' | 'blocked' | 'expired'; translationKey: string }
+  { variant: 'active' | 'inactive' | 'blocked'; translationKey: string }
 > = {
   [GameStatusesEnum.INACTIVE]: {
     variant: 'inactive',
-    translationKey: 'inActive'
+    translationKey: 'Inactive'
   },
   [GameStatusesEnum.ACTIVE]: {
     variant: 'active',
-    translationKey: 'active'
+    translationKey: 'Active'
+  },
+  [GameStatusesEnum.BLOCKED]: {
+    variant: 'blocked',
+    translationKey: 'Blocked'
   }
 };

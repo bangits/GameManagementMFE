@@ -20,7 +20,7 @@ import {
   ProvidersFiltersViewModel,
   ProvidersViewModel
 } from '@/view/models';
-import { convertDate, convertDateForRequestModel } from '@atom/common';
+import { convertDate } from '@atom/common';
 import type { MappingProfile } from '@automapper/core';
 import autoMapper from '@automapper/core';
 import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
@@ -236,11 +236,11 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.creationDate,
-      mapFrom((source) => source.creationDate[0] && convertDateForRequestModel(source.creationDate[0]))
+      mapFrom((source) => source.creationDate[0] && convertDate(source.creationDate[0]))
     )
     .forMember(
       (destination) => destination.releaseDate,
-      mapFrom((source) => source.releaseDate && convertDateForRequestModel(source.releaseDate))
+      mapFrom((source) => source.releaseDate && convertDate(source.releaseDate))
     )
     .forMember(
       (destination) => destination.rtpTo,
@@ -258,16 +258,16 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.createdByUserEmail)
     )
     .forMember(
-      (destination) => destination.status.id,
-      mapFrom((source) => source.status)
+      (destination) => destination.statusId,
+      mapFrom((source) => source.status.id)
     )
     .forMember(
       (destination) => destination.creationDate,
-      mapFrom((source) => `${convertDate(source.creationDate)}`)
+      mapFrom((source) => source.creationDate ? `${convertDate(source.creationDate, 'DD/MM/YYYY')}` : 'N/A')
     )
     .forMember(
       (destination) => destination.releaseDate,
-      mapFrom((source) => `${convertDate(source.releaseDate)}`)
+      mapFrom((source) => (source.releaseDate ? `${convertDate(source.releaseDate, 'DD/MM/YYYY')}` : 'N/A'))
     );
 
   mapper
