@@ -29,5 +29,8 @@ export class Game extends BaseEntity {
 
   releaseDate: string;
   creationDate: string;
-  status: GameStatusesEnum;
+  status: {
+    id: GameStatusesEnum;
+    name: string;
+  };
 }
