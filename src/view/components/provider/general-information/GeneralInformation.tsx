@@ -150,10 +150,10 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data }) => {
 
   return (
     //@ts-expect-error rgsdgdfg
-    <Formik onSubmit={() => console.log} initialValues={{ website: '' }} validationSchema={{}}>
+    <Formik onSubmit={() => console.log} initialValues={{ website: '' }} validationSchema={{}} >
       {(form) => {
         return (
-          <Form noValidate>
+          <Form noValidate >
             <FlexibleForm
               title=''
               col={12}
