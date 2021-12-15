@@ -1,4 +1,3 @@
-import { GameStatusesEnum } from '@/domain/models/enums';
 import {
   GameClassSelect,
   GameFeaturesSelect,
@@ -9,6 +8,7 @@ import {
   GameVolatilitiesSelect,
   ProviderSelect
 } from '@/view';
+import { gameStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel } from '@/view/models';
 import {
@@ -16,6 +16,7 @@ import {
   CurrencySelect,
   INPUT_MAX_VALUES,
   LanguageSelect,
+  PrimaryKey,
   redirectToURL,
   TablePage,
   useTranslation
@@ -29,9 +30,29 @@ export interface GameListProps {
   rowCount: number;
   isFilteredData: boolean;
   isFetching: boolean;
+  gameTableLoadingIds: PrimaryKey[];
+
+  // actions
+  onActivateButtonClick: (column: GamesViewModel | GamesViewModel[]) => void;
+  shouldShowActivateButton: (column: GamesViewModel) => boolean;
+
+  onInActivateButtonClick: (column: GamesViewModel | GamesViewModel[]) => void;
+  shouldShowInActivateButton: (column: GamesViewModel) => boolean;
 }
 
-function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData, isFetching }: GameListProps) {
+function GameList({
+  filters,
+  results,
+  onFiltersChange,
+  rowCount,
+  isFilteredData,
+  isFetching,
+  onActivateButtonClick,
+  shouldShowActivateButton,
+  onInActivateButtonClick,
+  shouldShowInActivateButton,
+  gameTableLoadingIds
+}: GameListProps) {
   const t = useTranslation();
 
   const tableColumns = useMemo(
@@ -110,10 +131,10 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
       },
       {
         Header: t.get('status'),
-        accessor: 'status' as keyof GamesViewModel,
+        accessor: 'statusId' as keyof GamesViewModel,
         variant: 'status' as const,
-        getVariant: (value: number) => (value === GameStatusesEnum.Active ? 'active' : 'blocked'),
-        getVariantName: (value: number) => (value === GameStatusesEnum.Active ? 'Active' : 'Blocked')
+        getVariant: (value: string) => gameStatusesConfig[value].variant,
+        getVariantName: (value: string) => t.get(gameStatusesConfig[value].translationKey)
       }
     ],
     []
@@ -452,7 +473,24 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
           data: results,
           columns: tableColumns,
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound')
+          emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound'),
+          loadingRowsIds: gameTableLoadingIds,
+          loadingRowColumnProperty: 'gameId',
+
+          actions: [
+            {
+              iconName: 'CheckButtonIcon',
+              onClick: onActivateButtonClick,
+              shouldShow: shouldShowActivateButton,
+              tooltipText: t.get('activate')
+            },
+            {
+              iconName: 'BlockButtonIcon',
+              onClick: onInActivateButtonClick,
+              shouldShow: shouldShowInActivateButton,
+              tooltipText: t.get('inActivate')
+            }
+          ]
         }}
         rowCount={rowCount}
         onEditButtonClick={() => {

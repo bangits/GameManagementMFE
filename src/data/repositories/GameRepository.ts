@@ -100,9 +100,11 @@ export class GameRepository implements IGameRepository {
   changeGameStatus = async (
     changeGameStatusRequestModel: ChangeGameStatusRequestModel
   ): Promise<ActionResponseModel> => {
+
     return await this.httpService.put<ActionResponseModel, ChangeGameStatusRequestModel, {}>({
-      url: API_ROUTES.GAMES.CHANGE_GAME_STATUS,
+      url:API_ROUTES.GAMES.CHANGE_STATUS,
       body: changeGameStatusRequestModel
     });
   };
+  
 }

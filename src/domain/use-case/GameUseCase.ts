@@ -90,6 +90,6 @@ export class GameUseCase {
       ChangeGameStatusViewModel
     );
 
-    return this.changeGameStatus(changeGameStatusRequestModel);
+    return this.gameRepository.changeGameStatus(changeGameStatusRequestModel);
   };
 }

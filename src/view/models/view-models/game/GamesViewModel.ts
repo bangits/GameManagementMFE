@@ -28,10 +28,7 @@ export class GamesViewModel {
 
   releaseDate: string;
   creationDate: string;
-  status: {
-    id: GameStatusesEnum;
-    name: string;
-  };
+  statusId: GameStatusesEnum;
 
   gameId: PrimaryKey;
   class: number;

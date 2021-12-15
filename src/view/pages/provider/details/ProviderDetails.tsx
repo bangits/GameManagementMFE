@@ -145,7 +145,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
       tooltip: {
         showEvent: 'click',
         text: t.get('copied'),
-        placement: 'right'
+        placement: 'bottom'
       }
     }),
     [t, data]
@@ -158,18 +158,19 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
       tooltip: {
         showEvent: 'click',
         text: t.get('copied'),
-        placement: 'right'
+        placement: 'bottom',
       }
     }),
     [t, data]
   );
+  
 
   return (
     <PageWrapper>
       <ProviderDetailsPage
         gamesTabContent={{}}
         noDataText={t.get('emptyValue')}
-        totalGameCount={`${data.gameCount || t.get('emptyValue')}`}
+        totalGameCount={`${data.gameCount || 0}`}
         creationDate={data.creationDate}
         createdBy={data.createdByUserEmail}
         translations={translations}
@@ -179,7 +180,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         generalInformationContext={
           <>
             <ProvidersGeneralInfo
-              noDataText={t.get('emptyValue')}
+              noDataText={t.get('notCompleted')}
               totalMarket={totalMarket}
               certifiedCountries={certifiedCountries}
               restrictedtCountries={restrictedCountries}
