@@ -1,3 +1,4 @@
+//@ts-expect-error not exported Component
 import { ProviderGames } from '@atom/design-system';
 
 export const ProviderGamesContainer = () => {
