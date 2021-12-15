@@ -7,10 +7,9 @@ export interface GeneralInformationContainerProps {
 }
 
 const GeneralInformationContainer: FC<GeneralInformationContainerProps> = ({ data }) => {
-
   return (
     <>
-     <GeneralInformation data={data} />
+      <GeneralInformation data={data} />
     </>
   );
 };
