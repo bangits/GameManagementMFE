@@ -9,6 +9,7 @@ import {
   GameVolatilitiesSelect,
   ProviderSelect
 } from '@/view';
+import { gameStatusesConfig } from '@/view/configs/games';
 import { ROUTES } from '@/view/constants';
 import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel } from '@/view/models';
 import {
@@ -112,8 +113,8 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         Header: t.get('status'),
         accessor: 'status' as keyof GamesViewModel,
         variant: 'status' as const,
-        getVariant: (value: number) => (value === GameStatusesEnum.Active ? 'active' : 'blocked'),
-        getVariantName: (value: number) => (value === GameStatusesEnum.Active ? 'Active' : 'Blocked')
+        getVariant: (value: GameStatusesEnum) => gameStatusesConfig[value].variant,
+        getVariantName: (value: GameStatusesEnum) => t.get(gameStatusesConfig[value].translationKey)
       }
     ],
     []

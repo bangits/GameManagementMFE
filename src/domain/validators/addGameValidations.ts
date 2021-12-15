@@ -7,7 +7,10 @@ export const addGameValidationSchema = async (
 ): Promise<SchemaOf<Omit<AddGameViewModel, 'hasDemo'>>> => {
   return object({
     providerId: number().typeError(t.required()),
-    externalId: string().max(30, t.max(30)).required(t.required()),
+    externalId: string()
+      .max(30, t.max(30))
+      .required(t.required())
+      .matches(/^([0-9()._\-/])*[^\s]\1*$/, t.textInput()),
     name: string().required(t.required()).max(50, t.max(50)),
     typeId: number().typeError(t.required()).required(t.required()),
     subTypeId: number().nullable(),
