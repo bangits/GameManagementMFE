@@ -10,7 +10,9 @@ import {
   GetGameSupportedBrowsersResponseModel,
   GetGameThemesResponseModel,
   GetGameTypesResponseModel,
-  GetGameVolatilitiesResponseModel
+  GetGameVolatilitiesResponseModel,
+  GetProviderGamesRequestModel,
+  GetProviderGamesResponseModel
 } from '@/domain/models';
 import { cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -47,6 +49,19 @@ export class GameRepository implements IGameRepository {
         parentTypeId
       }
     });
+  };
+
+  getProviderGames = async (
+    getProviderGamesRequestModel: GetProviderGamesRequestModel
+  ): Promise<GetProviderGamesResponseModel> => {
+    return await this.httpService.get<GetProviderGamesResponseModel, {}>({
+      url: API_ROUTES.GAMES.GET_PROVIDER_GAMES,
+      query: getProviderGamesRequestModel
+    });
+  };
+
+  gameLaunch = async (): Promise<string> => {
+    return '';
   };
 
   getClassNames = cachedFn(CACHE_CONSTANTS.GetClassNamesResponse, async (): Promise<GetClassNamesResponseModel> => {
@@ -87,6 +102,7 @@ export class GameRepository implements IGameRepository {
       });
     }
   ).bind(this);
+
   getGamePlatforms = cachedFn(
     CACHE_CONSTANTS.GetGamePlatformsResponse,
     async (): Promise<GetGamePlatformsResponseModel> => {

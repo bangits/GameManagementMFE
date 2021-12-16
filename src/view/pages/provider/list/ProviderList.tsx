@@ -181,7 +181,7 @@ function ProviderList({
           redirectToURL(
             ROUTES.baseUrl +
               ROUTES.providers +
-              ROUTES.providerDetails.replace(':providerId', column.partnerId.toString())
+              ROUTES.providerDetails.replace(':providerId', column.providerId.toString())
           )
         }
       />

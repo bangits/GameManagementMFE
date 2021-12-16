@@ -1,8 +1,15 @@
 import { DI_CONSTANTS } from '@/di/constants';
-import { AddGameRequestModel, GetGameRequestModel, GetGameResponseModel } from '@/domain/models';
+import {
+  AddGameRequestModel,
+  GetGameRequestModel,
+  GetGameResponseModel,
+  GetProviderGamesRequestModel,
+  GetProviderGamesResponseModel
+} from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
+  GameLaunchViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
@@ -11,8 +18,10 @@ import {
   GetGamesViewModel,
   GetGameThemesViewModel,
   GetGameTypesViewModel,
-  GetGameVolatilitiesViewModel
+  GetGameVolatilitiesViewModel,
+  ProviderGamesViewModel
 } from '@/view/models';
+import { ProviderGamesFilterViewModel } from '@/view/models/view-models/game/ProviderGamesFilterViewModel';
 import { PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IGameRepository } from './../boundaries';
@@ -59,7 +68,7 @@ export class GameUseCase {
 
     return getGameFeaturesResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };
-  /////
+
   getGameVolatilities = async (): Promise<GetGameVolatilitiesViewModel> => {
     const getGameVolatilitiesResponse = await this.gameRepository.getGameVolatilities();
 
@@ -71,9 +80,34 @@ export class GameUseCase {
 
     return getGameSupportedBrowsersResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };
+
   getGamePlatforms = async (): Promise<GetGamePlatformsViewModel> => {
     const getGamePlatformsResponse = await this.gameRepository.getGamePlatforms();
 
     return getGamePlatformsResponse.results.map((r) => ({ value: r.id, label: r.name }));
+  };
+
+  getGamesByProviderId = async (
+    providerGamesFilterViewModel: ProviderGamesFilterViewModel
+  ): Promise<ProviderGamesViewModel> => {
+    const getProviderGamesRequestModel = mapper.map(
+      providerGamesFilterViewModel,
+      GetProviderGamesRequestModel,
+      ProviderGamesFilterViewModel
+    );
+
+    const getProviderGamesResponseModel = await this.gameRepository.getProviderGames(getProviderGamesRequestModel);
+
+    return mapper.map(getProviderGamesResponseModel, ProviderGamesViewModel, GetProviderGamesResponseModel);
+  };
+
+  gameLaunch = async (gameLaunchViewModel: GameLaunchViewModel): Promise<string> => {
+    // if (!gameLaunchViewModel) return null;
+
+    // const gameLaunchRequestModel = mapper.map(gameLaunchViewModel, GameLaunchRequestModel, GameLaunchViewModel);
+
+    // return await this.gameRepository.gameLaunch(gameLaunchRequestModel);
+
+    return 'https://partnerapi.sportdigi.com/GamesLaunch/Launch?gameid=5935&playMode=demo&deviceType=1&lang=EN&operatorId=DB6D2EB9&mainDomain=totogaming697.ru';
   };
 }

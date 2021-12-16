@@ -1,7 +1,7 @@
 import { GameClassSelect, GameTypesSelect, GameVolatilitiesSelect, ProviderSelect } from '@/view';
 import { GAME_MIN_RELEASE_DATE, ROUTES } from '@/view/constants';
 import { AddGameViewModel } from '@/view/models';
-import { createRenderInputs, CustomSelectProps, redirectToURL, useTranslation } from '@atom/common';
+import { createRenderInputs, CustomSelectProps, PrimaryKey, redirectToURL, useTranslation } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
 import { FastField, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
 import { FC, useMemo } from 'react';
@@ -10,21 +10,26 @@ import { initialValues } from './initialValues';
 export interface AddGameProps {
   onSubmit: (data: AddGameViewModel, form: FormikHelpers<typeof initialValues>) => void;
   validationSchema: SchemaOf<AddGameViewModel> | null;
+  providerId: PrimaryKey;
 }
 
-const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
+const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) => {
   const t = useTranslation();
 
   const atomFormFields = useMemo(
     () => [
-      {
-        type: 'select' as const,
-        name: 'providerId' as keyof AddGameViewModel,
-        label: t.get('games.add.fields.provider'),
-        component: (props: CustomSelectProps) => (
-          <ProviderSelect {...props} isMain fullWidth inputLabel={t.get('games.add.fields.provider')} />
-        )
-      },
+      ...(!providerId
+        ? [
+            {
+              type: 'select' as const,
+              name: 'providerId' as keyof AddGameViewModel,
+              label: t.get('games.add.fields.provider'),
+              component: (props: CustomSelectProps) => (
+                <ProviderSelect {...props} isMain fullWidth inputLabel={t.get('games.add.fields.provider')} />
+              )
+            }
+          ]
+        : []),
       {
         name: 'externalId' as keyof AddGameViewModel,
         type: 'input' as const,
@@ -115,7 +120,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
         }
       }
     ],
-    [t]
+    [t, providerId]
   );
 
   const atomFormProps = useMemo(
@@ -137,7 +142,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema }) => {
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{ ...initialValues, providerId }}
       validationSchema={validationSchema}
       onSubmit={(data, form) => onSubmit(data, form)}>
       {() => {

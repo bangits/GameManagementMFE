@@ -1,4 +1,5 @@
 import { gameApi } from '@/adapter/redux/api';
+import { GameLauncherContainer } from '@/view';
 import { GamesFiltersViewModel, GetGamesViewModel } from '@/view/models';
 import { SortTypesEnum, useFirstValue } from '@atom/common';
 import { useMemo, useState } from 'react';
@@ -50,6 +51,8 @@ const GameListContainer = () => {
 
   return (
     <>
+      <GameLauncherContainer />
+
       <GameList
         results={results || []}
         rowCount={rowCount || 1}

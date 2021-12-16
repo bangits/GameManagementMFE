@@ -1,3 +1,4 @@
+import { ProviderGamesContainer } from '@/view/components';
 import { providerStatusesConfig } from '@/view/configs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
 import { redirectToURL, useTranslation } from '@atom/common';
@@ -9,7 +10,6 @@ import {
   ProvidersGeneralInfoProps
 } from '@atom/design-system';
 import React, { FC, useMemo } from 'react';
-import { ProviderGamesContainer } from './provider-games';
 
 export interface ProviderDetailsProps {
   data: ProviderDetailsViewModel;
@@ -77,7 +77,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
               {
                 iconName: 'CheckButtonIcon' as const,
                 onClick: onActivateButtonClick,
-                tooltipText: t.get('approve')
+                tooltipText: t.get('activate')
               }
             ]
           : []),
@@ -86,13 +86,13 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
               {
                 iconName: 'BlockButtonIcon' as const,
                 onClick: onInActivateButtonClick,
-                tooltipText: t.get('terminate')
+                tooltipText: t.get('inActivate')
               }
             ]
           : [])
       ]
     }),
-    []
+    [data, shouldShowActivateButton, shouldShowInActivateButton, t]
   );
 
   const totalMarket = useMemo<ProvidersGeneralInfoProps['totalMarket']>(
@@ -165,10 +165,11 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     [t, data]
   );
 
+  console.log(data);
+
   return (
     <PageWrapper>
       <ProviderDetailsPage
-        gamesTabContent={<ProviderGamesContainer />}
         noDataText={t.get('emptyValue')}
         totalGameCount={`${data.gameCount || t.get('emptyValue')}`}
         creationDate={data.creationDate}
@@ -177,6 +178,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         mainDetailsInfo={mainDetailsInfo}
         statusInfo={statusInfo}
         breadCrumb={breadCrumb}
+        gamesTabContent={<ProviderGamesContainer providerId={data.id} />}
         generalInformationContext={
           <>
             <ProvidersGeneralInfo

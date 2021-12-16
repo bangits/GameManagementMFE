@@ -5,9 +5,12 @@ import {
   ChangeProviderStatusRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
+  GetProviderGamesRequestModel,
+  GetProviderGamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
-  GetProvidersByIdResponseModel
+  GetProvidersByIdResponseModel,
+  ProviderGamesResponseModel
 } from '@/domain/models';
 import {
   AddGameViewModel,
@@ -17,6 +20,9 @@ import {
   GamesViewModel,
   GetGamesViewModel,
   GetProvidersViewModel,
+  ProviderGamesFilterViewModel,
+  ProviderGamesViewModel,
+  ProviderGameViewModel,
   ProvidersFiltersViewModel,
   ProvidersViewModel
 } from '@/view/models';
@@ -289,4 +295,30 @@ export const baseProfile: MappingProfile = (mapper) => {
     (destination) => destination.results,
     mapWith(GamesViewModel, Game, (source) => source.results)
   );
+
+  mapper
+    .createMap(ProviderGamesFilterViewModel, GetProviderGamesRequestModel)
+    .forMember(
+      (destination) => destination.pagination,
+      mapFrom((source) => source.pagination)
+    )
+    .forMember(
+      (destination) => destination.filterName,
+      mapFrom((source) => source.gameSearch)
+    )
+    .forMember(
+      (destination) => destination.typeId,
+      mapFrom((source) => source.gameTypeId)
+    );
+
+  mapper.createMap(ProviderGamesResponseModel, ProviderGameViewModel).forMember(
+    (destination) => destination.id,
+    mapFrom((source) => source.id)
+  );
+
+  mapper.createMap(GetProviderGamesResponseModel, ProviderGamesViewModel).forMember(
+    (destination) => destination.results,
+    mapWith(ProviderGameViewModel, ProviderGamesResponseModel, (source) => source.results)
+  );
+  //#endregion
 };
