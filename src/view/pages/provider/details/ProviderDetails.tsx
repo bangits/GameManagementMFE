@@ -1,13 +1,11 @@
-import { ProviderGamesContainer } from '@/view/components';
+import { GeneralInformationContainer, ProviderGamesContainer } from '@/view';
 import { providerStatusesConfig } from '@/view/configs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
 import { redirectToURL, useTranslation } from '@atom/common';
 import {
   PageWrapper,
   ProviderDetails as ProviderDetailsPage,
-  ProviderDetailsProps as ProviderDetailsPageProps,
-  ProvidersGeneralInfo,
-  ProvidersGeneralInfoProps
+  ProviderDetailsProps as ProviderDetailsPageProps
 } from '@atom/design-system';
 import React, { FC, useMemo } from 'react';
 
@@ -95,78 +93,6 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     [data, shouldShowActivateButton, shouldShowInActivateButton, t]
   );
 
-  const totalMarket = useMemo<ProvidersGeneralInfoProps['totalMarket']>(
-    () => ({
-      title: t.get('totalMarket'),
-      total: `${data.targetMarkets.length} ${t.get('countries')}`,
-      countries: data.targetMarkets
-    }),
-    [t, data]
-  );
-
-  const certifiedCountries = useMemo<ProvidersGeneralInfoProps['certifiedCountries']>(
-    () => ({
-      title: t.get('certifiedCountries'),
-      total: `${data.certifiedCountries.length} ${t.get('countries')}`,
-      countries: data.certifiedCountries
-    }),
-    [t, data]
-  );
-
-  const restrictedCountries = useMemo<ProvidersGeneralInfoProps['restrictedtCountries']>(
-    () => ({
-      title: t.get('restrictedCountries'),
-      total: `${data.restrictedCountries.length} ${t.get('countries')}`,
-      countries: data.restrictedCountries
-    }),
-    [t, data]
-  );
-
-  const supportedCurrencies = useMemo<ProvidersGeneralInfoProps['supportedCurrencies']>(
-    () => ({
-      title: t.get('supportedCurrencies'),
-      total: `${data.providerCurrencies.length} ${t.get('supportedCurrencies')}`,
-      currencies: data.providerCurrencies
-    }),
-    [t, data]
-  );
-
-  const licenses = useMemo<ProvidersGeneralInfoProps['licenses']>(
-    () => ({
-      title: t.get('licenses'),
-      licenses: data.providerLicenses
-    }),
-    [t, data]
-  );
-
-  const realURL = useMemo<ProvidersGeneralInfoProps['realURL']>(
-    () => ({
-      URL: data.absoluteUrl,
-      title: t.get('absoluteRealURL'),
-      tooltip: {
-        showEvent: 'click',
-        text: t.get('copied'),
-        placement: 'right'
-      }
-    }),
-    [t, data]
-  );
-
-  const demoURL = useMemo<ProvidersGeneralInfoProps['demoURL']>(
-    () => ({
-      URL: data.absoluteDemoUrl,
-      title: t.get('absoluteDemoURL'),
-      tooltip: {
-        showEvent: 'click',
-        text: t.get('copied'),
-        placement: 'right'
-      }
-    }),
-    [t, data]
-  );
-
-  console.log(data);
-
   return (
     <PageWrapper>
       <ProviderDetailsPage
@@ -181,16 +107,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         gamesTabContent={<ProviderGamesContainer providerId={data.id} />}
         generalInformationContext={
           <>
-            <ProvidersGeneralInfo
-              noDataText={t.get('emptyValue')}
-              totalMarket={totalMarket}
-              certifiedCountries={certifiedCountries}
-              restrictedtCountries={restrictedCountries}
-              supportedCurrencies={supportedCurrencies}
-              licenses={licenses}
-              realURL={realURL}
-              demoURL={demoURL}
-            />
+            <GeneralInformationContainer data={data} />
           </>
         }
       />
