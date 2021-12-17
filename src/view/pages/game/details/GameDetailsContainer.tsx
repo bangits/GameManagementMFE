@@ -11,6 +11,7 @@ const GameDetailsContainer = () => {
 
   const t = useTranslation();
 
+  console.log('GameDetailsContainer')
   const dispatch = useDispatch();
 
   // Game status change functions
