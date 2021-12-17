@@ -1,21 +1,42 @@
-import { ProviderDetailsViewModel } from '@/view/models';
-import { CountriesSelect, createRenderInputs, CustomSelectProps, useTranslation } from '@atom/common';
+import { editProviderGeneralInfoValidations } from '@/domain/validators';
+import { EditProviderGeneralInformationViewModel, ProviderDetailsViewModel } from '@/view/models';
+import {
+  CountriesSelect,
+  createRenderInputs,
+  CurrencySelect,
+  CustomSelect,
+  CustomSelectProps,
+  useAsync,
+  useTranslation,
+  useValidationTranslation
+} from '@atom/common';
 import { FlexibleForm, FlexibleFormProps, ProvidersGeneralInfo, ProvidersGeneralInfoProps } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
 import React, { FC, useMemo } from 'react';
+import { editProviderGeneralInfoInitialValues } from './initialValues';
 
 export interface GeneralInformationProps {
   data: ProviderDetailsViewModel;
+  onSubmit: (data: EditProviderGeneralInformationViewModel) => void;
+  isEdit: boolean;
 }
 
-const GeneralInformation: FC<GeneralInformationProps> = ({ data }) => {
+const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdit }) => {
   const t = useTranslation();
+
+  const translationValidations = useValidationTranslation();
+
+  const editProviderGeneralInfoValidationSchema = useAsync(
+    () => editProviderGeneralInfoValidations(translationValidations),
+    [translationValidations],
+    null
+  );
 
   const totalMarket = useMemo<ProvidersGeneralInfoProps['totalMarket']>(
     () => ({
       title: t.get('totalMarket'),
       total: `${data.targetMarkets.length} ${t.get('countries')}`,
-      countries: data.targetMarkets
+      countries: data.targetMarkets.map((markets) => ({ tagName: markets.tagName }))
     }),
     [t, data]
   );
@@ -24,7 +45,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data }) => {
     () => ({
       title: t.get('certifiedCountries'),
       total: `${data.certifiedCountries.length} ${t.get('countries')}`,
-      countries: data.certifiedCountries
+      countries: data.certifiedCountries.map((country) => ({ tagName: country.tagName }))
     }),
     [t, data]
   );
@@ -33,7 +54,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data }) => {
     () => ({
       title: t.get('restrictedCountries'),
       total: `${data.restrictedCountries.length} ${t.get('countries')}`,
-      countries: data.restrictedCountries
+      countries: data.restrictedCountries.map((country) => ({ tagName: country.tagName }))
     }),
     [t, data]
   );
@@ -88,59 +109,114 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data }) => {
       fields: [
         {
           type: 'select' as const,
-          name: 'legalEntityId',
-          label: t.get('legalEntity'),
+          name: 'targetMarketsId',
+          label: t.get('targetMarket'),
           component: (props: CustomSelectProps) => {
-            return <CountriesSelect {...props} fullWidth inputLabel={t.get('legalEntity')} />;
+            return (
+              <CountriesSelect
+                {...props}
+                isMulti
+                selectAll
+                selectAllLabel={t.get('all')}
+                clearButton
+                clearButtonLabel={t.get('clear')}
+                fullWidth
+                inputLabel={t.get('targetMarkets')}
+              />
+            );
           }
         },
         {
           type: 'select' as const,
-          name: 'legalEntityId',
-          label: t.get('legalEntity'),
+          name: 'certifiedCountriesId',
+          label: t.get('certifiedCountries'),
           component: (props: CustomSelectProps) => {
-            return <CountriesSelect {...props} fullWidth inputLabel={t.get('legalEntity')} />;
+            return (
+              <CountriesSelect
+                {...props}
+                isMulti
+                selectAll
+                selectAllLabel={t.get('all')}
+                clearButton
+                clearButtonLabel={t.get('clear')}
+                fullWidth
+                inputLabel={t.get('certifiedCountries')}
+              />
+            );
+          }
+        },
+        {
+          type: 'select' as const,
+          name: 'restrictedCountriesId',
+          label: t.get('restrictedCountries'),
+          component: (props: CustomSelectProps) => {
+            return (
+              <CountriesSelect
+                {...props}
+                isMulti
+                selectAll
+                selectAllLabel={t.get('all')}
+                clearButton
+                clearButtonLabel={t.get('clear')}
+                fullWidth
+                inputLabel={t.get('restrictedCountries')}
+              />
+            );
+          }
+        },
+        {
+          type: 'select' as const,
+          name: 'providerCurrenciesId',
+          label: t.get('providerCurrencies'),
+          component: (props: CustomSelectProps) => {
+            return (
+              <CurrencySelect
+                {...props}
+                isMulti
+                selectAll
+                selectAllLabel={t.get('all')}
+                clearButton
+                clearButtonLabel={t.get('clear')}
+                fullWidth
+                inputLabel={t.get('supportedCurrencies')}
+              />
+            );
+          }
+        },
+        {
+          type: 'select' as const,
+          name: 'licensesId',
+          label: t.get('licenses'),
+          component: (props: CustomSelectProps) => {
+            return (
+              <CustomSelect
+                {...props}
+                isMulti
+                options={[
+                  {
+                    label: 'Malta License',
+                    value: 1
+                  }
+                ]}
+                selectAll
+                selectAllLabel={t.get('all')}
+                clearButton
+                clearButtonLabel={t.get('clear')}
+                fullWidth
+                inputLabel={t.get('licenses')}
+              />
+            );
           }
         },
         {
           type: 'input' as const,
-          name: 'address',
-          label: t.get('address')
+          name: 'absoluteRealUrl',
+          label: t.get('absoluteRealURL')
         },
         {
           type: 'input' as const,
-          name: 'postalAddress',
-          label: t.get('postalAddress')
-        },
-        {
-          type: 'input' as const,
-          name: 'zipCode',
-          label: t.get('zipCode')
-        },
-        {
-          type: 'input' as const,
-          name: 'tin',
-          label: t.get('tin')
-        },
-        {
-          type: 'input' as const,
-          name: 'vat',
-          label: t.get('vat')
-        },
-        {
-          type: 'datepicker' as const,
-          name: 'companyRegistrationDate',
-          label: t.get('registrationDate')
-        },
-        {
-          type: 'input' as const,
-          name: 'registrationNumber',
-          label: t.get('registrationNumber')
-        },
-        {
-          type: 'input' as const,
-          name: 'website',
-          label: t.get('website')
+          name: 'absoluteDemoUrl',
+          label: t.get('absoluteDemoURL')
         }
       ],
       renderInputs
@@ -149,17 +225,27 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data }) => {
   );
 
   return (
-    //@ts-expect-error rgsdgdfg
-    <Formik onSubmit={() => console.log} initialValues={{ website: '' }} validationSchema={{}}>
+    <Formik
+      onSubmit={onSubmit}
+      initialValues={editProviderGeneralInfoInitialValues(data)}
+      validationSchema={editProviderGeneralInfoValidationSchema}>
       {(form) => {
         return (
           <Form noValidate>
             <FlexibleForm
               title=''
+              isEdit={isEdit}
               col={12}
               editedFormProps={{
                 options: [],
                 viewMoreLabel: 'View More'
+              }}
+              onSubmit={async (onClose) => {
+                await form.submitForm();
+
+                const errors = await form.validateForm();
+
+                if (!Object.values(errors).length) onClose();
               }}
               editFormProps={editFormProps}
               editedModeChildren={

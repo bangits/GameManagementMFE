@@ -3,6 +3,7 @@ import {
   AddGameRequestModel,
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
+  EditProviderGeneralInformationRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
@@ -16,6 +17,7 @@ import {
   AddGameViewModel,
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
+  EditProviderGeneralInformationViewModel,
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
@@ -27,8 +29,7 @@ import {
   ProvidersViewModel
 } from '@/view/models';
 import { convertDate } from '@atom/common';
-import type { MappingProfile } from '@automapper/core';
-import autoMapper from '@automapper/core';
+import autoMapper, { MappingProfile } from '@automapper/core';
 import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
 import { transformToCountryModel } from './transformFunctions';
 
@@ -122,7 +123,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.targetMarkets,
       mapFrom((source) =>
         source.targetMarkets.map((markets) => ({
-          tagName: markets.name
+          tagName: markets.name,
+          id: markets.id
         }))
       )
     )
@@ -130,7 +132,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.providerCurrencies,
       mapFrom((source) =>
         source.providerCurrencies.map((currency) => ({
-          title: currency.name
+          title: currency.name,
+          id: currency.id
         }))
       )
     )
@@ -138,7 +141,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.certifiedCountries,
       mapFrom((source) =>
         source.certifiedCountries.map((country) => ({
-          tagName: country.name
+          tagName: country.name,
+          id: country.id
         }))
       )
     )
@@ -146,7 +150,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.restrictedCountries,
       mapFrom((source) =>
         source.restrictedCountries.map((country) => ({
-          tagName: country.name
+          tagName: country.name,
+          id: country.id
         }))
       )
     )
@@ -158,7 +163,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.providerLicenses,
       mapFrom((source) =>
         source.providerLicenses.map((license) => ({
-          title: license.name
+          title: license.name,
+          id: license.id
         }))
       )
     )
@@ -320,5 +326,54 @@ export const baseProfile: MappingProfile = (mapper) => {
     (destination) => destination.results,
     mapWith(ProviderGameViewModel, ProviderGamesResponseModel, (source) => source.results)
   );
+
+  //# Edit Provider View
+  mapper
+    .createMap(EditProviderGeneralInformationViewModel, EditProviderGeneralInformationRequestModel)
+    .forMember(
+      (destination) => destination.absoluteUrl,
+      mapFrom((source) => source.absoluteRealUrl)
+    )
+    .forMember(
+      (destination) => destination.providerLicenses,
+      mapFrom((source) =>
+        source.licensesId.map((licenseId) => ({
+          licenseId
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.targetMarkets,
+      mapFrom((source) =>
+        source.targetMarketsId.map((countryId) => ({
+          countryId
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) =>
+        source.certifiedCountriesId.map((countryId) => ({
+          countryId
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) =>
+        source.restrictedCountriesId.map((countryId) => ({
+          countryId
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.providerCurrencies,
+      mapFrom((source) =>
+        source.providerCurrenciesId.map((currency) => ({
+          currencyId: currency,
+          defaultCurrency: false
+        }))
+      )
+    );
   //#endregion
 };

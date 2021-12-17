@@ -3,6 +3,7 @@ import { ProviderUseCase } from '@/domain/use-case';
 import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
+  EditProviderGeneralInformationViewModel,
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
   ProviderGamesTypesViewModel,
@@ -15,7 +16,7 @@ import { createBaseQuery } from '../helpers';
 export const providerApi = createApi({
   reducerPath: 'providerApi',
   baseQuery: createBaseQuery<ProviderUseCase>({ useCaseName: DI_CONSTANTS.PROVIDER.ProviderUseCase }),
-  tagTypes: ['Providers'],
+  tagTypes: ['Providers', 'getProviderById'],
   endpoints: (build) => ({
     getProvider: build.query({
       query: (providersFiltersViewModel: ProvidersFiltersViewModel) => {
@@ -57,7 +58,8 @@ export const providerApi = createApi({
           methodName: 'getProvidersById',
           methodArguments: [partnerId]
         };
-      }
+      },
+      providesTags: ['getProviderById']
     }),
     getProviderGameTypesAndCount: build.query<ProviderGamesTypesViewModel[], {}>({
       query: (partnerId: PrimaryKey) => {
@@ -66,6 +68,15 @@ export const providerApi = createApi({
           methodArguments: [partnerId]
         };
       }
+    }),
+    editProviderGeneralInfo: build.mutation<ActionResponseModel, {}>({
+      query: (editProviderGeneralInfoViewModel: EditProviderGeneralInformationViewModel) => {
+        return {
+          methodName: 'editProviderGeneralInfo',
+          methodArguments: [editProviderGeneralInfoViewModel]
+        };
+      },
+      invalidatesTags: ['getProviderById']
     })
   })
 });

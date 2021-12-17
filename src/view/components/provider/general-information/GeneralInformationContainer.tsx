@@ -1,5 +1,9 @@
-import { ProviderDetailsViewModel } from '@/view/models';
-import React, { FC } from 'react';
+import { providerApi } from '@/adapter/redux/api';
+import { EditProviderGeneralInformationViewModel, ProviderDetailsViewModel } from '@/view/models';
+import { useTranslation } from '@atom/common';
+import { alert } from '@atom/design-system';
+import React, { FC, useCallback } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import GeneralInformation from './GeneralInformation';
 
 export interface GeneralInformationContainerProps {
@@ -7,9 +11,35 @@ export interface GeneralInformationContainerProps {
 }
 
 const GeneralInformationContainer: FC<GeneralInformationContainerProps> = ({ data }) => {
+  const t = useTranslation();
+
+  const location = useLocation();
+
+  const isEdit = location.search.includes('isEdit');
+
+  console.log(isEdit);
+
+  const params = useParams<{ providerId: string }>();
+
+  const [editProviderGeneralInfo] = providerApi.useEditProviderGeneralInfoMutation();
+
+  const showSuccessAlert = useCallback(() => alert.success({ alertLabel: t.get('successAlertMessage') }), [t]);
+
+  const showErrorAlert = useCallback(() => alert.error({ alertLabel: t.get('errorAlertMessage') }), [t]);
+
+  const onSubmit = useCallback(
+    (generalInformationData: EditProviderGeneralInformationViewModel) => {
+      editProviderGeneralInfo({ providerId: +params.providerId, ...generalInformationData })
+        .unwrap()
+        .then(showSuccessAlert)
+        .catch(showErrorAlert);
+    },
+    [+params.providerId]
+  );
+
   return (
     <>
-      <GeneralInformation data={data} />
+      <GeneralInformation data={data} onSubmit={onSubmit} isEdit={isEdit} />
     </>
   );
 };

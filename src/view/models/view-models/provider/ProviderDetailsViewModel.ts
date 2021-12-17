@@ -17,18 +17,23 @@ export class ProviderDetailsViewModel {
 
   targetMarkets: {
     tagName: string;
+    id: PrimaryKey;
   }[];
   providerCurrencies: {
     title: string;
+    id: PrimaryKey;
   }[];
   certifiedCountries: {
     tagName: string;
+    id: PrimaryKey;
   }[];
   restrictedCountries: {
     tagName: string;
+    id: PrimaryKey;
   }[];
   providerLicenses: {
     title: string;
+    id: PrimaryKey;
   }[];
 
   statusId: ProviderStatusesEnum;

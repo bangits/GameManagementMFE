@@ -1,7 +1,7 @@
 import { GeneralInformationContainer, ProviderGamesContainer } from '@/view';
 import { providerStatusesConfig } from '@/view/configs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
-import { redirectToURL, useTranslation } from '@atom/common';
+import { convertDate, redirectToURL, useTranslation } from '@atom/common';
 import {
   PageWrapper,
   ProviderDetails as ProviderDetailsPage,
@@ -97,19 +97,15 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     <PageWrapper>
       <ProviderDetailsPage
         noDataText={t.get('emptyValue')}
-        totalGameCount={`${data.gameCount || t.get('emptyValue')}`}
-        creationDate={data.creationDate}
+        totalGameCount={data.gameCount ? `${data.gameCount}` : ''}
+        creationDate={convertDate(data.creationDate)}
         createdBy={data.createdByUserEmail}
         translations={translations}
         mainDetailsInfo={mainDetailsInfo}
         statusInfo={statusInfo}
         breadCrumb={breadCrumb}
         gamesTabContent={<ProviderGamesContainer providerId={data.id} />}
-        generalInformationContext={
-          <>
-            <GeneralInformationContainer data={data} />
-          </>
-        }
+        generalInformationContext={<GeneralInformationContainer data={data} />}
       />
     </PageWrapper>
   );
