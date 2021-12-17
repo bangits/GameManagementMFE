@@ -53,7 +53,7 @@ export class ProviderRepository implements IProviderRepository {
       url: API_ROUTES.PROVIDERS.BASE_ROUTE + `/${providerId}`
     });
   };
-  
+
   changeProviderStatus = async (
     changeProviderStatusRequestModel: ChangeProviderStatusRequestModel
   ): Promise<ActionResponseModel> => {
@@ -62,6 +62,4 @@ export class ProviderRepository implements IProviderRepository {
       body: changeProviderStatusRequestModel
     });
   };
-
- 
 }

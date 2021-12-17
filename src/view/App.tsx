@@ -6,7 +6,13 @@ import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { ROUTES } from './constants';
-import { AddGameContainer, GameDetailsContainer, GameListContainer, ProviderDetailsContainer, ProviderListContainer } from './pages';
+import {
+  AddGameContainer,
+  GameDetailsContainer,
+  GameListContainer,
+  ProviderDetailsContainer,
+  ProviderListContainer
+} from './pages';
 
 const App = () => {
   const [store, setStore] = useState(null);

@@ -1,4 +1,1 @@
-
-export class GamesDetailsViewModel {
-  
-}
+export class GamesDetailsViewModel {}

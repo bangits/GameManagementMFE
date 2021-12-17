@@ -12,5 +12,4 @@ export const ROUTES = {
   gameAdd: 'add',
   gamesList: '/',
   gameDetails: ':gameId'
-
 };

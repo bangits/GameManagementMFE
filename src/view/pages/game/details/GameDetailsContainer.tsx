@@ -64,8 +64,12 @@ const GameDetailsContainer = () => {
   return (
     <GameDetails
       data={data || []}
-      onApproveButtonClick={() => {}}
-      onTerminateButtonClick={() => {}}
+      onApproveButtonClick={() => {
+        console.log;
+      }}
+      onTerminateButtonClick={() => {
+        console.log;
+      }}
       // shouldShowApproveButton={data.statusId !== GameStatusesEnum.ACTIVE}
       // shouldShowTerminateButton={data.statusId !== GameStatusesEnum.ACTIVE}
       shouldShowTerminateButton={false}

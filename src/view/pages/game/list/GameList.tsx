@@ -30,7 +30,6 @@ export interface GameListProps {
   rowCount: number;
   isFilteredData: boolean;
   isFetching: boolean;
-  
 }
 
 function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData, isFetching }: GameListProps) {
