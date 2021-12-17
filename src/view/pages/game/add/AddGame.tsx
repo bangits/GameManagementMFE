@@ -65,6 +65,9 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
       }
     };
 
+    console.log(GameTypesSelect, ProviderSelect, GameVolatilitiesSelect, GameClassSelect);
+    
+
     return [
       ...(!providerId
         ? [
