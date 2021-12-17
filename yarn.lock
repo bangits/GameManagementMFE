@@ -38,13 +38,13 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/design-system@^2.0.0":
-  version "2.0.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.0.0.tgz#83fc0aa5fa529424dd9dbce5f269c3a45a13120e"
-  integrity sha1-g/wKpfpSlCTdnbzl8mnDpFoTEg4=
+"@atom/design-system@^2.2.5":
+  version "2.2.5"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.5.tgz#6df77df3ad362c501b8299f9c7d987a60ffdca84"
+  integrity sha1-bfd98602LFAbgpn5x9mHpg/9yoQ=
   dependencies:
     "@atom/common" "^2.3.4"
-    "@my-ui/core" "^2.24.1"
+    "@my-ui/core" "^2.24.9"
     classnames "^2.3.1"
     react "^17.0.2"
     react-dom "^17.0.2"
@@ -1394,10 +1394,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@my-ui/core@^2.24.1":
-  version "2.24.1"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.24.1.tgz#643a5abd33c34461695b4efe871fa85835eda130"
-  integrity sha1-ZDpavTPDRGFpW07+hx+oWDXtoTA=
+"@my-ui/core@^2.24.9":
+  version "2.24.9"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.24.9.tgz#a4d4b0ca036176733be884a3772efc5d1cb09e00"
+  integrity sha1-pNSwygNhdnM76ISjdy78XRywngA=
   dependencies:
     "@my-ui/react-datepicker" "^1.5.0"
     "@my-ui/react-select" "1.1.6"
@@ -2401,6 +2401,11 @@ atob@^2.1.2:
   version "2.1.2"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
+
+atom@^1.4.1:
+  version "1.4.1"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/atom/-/atom-1.4.1.tgz#436df9ed119e12209899d72e409da2f652a1b10a"
+  integrity sha1-Q2357RGeEiCYmdcuQJ2i9lKhsQo=
 
 aws-sign2@~0.7.0:
   version "0.7.0"

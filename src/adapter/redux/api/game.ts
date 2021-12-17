@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { GameUseCase } from '@/domain/use-case';
 import {
   AddGameViewModel,
+  GamesDetailsViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
@@ -19,6 +20,7 @@ import { createBaseQuery } from '../helpers';
 export const gameApi = createApi({
   reducerPath: 'gameApi',
   baseQuery: createBaseQuery<GameUseCase>({ useCaseName: DI_CONSTANTS.GAME.GameUseCase }),
+  tagTypes: ['Games', 'GetGameById'],
   endpoints: (build) => ({
     getGames: build.query<GetGamesViewModel, {}>({
       query: (gamesFiltersViewModel: GamesFiltersViewModel) => {
@@ -27,6 +29,15 @@ export const gameApi = createApi({
           methodArguments: [gamesFiltersViewModel]
         };
       }
+    }),
+    getGameById: build.query<GamesDetailsViewModel, {}>({
+      query: (partnerId: PrimaryKey) => {
+        return {
+          methodName: 'getGameById',
+          methodArguments: [partnerId]
+        };
+      },
+      providesTags: ['GetGameById']
     }),
     addGame: build.mutation({
       query: (addGameViewModel: AddGameViewModel) => {
@@ -84,7 +95,6 @@ export const gameApi = createApi({
         };
       }
     }),
-
     getGamePlatforms: build.query<GetGamePlatformsViewModel, {}>({
       query: () => {
         return {

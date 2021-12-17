@@ -30,6 +30,7 @@ export interface GameListProps {
   rowCount: number;
   isFilteredData: boolean;
   isFetching: boolean;
+  
 }
 
 function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData, isFetching }: GameListProps) {
@@ -235,11 +236,11 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
         )
       },
       {
-        label: t.get('companyType'),
+        label: t.get('hasDemo'),
         name: 'hasDemo' as keyof GamesFiltersViewModel,
         type: 'truthly-select' as const,
         props: {
-          inputLabel: t.get('companyType'),
+          inputLabel: t.get('hasDemo'),
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD
         },
         translations: {
@@ -288,7 +289,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
             inputLabel={t.get('gamePlatforms')}
             fullWidth
             isMulti
-            value={filterValues.gameFeatureIds}
+            value={filterValues.gamePlatformIds}
             onChange={(changedValue) => onChange('gamePlatformIds', changedValue)}
           />
         )

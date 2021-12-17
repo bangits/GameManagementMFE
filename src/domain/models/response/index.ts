@@ -1,4 +1,5 @@
 export * from './GetClassNamesResponseModel';
+export * from './GetGameByIdResponseModel';
 export * from './GetGameFeaturesResponseModel';
 export * from './GetGamePlatromsResponseModel';
 export * from './GetGameResponseModel';
@@ -9,3 +10,4 @@ export * from './GetGameVolatilitiesResponseModel';
 export * from './GetProviderNamesResponseModel';
 export * from './GetProviderResponseModel';
 export * from './GetProvidersByIdResponseModel';
+

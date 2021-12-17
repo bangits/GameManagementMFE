@@ -10,5 +10,7 @@ export const ROUTES = {
   // Games
   game: '/',
   gameAdd: 'add',
-  gamesList: '/'
+  gamesList: '/',
+  gameDetails: ':gameId'
+
 };

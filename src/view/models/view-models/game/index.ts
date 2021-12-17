@@ -1,4 +1,6 @@
 export * from './AddGameViewModel';
+export * from './ChangeGameStatusViewModel';
+export * from './GamesDetailsViewModel';
 export * from './GamesFiltersViewModel';
 export * from './GamesViewModel';
 export * from './GetClassNamesViewModel';
@@ -9,3 +11,5 @@ export * from './GetGamesViewModel';
 export * from './GetGameThemesViewModel';
 export * from './GetGameTypesViewModel';
 export * from './GetGameVolatilitiesViewModel';
+
+

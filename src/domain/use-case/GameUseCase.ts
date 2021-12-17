@@ -3,6 +3,7 @@ import { AddGameRequestModel, GetGameRequestModel, GetGameResponseModel } from '
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
+  GamesDetailsViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
@@ -16,7 +17,7 @@ import {
 import { PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IGameRepository } from './../boundaries';
-
+import { GetGameByIdResponseModel } from './../models/response/GetGameByIdResponseModel';
 @injectable()
 export class GameUseCase {
   @inject(DI_CONSTANTS.GAME.GameRepository)
@@ -29,9 +30,16 @@ export class GameUseCase {
 
     return mapper.map(getGameResponseModel, GetGamesViewModel, GetGameResponseModel);
   };
+
   addGame = async (addGameViewModel: AddGameViewModel): Promise<boolean> => {
     const addGameRequestModel = mapper.map(addGameViewModel, AddGameRequestModel, AddGameViewModel);
     return this.gameRepository.addGame(addGameRequestModel);
+  };
+
+  getGameById = async (id: PrimaryKey): Promise<GamesDetailsViewModel> => {
+    const getGameResponseModel = await this.gameRepository.getGameById(id);
+
+    return mapper.map(getGameResponseModel, GamesDetailsViewModel, GetGameByIdResponseModel);
   };
 
   getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesViewModel> => {
@@ -71,6 +79,7 @@ export class GameUseCase {
 
     return getGameSupportedBrowsersResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };
+
   getGamePlatforms = async (): Promise<GetGamePlatformsViewModel> => {
     const getGamePlatformsResponse = await this.gameRepository.getGamePlatforms();
 
