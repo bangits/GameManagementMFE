@@ -52,7 +52,7 @@ const App = () => {
                 path={ROUTES.game}
                 render={({ match: { url } }) => {
                   return (
-                    <>
+                    <Switch>
                       <Route path={`${url}${ROUTES.gamesList}`} exact>
                         <GameListContainer />
                       </Route>
@@ -62,7 +62,7 @@ const App = () => {
                       <Route path={`${url}${ROUTES.gameDetails}`} exact>
                         <GameDetailsContainer />
                       </Route>
-                    </>
+                    </Switch>
                   );
                 }}
               />

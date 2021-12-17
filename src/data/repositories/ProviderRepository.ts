@@ -9,9 +9,9 @@ import {
   GetProviderResponseModel,
   GetProvidersByIdResponseModel
 } from '@/domain/models';
-import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
+import { ActionResponseModel, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
-import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
+import { API_ROUTES } from '../constants';
 
 @injectable()
 export class ProviderRepository implements IProviderRepository {
@@ -21,17 +21,14 @@ export class ProviderRepository implements IProviderRepository {
   @inject(DI_CONSTANTS.CacheService)
   private readonly cacheService: ICacheService;
 
-  getProviderNames = cachedFn(
-    CACHE_CONSTANTS.GetProviderNamesResponse,
-    async (isActive): Promise<GetProviderNamesResponseModel> => {
-      return await this.httpService.get<GetProviderNamesResponseModel, {}>({
-        url: API_ROUTES.PROVIDERS.GET_PROVIDER_NAMES,
-        query: {
-          isActive
-        }
-      });
-    }
-  ).bind(this);
+  getProviderNames = async (isActive): Promise<GetProviderNamesResponseModel> => {
+    return await this.httpService.get<GetProviderNamesResponseModel, {}>({
+      url: API_ROUTES.PROVIDERS.GET_PROVIDER_NAMES,
+      query: {
+        isActive
+      }
+    });
+  };
 
   addProviders = async (addProviderRequestModel: AddProviderRequestModel) => {
     await this.httpService.post<void, {}, AddProviderRequestModel>({

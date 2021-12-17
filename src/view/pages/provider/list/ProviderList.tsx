@@ -86,7 +86,8 @@ function ProviderList({
         name: 'providerId',
         type: 'input' as const,
         props: {
-          label: t.get('providerId')
+          label: t.get('providerId'),
+          type: 'number'
         }
       },
       {
@@ -94,7 +95,8 @@ function ProviderList({
         name: 'partnerId',
         type: 'input' as const,
         props: {
-          label: t.get('partnerId')
+          label: t.get('partnerId'),
+          type: 'number'
         }
       },
       {

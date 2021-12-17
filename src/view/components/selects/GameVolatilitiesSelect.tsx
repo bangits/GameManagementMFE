@@ -4,7 +4,7 @@ import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
 export const GameVolatilitiesSelect = (props: CustomSelectProps) => {
   const t = useTranslation();
 
-  const { data: gameVolatilities } = gameApi.useGetGameThemesQuery({});
+  const { data: gameVolatilities } = gameApi.useGetGameVolatilitiesQuery({});
 
   return (
     <>
