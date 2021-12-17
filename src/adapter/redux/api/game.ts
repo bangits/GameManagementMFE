@@ -1,9 +1,7 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { GameUseCase } from '@/domain/use-case';
 import {
-  AddGameViewModel,
-  GamesDetailsViewModel,
-  GamesFiltersViewModel,
+  AddGameViewModel, GameLaunchViewModel, GamesDetailsViewModel, GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
   GetGamePlatformsViewModel,
@@ -11,7 +9,9 @@ import {
   GetGamesViewModel,
   GetGameThemesViewModel,
   GetGameTypesViewModel,
-  GetGameVolatilitiesViewModel
+  GetGameVolatilitiesViewModel,
+  ProviderGamesFilterViewModel,
+  ProviderGamesViewModel
 } from '@/view/models';
 import { PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
@@ -100,6 +100,22 @@ export const gameApi = createApi({
         return {
           methodName: 'getGamePlatforms',
           methodArguments: []
+        };
+      }
+    }),
+    getGamesByProviderId: build.query<ProviderGamesViewModel, {}>({
+      query: (providerGamesFilterViewModel: ProviderGamesFilterViewModel) => {
+        return {
+          methodName: 'getGamesByProviderId',
+          methodArguments: [providerGamesFilterViewModel]
+        };
+      }
+    }),
+    launchGame: build.query<string, GameLaunchViewModel>({
+      query: (gameLaunchViewModel: GameLaunchViewModel) => {
+        return {
+          methodName: 'gameLaunch',
+          methodArguments: [gameLaunchViewModel]
         };
       }
     })

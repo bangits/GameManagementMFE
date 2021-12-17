@@ -138,14 +138,6 @@ function ProviderList({
           initialValues: filtersInitialValues,
           filters: filtersList
         }}
-        filtersDropdownProps={{
-          dropdown: true,
-          selectAll: true,
-          selectAllLabel: 'All',
-          clearButton: true,
-          clearButtonLabel: 'Clear',
-          color: 'primary'
-        }}
         tableProps={{
           data: results,
           columns: tableColumns,
@@ -189,7 +181,7 @@ function ProviderList({
           redirectToURL(
             ROUTES.baseUrl +
               ROUTES.providers +
-              ROUTES.providerDetails.replace(':providerId', column.partnerId.toString())
+              ROUTES.providerDetails.replace(':providerId', column.providerId.toString())
           )
         }
       />

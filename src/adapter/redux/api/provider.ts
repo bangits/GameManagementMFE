@@ -5,6 +5,7 @@ import {
   ChangeProviderStatusViewModel,
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
+  ProviderGamesTypesViewModel,
   ProvidersFiltersViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
@@ -54,6 +55,14 @@ export const providerApi = createApi({
       query: (partnerId: PrimaryKey) => {
         return {
           methodName: 'getProvidersById',
+          methodArguments: [partnerId]
+        };
+      }
+    }),
+    getProviderGameTypesAndCount: build.query<ProviderGamesTypesViewModel[], {}>({
+      query: (partnerId: PrimaryKey) => {
+        return {
+          methodName: 'getProviderGameTypesAndCount',
           methodArguments: [partnerId]
         };
       }

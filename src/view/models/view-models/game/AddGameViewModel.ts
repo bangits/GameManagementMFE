@@ -11,8 +11,6 @@ export class AddGameViewModel {
   @AutoMap()
   releaseDate: string;
   @AutoMap()
-  rtp: PrimaryKey | '';
-  @AutoMap()
   volatilityId: PrimaryKey;
   @AutoMap()
   classId: PrimaryKey;
@@ -21,6 +19,7 @@ export class AddGameViewModel {
   @AutoMap()
   createdByUserEmail: string;
 
+  rtp: PrimaryKey | '';
   hasDemo: '0' | '1';
   typeId: PrimaryKey;
   subTypeId: PrimaryKey;

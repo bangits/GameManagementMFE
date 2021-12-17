@@ -1,6 +1,7 @@
 import { PrimaryKey } from '@atom/common';
 import {
   AddGameRequestModel,
+  GameLaunchRequestModel,
   GetClassNamesResponseModel,
   GetGameByIdResponseModel,
   GetGameFeaturesResponseModel,
@@ -10,7 +11,9 @@ import {
   GetGameSupportedBrowsersResponseModel,
   GetGameThemesResponseModel,
   GetGameTypesResponseModel,
-  GetGameVolatilitiesResponseModel
+  GetGameVolatilitiesResponseModel,
+  GetProviderGamesRequestModel,
+  GetProviderGamesResponseModel
 } from '../models';
 
 export interface IGameRepository {
@@ -25,4 +28,6 @@ export interface IGameRepository {
   getGameVolatilities(): Promise<GetGameVolatilitiesResponseModel>;
   getGameSupportedBrowsers(): Promise<GetGameSupportedBrowsersResponseModel>;
   getGamePlatforms(): Promise<GetGamePlatformsResponseModel>;
+  getProviderGames(getProviderGamesRequestModel: GetProviderGamesRequestModel): Promise<GetProviderGamesResponseModel>;
+  gameLaunch(gameLaunchRequestModel: GameLaunchRequestModel): Promise<string>;
 }

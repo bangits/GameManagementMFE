@@ -1,7 +1,7 @@
 import { gameApi } from '@/adapter/redux/api';
 import { addGameValidationSchema } from '@/domain/validators';
 import { AddGameCustomErrorsEnum, AddGameViewModel } from '@/view/models';
-import { useAsync, useLoading, useTranslation, useValidationTranslation } from '@atom/common';
+import { useAsync, useLoading, useQueryString, useTranslation, useValidationTranslation } from '@atom/common';
 import { alert } from '@atom/design-system';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import { FC, useCallback, useEffect, useMemo } from 'react';
@@ -11,6 +11,8 @@ const AddGameContainer: FC = () => {
   const [addGame, { status }] = gameApi.useAddGameMutation();
 
   const changeAppLoading = useLoading();
+
+  const parsedQueries = useQueryString<{ providerId: string }>();
 
   const t = useTranslation();
   const validationTranslations = useValidationTranslation();
@@ -71,7 +73,13 @@ const AddGameContainer: FC = () => {
     }
   }, [status]);
 
-  return <AddGame validationSchema={getAddPartnerValidationSchema} onSubmit={onSubmit} />;
+  return (
+    <AddGame
+      providerId={+parsedQueries.providerId || null}
+      validationSchema={getAddPartnerValidationSchema}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default AddGameContainer;

@@ -13,6 +13,7 @@ import {
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
   GetProvidersViewModel,
+  ProviderGamesTypesViewModel,
   ProvidersFiltersViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
@@ -64,6 +65,10 @@ export class ProviderUseCase {
   getProvidersById = async (providerId: PrimaryKey): Promise<GetProvidersByIdViewModel> => {
     const getProvidersByIdResponseModel = await this.providerRepository.getProvidersById(providerId);
 
-    return await mapper.map(getProvidersByIdResponseModel, GetProvidersByIdViewModel, GetProvidersByIdResponseModel);
+    return mapper.map(getProvidersByIdResponseModel, GetProvidersByIdViewModel, GetProvidersByIdResponseModel);
+  };
+
+  getProviderGameTypesAndCount = async (providerId: PrimaryKey): Promise<ProviderGamesTypesViewModel[]> => {
+    return await this.providerRepository.getProviderGameTypesAndCount(providerId);
   };
 }
