@@ -1,4 +1,5 @@
 export * from './GetClassNamesResponseModel';
+export * from './GetGameByIdResponseModel';
 export * from './GetGameFeaturesResponseModel';
 export * from './GetGamePlatromsResponseModel';
 export * from './GetGameResponseModel';

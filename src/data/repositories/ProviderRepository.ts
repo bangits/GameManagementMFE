@@ -49,18 +49,18 @@ export class ProviderRepository implements IProviderRepository {
     });
   };
 
+  getProvidersById = async (providerId: PrimaryKey): Promise<GetProvidersByIdResponseModel> => {
+    return await this.httpService.get<GetProvidersByIdResponseModel, {}>({
+      url: API_ROUTES.PROVIDERS.BASE_ROUTE + `/${providerId}`
+    });
+  };
+
   changeProviderStatus = async (
     changeProviderStatusRequestModel: ChangeProviderStatusRequestModel
   ): Promise<ActionResponseModel> => {
     return await this.httpService.put<ActionResponseModel, ChangeProviderStatusRequestModel, {}>({
       url: API_ROUTES.PROVIDERS.CHANGE_STATUS,
       body: changeProviderStatusRequestModel
-    });
-  };
-
-  getProvidersById = async (providerId: PrimaryKey): Promise<GetProvidersByIdResponseModel> => {
-    return await this.httpService.get<GetProvidersByIdResponseModel, {}>({
-      url: API_ROUTES.PROVIDERS.BASE_ROUTE + `/${providerId}`
     });
   };
 
