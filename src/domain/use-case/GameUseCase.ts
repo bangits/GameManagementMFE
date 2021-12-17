@@ -9,11 +9,8 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
-<<<<<<< HEAD
-  GamesDetailsViewModel,
-=======
   GameLaunchViewModel,
->>>>>>> 0aaeef7af933e820065d6572a2e786124326642a
+  GamesDetailsViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,

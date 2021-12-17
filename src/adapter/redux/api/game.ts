@@ -1,7 +1,10 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import { GameUseCase } from '@/domain/use-case';
 import {
-  AddGameViewModel, GameLaunchViewModel, GamesDetailsViewModel, GamesFiltersViewModel,
+  AddGameViewModel,
+  GameLaunchViewModel,
+  GamesDetailsViewModel,
+  GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
   GetGamePlatformsViewModel,
