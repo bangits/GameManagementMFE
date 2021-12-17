@@ -90,6 +90,7 @@
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
     "@reduxjs/toolkit": "^1.6.2",
+    "atom": "^1.4.1",
     "formik": "^2.2.9",
     "immer": "^9.0.7",
     "inversify": "^5.1.1",

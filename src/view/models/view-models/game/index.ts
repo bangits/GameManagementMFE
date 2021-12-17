@@ -1,5 +1,6 @@
 export * from './AddGameViewModel';
 export * from './GameLaunchViewModel';
+export * from './GamesDetailsViewModel';
 export * from './GamesFiltersViewModel';
 export * from './GamesViewModel';
 export * from './GetClassNamesViewModel';

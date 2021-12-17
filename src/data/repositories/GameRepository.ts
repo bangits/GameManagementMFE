@@ -3,6 +3,7 @@ import { IGameRepository } from '@/domain/boundaries';
 import {
   AddGameRequestModel,
   GetClassNamesResponseModel,
+  GetGameByIdResponseModel,
   GetGameFeaturesResponseModel,
   GetGamePlatformsResponseModel,
   GetGameRequestModel,
@@ -42,6 +43,11 @@ export class GameRepository implements IGameRepository {
     return true;
   };
 
+  getGameById = async (gameId: PrimaryKey): Promise<GetGameByIdResponseModel> => {
+    return await this.httpService.get<GetGameByIdResponseModel, {}>({
+      url: API_ROUTES.GAMES.BASE_ROUTE + `/${gameId}`
+    });
+  };
   getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel> => {
     return await this.httpService.get<GetGameTypesResponseModel, {}>({
       url: API_ROUTES.GAMES.GET_GAME_TYPES,
@@ -107,7 +113,7 @@ export class GameRepository implements IGameRepository {
     CACHE_CONSTANTS.GetGamePlatformsResponse,
     async (): Promise<GetGamePlatformsResponseModel> => {
       return await this.httpService.get<GetGamePlatformsResponseModel, {}>({
-        url: API_ROUTES.GAMES.GET_GAME_SUPPORTED_BROWSERS
+        url: API_ROUTES.GAMES.GET_GAME_PLATFORMS
       });
     }
   ).bind(this);
