@@ -5,10 +5,12 @@ export const API_ROUTES = {
   PROVIDERS: {
     BASE_ROUTE: PROVIDER_ROUTE,
     GET_PROVIDER_NAMES: PROVIDER_ROUTE + '/ProvidersName',
-    CHANGE_STATUS: PROVIDER_ROUTE + '/UpdateStatus'
+    CHANGE_STATUS: PROVIDER_ROUTE + '/UpdateStatus',
+    PROVIDER_GET_GAME_TYPES: '/GameTypes/GetGameTypesAndCount'
   },
   GAMES: {
     BASE_ROUTE: GAME_ROUTE,
+    GET_PROVIDER_GAMES: GAME_ROUTE + '/ProviderId',
     GET_GAME_TYPES: '/GameTypes',
     GET_CLASS_NAMES: '/Classes',
     GET_GAME_THEMES: '/Themes',

@@ -1,5 +1,11 @@
 {
   "name": "@atom/game-management",
+  "version": "1.0.0",
+  "main": "",
+  "types": "./dist/atom-game-management.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "webpack serve --mode=production",
     "start:standalone": "webpack serve --env standalone",
@@ -15,11 +21,12 @@
     "start-app": "docker-compose up --build",
     "kill-app": "docker-compose down",
     "pre-commit": "yarn format && yarn lint",
-    "pre-push": "yarn format"
+    "pre-push": "yarn format",
+    "build-declarations": "tsc -p tsconfig.declarations.json && tscpaths -p tsconfig.declarations.json -s ./src -o ./dist"
   },
   "devDependencies": {
-    "@atom/common": "^2.6.1",
-    "@atom/design-system": "^2.2.1",
+    "@atom/common": "^2.6.4",
+    "@atom/design-system": "^2.2.3",
     "@babel/core": "^7.14.6",
     "@babel/eslint-parser": "^7.14.7",
     "@babel/plugin-proposal-decorators": "^7.15.8",
@@ -67,6 +74,8 @@
     "sass-loader": "^12.1.0",
     "sass-resources-loader": "^2.2.3",
     "style-loader": "^3.2.1",
+    "tsconfig-paths": "^3.11.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^4.3.4",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2",
