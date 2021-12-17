@@ -72,9 +72,9 @@ export const providerApi = createApi({
     editProviderGeneralInfo: build.mutation<ActionResponseModel, {}>({
       query: (editProviderGeneralInfoViewModel: EditProviderGeneralInformationViewModel) => {
         return {
-          methodName: "editProviderGeneralInfo",
+          methodName: 'editProviderGeneralInfo',
           methodArguments: [editProviderGeneralInfoViewModel]
-        }
+        };
       },
       invalidatesTags: ['getProviderById']
     })

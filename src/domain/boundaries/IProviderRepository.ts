@@ -17,5 +17,7 @@ export interface IProviderRepository {
   changeProviderStatus(changeProviderStatus: ChangeProviderStatusRequestModel): Promise<ActionResponseModel>;
   getProvidersById(providerId: PrimaryKey): Promise<GetProvidersByIdResponseModel>;
   getProviderGameTypesAndCount(providerId: PrimaryKey): Promise<GetGameTypesAndCountResponseModel[]>;
-  editProviderGeneralInfo(editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel): Promise<ActionResponseModel>
+  editProviderGeneralInfo(
+    editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel
+  ): Promise<ActionResponseModel>;
 }

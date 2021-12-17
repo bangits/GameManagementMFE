@@ -124,7 +124,7 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) =>
         source.targetMarkets.map((markets) => ({
           tagName: markets.name,
-          id: markets.id,
+          id: markets.id
         }))
       )
     )
@@ -328,41 +328,52 @@ export const baseProfile: MappingProfile = (mapper) => {
   );
 
   //# Edit Provider View
-  mapper.createMap(EditProviderGeneralInformationViewModel, EditProviderGeneralInformationRequestModel)
+  mapper
+    .createMap(EditProviderGeneralInformationViewModel, EditProviderGeneralInformationRequestModel)
     .forMember(
       (destination) => destination.absoluteUrl,
       mapFrom((source) => source.absoluteRealUrl)
     )
     .forMember(
       (destination) => destination.providerLicenses,
-      mapFrom((source) => source.licensesId.map(licenseId => ({
-        licenseId
-      })))
+      mapFrom((source) =>
+        source.licensesId.map((licenseId) => ({
+          licenseId
+        }))
+      )
     )
     .forMember(
       (destination) => destination.targetMarkets,
-      mapFrom((source) => source.targetMarketsId.map(countryId => ({
-        countryId
-      })))
+      mapFrom((source) =>
+        source.targetMarketsId.map((countryId) => ({
+          countryId
+        }))
+      )
     )
     .forMember(
       (destination) => destination.certifiedCountries,
-      mapFrom((source) => source.certifiedCountriesId.map(countryId => ({
-        countryId
-      })))
+      mapFrom((source) =>
+        source.certifiedCountriesId.map((countryId) => ({
+          countryId
+        }))
+      )
     )
     .forMember(
       (destination) => destination.restrictedCountries,
-      mapFrom((source) => source.restrictedCountriesId.map(countryId => ({
-        countryId
-      })))
+      mapFrom((source) =>
+        source.restrictedCountriesId.map((countryId) => ({
+          countryId
+        }))
+      )
     )
     .forMember(
       (destination) => destination.providerCurrencies,
-      mapFrom((source) => source.providerCurrenciesId.map(currency => ({
-        currencyId: currency,
-        defaultCurrency: false
-      })))
-    )
+      mapFrom((source) =>
+        source.providerCurrenciesId.map((currency) => ({
+          currencyId: currency,
+          defaultCurrency: false
+        }))
+      )
+    );
   //#endregion
 };

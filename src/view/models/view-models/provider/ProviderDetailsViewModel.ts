@@ -30,7 +30,6 @@ export class ProviderDetailsViewModel {
   restrictedCountries: {
     tagName: string;
     id: PrimaryKey;
-
   }[];
   providerLicenses: {
     title: string;

@@ -1,42 +1,42 @@
-import { PrimaryKey } from "@atom/common";
-import { AutoMap } from "@automapper/classes";
+import { PrimaryKey } from '@atom/common';
+import { AutoMap } from '@automapper/classes';
 
 export class EditProviderGeneralInformationRequestModel {
-    @AutoMap()
-    providerId: PrimaryKey;
+  @AutoMap()
+  providerId: PrimaryKey;
 
-    @AutoMap()
-    logo: string;
+  @AutoMap()
+  logo: string;
 
-    @AutoMap()
-    absoluteDemoUrl: string;
+  @AutoMap()
+  absoluteDemoUrl: string;
 
-    @AutoMap()
-    lastUpdatedByUserId: PrimaryKey;
+  @AutoMap()
+  lastUpdatedByUserId: PrimaryKey;
 
-    @AutoMap()
-    lastUpdatedByUserEmail: string;
+  @AutoMap()
+  lastUpdatedByUserEmail: string;
 
-    providerCurrencies: {
-        currencyId: PrimaryKey;
-        defaultCurrency: boolean;
-    }[]
+  providerCurrencies: {
+    currencyId: PrimaryKey;
+    defaultCurrency: boolean;
+  }[];
 
-    absoluteUrl: string;
-    
-    providerLicenses: {
-        licenseId: PrimaryKey;
-    }[];
+  absoluteUrl: string;
 
-    targetMarkets: {
-        countryId: PrimaryKey;
-    }[]
+  providerLicenses: {
+    licenseId: PrimaryKey;
+  }[];
 
-    certifiedCountries: {
-        countryId: PrimaryKey;
-    }[]
+  targetMarkets: {
+    countryId: PrimaryKey;
+  }[];
 
-    restrictedCountries: {
-        countryId: PrimaryKey;
-    }[]    
+  certifiedCountries: {
+    countryId: PrimaryKey;
+  }[];
+
+  restrictedCountries: {
+    countryId: PrimaryKey;
+  }[];
 }

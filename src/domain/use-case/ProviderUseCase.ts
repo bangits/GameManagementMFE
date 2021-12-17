@@ -74,9 +74,15 @@ export class ProviderUseCase {
     return await this.providerRepository.getProviderGameTypesAndCount(providerId);
   };
 
-  editProviderGeneralInfo = async (editProviderGeneralInfoViewModel: EditProviderGeneralInformationViewModel): Promise<ActionResponseModel> => {
-    const editProviderGeneralInfoResponseModel = mapper.map(editProviderGeneralInfoViewModel, EditProviderGeneralInformationRequestModel, EditProviderGeneralInformationViewModel);
+  editProviderGeneralInfo = async (
+    editProviderGeneralInfoViewModel: EditProviderGeneralInformationViewModel
+  ): Promise<ActionResponseModel> => {
+    const editProviderGeneralInfoResponseModel = mapper.map(
+      editProviderGeneralInfoViewModel,
+      EditProviderGeneralInformationRequestModel,
+      EditProviderGeneralInformationViewModel
+    );
 
-    return this.providerRepository.editProviderGeneralInfo(editProviderGeneralInfoResponseModel)
-  }
+    return this.providerRepository.editProviderGeneralInfo(editProviderGeneralInfoResponseModel);
+  };
 }

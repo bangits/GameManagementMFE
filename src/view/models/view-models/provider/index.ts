@@ -8,4 +8,3 @@ export * from './ProviderDetailsViewModel';
 export * from './ProviderGamesTypesViewModel';
 export * from './ProvidersFiltersViewModel';
 export * from './ProvidersViewModel';
-

@@ -74,10 +74,12 @@ export class ProviderRepository implements IProviderRepository {
     });
   };
 
-  editProviderGeneralInfo = async (editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel): Promise<ActionResponseModel> => {
+  editProviderGeneralInfo = async (
+    editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel
+  ): Promise<ActionResponseModel> => {
     return await this.httpService.put<ActionResponseModel, {}, EditProviderGeneralInformationRequestModel>({
       url: API_ROUTES.PROVIDERS.EDIT_GENERAL_INFORMATION,
       body: editProviderGeneralInformationRequestModel
-    })
-  }
+    });
+  };
 }
