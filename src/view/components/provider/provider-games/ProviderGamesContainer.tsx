@@ -1,18 +1,16 @@
 import { gameApi, providerApi } from '@/adapter/redux/api';
 import { ROUTES } from '@/view/constants';
 import { ProviderGamesFilterViewModel } from '@/view/models';
-import { gameLaunchService } from '@/view/services';
-import { AuthenticatedContext } from '@atom/authorization';
-import { PrimaryKey, redirectToURL, useFirstValue } from '@atom/common';
+import { PrimaryKey, redirectToURL, useFirstValue, useTranslation } from '@atom/common';
 import { ProviderGames } from '@atom/design-system';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface ProviderGamesContainerProps {
   providerId: PrimaryKey;
 }
 
 export const ProviderGamesContainer = ({ providerId }: ProviderGamesContainerProps) => {
-  const { user } = useContext(AuthenticatedContext);
+  const t = useTranslation();
 
   const [filters, setFilters] = useState<ProviderGamesFilterViewModel>({
     gameSearch: '',
@@ -60,6 +58,17 @@ export const ProviderGamesContainer = ({ providerId }: ProviderGamesContainerPro
     redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd + `?providerId=${providerId}`);
   }, [providerId]);
 
+  const hasGames = !!firstGames?.results?.length;
+
+  const translations = useMemo(
+    () => ({
+      addGame: t.get('addGame'),
+      noGames: hasGames ? t.get('noDataFound') : t.get('providerDoesntHaveGames'),
+      search: t.get('search')
+    }),
+    [hasGames, t]
+  );
+
   useEffect(() => {
     if (data) {
       setGames([...games, ...data.results]);
@@ -73,26 +82,23 @@ export const ProviderGamesContainer = ({ providerId }: ProviderGamesContainerPro
   return (
     <ProviderGames
       searchInputMaxLength={30}
-      translations={{
-        addGame: 'Add Game',
-        noGames: 'No Games',
-        search: 'Search'
-      }}
+      translations={translations}
       gameTypes={providerGameTypes || []}
       games={games}
       onChange={onFiltersChange}
-      onGameClick={(gameId) => {
-        gameLaunchService.publish({
-          gameId,
-          gameLaunchUrl: '',
-          providerId
-        });
-      }}
+      onGameClick={console.log}
+      // (gameId) => {
+      //   gameLaunchService.publish({
+      //     gameId,
+      //     gameLaunchUrl: '',
+      //     providerId
+      //   });
+      // }
       onAddGameClick={onAddGameClick}
       isLoadingGames={isFetching}
       isAllGamesLoaded={isAllGamesLoaded}
       isTabLoading={isGameTypesFetching || isTabLoading}
-      hasGames={!!firstGames?.results?.length}
+      hasGames={hasGames}
     />
   );
 };
