@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
+  EditProviderGeneralInformationRequestModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
   GetProvidersByIdResponseModel
@@ -10,6 +11,7 @@ import { mapper } from '@/mapper';
 import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
+  EditProviderGeneralInformationViewModel,
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
   GetProvidersViewModel,
@@ -71,4 +73,10 @@ export class ProviderUseCase {
   getProviderGameTypesAndCount = async (providerId: PrimaryKey): Promise<ProviderGamesTypesViewModel[]> => {
     return await this.providerRepository.getProviderGameTypesAndCount(providerId);
   };
+
+  editProviderGeneralInfo = async (editProviderGeneralInfoViewModel: EditProviderGeneralInformationViewModel): Promise<ActionResponseModel> => {
+    const editProviderGeneralInfoResponseModel = mapper.map(editProviderGeneralInfoViewModel, EditProviderGeneralInformationRequestModel, EditProviderGeneralInformationViewModel);
+
+    return this.providerRepository.editProviderGeneralInfo(editProviderGeneralInfoResponseModel)
+  }
 }

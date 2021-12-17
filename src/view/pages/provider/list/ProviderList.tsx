@@ -174,8 +174,13 @@ function ProviderList({
           )
         }}
         rowCount={rowCount}
-        onEditButtonClick={() => {
-          const mockEdit = {};
+        onEditButtonClick={(column) => {
+          redirectToURL(
+            ROUTES.baseUrl +
+              ROUTES.providers +
+              ROUTES.providerDetails.replace(':providerId', column.providerId.toString()) +
+              '/?isEdit=true'
+          );
         }}
         onViewButtonClick={(column) =>
           redirectToURL(
