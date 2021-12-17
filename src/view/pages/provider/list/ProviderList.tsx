@@ -116,7 +116,7 @@ function ProviderList({
           options: [
             { label: t.get('active'), value: ProviderStatusesEnum.Active },
             // { label: t.get('blocked'), value: ProviderStatusesEnum.Blocked },
-            { label: t.get('inActive'), value: ProviderStatusesEnum.Inactive },
+            { label: t.get('inActive'), value: ProviderStatusesEnum.Inactive }
             // { label: t.get('removed'), value: ProviderStatusesEnum.Removed }
           ],
           isSearchable: true,

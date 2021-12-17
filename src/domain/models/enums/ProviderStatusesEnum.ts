@@ -1,6 +1,6 @@
 export enum ProviderStatusesEnum {
   Active = 1,
-  Inactive,
+  Inactive
   // Blocked,
   // Removed
 }
