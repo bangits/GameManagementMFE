@@ -150,7 +150,8 @@ function GameList({
 
         props: {
           label: t.get('gameId'),
-          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD,
+          type:'number'
         }
       },
 
@@ -440,7 +441,8 @@ function GameList({
 
         props: {
           label: t.get('createdBy'),
-          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
+          //@ts-expect-error delete this comment when atom common version is update  
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD_LARGE
         }
       }
     ],
@@ -471,7 +473,19 @@ function GameList({
           data: results,
           columns: tableColumns,
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound'),
+          emptyText: isFilteredData ? (
+            <>
+              {t.get('tables.emptyResultFirstSentence')}
+              <br />
+              {t.get('tables.emptyResultSecondSentence')}
+            </>
+          ) : (
+            <>
+              {t.get('youDontHavePartnersAdded')}
+              <br />
+              {t.get('pleaseAddPartner')}
+            </>
+          ),
           loadingRowsIds: gameTableLoadingIds,
           loadingRowColumnProperty: 'gameId',
           actions: [
