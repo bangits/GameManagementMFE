@@ -1,21 +1,21 @@
 import {
-    CountriesSelect,
-    createRenderInputs,
-    CurrencySelect,
-    CustomSelectProps,
-    LanguageSelect,
-    useTranslation
+  CountriesSelect,
+  createRenderInputs,
+  CurrencySelect,
+  CustomSelectProps,
+  LanguageSelect,
+  useTranslation
 } from '@atom/common';
 import {
-    BrowsersCheckboxGroup,
-    CompatibilityCheckboxesGroup,
-    CompatibilityCheckboxesGroupProps,
-    EditFormFields,
-    FlexibleForm,
-    FlexibleFormProps,
-    GameCompatibility,
-    GameCompatibilityProps,
-    LabelGroup
+  BrowsersCheckboxGroup,
+  CompatibilityCheckboxesGroup,
+  CompatibilityCheckboxesGroupProps,
+  EditFormFields,
+  FlexibleForm,
+  FlexibleFormProps,
+  GameCompatibility,
+  GameCompatibilityProps,
+  LabelGroup
 } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
 import React, { useMemo } from 'react';

@@ -36,7 +36,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
     () => ({
       title: t.get('totalMarket'),
       total: `${data.targetMarkets.length} ${t.get('countries')}`,
-      countries: data.targetMarkets.map((markets) => ({ tagName: markets.tagName }))
+      countries: data.targetMarkets.map((markets) => ({ tagName: markets.tagName, imgSrc: markets.imgSrc }))
     }),
     [t, data]
   );
@@ -45,7 +45,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
     () => ({
       title: t.get('certifiedCountries'),
       total: `${data.certifiedCountries.length} ${t.get('countries')}`,
-      countries: data.certifiedCountries.map((country) => ({ tagName: country.tagName }))
+      countries: data.certifiedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
     }),
     [t, data]
   );
@@ -54,7 +54,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
     () => ({
       title: t.get('restrictedCountries'),
       total: `${data.restrictedCountries.length} ${t.get('countries')}`,
-      countries: data.restrictedCountries.map((country) => ({ tagName: country.tagName }))
+      countries: data.restrictedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
     }),
     [t, data]
   );
