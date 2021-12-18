@@ -1,11 +1,7 @@
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
 import { redirectToURL, useTranslation } from '@atom/common';
-import {
-  GameDetails as GameDetailsPage,
-  GameDetailsProps as GameDetailsPageProps,
-  PageWrapper
-} from '@atom/design-system';
+import { GameDetails as GameDetailsPage, PageWrapper } from '@atom/design-system';
 import { FC, useMemo } from 'react';
 
 export interface GameDetailsProps {
@@ -70,7 +66,7 @@ const GameDetails: FC<GameDetailsProps> = ({
     [shouldShowApproveButton, onApproveButtonClick, shouldShowTerminateButton, onTerminateButtonClick, t]
   );
 
-  const translations = useMemo<GameDetailsPageProps['translations']>(
+  const translations = useMemo(
     () => ({
       createdBy: '',
       creationDate: '',
@@ -80,9 +76,7 @@ const GameDetails: FC<GameDetailsProps> = ({
       generalInformation: 'General Information',
       assets: '',
       playButton: 'Play',
-      playDemoButton: 'Play Demo',
-      gameId: '',
-      gameName: ''
+      playDemoButton: 'Play Demo'
     }),
     [t]
   );
@@ -90,6 +84,8 @@ const GameDetails: FC<GameDetailsProps> = ({
   return (
     <PageWrapper>
       <GameDetailsPage
+        gameName=''
+        gameId=''
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
         statusInfo={statusInfo}
@@ -102,6 +98,7 @@ const GameDetails: FC<GameDetailsProps> = ({
           playButtonProps: {},
           playDemoButtonProps: {}
         }}
+        //@ts-expect-error fixed
         translations={translations}
       />
     </PageWrapper>

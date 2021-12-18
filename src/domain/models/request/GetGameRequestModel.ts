@@ -39,8 +39,12 @@ export class GetGameRequestModel extends PagedModel {
   @AutoMap()
   providerIds: PrimaryKey[];
 
-  releaseDate: string;
-  creationDate: string;
+  releaseDateTo: string;
+  releaseDateFrom: string;
+
+  creationDateTo: string;
+  creationDateFrom: string;
+
   parentTypeIds: PrimaryKey[];
   rtpFrom: number;
   rtpTo: number;

@@ -150,7 +150,8 @@ function GameList({
 
         props: {
           label: t.get('gameId'),
-          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD,
+          type: 'number'
         }
       },
 
@@ -238,7 +239,11 @@ function GameList({
         type: 'datepicker' as const,
         name: 'releaseDate' as keyof GamesFiltersViewModel,
         label: t.get('releaseDate'),
-        props: {}
+
+        props: {
+          selectsRange: true,
+          monthsShown: 2
+        }
       },
       {
         name: 'classIds' as keyof GamesFiltersViewModel,
@@ -414,15 +419,21 @@ function GameList({
         )
       },
       {
-        type: 'datepicker' as const,
-        name: 'creationDate' as keyof GamesFiltersViewModel,
+        type: 'timepicker-from-to' as const,
         label: t.get('creationDate'),
-
+        name: 'creationDate' as keyof GamesFiltersViewModel,
         props: {
           selectsRange: true,
           monthsShown: 2
+        },
+        fromTimePickerProps: {
+          placeholderText: t.get('creationDateFrom')
+        },
+        toTimePickerProps: {
+          placeholderText: t.get('creationDateTo')
         }
       },
+
       {
         name: 'createdBy' as keyof GamesFiltersViewModel,
         type: 'input' as const,
@@ -430,7 +441,7 @@ function GameList({
 
         props: {
           label: t.get('createdBy'),
-          maxLength: INPUT_MAX_VALUES.INPUT_FIELD
+          maxLength: INPUT_MAX_VALUES.INPUT_FIELD_LARGE
         }
       }
     ],
@@ -461,7 +472,19 @@ function GameList({
           data: results,
           columns: tableColumns,
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound'),
+          emptyText: isFilteredData ? (
+            <>
+              {t.get('tables.emptyResultFirstSentence')}
+              <br />
+              {t.get('tables.emptyResultSecondSentence')}
+            </>
+          ) : (
+            <>
+              {t.get('youDontHavePartnersAdded')}
+              <br />
+              {t.get('pleaseAddPartner')}
+            </>
+          ),
           loadingRowsIds: gameTableLoadingIds,
           loadingRowColumnProperty: 'gameId',
           actions: [
