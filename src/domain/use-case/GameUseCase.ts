@@ -1,6 +1,9 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddGameRequestModel,
+  ChangeGameStatusRequestModel,
+  GameLaunchRequestModel,
+  GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
@@ -9,6 +12,7 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
+  ChangeGameStatusViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
@@ -23,10 +27,9 @@ import {
   ProviderGamesViewModel
 } from '@/view/models';
 import { ProviderGamesFilterViewModel } from '@/view/models/view-models/game/ProviderGamesFilterViewModel';
-import { PrimaryKey } from '@atom/common';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IGameRepository } from './../boundaries';
-import { GetGameByIdResponseModel } from './../models/response/GetGameByIdResponseModel';
 @injectable()
 export class GameUseCase {
   @inject(DI_CONSTANTS.GAME.GameRepository)
@@ -110,12 +113,20 @@ export class GameUseCase {
   };
 
   gameLaunch = async (gameLaunchViewModel: GameLaunchViewModel): Promise<string> => {
-    // if (!gameLaunchViewModel) return null;
+    if (!gameLaunchViewModel) return null;
 
-    // const gameLaunchRequestModel = mapper.map(gameLaunchViewModel, GameLaunchRequestModel, GameLaunchViewModel);
+    const gameLaunchRequestModel = mapper.map(gameLaunchViewModel, GameLaunchRequestModel, GameLaunchViewModel);
 
-    // return await this.gameRepository.gameLaunch(gameLaunchRequestModel);
+    return await this.gameRepository.gameLaunch(gameLaunchRequestModel);
+  };
 
-    return 'https://partnerapi.sportdigi.com/GamesLaunch/Launch?gameid=5935&playMode=demo&deviceType=1&lang=EN&operatorId=DB6D2EB9&mainDomain=totogaming697.ru';
+  changeGameStatus = async (changeGameStatusViewModel: ChangeGameStatusViewModel): Promise<ActionResponseModel> => {
+    const changeGameStatusRequestModel = mapper.map(
+      changeGameStatusViewModel,
+      ChangeGameStatusRequestModel,
+      ChangeGameStatusViewModel
+    );
+
+    return this.gameRepository.changeGameStatus(changeGameStatusRequestModel);
   };
 }

@@ -2,8 +2,10 @@ import { Game, Provider } from '@/domain/entities';
 import {
   AddGameRequestModel,
   AddProviderRequestModel,
+  ChangeGameStatusRequestModel,
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
+  GameLaunchRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
@@ -16,8 +18,10 @@ import {
 import {
   AddGameViewModel,
   AddProviderViewModel,
+  ChangeGameStatusViewModel,
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
+  GameLaunchViewModel,
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
@@ -190,7 +194,7 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.creationDate,
-      mapFrom((source) => source.creationDate)
+      mapFrom((source) => `${convertDate(source.creationDate)}`)
     )
     .forMember(
       (destination) => destination.createdByUserEmail,
@@ -383,5 +387,26 @@ export const baseProfile: MappingProfile = (mapper) => {
         }))
       )
     );
+
+  //# Game Launch
+  mapper
+    .createMap(GameLaunchViewModel, GameLaunchRequestModel)
+    .forMember(
+      (destination) => destination.playerId,
+      mapFrom((source) => source.userId)
+    )
+    .forMember(
+      (destination) => destination.projectId,
+      mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.currencyId,
+      mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.currency,
+      mapFrom((source) => 'USD')
+    );
   //#endregion
+  mapper.createMap(ChangeGameStatusViewModel, ChangeGameStatusRequestModel);
 };

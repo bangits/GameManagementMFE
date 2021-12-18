@@ -1,4 +1,4 @@
-import { GameStatusesEnum } from '@/domain/models/enums';
+import { GameStatusesEnum } from '@/domain/models';
 import {
   GameClassSelect,
   GameFeaturesSelect,
@@ -17,6 +17,7 @@ import {
   CurrencySelect,
   INPUT_MAX_VALUES,
   LanguageSelect,
+  PrimaryKey,
   redirectToURL,
   TablePage,
   useTranslation
@@ -30,9 +31,29 @@ export interface GameListProps {
   rowCount: number;
   isFilteredData: boolean;
   isFetching: boolean;
+  gameTableLoadingIds: PrimaryKey[];
+
+  // actions
+  onActivateButtonClick: (column: GamesViewModel | GamesViewModel[]) => void;
+  shouldShowActivateButton: (column: GamesViewModel) => boolean;
+
+  onInActivateButtonClick: (column: GamesViewModel | GamesViewModel[]) => void;
+  shouldShowInActivateButton: (column: GamesViewModel) => boolean;
 }
 
-function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData, isFetching }: GameListProps) {
+function GameList({
+  filters,
+  results,
+  onFiltersChange,
+  rowCount,
+  isFilteredData,
+  isFetching,
+  onActivateButtonClick,
+  shouldShowActivateButton,
+  onInActivateButtonClick,
+  shouldShowInActivateButton,
+  gameTableLoadingIds
+}: GameListProps) {
   const t = useTranslation();
 
   const tableColumns = useMemo(
@@ -438,36 +459,49 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
   return (
     <PageWrapper title={t.get('games')} showButton buttonProps={addGameButtonProps}>
       <TablePage
-        fetchData={onFiltersChange}
-        isFetching={isFetching}
-        isFilteredData={isFilteredData}
-        filterProps={{
-          defaultOpened: false,
-          initialValues: filters,
-          filters: filtersList
-        }}
-        tableProps={{
-          data: results,
-          columns: tableColumns,
-          illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? (
-            <>
-              {t.get('tables.emptyResultFirstSentence')}
-              <br />
-              {t.get('tables.emptyResultSecondSentence')}
-            </>
-          ) : (
-            <>
-              {t.get('youDontHavePartnersAdded')}
-              <br />
-              {t.get('pleaseAddPartner')}
-            </>
-          )
-        }}
-        rowCount={rowCount}
-      />
+          fetchData={onFiltersChange}
+          isFetching={isFetching}
+          isFilteredData={isFilteredData}
+          filterProps={{
+            defaultOpened: false,
+            initialValues: filters,
+            filters: filtersList
+          }}
+          tableProps={{
+            data: results,
+            columns: tableColumns,
+            illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
+            emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound'),
+            loadingRowsIds: gameTableLoadingIds,
+            loadingRowColumnProperty: 'gameId',
+            actions: [
+              {
+                iconName: 'CheckButtonIcon',
+                onClick: onActivateButtonClick,
+                shouldShow: shouldShowActivateButton,
+                tooltipText: t.get('activate')
+              },
+              {
+                iconName: 'BlockButtonIcon',
+                onClick: onInActivateButtonClick,
+                shouldShow: shouldShowInActivateButton,
+                tooltipText: t.get('inActivate')
+              }
+            ]
+          }}
+          rowCount={rowCount}
+          getEditUrl={(column) =>
+            ROUTES.baseUrl +
+            ROUTES.game +
+            ROUTES.providerDetails.replace(':providerId', column.gameId.toString()) +
+            '/?isEdit=true'
+          }
+          getViewUrl={(column) =>
+            ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', column.gameId.toString())
+          }
+        />
     </PageWrapper>
-  );
+  )
 }
 
 export default GameList;

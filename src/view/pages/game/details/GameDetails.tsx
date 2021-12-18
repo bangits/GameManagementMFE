@@ -1,7 +1,11 @@
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
 import { redirectToURL, useTranslation } from '@atom/common';
-import { GameDetails as GameDetailsPage, PageWrapper } from '@atom/design-system';
+import {
+  GameDetails as GameDetailsPage,
+  GameDetailsProps as GameDetailsPageProps,
+  PageWrapper
+} from '@atom/design-system';
 import { FC, useMemo } from 'react';
 
 export interface GameDetailsProps {
@@ -66,28 +70,19 @@ const GameDetails: FC<GameDetailsProps> = ({
     [shouldShowApproveButton, onApproveButtonClick, shouldShowTerminateButton, onTerminateButtonClick, t]
   );
 
-  const docInfo = useMemo(
+  const translations = useMemo<GameDetailsPageProps['translations']>(
     () => ({
-      documentID: '5461213584',
-      type: 'Gameship Agreement',
-      expirationDate: '12/08/2021',
-      statusLabel: 'Signed',
-      statusVariant: 'active' as const
-    }),
-    []
-  );
-
-  const translations = useMemo(
-    () => ({
+      createdBy: '',
+      creationDate: '',
       status: t.get('status'),
-      parentCompany: t.get('parentCompany'),
-      parentCompanyId: t.get('parentCompanyId'),
-      expirationDate: t.get('expirationDate'),
-      type: t.get('type'),
-      documentID: t.get('documentId'),
-      providerInformation: t.get('providerInformation'),
-      mainInformation: t.get('mainInformation'),
-      organizationData: t.get('organizationData')
+      lastUpdateDate: '',
+      lastUpdateBy: '',
+      generalInformation: 'General Information',
+      assets: '',
+      playButton: 'Play',
+      playDemoButton: 'Play Demo',
+      gameId: '',
+      gameName: ''
     }),
     [t]
   );
@@ -97,11 +92,17 @@ const GameDetails: FC<GameDetailsProps> = ({
       <GameDetailsPage
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
-        parentCompanyId={14}
-        parentCompany={'parentCompany'}
-        statusInfo={[]}
-        docInfo={[]}
-        translations={[]}
+        statusInfo={statusInfo}
+        creationDate={''}
+        createdBy=''
+        lastUpdateDate=''
+        lastUpdateBy=''
+        generalInformationContext={<></>}
+        buttons={{
+          playButtonProps: {},
+          playDemoButtonProps: {}
+        }}
+        translations={translations}
       />
     </PageWrapper>
   );

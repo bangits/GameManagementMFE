@@ -9,6 +9,7 @@ export const DI_CONSTANTS = {
   },
   CacheService: 'ICacheService',
   HttpService: 'IHttpService',
+  GameLauncherHttpService: 'GameLauncherHttpService',
   TranslationUseCase: 'TranslationUseCase',
   LocalStorageService: 'LocalStorageService'
 };

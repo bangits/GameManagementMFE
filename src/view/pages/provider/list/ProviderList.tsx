@@ -2,7 +2,7 @@ import { ProviderStatusesEnum } from '@/domain/models/enums';
 import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
-import { PrimaryKey, redirectToURL, TablePage, useTranslation } from '@atom/common';
+import { PrimaryKey, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useMemo } from 'react';
 
@@ -176,20 +176,16 @@ function ProviderList({
           )
         }}
         rowCount={rowCount}
-        onEditButtonClick={(column) => {
-          redirectToURL(
-            ROUTES.baseUrl +
-              ROUTES.providers +
-              ROUTES.providerDetails.replace(':providerId', column.providerId.toString()) +
-              '/?isEdit=true'
-          );
-        }}
-        onViewButtonClick={(column) =>
-          redirectToURL(
-            ROUTES.baseUrl +
-              ROUTES.providers +
-              ROUTES.providerDetails.replace(':providerId', column.providerId.toString())
-          )
+        getEditUrl={(column) =>
+          ROUTES.baseUrl +
+          ROUTES.providers +
+          ROUTES.providerDetails.replace(':providerId', column.providerId.toString()) +
+          '/?isEdit=true'
+        }
+        getViewUrl={(column) =>
+          ROUTES.baseUrl +
+          ROUTES.providers +
+          ROUTES.providerDetails.replace(':providerId', column.providerId.toString())
         }
       />
     </PageWrapper>

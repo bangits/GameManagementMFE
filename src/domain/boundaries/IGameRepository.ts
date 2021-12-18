@@ -1,6 +1,7 @@
-import { PrimaryKey } from '@atom/common';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import {
   AddGameRequestModel,
+  ChangeGameStatusRequestModel,
   GameLaunchRequestModel,
   GetClassNamesResponseModel,
   GetGameByIdResponseModel,
@@ -30,4 +31,5 @@ export interface IGameRepository {
   getGamePlatforms(): Promise<GetGamePlatformsResponseModel>;
   getProviderGames(getProviderGamesRequestModel: GetProviderGamesRequestModel): Promise<GetProviderGamesResponseModel>;
   gameLaunch(gameLaunchRequestModel: GameLaunchRequestModel): Promise<string>;
+  changeGameStatus(changeGameStatus: ChangeGameStatusRequestModel): Promise<ActionResponseModel>;
 }
