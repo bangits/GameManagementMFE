@@ -104,7 +104,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         mainDetailsInfo={mainDetailsInfo}
         statusInfo={statusInfo}
         breadCrumb={breadCrumb}
-        gamesTabContent={<ProviderGamesContainer providerId={data.id} />}
+        gamesTabContent={<ProviderGamesContainer providerId={data.id} providerStatusId={data.statusId} />}
         generalInformationContext={<GeneralInformationContainer data={data} />}
       />
     </PageWrapper>

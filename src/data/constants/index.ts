@@ -18,7 +18,8 @@ export const API_ROUTES = {
     GET_GAME_FEATURES: '/Feature',
     GET_GAME_VOLATILITIES: '/Volatility',
     GET_GAME_SUPPORTED_BROWSERS: '/SupportedBrowsers',
-    GET_GAME_PLATFORMS: '/GamePlatform'
+    GET_GAME_PLATFORMS: '/GamePlatform',
+    LAUNCH_GAME: '/Rival/gameLaunch'
   }
 };
 

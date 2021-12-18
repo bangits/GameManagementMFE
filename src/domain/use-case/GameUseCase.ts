@@ -1,6 +1,7 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddGameRequestModel,
+  GameLaunchRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
@@ -110,12 +111,10 @@ export class GameUseCase {
   };
 
   gameLaunch = async (gameLaunchViewModel: GameLaunchViewModel): Promise<string> => {
-    // if (!gameLaunchViewModel) return null;
+    if (!gameLaunchViewModel) return null;
 
-    // const gameLaunchRequestModel = mapper.map(gameLaunchViewModel, GameLaunchRequestModel, GameLaunchViewModel);
+    const gameLaunchRequestModel = mapper.map(gameLaunchViewModel, GameLaunchRequestModel, GameLaunchViewModel);
 
-    // return await this.gameRepository.gameLaunch(gameLaunchRequestModel);
-
-    return 'https://partnerapi.sportdigi.com/GamesLaunch/Launch?gameid=5935&playMode=demo&deviceType=1&lang=EN&operatorId=DB6D2EB9&mainDomain=totogaming697.ru';
+    return await this.gameRepository.gameLaunch(gameLaunchRequestModel);
   };
 }

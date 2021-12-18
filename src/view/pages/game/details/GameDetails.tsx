@@ -1,7 +1,7 @@
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
 import { redirectToURL, useTranslation } from '@atom/common';
-import { GameDetails as GameDetailsPage, PageWrapper } from '@atom/design-system';
+import { PageWrapper } from '@atom/design-system';
 import { FC, useMemo } from 'react';
 
 export interface GameDetailsProps {
@@ -94,7 +94,7 @@ const GameDetails: FC<GameDetailsProps> = ({
 
   return (
     <PageWrapper>
-      <GameDetailsPage
+      {/* <GameDetailsPage
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
         parentCompanyId={14}
@@ -102,7 +102,7 @@ const GameDetails: FC<GameDetailsProps> = ({
         statusInfo={[]}
         docInfo={[]}
         translations={[]}
-      />
+      /> */}
     </PageWrapper>
   );
 };

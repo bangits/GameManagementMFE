@@ -20,6 +20,12 @@ export class DiContainer {
           baseURL: 'http://20.120.144.194/api/v1'
         })
     );
+    this.diContainer.bind(DI_CONSTANTS.GameLauncherHttpService).toDynamicValue(
+      () =>
+        new HttpService({
+          baseURL: 'http://52.143.74.18/api/v1'
+        })
+    );
 
     // Repositories
     this.diContainer.bind(DI_CONSTANTS.PROVIDER.ProviderRepository).to(ProviderRepository);

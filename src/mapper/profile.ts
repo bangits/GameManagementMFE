@@ -4,6 +4,7 @@ import {
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
+  GameLaunchRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
@@ -18,6 +19,7 @@ import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
+  GameLaunchViewModel,
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
@@ -374,6 +376,26 @@ export const baseProfile: MappingProfile = (mapper) => {
           defaultCurrency: false
         }))
       )
+    );
+
+  //# Game Launch
+  mapper
+    .createMap(GameLaunchViewModel, GameLaunchRequestModel)
+    .forMember(
+      (destination) => destination.playerId,
+      mapFrom((source) => source.userId)
+    )
+    .forMember(
+      (destination) => destination.projectId,
+      mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.currencyId,
+      mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.currency,
+      mapFrom((source) => 'USD')
     );
   //#endregion
 };
