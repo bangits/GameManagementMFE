@@ -459,49 +459,49 @@ function GameList({
   return (
     <PageWrapper title={t.get('games')} showButton buttonProps={addGameButtonProps}>
       <TablePage
-          fetchData={onFiltersChange}
-          isFetching={isFetching}
-          isFilteredData={isFilteredData}
-          filterProps={{
-            defaultOpened: false,
-            initialValues: filters,
-            filters: filtersList
-          }}
-          tableProps={{
-            data: results,
-            columns: tableColumns,
-            illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-            emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound'),
-            loadingRowsIds: gameTableLoadingIds,
-            loadingRowColumnProperty: 'gameId',
-            actions: [
-              {
-                iconName: 'CheckButtonIcon',
-                onClick: onActivateButtonClick,
-                shouldShow: shouldShowActivateButton,
-                tooltipText: t.get('activate')
-              },
-              {
-                iconName: 'BlockButtonIcon',
-                onClick: onInActivateButtonClick,
-                shouldShow: shouldShowInActivateButton,
-                tooltipText: t.get('inActivate')
-              }
-            ]
-          }}
-          rowCount={rowCount}
-          getEditUrl={(column) =>
-            ROUTES.baseUrl +
-            ROUTES.game +
-            ROUTES.providerDetails.replace(':providerId', column.gameId.toString()) +
-            '/?isEdit=true'
-          }
-          getViewUrl={(column) =>
-            ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', column.gameId.toString())
-          }
-        />
+        fetchData={onFiltersChange}
+        isFetching={isFetching}
+        isFilteredData={isFilteredData}
+        filterProps={{
+          defaultOpened: false,
+          initialValues: filters,
+          filters: filtersList
+        }}
+        tableProps={{
+          data: results,
+          columns: tableColumns,
+          illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
+          emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound'),
+          loadingRowsIds: gameTableLoadingIds,
+          loadingRowColumnProperty: 'gameId',
+          actions: [
+            {
+              iconName: 'CheckButtonIcon',
+              onClick: onActivateButtonClick,
+              shouldShow: shouldShowActivateButton,
+              tooltipText: t.get('activate')
+            },
+            {
+              iconName: 'BlockButtonIcon',
+              onClick: onInActivateButtonClick,
+              shouldShow: shouldShowInActivateButton,
+              tooltipText: t.get('inActivate')
+            }
+          ]
+        }}
+        rowCount={rowCount}
+        getEditUrl={(column) =>
+          ROUTES.baseUrl +
+          ROUTES.game +
+          ROUTES.providerDetails.replace(':providerId', column.gameId.toString()) +
+          '/?isEdit=true'
+        }
+        getViewUrl={(column) =>
+          ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', column.gameId.toString())
+        }
+      />
     </PageWrapper>
-  )
+  );
 }
 
 export default GameList;
