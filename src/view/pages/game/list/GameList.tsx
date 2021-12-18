@@ -411,7 +411,7 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
           placeholderText: t.get('creationDateTo')
         }
       },
-     
+
       {
         name: 'createdBy' as keyof GamesFiltersViewModel,
         type: 'input' as const,
