@@ -24,10 +24,25 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-"@atom/common@^2.3.4", "@atom/common@^2.8.3":
+"@atom/common@^2.3.4":
   version "2.8.5"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.5.tgz#a6988316a4f7dcd1307f77191065caae12bce256"
   integrity sha1-ppiDFqT33NEwf3cZEGXKrhK84lY=
+  dependencies:
+    "@automapper/classes" "^7.0.2"
+    "@automapper/core" "^7.0.2"
+    axios "^0.23.0"
+    dayjs "^1.10.7"
+    formik "^2.2.9"
+    query-string "^7.0.1"
+    react "^17.0.2"
+    single-spa "^5.9.3"
+    single-spa-react "^4.6.0"
+
+"@atom/common@^2.8.4":
+  version "2.8.4"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.4.tgz#ed39f6bcd5b9ecabce6936505f3873bcccfe73fe"
+  integrity sha1-7Tn2vNW57KvOaTZQXzhzvMz+c/4=
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
