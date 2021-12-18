@@ -1,7 +1,12 @@
+import { GameGeneralInformationContainer } from '@/view';
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
 import { redirectToURL, useTranslation } from '@atom/common';
-import { GameDetails as GameDetailsPage, PageWrapper } from '@atom/design-system';
+import {
+  GameDetails as GameDetailsPage,
+  GameDetailsProps as GameDetailsPageProps,
+  PageWrapper
+} from '@atom/design-system';
 import { FC, useMemo } from 'react';
 
 export interface GameDetailsProps {
@@ -66,7 +71,7 @@ const GameDetails: FC<GameDetailsProps> = ({
     [shouldShowApproveButton, onApproveButtonClick, shouldShowTerminateButton, onTerminateButtonClick, t]
   );
 
-  const translations = useMemo(
+  const translations = useMemo<GameDetailsPageProps['translations']>(
     () => ({
       createdBy: '',
       creationDate: '',
@@ -93,7 +98,7 @@ const GameDetails: FC<GameDetailsProps> = ({
         createdBy=''
         lastUpdateDate=''
         lastUpdateBy=''
-        generalInformationContext={<></>}
+        generalInformationContext={<GameGeneralInformationContainer />}
         buttons={{
           playButtonProps: {},
           playDemoButtonProps: {}
