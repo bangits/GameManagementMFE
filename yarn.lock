@@ -60,22 +60,22 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/common@^2.8.1":
-  version "2.8.1"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.1.tgz#0a4de90d6c9af65f96e8ffb630912ac3f0946f2d"
-  integrity sha1-Ck3pDWya9l+W6P+2MJEqw/CUby0=
+"@atom/common@^2.8.3":
+  version "2.8.3"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.3.tgz#9a15eb84dab3b76e296ff3828f98bc935fa4690a"
+  integrity sha1-mhXrhNqzt24pb/OCj5i8k1+kaQo=
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
     axios "^0.23.0"
     dayjs "^1.10.7"
     formik "^2.2.9"
-    moment "^2.29.1"
     query-string "^7.0.1"
     react "^17.0.2"
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
+<<<<<<< HEAD
 "@atom/design-system@^2.2.6":
   version "2.2.7"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.7.tgz#e01f4c64b017d797ce7780824fd653d77e9c4db8"
@@ -93,6 +93,12 @@
   version "2.2.9"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.9.tgz#ec7ec5494a073c9866d82be655103a181268d345"
   integrity sha1-7H7FSUoHPJhm2CvmVRA6GBJo00U=
+=======
+"@atom/design-system@^2.2.8":
+  version "2.2.8"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.8.tgz#d015f0eedb1b9840b2d1f29497bead6c52b1c214"
+  integrity sha1-0BXw7tsbmECy0fKUl76tbFKxwhQ=
+>>>>>>> e9f71d73eb5db6f1c0bc5b7f59aaab9589187a5c
   dependencies:
     "@atom/common" "^2.3.4"
     "@my-ui/core" "^2.26.13"
@@ -1493,7 +1499,11 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+<<<<<<< HEAD
 "@my-ui/core@^2.23.27", "@my-ui/core@^2.26.13":
+=======
+"@my-ui/core@^2.26.13":
+>>>>>>> e9f71d73eb5db6f1c0bc5b7f59aaab9589187a5c
   version "2.26.13"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.26.13.tgz#4d1c9f2a1092b91ff1c37cfcb980fbc9afcb0ecd"
   integrity sha1-TRyfKhCSuR/xw3z8uYD7ya/LDs0=

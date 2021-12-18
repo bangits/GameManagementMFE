@@ -64,7 +64,7 @@ const GameDetailsContainer = () => {
 
   return (
     <GameDetails
-      data={data || []}
+      data={data}
       onApproveButtonClick={() => {
         console.log;
       }}
