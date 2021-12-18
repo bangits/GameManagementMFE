@@ -443,12 +443,6 @@ function GameList({ filters, results, onFiltersChange, rowCount, isFilteredData,
           emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound')
         }}
         rowCount={rowCount}
-        onEditButtonClick={() => {
-          const mockEdit = {};
-        }}
-        onViewButtonClick={() => {
-          const mockView = {};
-        }}
       />
     </PageWrapper>
   );

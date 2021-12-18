@@ -66,28 +66,18 @@ const GameDetails: FC<GameDetailsProps> = ({
     [shouldShowApproveButton, onApproveButtonClick, shouldShowTerminateButton, onTerminateButtonClick, t]
   );
 
-  const docInfo = useMemo(
-    () => ({
-      documentID: '5461213584',
-      type: 'Gameship Agreement',
-      expirationDate: '12/08/2021',
-      statusLabel: 'Signed',
-      statusVariant: 'active' as const
-    }),
-    []
-  );
 
   const translations = useMemo(
     () => ({
+      createdBy: "",
+      creationDate: "",
       status: t.get('status'),
-      parentCompany: t.get('parentCompany'),
-      parentCompanyId: t.get('parentCompanyId'),
-      expirationDate: t.get('expirationDate'),
-      type: t.get('type'),
-      documentID: t.get('documentId'),
-      providerInformation: t.get('providerInformation'),
-      mainInformation: t.get('mainInformation'),
-      organizationData: t.get('organizationData')
+      lastUpdateDate: '',
+      lastUpdateBy: '',
+      generalInformation: "General Information",
+      assets: "",
+      playButton: "Play",
+      playDemoButton: "Play Demo"
     }),
     [t]
   );
@@ -95,13 +85,25 @@ const GameDetails: FC<GameDetailsProps> = ({
   return (
     <PageWrapper>
       <GameDetailsPage
+        gameId=''
+        gameName=''
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
-        parentCompanyId={14}
-        parentCompany={'parentCompany'}
-        statusInfo={[]}
-        docInfo={[]}
-        translations={[]}
+        statusInfo={statusInfo}
+        creationDate={''}
+        createdBy=''
+        lastUpdateDate=''
+        lastUpdateBy=''
+        generalInformationContext={<></>}
+        buttons={{
+          playButtonProps: {
+
+          },
+          playDemoButtonProps: {
+
+          }
+        }}
+        translations={translations}
       />
     </PageWrapper>
   );
