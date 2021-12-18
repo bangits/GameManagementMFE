@@ -5,6 +5,13 @@ import { AutoMap } from '@automapper/classes';
 export class ChangeGameStatusViewModel {
   @AutoMap()
   gameIds: PrimaryKey[];
+
   @AutoMap()
   statusId: GameStatusesEnum;
+
+  @AutoMap()
+  lastUpdatedByUserId: PrimaryKey;
+
+  @AutoMap()
+  lastUpdatedByUserEmail: string;
 }

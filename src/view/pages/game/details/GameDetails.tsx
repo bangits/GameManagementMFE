@@ -1,7 +1,9 @@
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
 import { redirectToURL, useTranslation } from '@atom/common';
-import { GameDetails as GameDetailsPage, PageWrapper } from '@atom/design-system';
+import {
+  GameDetails as GameDetailsPage, PageWrapper
+} from '@atom/design-system';
 import { FC, useMemo } from 'react';
 
 export interface GameDetailsProps {
@@ -84,8 +86,8 @@ const GameDetails: FC<GameDetailsProps> = ({
   return (
     <PageWrapper>
       <GameDetailsPage
-        gameId=''
         gameName=''
+        gameId=''
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
         statusInfo={statusInfo}

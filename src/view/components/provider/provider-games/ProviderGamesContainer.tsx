@@ -1,15 +1,18 @@
 import { gameApi, providerApi } from '@/adapter/redux/api';
+import { ProviderStatusesEnum } from '@/domain/models';
 import { ROUTES } from '@/view/constants';
 import { ProviderGamesFilterViewModel } from '@/view/models';
+import { gameLaunchService } from '@/view/services';
 import { PrimaryKey, redirectToURL, useFirstValue, useTranslation } from '@atom/common';
 import { ProviderGames } from '@atom/design-system';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface ProviderGamesContainerProps {
   providerId: PrimaryKey;
+  providerStatusId: ProviderStatusesEnum;
 }
 
-export const ProviderGamesContainer = ({ providerId }: ProviderGamesContainerProps) => {
+export const ProviderGamesContainer = ({ providerId, providerStatusId }: ProviderGamesContainerProps) => {
   const t = useTranslation();
 
   const [filters, setFilters] = useState<ProviderGamesFilterViewModel>({
@@ -86,19 +89,19 @@ export const ProviderGamesContainer = ({ providerId }: ProviderGamesContainerPro
       gameTypes={providerGameTypes || []}
       games={games}
       onChange={onFiltersChange}
-      onGameClick={console.log}
-      // (gameId) => {
-      //   gameLaunchService.publish({
-      //     gameId,
-      //     gameLaunchUrl: '',
-      //     providerId
-      //   });
-      // }
+      onGameClick={(gameId) => {
+        gameLaunchService.publish({
+          gameId,
+          gameLaunchUrl: '',
+          providerId
+        });
+      }}
       onAddGameClick={onAddGameClick}
       isLoadingGames={isFetching}
       isAllGamesLoaded={isAllGamesLoaded}
       isTabLoading={isGameTypesFetching || isTabLoading}
       hasGames={hasGames}
+      shouldShowAddGameButton={providerStatusId === ProviderStatusesEnum.Active}
     />
   );
 };
