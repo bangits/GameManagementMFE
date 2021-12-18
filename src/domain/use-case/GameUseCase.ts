@@ -1,6 +1,7 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddGameRequestModel,
+  ChangeGameStatusRequestModel,
   GameLaunchRequestModel,
   GetGameRequestModel,
   GetGameResponseModel,
@@ -10,6 +11,7 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
+  ChangeGameStatusViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
@@ -24,10 +26,9 @@ import {
   ProviderGamesViewModel
 } from '@/view/models';
 import { ProviderGamesFilterViewModel } from '@/view/models/view-models/game/ProviderGamesFilterViewModel';
-import { PrimaryKey } from '@atom/common';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IGameRepository } from './../boundaries';
-import { GetGameByIdResponseModel } from './../models/response/GetGameByIdResponseModel';
 @injectable()
 export class GameUseCase {
   @inject(DI_CONSTANTS.GAME.GameRepository)
@@ -116,5 +117,15 @@ export class GameUseCase {
     const gameLaunchRequestModel = mapper.map(gameLaunchViewModel, GameLaunchRequestModel, GameLaunchViewModel);
 
     return await this.gameRepository.gameLaunch(gameLaunchRequestModel);
+  };
+
+  changeGameStatus = async (changeGameStatusViewModel: ChangeGameStatusViewModel): Promise<ActionResponseModel> => {
+    const changeGameStatusRequestModel = mapper.map(
+      changeGameStatusViewModel,
+      ChangeGameStatusRequestModel,
+      ChangeGameStatusViewModel
+    );
+
+    return this.gameRepository.changeGameStatus(changeGameStatusRequestModel);
   };
 }

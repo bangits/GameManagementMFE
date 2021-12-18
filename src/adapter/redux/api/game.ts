@@ -16,7 +16,8 @@ import {
   ProviderGamesFilterViewModel,
   ProviderGamesViewModel
 } from '@/view/models';
-import { PrimaryKey } from '@atom/common';
+import { ChangeGameStatusViewModel } from '@/view/models/view-models/game/ChangeGameStatusViewModel';
+import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../helpers';
 
@@ -121,6 +122,15 @@ export const gameApi = createApi({
           methodArguments: [gameLaunchViewModel]
         };
       }
+    }),
+    changeGameStatus: build.mutation<ActionResponseModel, {}>({
+      query: (changeGameStatusViewModel: ChangeGameStatusViewModel) => {
+        return {
+          methodName: 'changeGameStatus',
+          methodArguments: [changeGameStatusViewModel]
+        };
+      },
+      invalidatesTags: ['Games']
     })
   })
 });

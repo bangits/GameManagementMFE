@@ -19,7 +19,8 @@ export const API_ROUTES = {
     GET_GAME_VOLATILITIES: '/Volatility',
     GET_GAME_SUPPORTED_BROWSERS: '/SupportedBrowsers',
     GET_GAME_PLATFORMS: '/GamePlatform',
-    LAUNCH_GAME: '/Rival/gameLaunch'
+    LAUNCH_GAME: '/Rival/gameLaunch',
+    CHANGE_STATUS: GAME_ROUTE + '/status'
   }
 };
 
