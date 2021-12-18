@@ -18,6 +18,7 @@ export class ProviderDetailsViewModel {
   targetMarkets: {
     tagName: string;
     id: PrimaryKey;
+    imgSrc: string;
   }[];
   providerCurrencies: {
     title: string;
@@ -26,10 +27,12 @@ export class ProviderDetailsViewModel {
   certifiedCountries: {
     tagName: string;
     id: PrimaryKey;
+    imgSrc: string;
   }[];
   restrictedCountries: {
     tagName: string;
     id: PrimaryKey;
+    imgSrc: string;
   }[];
   providerLicenses: {
     title: string;

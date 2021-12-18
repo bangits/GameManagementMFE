@@ -39,10 +39,23 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> baad222e430a9997b8227d9f7be5897df094c210
 "@atom/common@^2.8.4":
   version "2.8.4"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.4.tgz#ed39f6bcd5b9ecabce6936505f3873bcccfe73fe"
   integrity sha1-7Tn2vNW57KvOaTZQXzhzvMz+c/4=
+<<<<<<< HEAD
+=======
+=======
+"@atom/common@^2.8.7":
+  version "2.8.7"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.7.tgz#4dbd04e04df392b7dfdc2caacd4024c58ffcec13"
+  integrity sha1-Tb0E4E3zkrff3CyqzUAkxY/87BM=
+>>>>>>> d8cc15813833ec612ecb9bc7b78652458f07c81d
+>>>>>>> baad222e430a9997b8227d9f7be5897df094c210
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
@@ -54,10 +67,17 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
+<<<<<<< HEAD
 "@atom/design-system@2.2.17":
   version "2.2.17"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.17.tgz#91ca72c9c00222beeecb1122ee602ea937570321"
   integrity sha1-kcpyycACIr7uyxEi7mAuqTdXAyE=
+=======
+"@atom/design-system@^2.2.10":
+  version "2.2.10"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.10.tgz#24071c766237c1694312ed2a964420d5e62c6c5e"
+  integrity sha1-JAccdmI3wWlDEu0qlkQg1eYsbF4=
+>>>>>>> baad222e430a9997b8227d9f7be5897df094c210
   dependencies:
     "@atom/common" "^2.3.4"
     "@my-ui/core" "^2.26.18"

@@ -35,7 +35,7 @@ import {
 import { convertDate, convertDateForRequestModel } from '@atom/common';
 import autoMapper, { MappingProfile } from '@automapper/core';
 import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
-import { transformToCountryModel } from './transformFunctions';
+import { convertToCountryTab, transformToCountryModel } from './transformFunctions';
 
 const { mapFrom, mapWith } = autoMapper;
 
@@ -125,12 +125,7 @@ export const baseProfile: MappingProfile = (mapper) => {
     .createMap(GetProvidersByIdResponseModel, GetProvidersByIdViewModel)
     .forMember(
       (destination) => destination.targetMarkets,
-      mapFrom((source) =>
-        source.targetMarkets.map((markets) => ({
-          tagName: markets.name,
-          id: markets.id
-        }))
-      )
+      mapFrom((source) => convertToCountryTab(source.targetMarkets))
     )
     .forMember(
       (destination) => destination.providerCurrencies,
@@ -143,21 +138,11 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.certifiedCountries,
-      mapFrom((source) =>
-        source.certifiedCountries.map((country) => ({
-          tagName: country.name,
-          id: country.id
-        }))
-      )
+      mapFrom((source) => convertToCountryTab(source.certifiedCountries))
     )
     .forMember(
       (destination) => destination.restrictedCountries,
-      mapFrom((source) =>
-        source.restrictedCountries.map((country) => ({
-          tagName: country.name,
-          id: country.id
-        }))
-      )
+      mapFrom((source) => convertToCountryTab(source.restrictedCountries))
     )
     .forMember(
       (destination) => destination.statusId,
@@ -287,7 +272,7 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.creationDate,
-      mapFrom((source) => (source.creationDate ? `${convertDate(source.creationDate, 'DD/MM/YYYY')}` : 'N/A'))
+      mapFrom((source) => (source.creationDate ? `${convertDate(source.creationDate, 'DD/MM/YYYY HH:MM:SS')}` : 'N/A'))
     )
     .forMember(
       (destination) => destination.releaseDate,

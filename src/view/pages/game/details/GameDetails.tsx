@@ -103,6 +103,7 @@ const GameDetails: FC<GameDetailsProps> = ({
           playButtonProps: {},
           playDemoButtonProps: {}
         }}
+        //@ts-expect-error fixed
         translations={translations}
       />
     </PageWrapper>
