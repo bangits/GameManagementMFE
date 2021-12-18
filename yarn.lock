@@ -22,7 +22,7 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-"@atom/common@^2.3.4", "@atom/common@^2.6.4":
+"@atom/common@^2.3.4":
   version "2.6.4"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.6.4.tgz#0d4c8a008e6bf4be980f13568d06ede068f81d85"
   integrity sha1-DUyKAI5r9L6YDxNWjQbt4Gj4HYU=
@@ -38,16 +38,25 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
+"@atom/common@^2.8.5":
+  version "2.8.5"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.5.tgz#a6988316a4f7dcd1307f77191065caae12bce256"
+  integrity sha1-ppiDFqT33NEwf3cZEGXKrhK84lY=
+  dependencies:
+    "@automapper/classes" "^7.0.2"
+    "@automapper/core" "^7.0.2"
+    axios "^0.23.0"
+    dayjs "^1.10.7"
+    formik "^2.2.9"
+    query-string "^7.0.1"
+    react "^17.0.2"
+    single-spa "^5.9.3"
+    single-spa-react "^4.6.0"
+
 "@atom/design-system@^2.2.3":
-<<<<<<< HEAD
-  version "2.2.3"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.3.tgz#b29c4fb69f9cdf4c062e3d89511871877ca062e3"
-  integrity sha1-spxPtp+c30wGLj2JURhxh3ygYuM=
-=======
   version "2.2.5"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.5.tgz#6df77df3ad362c501b8299f9c7d987a60ffdca84"
   integrity sha1-bfd98602LFAbgpn5x9mHpg/9yoQ=
->>>>>>> 65226062bb9ff875665230f3961f160c086c1630
   dependencies:
     "@atom/common" "^2.3.4"
     "@my-ui/core" "^2.24.9"
