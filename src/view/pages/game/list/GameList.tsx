@@ -151,7 +151,7 @@ function GameList({
         props: {
           label: t.get('gameId'),
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD,
-          type:'number'
+          type: 'number'
         }
       },
 
@@ -441,7 +441,6 @@ function GameList({
 
         props: {
           label: t.get('createdBy'),
-          //@ts-expect-error delete this comment when atom common version is update  
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD_LARGE
         }
       }
