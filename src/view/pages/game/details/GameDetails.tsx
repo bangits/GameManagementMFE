@@ -66,18 +66,17 @@ const GameDetails: FC<GameDetailsProps> = ({
     [shouldShowApproveButton, onApproveButtonClick, shouldShowTerminateButton, onTerminateButtonClick, t]
   );
 
-
   const translations = useMemo(
     () => ({
-      createdBy: "",
-      creationDate: "",
+      createdBy: '',
+      creationDate: '',
       status: t.get('status'),
       lastUpdateDate: '',
       lastUpdateBy: '',
-      generalInformation: "General Information",
-      assets: "",
-      playButton: "Play",
-      playDemoButton: "Play Demo"
+      generalInformation: 'General Information',
+      assets: '',
+      playButton: 'Play',
+      playDemoButton: 'Play Demo'
     }),
     [t]
   );
@@ -96,12 +95,8 @@ const GameDetails: FC<GameDetailsProps> = ({
         lastUpdateBy=''
         generalInformationContext={<></>}
         buttons={{
-          playButtonProps: {
-
-          },
-          playDemoButtonProps: {
-
-          }
+          playButtonProps: {},
+          playDemoButtonProps: {}
         }}
         translations={translations}
       />
