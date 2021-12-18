@@ -25,7 +25,7 @@ const GameListContainer = () => {
       gameThemeIds: [],
       gameFeatureIds: [],
       gamePlatformIds: [],
-      releaseDate: null,
+      releaseDate: [null, null],
       createdBy: '',
       creationDate: [null, null],
       sorting: null,

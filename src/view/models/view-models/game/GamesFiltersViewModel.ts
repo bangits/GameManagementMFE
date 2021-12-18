@@ -41,8 +41,7 @@ export class GamesFiltersViewModel extends PagedModel {
   @AutoMap()
   providerIds: String[] | '';
 
-  releaseDate: Date;
-
+  releaseDate: [Date, Date];
   creationDate: [Date, Date];
 
   rtp: { from: number | ''; to: number | '' };

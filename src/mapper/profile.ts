@@ -32,7 +32,7 @@ import {
   ProvidersFiltersViewModel,
   ProvidersViewModel
 } from '@/view/models';
-import { convertDate } from '@atom/common';
+import { convertDate, convertDateForRequestModel } from '@atom/common';
 import autoMapper, { MappingProfile } from '@automapper/core';
 import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
 import { transformToCountryModel } from './transformFunctions';
@@ -251,12 +251,20 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => source.createdBy)
     )
     .forMember(
-      (destination) => destination.creationDate,
-      mapFrom((source) => source.creationDate[0] && convertDate(source.creationDate[0]))
+      (destination) => destination.creationDateFrom,
+      mapFrom((source) => source.creationDate[0] && convertDateForRequestModel(source.creationDate[0]))
     )
     .forMember(
-      (destination) => destination.releaseDate,
-      mapFrom((source) => source.releaseDate && convertDate(source.releaseDate))
+      (destination) => destination.creationDateTo,
+      mapFrom((source) => source.creationDate[1] && convertDateForRequestModel(source.creationDate[1]))
+    )
+    .forMember(
+      (destination) => destination.releaseDateFrom,
+      mapFrom((source) => source.releaseDate[0] && convertDateForRequestModel(source.releaseDate[0]))
+    )
+    .forMember(
+      (destination) => destination.releaseDateTo,
+      mapFrom((source) => source.releaseDate[1] && convertDateForRequestModel(source.releaseDate[1]))
     )
     .forMember(
       (destination) => destination.rtpTo,

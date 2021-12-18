@@ -238,7 +238,11 @@ function GameList({
         type: 'datepicker' as const,
         name: 'releaseDate' as keyof GamesFiltersViewModel,
         label: t.get('releaseDate'),
-        props: {}
+
+        props: {
+          selectsRange: true,
+          monthsShown: 2
+        }
       },
       {
         name: 'classIds' as keyof GamesFiltersViewModel,
@@ -414,15 +418,21 @@ function GameList({
         )
       },
       {
-        type: 'datepicker' as const,
-        name: 'creationDate' as keyof GamesFiltersViewModel,
+        type: 'timepicker-from-to' as const,
         label: t.get('creationDate'),
-
+        name: 'creationDate' as keyof GamesFiltersViewModel,
         props: {
           selectsRange: true,
           monthsShown: 2
+        },
+        fromTimePickerProps: {
+          placeholderText: t.get('creationDateFrom')
+        },
+        toTimePickerProps: {
+          placeholderText: t.get('creationDateTo')
         }
       },
+
       {
         name: 'createdBy' as keyof GamesFiltersViewModel,
         type: 'input' as const,
