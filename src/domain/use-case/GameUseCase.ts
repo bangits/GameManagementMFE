@@ -3,6 +3,7 @@ import {
   AddGameRequestModel,
   ChangeGameStatusRequestModel,
   GameLaunchRequestModel,
+  GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,

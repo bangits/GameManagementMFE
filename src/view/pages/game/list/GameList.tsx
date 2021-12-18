@@ -1,3 +1,4 @@
+import { GameStatusesEnum } from '@/domain/models';
 import {
   GameClassSelect,
   GameFeaturesSelect,
@@ -463,7 +464,6 @@ function GameList({
           emptyText: isFilteredData ? t.get('emptyResultSecondSentence') : t.get('resultNotFound'),
           loadingRowsIds: gameTableLoadingIds,
           loadingRowColumnProperty: 'gameId',
-
           actions: [
             {
               iconName: 'CheckButtonIcon',
@@ -480,6 +480,15 @@ function GameList({
           ]
         }}
         rowCount={rowCount}
+        getEditUrl={(column) =>
+          ROUTES.baseUrl +
+          ROUTES.game +
+          ROUTES.providerDetails.replace(':providerId', column.gameId.toString()) +
+          '/?isEdit=true'
+        }
+        getViewUrl={(column) =>
+          ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', column.gameId.toString())
+        }
       />
     </PageWrapper>
   );
