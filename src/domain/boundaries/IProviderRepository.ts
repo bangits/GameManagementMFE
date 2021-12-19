@@ -4,6 +4,7 @@ import {
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
   GetGameTypesAndCountResponseModel,
+  GetProviderByPartnerIdResponseModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
@@ -20,4 +21,5 @@ export interface IProviderRepository {
   editProviderGeneralInfo(
     editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel
   ): Promise<ActionResponseModel>;
+  getProviderByPartnerId(partnerId: PrimaryKey): Promise<GetProviderByPartnerIdResponseModel>;
 }

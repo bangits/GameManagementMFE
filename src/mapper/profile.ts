@@ -9,6 +9,7 @@ import {
   GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
+  GetProviderByPartnerIdResponseModel,
   GetProviderGamesRequestModel,
   GetProviderGamesResponseModel,
   GetProviderRequestModel,
@@ -27,6 +28,7 @@ import {
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
+  GetProviderByPartnerIdViewModel,
   GetProvidersViewModel,
   ProviderGamesFilterViewModel,
   ProviderGamesViewModel,
@@ -202,6 +204,50 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.providerId,
       mapFrom((source) => source.id)
+    );
+
+  //# Get Partner Provider Details
+  mapper
+    .createMap(GetProviderByPartnerIdResponseModel, GetProviderByPartnerIdViewModel)
+    .forMember(
+      (destination) => destination.totalGameCount,
+      mapFrom((source) => source.gameCount)
+    )
+    .forMember(
+      (destination) => destination.providerId,
+      mapFrom((source) => source.id)
+    )
+    .forMember(
+      (destination) => destination.currencies,
+      mapFrom((source) =>
+        source.providerCurrencies.map((currencies) => ({
+          title: currencies.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.targetMarkets,
+      mapFrom((source) =>
+        source.targetMarkets.map((market) => ({
+          tagName: market.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) =>
+        source.certifiedCountries.map((countries) => ({
+          tagName: countries.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) =>
+        source.restrictedCountries.map((countries) => ({
+          tagName: countries.name
+        }))
+      )
     );
   //#endregion
 
