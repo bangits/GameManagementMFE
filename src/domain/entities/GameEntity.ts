@@ -6,45 +6,87 @@ import { BaseEntity } from './BaseEntity';
 export class Game extends BaseEntity {
   @AutoMap()
   externalId: PrimaryKey;
+
   @AutoMap()
   icon: string;
+
   @AutoMap()
   name: string;
+
   @AutoMap()
   providerId: PrimaryKey;
+
   @AutoMap()
-  rtp: number;
+  rtp: string;
+
   @AutoMap()
   className: PrimaryKey;
+
   @AutoMap()
   providerName: string;
+
   @AutoMap()
   volatilityName: string;
+
   @AutoMap()
   subTypeName: string;
+
   @AutoMap()
   typeName: string;
+
   @AutoMap()
   createdByUserEmail: string;
 
+  @AutoMap()
+  backGroundImage: string;
+
+  @AutoMap()
   releaseDate: string;
+
+  @AutoMap()
   creationDate: string;
+
+  @AutoMap()
+  classId: PrimaryKey;
+
+  @AutoMap()
+  volatilityId: PrimaryKey;
+
+  @AutoMap()
+  hasDemo: boolean;
+
+  @AutoMap()
+  mobileScreenModeIsPortrait: boolean;
+
+  @AutoMap()
+  mobileScreenModeIsLandscape: boolean;
+
+  @AutoMap()
+  tabletScreenModeIsPortrait: boolean;
+
+  @AutoMap()
+  tabletScreenModeIsLandscape: boolean;
+
+  @AutoMap()
+  lastUpdatedByUserEmail: string;
+
+  @AutoMap()
+  lastUpdatedDate: string;
+
+  @AutoMap()
+  maxWin: string;
+
+  @AutoMap()
+  providerAbsoluteUrl: string;
+
+  @AutoMap()
+  providerDemoUrl: string;
+
   status: {
     id: GameStatusesEnum;
     name: string;
   };
 
-  classId: PrimaryKey;
-  hasDemo: boolean;
-  mobileScreenModeIsPortrait: boolean;
-  mobileScreenModeIsLandscape: boolean;
-  tabletScreenModeIsPortrait: boolean;
-  tabletScreenModeIsLandscape: boolean;
-  volatilityId: PrimaryKey;
-  backGroundImage: string;
-  lastUpdatedByUserEmail: string;
-  lastUpdatedDate: string;
-  maxWin: string;
   type: {
     id: PrimaryKey;
     name: string;

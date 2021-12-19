@@ -73,15 +73,15 @@ const GameDetails: FC<GameDetailsProps> = ({
 
   const translations = useMemo<GameDetailsPageProps['translations']>(
     () => ({
-      createdBy: '',
-      creationDate: '',
+      createdBy: t.get('createdBy'),
+      creationDate: t.get('creationDate'),
       status: t.get('status'),
-      lastUpdateDate: '',
-      lastUpdateBy: '',
-      generalInformation: 'General Information',
-      assets: '',
-      playButton: 'Play',
-      playDemoButton: 'Play Demo'
+      lastUpdateDate: t.get('lastUpdateDate'),
+      lastUpdateBy: t.get('lastUpdateBy'),
+      generalInformation: t.get('generalInformation'),
+      assets: t.get('assets'),
+      playButton: t.get('play'),
+      playDemoButton: t.get('playDemo')
     }),
     [t]
   );
@@ -103,7 +103,6 @@ const GameDetails: FC<GameDetailsProps> = ({
           playButtonProps: {},
           playDemoButtonProps: {}
         }}
-        //@ts-expect-error fixed
         translations={translations}
       />
     </PageWrapper>

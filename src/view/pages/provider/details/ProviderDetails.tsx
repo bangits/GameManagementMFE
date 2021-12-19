@@ -64,9 +64,6 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     [t, data]
   );
 
-  console.log(data.providerId);
-  
-
   const statusInfo = useMemo<ProviderDetailsPageProps['statusInfo']>(
     () => ({
       label: t.get('status'),

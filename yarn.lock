@@ -3,12 +3,12 @@
 
 
 "@atom/authorization@^1.2.3", "@atom/authorization@^1.2.5":
-  version "1.2.5"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/authorization/-/authorization-1.2.5.tgz#567da22c2c23c9e361d9bb570ca21064c515e5f8"
-  integrity sha1-Vn2iLCwjyeNh2btXDKIQZMUV5fg=
+  version "1.2.7"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/authorization/-/authorization-1.2.7.tgz#e1fd582066776c16b6bce48ea3baa4feedf253c0"
+  integrity sha1-4f1YIGZ3bBa2vOSOo7qk/u3yU8A=
   dependencies:
     "@atom/design-system" "^2.2.6"
-    "@atom/user-management" "^1.0.2"
+    "@atom/user-management" "^1.0.3"
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
     "@reduxjs/toolkit" "^1.6.1"
@@ -24,10 +24,10 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-"@atom/common@^2.3.4":
-  version "2.8.5"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.5.tgz#a6988316a4f7dcd1307f77191065caae12bce256"
-  integrity sha1-ppiDFqT33NEwf3cZEGXKrhK84lY=
+"@atom/common@^2.3.4", "@atom/common@^2.8.6":
+  version "2.8.6"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.6.tgz#c234d252b6de66e64114df34f162e71ae4af8422"
+  integrity sha1-wjTSUrbeZuZBFN808WLnGuSvhCI=
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
@@ -39,45 +39,10 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> baad222e430a9997b8227d9f7be5897df094c210
-"@atom/common@^2.8.4":
-  version "2.8.4"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.4.tgz#ed39f6bcd5b9ecabce6936505f3873bcccfe73fe"
-  integrity sha1-7Tn2vNW57KvOaTZQXzhzvMz+c/4=
-<<<<<<< HEAD
-=======
-=======
-"@atom/common@^2.8.7":
-  version "2.8.7"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.7.tgz#4dbd04e04df392b7dfdc2caacd4024c58ffcec13"
-  integrity sha1-Tb0E4E3zkrff3CyqzUAkxY/87BM=
->>>>>>> d8cc15813833ec612ecb9bc7b78652458f07c81d
->>>>>>> baad222e430a9997b8227d9f7be5897df094c210
-  dependencies:
-    "@automapper/classes" "^7.0.2"
-    "@automapper/core" "^7.0.2"
-    axios "^0.23.0"
-    dayjs "^1.10.7"
-    formik "^2.2.9"
-    query-string "^7.0.1"
-    react "^17.0.2"
-    single-spa "^5.9.3"
-    single-spa-react "^4.6.0"
-
-<<<<<<< HEAD
-"@atom/design-system@2.2.17":
+"@atom/design-system@^2.2.17", "@atom/design-system@^2.2.6":
   version "2.2.17"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.17.tgz#91ca72c9c00222beeecb1122ee602ea937570321"
   integrity sha1-kcpyycACIr7uyxEi7mAuqTdXAyE=
-=======
-"@atom/design-system@^2.2.10":
-  version "2.2.10"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.10.tgz#24071c766237c1694312ed2a964420d5e62c6c5e"
-  integrity sha1-JAccdmI3wWlDEu0qlkQg1eYsbF4=
->>>>>>> baad222e430a9997b8227d9f7be5897df094c210
   dependencies:
     "@atom/common" "^2.3.4"
     "@my-ui/core" "^2.26.18"
@@ -87,23 +52,10 @@
     react-jss "^10.8.2"
     react-sortable-hoc "^2.0.0"
 
-"@atom/design-system@^2.2.6":
-  version "2.2.9"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.9.tgz#ec7ec5494a073c9866d82be655103a181268d345"
-  integrity sha1-7H7FSUoHPJhm2CvmVRA6GBJo00U=
-  dependencies:
-    "@atom/common" "^2.3.4"
-    "@my-ui/core" "^2.26.13"
-    classnames "^2.3.1"
-    react "^17.0.2"
-    react-dom "^17.0.2"
-    react-jss "^10.8.2"
-    react-sortable-hoc "^2.0.0"
-
 "@atom/partner-management@^1.0.3":
-  version "1.0.3"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/partner-management/-/partner-management-1.0.3.tgz#904f5b12bb01b9f497d7ddffa84f23146802d9d5"
-  integrity sha1-kE9bErsBufSX193/qE8jFGgC2dU=
+  version "1.0.4"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/partner-management/-/partner-management-1.0.4.tgz#ca19c5d0240ac66be8471cd461e7e7c4750b065f"
+  integrity sha1-yhnF0CQKxmvoRxzUYefnxHULBl8=
   dependencies:
     "@atom/authorization" "^1.2.3"
     "@automapper/classes" "^7.0.2"
@@ -119,10 +71,10 @@
     single-spa-react "^4.2.0"
     yup "^0.32.10"
 
-"@atom/user-management@^1.0.2":
-  version "1.0.2"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/user-management/-/user-management-1.0.2.tgz#96e01320a865ec85080a81e044b038283dc360cb"
-  integrity sha1-luATIKhl7IUICoHgRLA4KD3DYMs=
+"@atom/user-management@^1.0.3":
+  version "1.0.3"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/user-management/-/user-management-1.0.3.tgz#ac70d0234fb19504d23c1ecf7d7f696a0983c96f"
+  integrity sha1-rHDQI0+xlQTSPB7PfX9pagmDyW8=
   dependencies:
     "@atom/authorization" "^1.2.3"
     "@atom/partner-management" "^1.0.3"
@@ -1491,22 +1443,7 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@my-ui/core@^2.23.27", "@my-ui/core@^2.26.13":
-  version "2.27.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.27.0.tgz#05441aa86c59289466582789f17f3b9f42a5d292"
-  integrity sha1-BUQaqGxZKJRmWCeJ8X87n0Kl0pI=
-  dependencies:
-    "@my-ui/react-datepicker" "^1.5.0"
-    "@my-ui/react-select" "1.1.6"
-    "@my-ui/react-table" "1.3.0"
-    "@my-ui/scrollbar" "^1.0.2"
-    classnames "^2.3.1"
-    react-jss "^10.8.0"
-    react-paginate "^7.1.5"
-    react-transition-group "^4.4.2"
-    throttle-debounce "^3.0.1"
-
-"@my-ui/core@^2.26.18":
+"@my-ui/core@^2.23.27", "@my-ui/core@^2.26.18":
   version "2.26.18"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.26.18.tgz#17ab69023d7db50d2dfd1c0a25b15a733a6b5ed2"
   integrity sha1-F6tpAj19tQ0t/RwKJbFaczprXtI=
@@ -2919,9 +2856,9 @@ camelcase@^6.2.0:
   integrity sha1-JQ/TUM/VVdDSFgsdUVEOr4Mm6G4=
 
 caniuse-lite@^1.0.30001286:
-  version "1.0.30001289"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/caniuse-lite/-/caniuse-lite-1.0.30001289.tgz#d62a20175c4d9e740feda12a78b7c8df7866329e"
-  integrity sha1-1iogF1xNnnQP7aEqeLfI33hmMp4=
+  version "1.0.30001291"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/caniuse-lite/-/caniuse-lite-1.0.30001291.tgz#08a8d2cfea0b2cf2e1d94dd795942d0daef6108c"
+  integrity sha1-CKjSz+oLLPLh2U3XlZQtDa72EIw=
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -3171,9 +3108,9 @@ concat-map@0.0.1:
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
 concurrently@^6.2.0:
-  version "6.5.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/concurrently/-/concurrently-6.5.0.tgz#57082bfe797f93cf4a437ce54742c56823a8ea05"
-  integrity sha1-Vwgr/nl/k89KQ3zlR0LFaCOo6gU=
+  version "6.5.1"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/concurrently/-/concurrently-6.5.1.tgz#4518c67f7ac680cf5c34d5adf399a2a2047edc8c"
+  integrity sha1-RRjGf3rGgM9cNNWt85miogR+3Iw=
   dependencies:
     chalk "^4.1.0"
     date-fns "^2.16.1"
@@ -5132,9 +5069,9 @@ ignore@^4.0.3, ignore@^4.0.6:
   integrity sha1-dQ49tYYgh7RzfrrIIH/9HvJ7Jfw=
 
 ignore@^5.1.4, ignore@^5.1.8:
-  version "5.1.9"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/ignore/-/ignore-5.1.9.tgz#9ec1a5cbe8e1446ec60d4420060d43aa6e7382fb"
-  integrity sha1-nsGly+jhRG7GDUQgBg1Dqm5zgvs=
+  version "5.2.0"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/ignore/-/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
+  integrity sha1-bTusj6f+DUXZ+b57rC/CeVd+NFo=
 
 immer@^9.0.7:
   version "9.0.7"

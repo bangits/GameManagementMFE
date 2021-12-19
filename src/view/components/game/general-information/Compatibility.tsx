@@ -169,8 +169,6 @@ const Compatibility = () => {
     [t]
   );
 
-  console.log(compatibilityFields);
-
   return (
     /* @ts-expect-error excepting on submit error */
     <Formik onSubmit={() => console.log} initialValues={{}} validationSchema={{}}>
@@ -178,8 +176,12 @@ const Compatibility = () => {
         return (
           <Form noValidate>
             <FlexibleForm
-              title='COMPATIBILITY'
+              title='Compatibility'
               col={12}
+              editedFormProps={{
+                viewMoreLabel: 'View More',
+                options: []
+              }}
               editFormProps={{
                 fields: [],
                 renderInputs
