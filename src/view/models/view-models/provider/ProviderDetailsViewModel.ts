@@ -9,7 +9,7 @@ export class ProviderDetailsViewModel {
   @AutoMap()
   partnerId: PrimaryKey;
 
-  @AutoMap()
+  
   providerId: PrimaryKey;
 
   @AutoMap()
