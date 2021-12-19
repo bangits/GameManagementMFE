@@ -383,14 +383,6 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.projectId,
       mapFrom((source) => 1)
-    )
-    .forMember(
-      (destination) => destination.currencyId,
-      mapFrom((source) => 1)
-    )
-    .forMember(
-      (destination) => destination.currency,
-      mapFrom((source) => 'USD')
     );
   //#endregion
   mapper.createMap(ChangeGameStatusViewModel, ChangeGameStatusRequestModel);

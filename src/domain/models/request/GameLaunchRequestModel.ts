@@ -5,7 +5,10 @@ export class GameLaunchRequestModel {
   playerId: PrimaryKey;
   projectId: PrimaryKey;
 
+  @AutoMap()
   currencyId: PrimaryKey;
+
+  @AutoMap()
   currency: string;
 
   @AutoMap()
