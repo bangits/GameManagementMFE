@@ -139,6 +139,6 @@ export class GameUseCase {
       EditGameInformationViewModel
     );
 
-    return this.gameRepository.editGameInfo((editGameInfoResponseModel));
+    return this.gameRepository.editGameInfo(editGameInfoResponseModel);
   };
 }

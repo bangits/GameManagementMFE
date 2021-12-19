@@ -140,7 +140,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
                 value: 0,
                 name: 'no'
               }
-            ],
+            ]
           }
         }
       ],
@@ -169,7 +169,6 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
                 await form.submitForm();
 
                 console.log(form.initialTouched);
-                
 
                 const errors = await form.validateForm();
 

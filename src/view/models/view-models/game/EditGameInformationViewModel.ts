@@ -19,7 +19,6 @@ export class EditGameInformationViewModel {
 
   hasDemo: string;
 
-  
   releaseDate: Date;
 
   @AutoMap()

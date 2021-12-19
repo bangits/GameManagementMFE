@@ -134,13 +134,13 @@ export const gameApi = createApi({
       invalidatesTags: ['Games']
     }),
     editGameInformation: build.mutation<ActionResponseModel, {}>({
-      query:( editGameInformationView: EditGameInformationViewModel) => {
+      query: (editGameInformationView: EditGameInformationViewModel) => {
         return {
           methodName: 'editGameInfo',
           methodArguments: [editGameInformationView]
-        }
+        };
       },
       invalidatesTags: ['getGameById']
-    }),
+    })
   })
 });

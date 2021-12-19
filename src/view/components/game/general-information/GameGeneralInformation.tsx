@@ -13,7 +13,7 @@ const GameGeneralInformation: FC<GameGeneralInformationProps> = ({ data, onGameI
   return (
     <>
       <GameInformation data={data} onSubmit={onGameInfoSubmit} />
-      <GameProperties data={data}  />
+      <GameProperties data={data} />
       <Compatibility data={data} />
     </>
   );

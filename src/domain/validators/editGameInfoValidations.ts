@@ -1,6 +1,6 @@
 import { EditGameInformationViewModel } from '@/view/models';
 import { regexLibrary, UseValidationTranslationReturnValue } from '@atom/common';
-import { string, number, object, SchemaOf, date, } from 'yup';
+import { string, number, object, SchemaOf, date } from 'yup';
 
 export const editGameInfoValidations = async (
   t: UseValidationTranslationReturnValue
@@ -15,8 +15,8 @@ export const editGameInfoValidations = async (
       .matches(/^([0-9a-zA-Z()._\-])*$/, t.textInput()),
     gameId: number().nullable(),
     subTypeId: number().nullable(),
-    releaseDate:  date().nullable(),
+    releaseDate: date().nullable(),
     providerId: number().nullable(),
-    gameTypeId: number().nullable(),
+    gameTypeId: number().nullable()
   });
 };
