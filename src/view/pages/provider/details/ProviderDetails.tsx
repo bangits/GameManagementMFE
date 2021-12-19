@@ -59,7 +59,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     () => ({
       src: data.logo,
       label: data.providerName,
-      id: `${data.providerId || t.get('emptyValue')}`
+      id: data.providerId ? `${data.providerId}` : t.get('emptyValue')
     }),
     [t, data]
   );

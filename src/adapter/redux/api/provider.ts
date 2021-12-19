@@ -16,7 +16,7 @@ import { createBaseQuery } from '../helpers';
 export const providerApi = createApi({
   reducerPath: 'providerApi',
   baseQuery: createBaseQuery<ProviderUseCase>({ useCaseName: DI_CONSTANTS.PROVIDER.ProviderUseCase }),
-  tagTypes: ['Providers', 'getProviderById'],
+  tagTypes: ['Providers', 'ProviderDetails'],
   endpoints: (build) => ({
     getProvider: build.query({
       query: (providersFiltersViewModel: ProvidersFiltersViewModel) => {
@@ -59,7 +59,7 @@ export const providerApi = createApi({
           methodArguments: [partnerId]
         };
       },
-      providesTags: ['getProviderById']
+      providesTags: ['ProviderDetails']
     }),
     getProviderGameTypesAndCount: build.query<ProviderGamesTypesViewModel[], {}>({
       query: (partnerId: PrimaryKey) => {
@@ -76,7 +76,7 @@ export const providerApi = createApi({
           methodArguments: [editProviderGeneralInfoViewModel]
         };
       },
-      invalidatesTags: ['getProviderById']
+      invalidatesTags: ['ProviderDetails']
     })
   })
 });

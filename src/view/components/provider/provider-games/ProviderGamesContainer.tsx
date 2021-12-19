@@ -27,7 +27,10 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
 
   const { data, isFetching } = gameApi.useGetGamesByProviderIdQuery(filters);
   const { data: providerGameTypes, isFetching: isGameTypesFetching } = providerApi.useGetProviderGameTypesAndCountQuery(
-    filters.providerId
+    filters.providerId,
+    {
+      refetchOnMountOrArgChange: true
+    }
   );
 
   const [games, setGames] = useState<typeof data['results']>([]);
@@ -65,7 +68,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
 
   const translations = useMemo(
     () => ({
-      addGame: t.get('addGame'),
+      addGame: t.get('add'),
       noGames: hasGames ? t.get('noDataFound') : t.get('providerDoesntHaveGames'),
       search: t.get('search')
     }),
@@ -92,7 +95,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
       onGameClick={(gameId) => {
         gameLaunchService.publish({
           gameId,
-          gameLaunchUrl: '',
+          gameLaunchUrl: 'https://demo.casinocontroller.com/rival/engine/EmbedGame/EmbedGame.php',
           providerId
         });
       }}

@@ -472,7 +472,7 @@ function GameList({
           data: results,
           columns: tableColumns,
           illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? (
+          emptyText: !isFilteredData ? (
             <>
               {t.get('tables.emptyResultFirstSentence')}
               <br />

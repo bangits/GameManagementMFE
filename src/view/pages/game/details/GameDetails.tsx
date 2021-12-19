@@ -1,7 +1,12 @@
+import { GameGeneralInformationContainer } from '@/view';
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
 import { redirectToURL, useTranslation } from '@atom/common';
-import { GameDetails as GameDetailsPage, PageWrapper } from '@atom/design-system';
+import {
+  GameDetails as GameDetailsPage,
+  GameDetailsProps as GameDetailsPageProps,
+  PageWrapper
+} from '@atom/design-system';
 import { FC, useMemo } from 'react';
 
 export interface GameDetailsProps {
@@ -66,17 +71,17 @@ const GameDetails: FC<GameDetailsProps> = ({
     [shouldShowApproveButton, onApproveButtonClick, shouldShowTerminateButton, onTerminateButtonClick, t]
   );
 
-  const translations = useMemo(
+  const translations = useMemo<GameDetailsPageProps['translations']>(
     () => ({
-      createdBy: '',
-      creationDate: '',
+      createdBy: t.get('createdBy'),
+      creationDate: t.get('creationDate'),
       status: t.get('status'),
-      lastUpdateDate: '',
-      lastUpdateBy: '',
-      generalInformation: 'General Information',
-      assets: '',
-      playButton: 'Play',
-      playDemoButton: 'Play Demo'
+      lastUpdateDate: t.get('lastUpdateDate'),
+      lastUpdateBy: t.get('lastUpdateBy'),
+      generalInformation: t.get('generalInformation'),
+      assets: t.get('assets'),
+      playButton: t.get('play'),
+      playDemoButton: t.get('playDemo')
     }),
     [t]
   );
@@ -93,12 +98,11 @@ const GameDetails: FC<GameDetailsProps> = ({
         createdBy=''
         lastUpdateDate=''
         lastUpdateBy=''
-        generalInformationContext={<></>}
+        generalInformationContext={<GameGeneralInformationContainer />}
         buttons={{
           playButtonProps: {},
           playDemoButtonProps: {}
         }}
-        //@ts-expect-error fixed
         translations={translations}
       />
     </PageWrapper>

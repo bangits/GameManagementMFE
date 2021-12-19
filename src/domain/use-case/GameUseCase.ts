@@ -7,7 +7,8 @@ import {
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
-  GetProviderGamesResponseModel
+  GetProviderGamesResponseModel,
+  EditGameInformationRequestModel
 } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
@@ -30,6 +31,7 @@ import { ProviderGamesFilterViewModel } from '@/view/models/view-models/game/Pro
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { IGameRepository } from './../boundaries';
+import { EditGameInformationViewModel } from './../../view/models/view-models/game/EditGameInformationViewModel';
 @injectable()
 export class GameUseCase {
   @inject(DI_CONSTANTS.GAME.GameRepository)
@@ -128,5 +130,15 @@ export class GameUseCase {
     );
 
     return this.gameRepository.changeGameStatus(changeGameStatusRequestModel);
+  };
+
+  editGameInfo = async (editGameInfoViewModel: EditGameInformationViewModel): Promise<ActionResponseModel> => {
+    const editGameInfoRequestModel = mapper.map(
+      editGameInfoViewModel,
+      EditGameInformationRequestModel,
+      EditGameInformationViewModel
+    );
+
+    return this.gameRepository.editGameInfo(editGameInfoRequestModel);
   };
 }
