@@ -4,6 +4,7 @@ import {
   AddProviderRequestModel,
   ChangeGameStatusRequestModel,
   ChangeProviderStatusRequestModel,
+  EditGameInformationRequestModel,
   EditProviderGeneralInformationRequestModel,
   GameLaunchRequestModel,
   GetGameByIdResponseModel,
@@ -21,6 +22,7 @@ import {
   AddProviderViewModel,
   ChangeGameStatusViewModel,
   ChangeProviderStatusViewModel,
+  EditGameInformationViewModel,
   EditProviderGeneralInformationViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
@@ -508,4 +510,23 @@ export const baseProfile: MappingProfile = (mapper) => {
     );
   //#endregion
   mapper.createMap(ChangeGameStatusViewModel, ChangeGameStatusRequestModel);
+
+  mapper
+    .createMap(EditGameInformationViewModel, EditGameInformationRequestModel)
+    .forMember(
+      (destination) => destination.subTypeId,
+      mapFrom((source) => source.gameTypeId)
+    )
+    .forMember(
+      (destination) => destination.subTypeId,
+      mapFrom((source) => source.subTypeId)
+    )
+    .forMember(
+      (destination) => destination.hasDemo,
+      mapFrom((source) => (source.hasDemo === '1' ? true : false))
+    )
+    .forMember(
+      (destination) => destination.releaseDate,
+      mapFrom((source) => convertDateForRequestModel(source.releaseDate))
+    );
 };

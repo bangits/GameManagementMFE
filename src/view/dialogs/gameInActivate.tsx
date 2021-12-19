@@ -1,10 +1,11 @@
-import { UseTranslationReturnValue } from '@atom/common';
+import { PrimaryKey, UseTranslationReturnValue } from '@atom/common';
 import { dialog, Icons } from '@atom/design-system';
+import { GameActionsViewModel } from '../models';
 
 export interface GameInActivateDialogProperties {
   t: UseTranslationReturnValue;
   onSubmit: (cancelFn: () => void) => void;
-  column: { name: string } | { name: string }[];
+  column: GameActionsViewModel | GameActionsViewModel[];
 }
 
 export const showGameInActivateDialog = ({ t, onSubmit, column }: GameInActivateDialogProperties) => {

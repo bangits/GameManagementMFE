@@ -17,10 +17,8 @@ export class EditGameInformationRequestModel {
   @AutoMap()
   classId: PrimaryKey;
 
-  @AutoMap()
   hasDemo: true;
 
-  @AutoMap()
   releaseDate: string;
 
   @AutoMap()

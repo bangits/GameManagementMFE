@@ -17,11 +17,10 @@ export class EditGameInformationViewModel {
   @AutoMap()
   classId: PrimaryKey;
 
-  @AutoMap()
-  hasDemo: true;
+  hasDemo: string;
 
-  @AutoMap()
-  releaseDate: string;
+  
+  releaseDate: Date;
 
   @AutoMap()
   gameId: PrimaryKey;
@@ -31,4 +30,6 @@ export class EditGameInformationViewModel {
 
   @AutoMap()
   lastUpdatedUserEmail: string;
+
+  gameTypeId: PrimaryKey;
 }

@@ -21,7 +21,8 @@ export const API_ROUTES = {
     GET_GAME_PLATFORMS: '/GamePlatform',
     LAUNCH_GAME: '/Rival/gameLaunch',
     CHANGE_STATUS: GAME_ROUTE + '/status',
-    EDIT_GAME_INFO: '/Info'
+    EDIT_GAME_INFO: GAME_ROUTE + '/Info',
+    GET_BY_ID: GAME_ROUTE + '/id'
   }
 };
 

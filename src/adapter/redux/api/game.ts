@@ -25,7 +25,7 @@ import { createBaseQuery } from '../helpers';
 export const gameApi = createApi({
   reducerPath: 'gameApi',
   baseQuery: createBaseQuery<GameUseCase>({ useCaseName: DI_CONSTANTS.GAME.GameUseCase }),
-  tagTypes: ['Games', 'GetGameById'],
+  tagTypes: ['Games', 'getGameById'],
   endpoints: (build) => ({
     getGames: build.query<GetGamesViewModel, {}>({
       query: (gamesFiltersViewModel: GamesFiltersViewModel) => {
@@ -42,7 +42,7 @@ export const gameApi = createApi({
           methodArguments: [partnerId]
         };
       },
-      providesTags: ['GetGameById']
+      providesTags: ['getGameById']
     }),
     addGame: build.mutation({
       query: (addGameViewModel: AddGameViewModel) => {
@@ -133,14 +133,14 @@ export const gameApi = createApi({
       },
       invalidatesTags: ['Games']
     }),
-    editGameInfo: build.mutation<ActionResponseModel, {}>({
-      query: (editGameInfoViewModel: EditGameInformationViewModel) => {
+    editGameInformation: build.mutation<ActionResponseModel, {}>({
+      query:( editGameInformationView: EditGameInformationViewModel) => {
         return {
           methodName: 'editGameInfo',
-          methodArguments: [editGameInfoViewModel]
-        };
+          methodArguments: [editGameInformationView]
+        }
       },
-      invalidatesTags: ['GetGameById']
-    })
+      invalidatesTags: ['getGameById']
+    }),
   })
 });

@@ -1,3 +1,4 @@
+import { GamesDetailsViewModel } from '@/view/models';
 import {
   CountriesSelect,
   createRenderInputs,
@@ -18,9 +19,13 @@ import {
   LabelGroup
 } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 
-const Compatibility = () => {
+export interface CompatibilityProps {
+  data: GamesDetailsViewModel;
+}
+
+const Compatibility: FC<CompatibilityProps> = ({ data }) => {
   enum SupportedBrowsersEnum { //Needs to create in enums section
     SAFARI = 1,
     CHROME,
@@ -176,7 +181,8 @@ const Compatibility = () => {
         return (
           <Form noValidate>
             <FlexibleForm
-              title='Compatibility'
+              noDataText={t.get('emptyValue')}
+              title={t.get('compatibility')}
               col={12}
               editedFormProps={{
                 viewMoreLabel: 'View More',
@@ -216,35 +222,21 @@ const Compatibility = () => {
                 <GameCompatibility
                   translations={translations}
                   devices={[1, 2, 3]}
-                  mobilePortrait={true}
-                  mobileLandscape={true}
-                  desktopPortrait={true}
-                  desktopLandscape={true}
-                  uiLanguages={[
-                    {
-                      title: 'Armenian'
-                    }
-                  ]}
-                  operatingLanguages={[
-                    {
-                      title: 'Russian'
-                    }
-                  ]}
-                  certifiedCountries={[
-                    {
-                      tagName: 'Armenia'
-                    }
-                  ]}
-                  restrictedCountries={[
-                    {
-                      tagName: 'United States'
-                    }
-                  ]}
-                  currencies={[
-                    {
-                      title: 'AMD'
-                    }
-                  ]}
+                  mobilePortrait={data.mobileScreenModeIsPortrait}
+                  mobileLandscape={data.mobileScreenModeIsLandscape}
+                  desktopPortrait={data.tabletScreenModeIsPortrait}
+                  desktopLandscape={data.tabletScreenModeIsLandscape}
+                  uiLanguages={data.gameUILanguages.map((language) => ({ title: language?.title }))}
+                  operatingLanguages={data.gameOperatingLanguages.map((language) => ({ title: language?.title }))}
+                  certifiedCountries={data.gameCertifiedCountries.map((country) => ({
+                    tagName: country?.tagName,
+                    imgSrc: country?.imgURL
+                  }))}
+                  restrictedCountries={data.gameRestrictedCountries.map((country) => ({
+                    tagName: country?.tagName,
+                    imgSrc: country?.imgURL
+                  }))}
+                  currencies={data.gameCurrencies.map((currency) => ({ title: currency?.title }))}
                   supportedBrowsers={{
                     browsersEnum: SupportedBrowsersEnum
                   }}

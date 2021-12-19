@@ -1,10 +1,15 @@
 import { createRenderInputs, CustomSelectProps, LanguageSelect, useTranslation } from '@atom/common';
 import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { GameVolatilitiesSelect, GameThemesSelect, GameFeaturesSelect } from '@/view';
+import { GamesDetailsViewModel } from '@/view/models';
 
-const GameProperties = () => {
+export interface GamePropertiesProps {
+  data: GamesDetailsViewModel;
+}
+
+const GameProperties: FC<GamePropertiesProps> = ({ data }) => {
   const t = useTranslation();
 
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
@@ -13,29 +18,29 @@ const GameProperties = () => {
     () => ({
       options: [
         {
-          title: 'Feature',
+          title: t.get('feature'),
           variant: 'tag',
-          value: ['Jackpot Support', 'FreeSpin Support']
+          value: data.gameFeatures.map((feature) => feature?.name)
         },
         {
-          title: 'Theme',
+          title: t.get('theme'),
           variant: 'tag',
-          value: ['Jewels and Gems', 'Fantasy', 'Halloween', 'Luxury']
+          value: data.gameThemes.map((theme) => theme?.name)
         },
         {
-          title: 'RTP',
+          title: t.get('rtp'),
           variant: 'default',
-          value: '98.7%'
+          value: data.rtp
         },
         {
-          title: 'Volatility',
+          title: t.get('volatility'),
           variant: 'default',
-          value: 'Low-Medium'
+          value: data.volatilityName
         },
         {
-          title: 'Max Win',
+          title: t.get('maxWin'),
           variant: 'default',
-          value: 'x 2000'
+          value: data.maxWin
         }
       ]
     }),
@@ -124,7 +129,19 @@ const GameProperties = () => {
       {(form) => {
         return (
           <Form noValidate>
-            <FlexibleForm title='Game Properties' editedFormProps={editedFormProps} editFormProps={editFormProps} />
+            <FlexibleForm
+              noDataText={t.get('emptyValue')}
+              title={t.get('gameProperties')}
+              onSubmit={async (onClose) => {
+                await form.submitForm();
+
+                const errors = await form.validateForm();
+
+                if (!Object.values(errors).length) onClose();
+              }}
+              editedFormProps={editedFormProps}
+              editFormProps={editFormProps}
+            />
           </Form>
         );
       }}
