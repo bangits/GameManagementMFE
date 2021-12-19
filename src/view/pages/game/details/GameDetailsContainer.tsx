@@ -14,6 +14,8 @@ const GameDetailsContainer = () => {
   console.log('GameDetailsContainer');
   const dispatch = useDispatch();
 
+  console.log(data);
+
   // Game status change functions
   // const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
 

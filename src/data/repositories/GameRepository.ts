@@ -20,6 +20,7 @@ import {
 import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
+import { EditGameInformationRequestModel } from './../../domain/models/request/EditGameInformationRequestModel';
 
 @injectable()
 export class GameRepository implements IGameRepository {
@@ -133,6 +134,13 @@ export class GameRepository implements IGameRepository {
     return await this.httpService.put<ActionResponseModel, ChangeGameStatusRequestModel, {}>({
       url: API_ROUTES.GAMES.CHANGE_STATUS,
       body: changeGameStatusRequestModel
+    });
+  };
+
+  editGameInfo = async (editGameInfoRequestModel: EditGameInformationRequestModel): Promise<ActionResponseModel> => {
+    return await this.httpService.put<ActionResponseModel, {}, EditGameInformationRequestModel>({
+      url: API_ROUTES.GAMES.EDIT_GAME_INFO,
+      body: editGameInfoRequestModel
     });
   };
 }

@@ -2,6 +2,7 @@ import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import {
   AddGameRequestModel,
   ChangeGameStatusRequestModel,
+  EditGameInformationRequestModel,
   GameLaunchRequestModel,
   GetClassNamesResponseModel,
   GetGameByIdResponseModel,
@@ -32,4 +33,5 @@ export interface IGameRepository {
   getProviderGames(getProviderGamesRequestModel: GetProviderGamesRequestModel): Promise<GetProviderGamesResponseModel>;
   gameLaunch(gameLaunchRequestModel: GameLaunchRequestModel): Promise<string>;
   changeGameStatus(changeGameStatus: ChangeGameStatusRequestModel): Promise<ActionResponseModel>;
+  editGameInfo(editGameInfoRequestModel: EditGameInformationRequestModel): Promise<ActionResponseModel>;
 }

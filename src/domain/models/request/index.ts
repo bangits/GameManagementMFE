@@ -7,3 +7,4 @@ export * from './GameLaunchRequestModel';
 export * from './GetGameRequestModel';
 export * from './GetProviderGamesRequestModel';
 export * from './GetProviderRequestModel';
+export * from './EditGameInformationRequestModel';

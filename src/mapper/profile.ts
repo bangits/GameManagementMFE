@@ -6,6 +6,7 @@ import {
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
   GameLaunchRequestModel,
+  GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
@@ -22,6 +23,7 @@ import {
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
   GameLaunchViewModel,
+  GamesDetailsViewModel,
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
@@ -34,6 +36,7 @@ import {
 } from '@/view/models';
 import { convertDate, convertDateForRequestModel } from '@atom/common';
 import autoMapper, { MappingProfile } from '@automapper/core';
+import { current } from 'immer';
 import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
 import { convertToCountryTab, transformToCountryModel } from './transformFunctions';
 
@@ -196,6 +199,10 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.lastUpdatedByUserEmail,
       mapFrom((source) => source.lastUpdatedByUserEmail)
+    )
+    .forMember(
+      (destination) => destination.providerId,
+      mapFrom((source) => source.id)
     );
   //#endregion
 
@@ -383,6 +390,113 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.projectId,
       mapFrom((source) => 1)
+    );
+
+  //#Get Games By Id
+  mapper
+    .createMap(GetGameByIdResponseModel, GamesDetailsViewModel)
+    .forMember(
+      (destination) => destination.gameId,
+      mapFrom((source) => source.id)
+    )
+    .forMember(
+      (destination) => destination.gameName,
+      mapFrom((source) => source.name)
+    )
+    .forMember(
+      (destination) => destination.statusId,
+      mapFrom((source) => source.status.id)
+    )
+    .forMember(
+      (destination) => destination.type,
+      mapFrom((source) => source.type)
+    )
+    .forMember(
+      (destination) => destination.subType,
+      mapFrom((source) => source.subType)
+    )
+    .forMember(
+      (destination) => destination.gameCurrencies,
+      mapFrom((source) =>
+        source.gameCurrencies.map((currency) => ({
+          title: currency.name,
+          id: currency.id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gameUILanguages,
+      mapFrom((source) =>
+        source.gameUILanguages.map((language) => ({
+          title: language.name,
+          id: language.id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gameOperatingLanguages,
+      mapFrom((source) =>
+        source.gameOperatingLanguages.map((language) => ({
+          title: language.name,
+          id: language.id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gameCertifiedCountries,
+      mapFrom((source) =>
+        source.gameCertifiedCountries.map((country) => ({
+          tagName: country.name,
+          id: country.id,
+          imgURL: country.flag
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gameRestrictedCountries,
+      mapFrom((source) =>
+        source.gameRestrictedCountries.map((countries) => ({
+          tagName: countries.name,
+          id: countries.id,
+          imgURL: countries.flag
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gamePlatformGames,
+      mapFrom((source) =>
+        source.gamePlatformGames.map((platform) => ({
+          id: platform.id,
+          name: platform.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gameSupportedBrowsers,
+      mapFrom((source) =>
+        source.gameSupportedBrowsers.map((browser) => ({
+          id: browser.id,
+          name: browser.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gameFeatures,
+      mapFrom((source) =>
+        source.gameFeatures.map((feature) => ({
+          id: feature.id,
+          name: feature.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gameThemes,
+      mapFrom((source) =>
+        source.gameThemes.map((theme) => ({
+          id: theme.id,
+          name: theme.name
+        }))
+      )
     );
   //#endregion
   mapper.createMap(ChangeGameStatusViewModel, ChangeGameStatusRequestModel);

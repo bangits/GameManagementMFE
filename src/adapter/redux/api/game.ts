@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { GameUseCase } from '@/domain/use-case';
 import {
   AddGameViewModel,
+  EditGameInformationViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
@@ -132,6 +133,15 @@ export const gameApi = createApi({
         };
       },
       invalidatesTags: ['Games']
+    }),
+    editGameInfo: build.mutation<ActionResponseModel, {}>({
+      query: (editGameInfoViewModel: EditGameInformationViewModel) => {
+        return {
+          methodName: 'editGameInfo',
+          methodArguments: [editGameInfoViewModel]
+        };
+      },
+      invalidatesTags: ['GetGameById']
     })
   })
 });
