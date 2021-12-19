@@ -29,4 +29,6 @@ export const gameLauncherLifecycles = singleSpaReact({
 
 export const { bootstrap, mount, unmount } = lifecycles;
 
+export * from './adapter/react-context';
+export * from './domain/models/response';
 export * from './view/components';

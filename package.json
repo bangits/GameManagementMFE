@@ -1,6 +1,6 @@
 {
   "name": "@atom/game-management",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "",
   "types": "./dist/atom-game-management.d.ts",
   "files": [
@@ -86,7 +86,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@atom/authorization": "^1.2.5",
+    "@atom/authorization": "^1.2.7",
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
     "@reduxjs/toolkit": "^1.6.2",

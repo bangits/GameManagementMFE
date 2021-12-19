@@ -114,7 +114,8 @@ export const gameApi = createApi({
           methodName: 'getGamesByProviderId',
           methodArguments: [providerGamesFilterViewModel]
         };
-      }
+      },
+      keepUnusedDataFor: 10
     }),
     launchGame: build.query<string, GameLaunchViewModel>({
       query: (gameLaunchViewModel: GameLaunchViewModel) => {

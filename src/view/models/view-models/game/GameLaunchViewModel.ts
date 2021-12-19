@@ -2,8 +2,13 @@ import { PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 
 export class GameLaunchViewModel {
-  @AutoMap()
   userId: PrimaryKey;
+
+  @AutoMap()
+  currencyId: PrimaryKey;
+
+  @AutoMap()
+  currency: string;
 
   @AutoMap()
   gameId: PrimaryKey;

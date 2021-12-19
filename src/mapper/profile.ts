@@ -10,6 +10,7 @@ import {
   GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
+  GetProviderByPartnerIdResponseModel,
   GetProviderGamesRequestModel,
   GetProviderGamesResponseModel,
   GetProviderRequestModel,
@@ -29,6 +30,7 @@ import {
   GamesFiltersViewModel,
   GamesViewModel,
   GetGamesViewModel,
+  GetProviderByPartnerIdViewModel,
   GetProvidersViewModel,
   ProviderGamesFilterViewModel,
   ProviderGamesViewModel,
@@ -38,7 +40,6 @@ import {
 } from '@/view/models';
 import { convertDate, convertDateForRequestModel } from '@atom/common';
 import autoMapper, { MappingProfile } from '@automapper/core';
-import { current } from 'immer';
 import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
 import { convertToCountryTab, transformToCountryModel } from './transformFunctions';
 
@@ -205,6 +206,50 @@ export const baseProfile: MappingProfile = (mapper) => {
     .forMember(
       (destination) => destination.providerId,
       mapFrom((source) => source.id)
+    );
+
+  //# Get Partner Provider Details
+  mapper
+    .createMap(GetProviderByPartnerIdResponseModel, GetProviderByPartnerIdViewModel)
+    .forMember(
+      (destination) => destination.totalGameCount,
+      mapFrom((source) => source.gameCount)
+    )
+    .forMember(
+      (destination) => destination.providerId,
+      mapFrom((source) => source.id)
+    )
+    .forMember(
+      (destination) => destination.currencies,
+      mapFrom((source) =>
+        source.providerCurrencies.map((currencies) => ({
+          title: currencies.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.targetMarkets,
+      mapFrom((source) =>
+        source.targetMarkets.map((market) => ({
+          tagName: market.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) =>
+        source.certifiedCountries.map((countries) => ({
+          tagName: countries.name
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) =>
+        source.restrictedCountries.map((countries) => ({
+          tagName: countries.name
+        }))
+      )
     );
   //#endregion
 
@@ -394,12 +439,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => 1)
     )
     .forMember(
-      (destination) => destination.currencyId,
+      (destination) => destination.providerId,
       mapFrom((source) => 1)
-    )
-    .forMember(
-      (destination) => destination.currency,
-      mapFrom((source) => 'USD')
     );
 
   //#Get Games By Id

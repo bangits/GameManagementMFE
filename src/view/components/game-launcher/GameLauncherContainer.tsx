@@ -8,10 +8,20 @@ import { useContext, useEffect, useState } from 'react';
 export const GameLauncherContainer = () => {
   const { user } = useContext(AuthenticatedContext);
 
-  const [gameLaunchConfig, setGameLaunchConfig] = useState<Omit<GameLaunchViewModel, 'userId'>>(null);
+  const [gameLaunchConfig, setGameLaunchConfig] =
+    useState<Omit<GameLaunchViewModel, 'userId' | 'currency' | 'currencyId'>>(null);
 
   const { data: gameIframeUrl } = gameApi.useLaunchGameQuery(
-    gameLaunchConfig && { ...gameLaunchConfig, userId: user.userId }
+    gameLaunchConfig && {
+      ...gameLaunchConfig,
+      userId: user.userId,
+      currency: user.currencyName,
+      currencyId: user.currencyId
+    },
+    {
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true
+    }
   );
 
   useEffect(() => {
