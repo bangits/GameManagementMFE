@@ -74,10 +74,12 @@ export class GameRepository implements IGameRepository {
   };
 
   gameLaunch = async (gameLauncherRequestModel: GameLaunchRequestModel): Promise<string> => {
-    return await this.gameLauncherHttpService.get<string, GameLaunchRequestModel>({
-      url: API_ROUTES.GAMES.LAUNCH_GAME,
-      query: gameLauncherRequestModel
-    });
+    return (
+      await this.gameLauncherHttpService.get<{ gameLaunchUrl: string }, GameLaunchRequestModel>({
+        url: API_ROUTES.GAMES.LAUNCH_GAME,
+        query: gameLauncherRequestModel
+      })
+    )?.gameLaunchUrl;
   };
 
   getClassNames = cachedFn(CACHE_CONSTANTS.GetClassNamesResponse, async (): Promise<GetClassNamesResponseModel> => {

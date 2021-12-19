@@ -36,7 +36,6 @@ import {
 } from '@/view/models';
 import { convertDate, convertDateForRequestModel } from '@atom/common';
 import autoMapper, { MappingProfile } from '@automapper/core';
-import { current } from 'immer';
 import { GetProvidersByIdViewModel } from './../view/models/view-models/provider/GetProvidersByIdViewModel';
 import { convertToCountryTab, transformToCountryModel } from './transformFunctions';
 
@@ -389,6 +388,10 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.projectId,
+      mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.providerId,
       mapFrom((source) => 1)
     );
 
