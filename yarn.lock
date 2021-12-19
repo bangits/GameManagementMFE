@@ -40,6 +40,9 @@
     single-spa-react "^4.6.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a7003b12ba0ad558264b0e2c42b93e3159a46e80
 "@atom/design-system@^2.2.17", "@atom/design-system@^2.2.6":
   version "2.2.17"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.17.tgz#91ca72c9c00222beeecb1122ee602ea937570321"

@@ -43,14 +43,15 @@ const AddGameContainer: FC = () => {
         .unwrap()
         .then(() => form.resetForm())
         .catch((error: { message: AddGameCustomErrorsEnum }) => {
-          if (error.message)
+          if (error.message) {
             customErrors[error.message]?.forEach((error) => {
               form.setFieldError(error.fieldKey, error.errorMessage);
             });
-          else
+          } else {
             alert.error({
               alertLabel: t.get('connectionError')
             });
+          }
         }),
     [addGame]
   );
@@ -65,10 +66,6 @@ const AddGameContainer: FC = () => {
     if (status === QueryStatus.fulfilled) {
       alert.success({
         alertLabel: t.get('successAlertMessage')
-      });
-    } else {
-      alert.error({
-        alertLabel: t.get('connectionError')
       });
     }
   }, [status]);
