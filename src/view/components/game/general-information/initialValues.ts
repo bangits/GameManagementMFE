@@ -1,4 +1,4 @@
-import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/models';
+import { EditGameInformationViewModel, EditGamePropertiesViewModel, GamesDetailsViewModel } from '@/view/models';
 
 export const getEditGameInfoInitialValues = (data: GamesDetailsViewModel): EditGameInformationViewModel => {
   return {
@@ -13,5 +13,17 @@ export const getEditGameInfoInitialValues = (data: GamesDetailsViewModel): EditG
     subTypeId: data.subType?.id || null,
     gameTypeId: data.type?.id || null,
     providerId: data.providerId
+  };
+};
+export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGamePropertiesViewModel => {
+  return {
+    featureIds: data.gameFeatures.map((featureId) => featureId.id) || null,
+    gameId: data.gameId || null,
+    lastUpdatedByUserEmail: data.lastUpdatedByUserEmail || null,
+    lastUpdatedByUserId: 1,
+    maxWin: data.maxWin || null,
+    rtp: data.rtp || null,
+    themesIds: data.gameThemes.map(theme => theme.id) || null,
+    volatilityId: data.volatilityId || null,
   };
 };

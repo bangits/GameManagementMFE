@@ -1,6 +1,6 @@
-import React, { FC, useMemo } from 'react';
-import { FastField, Form, Formik } from 'formik';
-import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
+import { editGameInfoValidations } from '@/domain/validators';
+import { GameClassSelect, GameTypesSelect, ProviderSelect } from '@/view';
+import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/models';
 import {
   convertDate,
   createRenderInputs,
@@ -9,17 +9,18 @@ import {
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
-import { GameTypesSelect, ProviderSelect, GameClassSelect } from '@/view';
-import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/models';
+import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
+import { FastField, Form, Formik, useFormikContext } from 'formik';
+import React, { FC, useMemo } from 'react';
 import { getEditGameInfoInitialValues } from './initialValues';
-import { editGameInfoValidations } from '@/domain/validators';
 
 export interface GameInformationProps {
   data: GamesDetailsViewModel;
   onSubmit: (data: EditGameInformationViewModel) => void;
+  isEdit: boolean;
 }
 
-const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
+const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) => {
   const t = useTranslation();
 
   const translationValidations = useValidationTranslation();
@@ -87,20 +88,23 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
           name: 'externalId',
           label: t.get('externalId')
         },
-        // {
-        //   type: 'select' as const,
-        //   name: 'gameTypeId',
-        //   label: t.get('gameTypes'),
-        //   component: (props: CustomSelectProps) => {
-        //     return <GameTypesSelect {...props} fullWidth inputLabel={t.get('gameTypes')} />;
-        //   }
-        // },
+        {
+          type: 'select' as const,
+          name: 'gameTypeId',
+          label: t.get('gameTypes'),
+          component: (props: CustomSelectProps) => {
+            return <GameTypesSelect {...props} fullWidth inputLabel={t.get('gameTypes')} />;
+          }
+        },
         {
           type: 'select' as const,
           name: 'subTypeId',
           label: t.get('subType'),
           component: (props: CustomSelectProps) => {
-            return <GameTypesSelect {...props} fullWidth inputLabel={t.get('subType')} />;
+            const form = useFormikContext<EditGameInformationViewModel>();
+            return (
+              <GameTypesSelect {...props} gameTypeId={form.values.gameTypeId} fullWidth inputLabel={t.get('subType')} />
+            );
           }
         },
         {
@@ -164,11 +168,10 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
         return (
           <Form noValidate>
             <FlexibleForm
+              isEdit={isEdit}
               title={t.get('gameInformation')}
               onSubmit={async (onClose) => {
                 await form.submitForm();
-
-                console.log(form.initialTouched);
 
                 const errors = await form.validateForm();
 

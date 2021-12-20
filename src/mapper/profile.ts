@@ -5,6 +5,7 @@ import {
   ChangeGameStatusRequestModel,
   ChangeProviderStatusRequestModel,
   EditGameInformationRequestModel,
+  EditGamePropertiesRequestModel,
   EditProviderGeneralInformationRequestModel,
   GameLaunchRequestModel,
   GetGameByIdResponseModel,
@@ -23,8 +24,7 @@ import {
   AddProviderViewModel,
   ChangeGameStatusViewModel,
   ChangeProviderStatusViewModel,
-  EditGameInformationViewModel,
-  EditProviderGeneralInformationViewModel,
+  EditGameInformationViewModel, EditGamePropertiesViewModel, EditProviderGeneralInformationViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
@@ -231,7 +231,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.targetMarkets,
       mapFrom((source) =>
         source.targetMarkets.map((market) => ({
-          tagName: market.name
+          tagName: market.name,
+          imgSrc: market.flag
         }))
       )
     )
@@ -239,7 +240,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.certifiedCountries,
       mapFrom((source) =>
         source.certifiedCountries.map((countries) => ({
-          tagName: countries.name
+          tagName: countries.name,
+          imgSrc: countries.flag
         }))
       )
     )
@@ -247,7 +249,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.restrictedCountries,
       mapFrom((source) =>
         source.restrictedCountries.map((countries) => ({
-          tagName: countries.name
+          tagName: countries.name,
+          imgSrc: countries.flag
         }))
       )
     );
@@ -570,4 +573,18 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.releaseDate,
       mapFrom((source) => convertDateForRequestModel(source.releaseDate))
     );
+
+  mapper.createMap(EditGamePropertiesViewModel, EditGamePropertiesRequestModel)
+    .forMember(
+      (destination) => destination.gameFeatures,
+      mapFrom((source) => source.featureIds.map(featureId => ({
+        itemId: featureId
+      })))
+    )
+    .forMember(
+      (destination) => destination.themes,
+      mapFrom((source) => source.themesIds.map(themeId => ({
+        itemId: themeId
+      })))
+    )
 };

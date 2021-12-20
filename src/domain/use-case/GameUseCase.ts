@@ -1,20 +1,17 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddGameRequestModel,
-  ChangeGameStatusRequestModel,
-  GameLaunchRequestModel,
+  ChangeGameStatusRequestModel, EditGameInformationRequestModel, EditGamePropertiesRequestModel, GameLaunchRequestModel,
   GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
-  GetProviderGamesResponseModel,
-  EditGameInformationRequestModel
+  GetProviderGamesResponseModel
 } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
-  ChangeGameStatusViewModel,
-  GameLaunchViewModel,
+  ChangeGameStatusViewModel, EditGamePropertiesViewModel, GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
@@ -30,8 +27,8 @@ import {
 import { ProviderGamesFilterViewModel } from '@/view/models/view-models/game/ProviderGamesFilterViewModel';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
-import { IGameRepository } from './../boundaries';
 import { EditGameInformationViewModel } from './../../view/models/view-models/game/EditGameInformationViewModel';
+import { IGameRepository } from './../boundaries';
 @injectable()
 export class GameUseCase {
   @inject(DI_CONSTANTS.GAME.GameRepository)
@@ -140,5 +137,15 @@ export class GameUseCase {
     );
 
     return this.gameRepository.editGameInfo(editGameInfoResponseModel);
+  };
+
+  editGameProperties = async (editGamePropertiesViewModel: EditGamePropertiesViewModel): Promise<ActionResponseModel> => {
+    const editGamePropertiesResponseModel = mapper.map(
+      editGamePropertiesViewModel,
+      EditGamePropertiesRequestModel,
+      EditGamePropertiesViewModel
+    );
+
+    return this.gameRepository.editGameProperties(editGamePropertiesResponseModel);
   };
 }

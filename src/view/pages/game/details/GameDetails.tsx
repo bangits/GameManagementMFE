@@ -105,8 +105,8 @@ const GameDetails: FC<GameDetailsProps> = ({
   return (
     <PageWrapper>
       <GameDetailsPage
-        gameName=''
-        gameId=''
+        gameName={data.gameName}
+        gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
         statusInfo={statusInfo}
