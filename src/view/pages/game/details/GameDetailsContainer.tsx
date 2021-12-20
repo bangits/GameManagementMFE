@@ -2,7 +2,9 @@ import { gameApi } from '@/adapter/redux/api';
 import { GameStatusesEnum } from '@/domain/models';
 import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
 import { GameActionsViewModel } from '@/view/models';
+import { gameLaunchService } from '@/view/services';
 import { useActionWithDialog, useTranslation } from '@atom/common';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import GameDetails from './GameDetails';
@@ -64,11 +66,24 @@ const GameDetailsContainer = () => {
     getColumnId: (column) => column.gameId
   });
 
+  const createGameLauncher = useCallback(
+    (isDemo: boolean) => () => {
+      gameLaunchService.publish({
+        gameId: data.externalId,
+        gameLaunchUrl: isDemo ? data.providerAbsoluteDemoUrl : data.providerAbsoluteUrl,
+        providerId: data.providerId
+      });
+    },
+    [data]
+  );
+
   if (!data) return null;
 
   return (
     <GameDetails
       data={data}
+      onPlayButtonClick={createGameLauncher(false)}
+      onDemoButtonClick={createGameLauncher(true)}
       onActivateButtonClick={() =>
         onActivateButtonClick({
           gameId: data.gameId,

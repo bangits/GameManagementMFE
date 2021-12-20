@@ -85,6 +85,9 @@ export class Game extends BaseEntity {
   @AutoMap()
   providerDemoUrl: string;
 
+  @AutoMap()
+  providerAbsoluteDemoUrl: string;
+
   status: {
     id: GameStatusesEnum;
     name: string;

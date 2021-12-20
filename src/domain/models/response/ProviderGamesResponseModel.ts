@@ -8,4 +8,12 @@ export class ProviderGamesResponseModel {
   name: string;
   @AutoMap()
   icon: string;
+  @AutoMap()
+  externalId: string;
+  @AutoMap()
+  backGroundImage: string;
+  @AutoMap()
+  providerAbsoluteDemoUrl: string;
+  @AutoMap()
+  providerAbsoluteUrl: string;
 }

@@ -16,6 +16,8 @@ export interface GameDetailsProps {
   shouldShowInActivateButton: boolean;
   onInActivateButtonClick: () => void;
   onActivateButtonClick: () => void;
+  onPlayButtonClick: () => void;
+  onDemoButtonClick: () => void;
 }
 
 const GameDetails: FC<GameDetailsProps> = ({
@@ -23,7 +25,9 @@ const GameDetails: FC<GameDetailsProps> = ({
   shouldShowActivateButton,
   shouldShowInActivateButton,
   onActivateButtonClick,
-  onInActivateButtonClick
+  onInActivateButtonClick,
+  onPlayButtonClick,
+  onDemoButtonClick
 }) => {
   const t = useTranslation();
 
@@ -86,6 +90,18 @@ const GameDetails: FC<GameDetailsProps> = ({
     [t]
   );
 
+  const buttons = useMemo<GameDetailsPageProps['buttons']>(
+    () => ({
+      playButtonProps: {
+        onClick: onPlayButtonClick
+      },
+      playDemoButtonProps: {
+        onClick: onDemoButtonClick
+      }
+    }),
+    []
+  );
+
   return (
     <PageWrapper>
       <GameDetailsPage
@@ -101,12 +117,7 @@ const GameDetails: FC<GameDetailsProps> = ({
         lastUpdateDate={convertDate(data.lastUpdatedDate)}
         lastUpdateBy={data.lastUpdatedByUserEmail}
         generalInformationContext={<GameGeneralInformationContainer data={data} />}
-        buttons={{
-          playButtonProps: {},
-          playDemoButtonProps: {
-            disabled: !data.hasDemo
-          }
-        }}
+        buttons={buttons}
         translations={translations}
       />
     </PageWrapper>
