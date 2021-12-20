@@ -1,7 +1,10 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddGameRequestModel,
-  ChangeGameStatusRequestModel, EditGameInformationRequestModel, EditGamePropertiesRequestModel, GameLaunchRequestModel,
+  ChangeGameStatusRequestModel,
+  EditGameInformationRequestModel,
+  EditGamePropertiesRequestModel,
+  GameLaunchRequestModel,
   GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
@@ -11,7 +14,9 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
-  ChangeGameStatusViewModel, EditGamePropertiesViewModel, GameLaunchViewModel,
+  ChangeGameStatusViewModel,
+  EditGamePropertiesViewModel,
+  GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
@@ -139,7 +144,9 @@ export class GameUseCase {
     return this.gameRepository.editGameInfo(editGameInfoResponseModel);
   };
 
-  editGameProperties = async (editGamePropertiesViewModel: EditGamePropertiesViewModel): Promise<ActionResponseModel> => {
+  editGameProperties = async (
+    editGamePropertiesViewModel: EditGamePropertiesViewModel
+  ): Promise<ActionResponseModel> => {
     const editGamePropertiesResponseModel = mapper.map(
       editGamePropertiesViewModel,
       EditGamePropertiesRequestModel,

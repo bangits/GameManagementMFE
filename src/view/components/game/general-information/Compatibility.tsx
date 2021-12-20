@@ -242,7 +242,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit }) => {
                   supportedBrowsers={{
                     browsersEnum: SupportedBrowsersEnum,
                     initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
-                    disabled: true,
+                    disabled: true
                   }}
                 />
               }

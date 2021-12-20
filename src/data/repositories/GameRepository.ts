@@ -151,7 +151,9 @@ export class GameRepository implements IGameRepository {
       body: editGameInfoRequestModel
     });
   };
-  editGameProperties = async (editGamePropertiesRequestModel: EditGamePropertiesRequestModel): Promise<ActionResponseModel> => {
+  editGameProperties = async (
+    editGamePropertiesRequestModel: EditGamePropertiesRequestModel
+  ): Promise<ActionResponseModel> => {
     return await this.httpService.put<ActionResponseModel, {}, EditGamePropertiesRequestModel>({
       url: API_ROUTES.GAMES.EDIT_GAME_PROPERTIES,
       body: editGamePropertiesRequestModel

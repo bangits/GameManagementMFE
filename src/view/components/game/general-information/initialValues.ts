@@ -23,7 +23,7 @@ export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGa
     lastUpdatedByUserId: 1,
     maxWin: data.maxWin || null,
     rtp: data.rtp || null,
-    themesIds: data.gameThemes.map(theme => theme.id) || null,
-    volatilityId: data.volatilityId || null,
+    themesIds: data.gameThemes.map((theme) => theme.id) || null,
+    volatilityId: data.volatilityId || null
   };
 };
