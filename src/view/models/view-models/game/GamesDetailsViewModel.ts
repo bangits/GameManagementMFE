@@ -10,6 +10,15 @@ export class GamesDetailsViewModel {
   rtp: string;
 
   @AutoMap()
+  className: string;
+
+  @AutoMap()
+  provideName: string;
+
+  @AutoMap()
+  volatilityName: string;
+
+  @AutoMap()
   externalId: string;
 
   @AutoMap()

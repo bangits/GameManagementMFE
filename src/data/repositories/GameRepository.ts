@@ -50,9 +50,14 @@ export class GameRepository implements IGameRepository {
   };
 
   getGameById = async (gameId: PrimaryKey): Promise<GetGameByIdResponseModel> => {
-    return await this.httpService.get<GetGameByIdResponseModel, {}>({
-      url: API_ROUTES.GAMES.BASE_ROUTE + `/${gameId}`
+    const getGameByIdResponseModel = await this.httpService.get<GetGameByIdResponseModel[], {}>({
+      url: API_ROUTES.GAMES.GET_BY_ID,
+      query: {
+        ids: [gameId]
+      }
     });
+
+    return getGameByIdResponseModel[0] || null;
   };
 
   getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel> => {

@@ -1,14 +1,20 @@
-import React from 'react';
+import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/models';
+import React, { FC } from 'react';
 import Compatibility from './Compatibility';
 import GameInformation from './GameInformation';
 import GameProperties from './GameProperties';
 
-const GameGeneralInformation = () => {
+export interface GameGeneralInformationProps {
+  data: GamesDetailsViewModel;
+  onGameInfoSubmit: (data: EditGameInformationViewModel) => void;
+}
+
+const GameGeneralInformation: FC<GameGeneralInformationProps> = ({ data, onGameInfoSubmit }) => {
   return (
     <>
-      <GameInformation />
-      <GameProperties />
-      <Compatibility />
+      <GameInformation data={data} onSubmit={onGameInfoSubmit} />
+      <GameProperties data={data} />
+      <Compatibility data={data} />
     </>
   );
 };

@@ -133,12 +133,12 @@ export class GameUseCase {
   };
 
   editGameInfo = async (editGameInfoViewModel: EditGameInformationViewModel): Promise<ActionResponseModel> => {
-    const editGameInfoRequestModel = mapper.map(
+    const editGameInfoResponseModel = mapper.map(
       editGameInfoViewModel,
       EditGameInformationRequestModel,
       EditGameInformationViewModel
     );
 
-    return this.gameRepository.editGameInfo(editGameInfoRequestModel);
+    return this.gameRepository.editGameInfo(editGameInfoResponseModel);
   };
 }

@@ -26,6 +26,9 @@ export class Game extends BaseEntity {
   providerName: string;
 
   @AutoMap()
+  provideName: string;
+
+  @AutoMap()
   volatilityName: string;
 
   @AutoMap()

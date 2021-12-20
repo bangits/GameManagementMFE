@@ -1,5 +1,9 @@
 import { gameApi } from '@/adapter/redux/api';
-import { useTranslation } from '@atom/common';
+import { GameStatusesEnum } from '@/domain/models';
+import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
+import { GameActionsViewModel, GamesDetailsViewModel, GamesViewModel } from '@/view/models';
+import { useActionWithDialog, useTranslation } from '@atom/common';
+import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import GameDetails from './GameDetails';
@@ -9,74 +13,79 @@ const GameDetailsContainer = () => {
 
   const { data, isFetching, originalArgs } = gameApi.useGetGameByIdQuery(+params.gameId);
 
-  const t = useTranslation();
-
-  console.log('GameDetailsContainer');
-  const dispatch = useDispatch();
-
   console.log(data);
 
-  // Game status change functions
-  // const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
+  const t = useTranslation();
 
-  // const changeStatusDialogModel = useMemo<{ gameId: PrimaryKey; legalName: string; legalEntity: string }>(
-  //   () => ({
-  //     gameId: data?.gameId,
-  //     legalName: data?.organizationDetails.legalName,
-  //     legalEntity: data?.organizationDetails.legalEntity.shortName
-  //   }),
-  //   [data]
-  // );
+  const dispatch = useDispatch();
 
-  // const { openDialogFn: onApproveButtonClick } = useActionWithDialog<typeof changeStatusDialogModel>({
-  //   dialogFn: showGameApproveDialog,
-  //   actionFn: (gameIds) => changeGameStatus({ gameIds, statusId: GameStatusesEnum.ACTIVE }).unwrap(),
-  //   isFetching,
-  //   t,
-  //   refetch: () => {
-  //     dispatch(
-  //       gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
-  //         Object.assign(draft, {
-  //           statusId: GameStatusesEnum.Validated
-  //         });
-  //       })
-  //     );
-  //   },
-  //   getColumnId: (column) => column.gameId
-  // });
+  const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
 
-  // const { openDialogFn: onTerminateButtonClick } = useActionWithDialog<typeof changeStatusDialogModel>({
-  //   dialogFn: showGameTerminateDialog,
-  //   actionFn: (gameIds) => changeGameStatus({ gameIds, statusId: GameStatusesEnum.Terminated }).unwrap(),
-  //   isFetching,
-  //   t,
-  //   refetch: () => {
-  //     dispatch(
-  //       gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
-  //         Object.assign(draft, {
-  //           statusId: GameStatusesEnum.Terminated
-  //         });
-  //       })
-  //     );
-  //   },
-  //   getColumnId: (column) => column.gameId
-  // });
+  const { openDialogFn: onActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
+    dialogFn: showGameActivateDialog,
+    actionFn: (gameIds) =>
+      changeGameStatus({
+        gameIds,
+        statusId: GameStatusesEnum.ACTIVE,
+        lastUpdatedByUserId: 2,
+        lastUpdatedByUserEmail: 'test@gmail․com'
+      }).unwrap(),
+    isFetching,
+    t,
+    refetch: () => {
+      dispatch(
+        gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
+          Object.assign(draft, {
+            statusId: GameStatusesEnum.ACTIVE
+          });
+        })
+      );
+    },
+    getColumnId: (column) => column.gameId
+  });
 
-  // if (!data) return null;
+  const { openDialogFn: onInActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
+    dialogFn: showGameInActivateDialog,
+    actionFn: (gameIds) =>
+      changeGameStatus({
+        gameIds,
+        statusId: GameStatusesEnum.INACTIVE,
+        lastUpdatedByUserId: 2,
+        lastUpdatedByUserEmail: 'test@gmail․com'
+      }).unwrap(),
+    isFetching,
+    t,
+    refetch: () => {
+      dispatch(
+        gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
+          Object.assign(draft, {
+            statusId: GameStatusesEnum.INACTIVE
+          });
+        })
+      );
+    },
+    getColumnId: (column) => column.gameId
+  });
+
+  if (!data) return null;
 
   return (
     <GameDetails
       data={data}
-      onApproveButtonClick={() => {
-        console.log;
-      }}
-      onTerminateButtonClick={() => {
-        console.log;
-      }}
-      // shouldShowApproveButton={data.statusId !== GameStatusesEnum.ACTIVE}
-      // shouldShowTerminateButton={data.statusId !== GameStatusesEnum.ACTIVE}
-      shouldShowTerminateButton={false}
-      shouldShowApproveButton={true}
+      onActivateButtonClick={() =>
+        onActivateButtonClick({
+          gameId: data.gameId,
+          name: data.gameName
+        })
+      }
+      onInActivateButtonClick={() =>
+        onInActivateButtonClick({
+          gameId: data.gameId,
+          name: data.gameName
+        })
+      }
+      shouldShowActivateButton={data.statusId === GameStatusesEnum.INACTIVE}
+      shouldShowInActivateButton={data.statusId === GameStatusesEnum.ACTIVE}
     />
   );
 };

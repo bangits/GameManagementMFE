@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { FastField, Form, Formik } from 'formik';
 import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
 import {
+  convertDate,
   createRenderInputs,
   CustomSelectProps,
   useAsync,
@@ -14,8 +15,8 @@ import { getEditGameInfoInitialValues } from './initialValues';
 import { editGameInfoValidations } from '@/domain/validators';
 
 export interface GameInformationProps {
-  data?: GamesDetailsViewModel;
-  onSubmit?: (data: EditGameInformationViewModel) => void;
+  data: GamesDetailsViewModel;
+  onSubmit: (data: EditGameInformationViewModel) => void;
 }
 
 const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
@@ -29,48 +30,48 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
     () => ({
       options: [
         {
-          title: 'Game Name',
+          title: t.get('gameName'),
           variant: 'default',
-          value: 'Shining Crown'
+          value: data?.gameName
         },
         {
-          title: 'External ID',
+          title: t.get('externalId'),
           variant: 'bold',
-          value: 'ID123456789454'
+          value: data?.externalId
         },
         {
-          title: 'Type',
+          title: t.get('type'),
           variant: 'default',
-          value: 'Casino Games'
+          value: data.type?.name
         },
         {
-          title: 'Subtype',
+          title: t.get('subType'),
           variant: 'default',
-          value: 'Slots'
+          value: data.subType?.name
         },
         {
-          title: 'Provider',
+          title: t.get('provider'),
           variant: 'default',
-          value: 'EGT'
+          value: data?.provideName
         },
         {
-          title: 'Release Date',
+          title: t.get('releaseDate'),
           variant: 'default',
-          value: '09/12/1220'
+          value: data.releaseDate && convertDate(data.releaseDate)
         },
         {
-          title: 'Class',
+          title: t.get('class'),
           variant: 'default',
-          value: 'Branded'
+          value: data.className
         },
         {
-          title: 'Has Demo',
+          title: t.get('hasDemo'),
           variant: 'default',
-          value: 'Yes'
+          value: data?.hasDemo ? t.get('yes') : t.get('no')
         }
       ]
     }),
-    []
+    [data, t]
   );
 
   const editFormProps = useMemo<FlexibleFormProps['editFormProps']>(
@@ -78,86 +79,66 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
       fields: [
         {
           type: 'input',
-          name: 'gameName',
-          label: 'Game Name'
+          name: 'name',
+          label: t.get('gameName')
         },
         {
           type: 'input',
           name: 'externalId',
-          label: 'External ID'
+          label: t.get('externalId')
         },
+        // {
+        //   type: 'select' as const,
+        //   name: 'gameTypeId',
+        //   label: t.get('gameTypes'),
+        //   component: (props: CustomSelectProps) => {
+        //     return <GameTypesSelect {...props} fullWidth inputLabel={t.get('gameTypes')} />;
+        //   }
+        // },
         {
           type: 'select' as const,
-          name: 'gameType',
-          label: t.get(''),
+          name: 'subTypeId',
+          label: t.get('subType'),
           component: (props: CustomSelectProps) => {
-            return <GameTypesSelect {...props} fullWidth inputLabel={t.get('')} />;
+            return <GameTypesSelect {...props} fullWidth inputLabel={t.get('subType')} />;
           }
         },
         {
           type: 'select' as const,
-          name: 'subType',
-          label: t.get('x'),
+          name: 'providerId',
+          label: t.get('provider'),
           component: (props: CustomSelectProps) => {
-            return <GameTypesSelect {...props} fullWidth inputLabel={t.get('x')} />;
-          }
-        },
-        {
-          type: 'select' as const,
-          name: 'subType',
-          label: t.get('x'),
-          component: (props: CustomSelectProps) => {
-            return (
-              <ProviderSelect
-                {...props}
-                isMulti
-                selectAll
-                selectAllLabel={t.get('all')}
-                clearButton
-                clearButtonLabel={t.get('clear')}
-                fullWidth
-                inputLabel={t.get('1')}
-              />
-            );
+            return <ProviderSelect {...props} fullWidth inputLabel={t.get('provider')} />;
           }
         },
         {
           type: 'datepicker' as const,
-          name: 'companyRegistrationDate',
+          name: 'releaseDate',
           label: t.get('registrationDate')
         },
         {
           type: 'select' as const,
-          name: 'subType',
-          label: t.get('x'),
+          name: 'classId',
+          label: t.get('class'),
           component: (props: CustomSelectProps) => {
-            return (
-              <GameClassSelect
-                {...props}
-                isMulti
-                selectAll
-                selectAllLabel={t.get('all')}
-                clearButton
-                clearButtonLabel={t.get('clear')}
-                fullWidth
-                inputLabel={t.get('12')}
-              />
-            );
+            return <GameClassSelect {...props} fullWidth inputLabel={t.get('class')} />;
           }
         },
         {
-          type: 'checkbox',
+          type: 'radio' as const,
           name: 'hasDemo',
-          label: 'Has Demo',
+          label: t.get('hasDemo'),
           props: {
-            checkboxes: [
+            radios: [
               {
-                label: 'Yes',
-                value: 1
+                label: t.get('yes'),
+                value: 1,
+                name: 'yes'
               },
               {
-                label: 'No',
-                value: 2
+                label: t.get('no'),
+                value: 0,
+                name: 'no'
               }
             ]
           }
@@ -165,7 +146,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
       ],
       renderInputs
     }),
-    []
+    [t]
   );
 
   const editGameInformationValidationScheme = useAsync(
@@ -182,7 +163,20 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit }) => {
       {(form) => {
         return (
           <Form noValidate>
-            <FlexibleForm title='Game Information' editedFormProps={editedFormProps} editFormProps={editFormProps} />
+            <FlexibleForm
+              title={t.get('gameInformation')}
+              onSubmit={async (onClose) => {
+                await form.submitForm();
+
+                console.log(form.initialTouched);
+
+                const errors = await form.validateForm();
+
+                if (!Object.values(errors).length) onClose();
+              }}
+              editedFormProps={editedFormProps}
+              editFormProps={editFormProps}
+            />
           </Form>
         );
       }}
