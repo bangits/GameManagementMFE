@@ -70,7 +70,8 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
     () => ({
       addGame: t.get('add'),
       noGames: hasGames ? t.get('noDataFound') : t.get('providerDoesntHaveGames'),
-      search: t.get('search')
+      search: t.get('search'),
+      playDemo: t.get('playDemo')
     }),
     [hasGames, t]
   );
