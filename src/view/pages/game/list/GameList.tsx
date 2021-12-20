@@ -455,7 +455,6 @@ function GameList({
     [t]
   );
 
-  
   return (
     <PageWrapper title={t.get('games')} showButton buttonProps={addGameButtonProps}>
       <TablePage

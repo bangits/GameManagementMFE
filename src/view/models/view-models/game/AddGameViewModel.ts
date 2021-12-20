@@ -18,7 +18,7 @@ export class AddGameViewModel {
   createdByUserId: PrimaryKey;
   @AutoMap()
   createdByUserEmail: string;
-  
+
   rtp: PrimaryKey | '';
 
   hasDemo: '0' | '1';
