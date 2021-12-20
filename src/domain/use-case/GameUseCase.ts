@@ -1,7 +1,9 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddGameRequestModel,
-  ChangeGameStatusRequestModel, EditGameCompatibilityRequestModel, EditGameInformationRequestModel,
+  ChangeGameStatusRequestModel,
+  EditGameCompatibilityRequestModel,
+  EditGameInformationRequestModel,
   EditGamePropertiesRequestModel,
   GameLaunchRequestModel,
   GetGameByIdResponseModel,
@@ -13,7 +15,10 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
-  ChangeGameStatusViewModel, EditGameCompatibilityViewModel, EditGameInformationViewModel, EditGamePropertiesViewModel,
+  ChangeGameStatusViewModel,
+  EditGameCompatibilityViewModel,
+  EditGameInformationViewModel,
+  EditGamePropertiesViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
@@ -24,7 +29,9 @@ import {
   GetGamesViewModel,
   GetGameThemesViewModel,
   GetGameTypesViewModel,
-  GetGameVolatilitiesViewModel, ProviderGamesFilterViewModel, ProviderGamesViewModel
+  GetGameVolatilitiesViewModel,
+  ProviderGamesFilterViewModel,
+  ProviderGamesViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';

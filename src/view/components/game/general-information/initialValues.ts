@@ -1,4 +1,9 @@
-import { EditGameCompatibilityViewModel, EditGameInformationViewModel, EditGamePropertiesViewModel, GamesDetailsViewModel } from '@/view/models';
+import {
+  EditGameCompatibilityViewModel,
+  EditGameInformationViewModel,
+  EditGamePropertiesViewModel,
+  GamesDetailsViewModel
+} from '@/view/models';
 
 export const getEditGameInfoInitialValues = (data: GamesDetailsViewModel): EditGameInformationViewModel => {
   return {
@@ -29,16 +34,16 @@ export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGa
 };
 export const getEditGameCompatibilityValues = (data: GamesDetailsViewModel): EditGameCompatibilityViewModel => {
   return {
-    certifiedCountryIds: data.gameCertifiedCountries.map(country => country.id),
+    certifiedCountryIds: data.gameCertifiedCountries.map((country) => country.id),
     gameId: data.gameId || null,
     lastUpdatedByUserEmail: data.lastUpdatedByUserEmail || null,
     lastUpdatedByUserId: 1,
     mobileScreenModeIsLandscape: data.mobileScreenModeIsLandscape || false,
     mobileScreenModeIsPortrait: data.mobileScreenModeIsPortrait || false,
-    operatingLanguagesIds: data.gameOperatingLanguages.map((language => language.id)),
-    platformIds: data.gamePlatformGames.map(platform => platform.id),
-    restrictedCountryIds: data.gameRestrictedCountries.map(country => country.id),
-    supportedBrowserIds: data.gameSupportedBrowsers.map((browser => browser.id)),
+    operatingLanguagesIds: data.gameOperatingLanguages.map((language) => language.id),
+    platformIds: data.gamePlatformGames.map((platform) => platform.id),
+    restrictedCountryIds: data.gameRestrictedCountries.map((country) => country.id),
+    supportedBrowserIds: data.gameSupportedBrowsers.map((browser) => browser.id),
     supportedCurrencyIds: data.gameCurrencies.map((currency) => currency.id),
     tabletScreenModeIsLandscape: data.tabletScreenModeIsLandscape || false,
     tabletScreenModeIsPortrait: data.tabletScreenModeIsPortrait || false,

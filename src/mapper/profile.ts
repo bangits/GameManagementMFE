@@ -24,7 +24,9 @@ import {
   AddGameViewModel,
   AddProviderViewModel,
   ChangeGameStatusViewModel,
-  ChangeProviderStatusViewModel, EditGameCompatibilityViewModel, EditGameInformationViewModel,
+  ChangeProviderStatusViewModel,
+  EditGameCompatibilityViewModel,
+  EditGameInformationViewModel,
   EditGamePropertiesViewModel,
   EditProviderGeneralInformationViewModel,
   GameLaunchViewModel,
@@ -626,7 +628,7 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.uiLanguages,
       mapFrom((source) =>
         source.uiLanguageIds.map((id) => ({
-          itemId: id,
+          itemId: id
         }))
       )
     )
@@ -634,7 +636,7 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.operatingLanguages,
       mapFrom((source) =>
         source.operatingLanguagesIds.map((id) => ({
-          itemId: id,
+          itemId: id
         }))
       )
     )
@@ -642,7 +644,7 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.certifiedCountries,
       mapFrom((source) =>
         source.certifiedCountryIds.map((id) => ({
-          itemId: id,
+          itemId: id
         }))
       )
     )
@@ -650,8 +652,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.restrictedCountries,
       mapFrom((source) =>
         source.restrictedCountryIds.map((id) => ({
-          itemId: id,
+          itemId: id
         }))
       )
-    )
+    );
 };

@@ -1,4 +1,9 @@
-import { EditGameCompatibilityViewModel, EditGameInformationViewModel, EditGamePropertiesViewModel, GamesDetailsViewModel } from '@/view/models';
+import {
+  EditGameCompatibilityViewModel,
+  EditGameInformationViewModel,
+  EditGamePropertiesViewModel,
+  GamesDetailsViewModel
+} from '@/view/models';
 import React, { FC } from 'react';
 import Compatibility from './Compatibility';
 import GameInformation from './GameInformation';

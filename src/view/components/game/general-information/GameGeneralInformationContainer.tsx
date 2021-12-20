@@ -34,7 +34,7 @@ const GameGeneralInformationContainer: FC<GameGeneralInformationContainer> = ({ 
   }, []);
 
   const onGameCompatibilitySubmit = useCallback((data) => {
-    editGameCompatibility(data).unwrap().then(showSuccessAlert).catch(showErrorAlert)
+    editGameCompatibility(data).unwrap().then(showSuccessAlert).catch(showErrorAlert);
     console.log(data);
   }, []);
 

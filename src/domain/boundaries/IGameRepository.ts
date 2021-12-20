@@ -37,5 +37,7 @@ export interface IGameRepository {
   changeGameStatus(changeGameStatus: ChangeGameStatusRequestModel): Promise<ActionResponseModel>;
   editGameInfo(editGameInfoRequestModel: EditGameInformationRequestModel): Promise<ActionResponseModel>;
   editGameProperties(editGamePropertiesRequestModel: EditGamePropertiesRequestModel): Promise<ActionResponseModel>;
-  editGameCompatibility(editGameCompatibilityRequestModel: EditGameCompatibilityRequestModel): Promise<ActionResponseModel>;
+  editGameCompatibility(
+    editGameCompatibilityRequestModel: EditGameCompatibilityRequestModel
+  ): Promise<ActionResponseModel>;
 }
