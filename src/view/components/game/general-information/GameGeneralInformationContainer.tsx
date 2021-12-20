@@ -3,6 +3,7 @@ import { GamesDetailsViewModel } from '@/view/models';
 import { useTranslation } from '@atom/common';
 import { alert } from '@atom/design-system';
 import React, { FC, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import GameGeneralInformation from './GameGeneralInformation';
 
 export interface GameGeneralInformationContainer {
@@ -12,7 +13,13 @@ export interface GameGeneralInformationContainer {
 const GameGeneralInformationContainer: FC<GameGeneralInformationContainer> = ({ data }) => {
   const t = useTranslation();
 
+  const location = useLocation();
+
+  const isEdit = location.search.includes('isEdit');
+
+
   const [editGameInfo] = gameApi.useEditGameInformationMutation();
+  const [editGameProperties] = gameApi.useEditGamePropertiesMutation();
 
   const showSuccessAlert = useCallback(() => alert.success({ alertLabel: t.get('successAlertMessage') }), [t]);
 
@@ -22,7 +29,18 @@ const GameGeneralInformationContainer: FC<GameGeneralInformationContainer> = ({ 
     editGameInfo(data).unwrap().then(showSuccessAlert).catch(showErrorAlert);
   }, []);
 
-  return <GameGeneralInformation data={data} onGameInfoSubmit={onGameInfoSubmit} />;
+  const onGamePropertiesSubmit = useCallback((data) => {
+    editGameProperties(data).unwrap().then(showSuccessAlert).catch(showErrorAlert);    
+  }, []);
+
+  return (
+    <GameGeneralInformation
+      data={data}
+      onGameInfoSubmit={onGameInfoSubmit}
+      onGamePropertiesSubmit={onGamePropertiesSubmit}
+      isEdit={isEdit}
+    />
+  );
 };
 
 export default GameGeneralInformationContainer;

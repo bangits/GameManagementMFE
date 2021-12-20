@@ -3,6 +3,7 @@ import {
   AddGameRequestModel,
   ChangeGameStatusRequestModel,
   EditGameInformationRequestModel,
+  EditGamePropertiesRequestModel,
   GameLaunchRequestModel,
   GetClassNamesResponseModel,
   GetGameByIdResponseModel,
@@ -34,4 +35,5 @@ export interface IGameRepository {
   gameLaunch(gameLaunchRequestModel: GameLaunchRequestModel): Promise<string>;
   changeGameStatus(changeGameStatus: ChangeGameStatusRequestModel): Promise<ActionResponseModel>;
   editGameInfo(editGameInfoRequestModel: EditGameInformationRequestModel): Promise<ActionResponseModel>;
+  editGameProperties(editGamePropertiesRequestModel: EditGamePropertiesRequestModel): Promise<ActionResponseModel>;
 }

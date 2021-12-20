@@ -7,7 +7,7 @@ export class GamesDetailsViewModel {
   providerId: PrimaryKey;
 
   @AutoMap()
-  rtp: string;
+  rtp: PrimaryKey;
 
   @AutoMap()
   className: string;
@@ -61,7 +61,7 @@ export class GamesDetailsViewModel {
   lastUpdatedByUserEmail: string;
 
   @AutoMap()
-  maxWin: string;
+  maxWin: PrimaryKey;
 
   @AutoMap()
   createdByUserEmail: string;

@@ -5,6 +5,7 @@ import {
   ChangeGameStatusRequestModel,
   ChangeProviderStatusRequestModel,
   EditGameInformationRequestModel,
+  EditGamePropertiesRequestModel,
   EditProviderGeneralInformationRequestModel,
   GameLaunchRequestModel,
   GetGameByIdResponseModel,
@@ -23,8 +24,7 @@ import {
   AddProviderViewModel,
   ChangeGameStatusViewModel,
   ChangeProviderStatusViewModel,
-  EditGameInformationViewModel,
-  EditProviderGeneralInformationViewModel,
+  EditGameInformationViewModel, EditGamePropertiesViewModel, EditProviderGeneralInformationViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
@@ -573,4 +573,18 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.releaseDate,
       mapFrom((source) => convertDateForRequestModel(source.releaseDate))
     );
+
+  mapper.createMap(EditGamePropertiesViewModel, EditGamePropertiesRequestModel)
+    .forMember(
+      (destination) => destination.gameFeatures,
+      mapFrom((source) => source.featureIds.map(featureId => ({
+        itemId: featureId
+      })))
+    )
+    .forMember(
+      (destination) => destination.themes,
+      mapFrom((source) => source.themesIds.map(themeId => ({
+        itemId: themeId
+      })))
+    )
 };

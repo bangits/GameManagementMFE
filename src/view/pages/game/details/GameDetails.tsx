@@ -1,7 +1,7 @@
 import { GameGeneralInformationContainer } from '@/view';
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
-import { redirectToURL, useTranslation, convertDate } from '@atom/common';
+import { convertDate, redirectToURL, useTranslation } from '@atom/common';
 import {
   GameDetails as GameDetailsPage,
   GameDetailsProps as GameDetailsPageProps,
@@ -89,8 +89,8 @@ const GameDetails: FC<GameDetailsProps> = ({
   return (
     <PageWrapper>
       <GameDetailsPage
-        gameName=''
-        gameId=''
+        gameName={data.gameName}
+        gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
         statusInfo={statusInfo}
@@ -101,7 +101,9 @@ const GameDetails: FC<GameDetailsProps> = ({
         generalInformationContext={<GameGeneralInformationContainer data={data} />}
         buttons={{
           playButtonProps: {},
-          playDemoButtonProps: {}
+          playDemoButtonProps: {
+            disabled: !data.hasDemo
+          }
         }}
         translations={translations}
       />

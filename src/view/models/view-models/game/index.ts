@@ -1,5 +1,8 @@
 export * from './AddGameViewModel';
 export * from './ChangeGameStatusViewModel';
+export * from './EditGameInformationViewModel';
+export * from './EditGamePropertiesViewModel';
+export * from './GameActionsViewModel';
 export * from './GameLaunchViewModel';
 export * from './GamesDetailsViewModel';
 export * from './GamesFiltersViewModel';
@@ -15,5 +18,4 @@ export * from './GetGameVolatilitiesViewModel';
 export * from './ProviderGamesFilterViewModel';
 export * from './ProviderGamesViewModel';
 export * from './ProviderGameViewModel';
-export * from './EditGameInformationViewModel';
-export * from './GameActionsViewModel';
+

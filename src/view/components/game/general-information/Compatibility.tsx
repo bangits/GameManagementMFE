@@ -23,9 +23,10 @@ import React, { FC, useMemo } from 'react';
 
 export interface CompatibilityProps {
   data: GamesDetailsViewModel;
+  isEdit: boolean;
 }
 
-const Compatibility: FC<CompatibilityProps> = ({ data }) => {
+const Compatibility: FC<CompatibilityProps> = ({ data, isEdit }) => {
   enum SupportedBrowsersEnum { //Needs to create in enums section
     SAFARI = 1,
     CHROME,
@@ -181,6 +182,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
         return (
           <Form noValidate>
             <FlexibleForm
+              isEdit={isEdit}
               noDataText={t.get('emptyValue')}
               title={t.get('compatibility')}
               col={12}
@@ -238,7 +240,9 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
                   }))}
                   currencies={data.gameCurrencies.map((currency) => ({ title: currency?.title }))}
                   supportedBrowsers={{
-                    browsersEnum: SupportedBrowsersEnum
+                    browsersEnum: SupportedBrowsersEnum,
+                    initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
+                    disabled: true,
                   }}
                 />
               }

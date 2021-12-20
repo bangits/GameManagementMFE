@@ -507,7 +507,7 @@ function GameList({
         getEditUrl={(column) =>
           ROUTES.baseUrl +
           ROUTES.game +
-          ROUTES.providerDetails.replace(':providerId', column.gameId.toString()) +
+          ROUTES.gameDetails.replace(':gameId', column.gameId.toString()) +
           '/?isEdit=true'
         }
         getViewUrl={(column) =>
