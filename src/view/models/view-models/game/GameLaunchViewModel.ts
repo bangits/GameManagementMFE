@@ -11,11 +11,14 @@ export class GameLaunchViewModel {
   currency: string;
 
   @AutoMap()
-  gameId: PrimaryKey;
+  gameId: PrimaryKey | string;
 
   @AutoMap()
   providerId: PrimaryKey;
 
   @AutoMap()
   gameLaunchUrl: string;
+
+  @AutoMap()
+  lang: string;
 }

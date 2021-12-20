@@ -1,11 +1,14 @@
-import { GamesDetailsViewModel } from '@/view/models';
+import { editGameCompatibilityValidations } from '@/domain/validators';
+import { EditGameCompatibilityViewModel, GamesDetailsViewModel } from '@/view/models';
 import {
   CountriesSelect,
   createRenderInputs,
   CurrencySelect,
   CustomSelectProps,
   LanguageSelect,
-  useTranslation
+  useAsync,
+  useTranslation,
+  useValidationTranslation
 } from '@atom/common';
 import {
   BrowsersCheckboxGroup,
@@ -20,12 +23,15 @@ import {
 } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
 import React, { FC, useMemo } from 'react';
+import { getEditGameCompatibilityValues } from './initialValues';
 
 export interface CompatibilityProps {
   data: GamesDetailsViewModel;
+  isEdit: boolean;
+  onSubmit: (data: EditGameCompatibilityViewModel) => void;
 }
 
-const Compatibility: FC<CompatibilityProps> = ({ data }) => {
+const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
   enum SupportedBrowsersEnum { //Needs to create in enums section
     SAFARI = 1,
     CHROME,
@@ -35,6 +41,8 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
   }
 
   const t = useTranslation();
+
+  const translationValidations = useValidationTranslation();
 
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
@@ -77,7 +85,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
     () => [
       {
         type: 'select' as const,
-        name: 'uiLanguages',
+        name: 'uiLanguageIds',
         label: t.get('uiLanguages'),
         component: (props: CustomSelectProps) => {
           return (
@@ -96,7 +104,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
       },
       {
         type: 'select' as const,
-        name: 'operatingLanguages',
+        name: 'operatingLanguagesIds',
         label: t.get('operatingLanguages'),
         component: (props: CustomSelectProps) => {
           return (
@@ -115,7 +123,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
       },
       {
         type: 'select' as const,
-        name: 'certifiedCountries',
+        name: 'certifiedCountryIds',
         label: t.get('certifiedCountries'),
         component: (props: CustomSelectProps) => {
           return (
@@ -134,7 +142,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
       },
       {
         type: 'select' as const,
-        name: 'restrictedCountries',
+        name: 'restrictedCountryIds',
         label: t.get('restrictedCountries'),
         component: (props: CustomSelectProps) => {
           return (
@@ -153,7 +161,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
       },
       {
         type: 'select' as const,
-        name: 'supportedCurrencies',
+        name: 'supportedCurrencyIds',
         label: t.get('supportedCurrencies'),
         component: (props: CustomSelectProps) => {
           return (
@@ -174,13 +182,38 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
     [t]
   );
 
+  const supportedBrowsers = useMemo<GameCompatibilityProps['supportedBrowsers']>(
+    () => ({
+      browsersEnum: SupportedBrowsersEnum,
+      initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
+      disabled: true
+    }),
+    [data.gameSupportedBrowsers]
+  );
+
+  const editGameCompatibilityValidationScheme = useAsync(
+    () => editGameCompatibilityValidations(translationValidations),
+    [translationValidations],
+    null
+  );
+
   return (
-    /* @ts-expect-error excepting on submit error */
-    <Formik onSubmit={() => console.log} initialValues={{}} validationSchema={{}}>
+    <Formik
+      onSubmit={onSubmit}
+      initialValues={getEditGameCompatibilityValues(data)}
+      validationSchema={editGameCompatibilityValidationScheme}>
       {(form) => {
         return (
           <Form noValidate>
             <FlexibleForm
+              onSubmit={async (onClose) => {
+                await form.submitForm();
+
+                const errors = await form.validateForm();
+
+                if (!Object.values(errors).length) onClose();
+              }}
+              isEdit={isEdit}
               noDataText={t.get('emptyValue')}
               title={t.get('compatibility')}
               col={12}
@@ -214,7 +247,13 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
                     <EditFormFields fields={compatibilityFields} renderInputs={renderInputs} />
                   </div>
                   <LabelGroup title={t.get('supportedBrowsers')}>
-                    <BrowsersCheckboxGroup browsersEnum={SupportedBrowsersEnum} />
+                    <BrowsersCheckboxGroup
+                      browsersEnum={SupportedBrowsersEnum}
+                      initialValues={data.gameSupportedBrowsers.map((browser) => browser.id)}
+                      onChange={(values) => {
+                        form.setFieldValue('supportedBrowserIds', values);
+                      }}
+                    />
                   </LabelGroup>
                 </>
               }
@@ -238,7 +277,9 @@ const Compatibility: FC<CompatibilityProps> = ({ data }) => {
                   }))}
                   currencies={data.gameCurrencies.map((currency) => ({ title: currency?.title }))}
                   supportedBrowsers={{
-                    browsersEnum: SupportedBrowsersEnum
+                    browsersEnum: SupportedBrowsersEnum,
+                    initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
+                    disabled: true
                   }}
                 />
               }

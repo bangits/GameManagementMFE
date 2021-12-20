@@ -8,4 +8,14 @@ export class ProviderGameViewModel {
   icon: string;
   @AutoMap()
   name: string;
+  @AutoMap()
+  externalId: string;
+  @AutoMap()
+  backGroundImage: string;
+  @AutoMap()
+  providerAbsoluteDemoUrl: string;
+  @AutoMap()
+  providerAbsoluteUrl: string;
+  @AutoMap()
+  hasDemo: boolean;
 }

@@ -1,16 +1,28 @@
-import { createRenderInputs, CustomSelectProps, LanguageSelect, useTranslation } from '@atom/common';
+import { editGamePropertiesValidations } from '@/domain/validators/editGamePropertiesValidations';
+import { GameFeaturesSelect, GameThemesSelect, GameVolatilitiesSelect } from '@/view';
+import { EditGamePropertiesViewModel, GamesDetailsViewModel } from '@/view/models';
+import {
+  createRenderInputs,
+  CustomSelectProps,
+  useAsync,
+  useTranslation,
+  useValidationTranslation
+} from '@atom/common';
 import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
 import { FastField, Form, Formik } from 'formik';
 import React, { FC, useMemo } from 'react';
-import { GameVolatilitiesSelect, GameThemesSelect, GameFeaturesSelect } from '@/view';
-import { GamesDetailsViewModel } from '@/view/models';
+import { getEditGamePropertiesValues } from './initialValues';
 
 export interface GamePropertiesProps {
   data: GamesDetailsViewModel;
+  onSubmit: (data: EditGamePropertiesViewModel) => void;
+  isEdit: boolean;
 }
 
-const GameProperties: FC<GamePropertiesProps> = ({ data }) => {
+const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => {
   const t = useTranslation();
+
+  const translationValidations = useValidationTranslation();
 
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
@@ -44,7 +56,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data }) => {
         }
       ]
     }),
-    []
+    [data, t]
   );
 
   const editFormProps = useMemo<FlexibleFormProps['editFormProps']>(
@@ -52,8 +64,8 @@ const GameProperties: FC<GamePropertiesProps> = ({ data }) => {
       fields: [
         {
           type: 'select' as const,
-          name: 'uiLanguages',
-          label: t.get('uiLanguages'),
+          name: 'featureIds',
+          label: t.get('gameFeatures'),
           component: (props: CustomSelectProps) => {
             return (
               <GameFeaturesSelect
@@ -64,15 +76,15 @@ const GameProperties: FC<GamePropertiesProps> = ({ data }) => {
                 clearButton
                 clearButtonLabel={t.get('clear')}
                 fullWidth
-                inputLabel={t.get('uiLanguages')}
+                inputLabel={t.get('gameFeatures')}
               />
             );
           }
         },
         {
           type: 'select' as const,
-          name: 'operatingLanguages',
-          label: t.get('operatingLanguages'),
+          name: 'themesIds',
+          label: t.get('gameThemes'),
           component: (props: CustomSelectProps) => {
             return (
               <GameThemesSelect
@@ -83,7 +95,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data }) => {
                 clearButton
                 clearButtonLabel={t.get('clear')}
                 fullWidth
-                inputLabel={t.get('operatingLanguages')}
+                inputLabel={t.get('gameThemes')}
               />
             );
           }
@@ -91,45 +103,51 @@ const GameProperties: FC<GamePropertiesProps> = ({ data }) => {
         {
           type: 'input' as const,
           name: 'rtp',
-          label: t.get('rtp')
+          label: t.get('rtp'),
+          props: {
+            type: 'number',
+            isDecimal: true
+          }
         },
         {
           type: 'select' as const,
-          name: 'restrictedCountries',
-          label: t.get('restrictedCountries'),
+          name: 'volatilityId',
+          label: t.get('volatility'),
           component: (props: CustomSelectProps) => {
-            return (
-              <GameVolatilitiesSelect
-                {...props}
-                isMulti
-                selectAll
-                selectAllLabel={t.get('all')}
-                clearButton
-                clearButtonLabel={t.get('clear')}
-                fullWidth
-                inputLabel={t.get('restrictedCountries')}
-              />
-            );
+            return <GameVolatilitiesSelect {...props} fullWidth inputLabel={t.get('volatility')} />;
           }
         },
         {
           type: 'input',
           name: 'maxWin',
-          label: 'Max Win'
+          label: 'Max Win',
+          props: {
+            type: 'number',
+            isDecimal: true
+          }
         }
       ],
       renderInputs
     }),
-    []
+    [t]
+  );
+
+  const editGameInformationValidationScheme = useAsync(
+    () => editGamePropertiesValidations(translationValidations),
+    [translationValidations],
+    null
   );
 
   return (
-    /* @ts-expect-error excepting onSubmit error */
-    <Formik onSubmit={() => console.log} initialValues={{}} validationSchema={{}}>
+    <Formik
+      onSubmit={onSubmit}
+      initialValues={getEditGamePropertiesValues(data)}
+      validationSchema={editGameInformationValidationScheme}>
       {(form) => {
         return (
           <Form noValidate>
             <FlexibleForm
+              isEdit={isEdit}
               noDataText={t.get('emptyValue')}
               title={t.get('gameProperties')}
               onSubmit={async (onClose) => {

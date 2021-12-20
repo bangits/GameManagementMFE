@@ -1,7 +1,7 @@
 import { GameGeneralInformationContainer } from '@/view';
 import { gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
-import { redirectToURL, useTranslation, convertDate } from '@atom/common';
+import { convertDate, redirectToURL, useTranslation } from '@atom/common';
 import {
   GameDetails as GameDetailsPage,
   GameDetailsProps as GameDetailsPageProps,
@@ -16,6 +16,8 @@ export interface GameDetailsProps {
   shouldShowInActivateButton: boolean;
   onInActivateButtonClick: () => void;
   onActivateButtonClick: () => void;
+  onPlayButtonClick: () => void;
+  onDemoButtonClick: () => void;
 }
 
 const GameDetails: FC<GameDetailsProps> = ({
@@ -23,7 +25,9 @@ const GameDetails: FC<GameDetailsProps> = ({
   shouldShowActivateButton,
   shouldShowInActivateButton,
   onActivateButtonClick,
-  onInActivateButtonClick
+  onInActivateButtonClick,
+  onPlayButtonClick,
+  onDemoButtonClick
 }) => {
   const t = useTranslation();
 
@@ -86,11 +90,26 @@ const GameDetails: FC<GameDetailsProps> = ({
     [t]
   );
 
+  const buttons = useMemo<GameDetailsPageProps['buttons']>(
+    () => ({
+      playButtonProps: {
+        onClick: onPlayButtonClick
+      },
+      playDemoButtonProps: {
+        onClick: onDemoButtonClick,
+        disabled: !data.hasDemo
+      }
+    }),
+    [data]
+  );
+
   return (
     <PageWrapper>
       <GameDetailsPage
-        gameName=''
-        gameId=''
+        gameName={data.gameName}
+        backgroundImgUrl={data.backGroundImage}
+        mainImgUrl={data.icon}
+        gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}
         statusInfo={statusInfo}
@@ -99,10 +118,7 @@ const GameDetails: FC<GameDetailsProps> = ({
         lastUpdateDate={convertDate(data.lastUpdatedDate)}
         lastUpdateBy={data.lastUpdatedByUserEmail}
         generalInformationContext={<GameGeneralInformationContainer data={data} />}
-        buttons={{
-          playButtonProps: {},
-          playDemoButtonProps: {}
-        }}
+        buttons={buttons}
         translations={translations}
       />
     </PageWrapper>

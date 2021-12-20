@@ -17,7 +17,7 @@ export class Game extends BaseEntity {
   providerId: PrimaryKey;
 
   @AutoMap()
-  rtp: string;
+  rtp: PrimaryKey;
 
   @AutoMap()
   className: PrimaryKey;
@@ -77,13 +77,16 @@ export class Game extends BaseEntity {
   lastUpdatedDate: string;
 
   @AutoMap()
-  maxWin: string;
+  maxWin: PrimaryKey;
 
   @AutoMap()
   providerAbsoluteUrl: string;
 
   @AutoMap()
   providerDemoUrl: string;
+
+  @AutoMap()
+  providerAbsoluteDemoUrl: string;
 
   status: {
     id: GameStatusesEnum;
