@@ -16,3 +16,4 @@ export * from './ProviderGamesFilterViewModel';
 export * from './ProviderGamesViewModel';
 export * from './ProviderGameViewModel';
 export * from './EditGameInformationViewModel';
+export * from './GameActionsViewModel';

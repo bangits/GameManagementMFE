@@ -39,6 +39,10 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a7003b12ba0ad558264b0e2c42b93e3159a46e80
 "@atom/design-system@^2.2.17", "@atom/design-system@^2.2.6":
   version "2.2.17"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.2.17.tgz#91ca72c9c00222beeecb1122ee602ea937570321"
@@ -56,6 +60,12 @@
   version "1.0.4"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/partner-management/-/partner-management-1.0.4.tgz#ca19c5d0240ac66be8471cd461e7e7c4750b065f"
   integrity sha1-yhnF0CQKxmvoRxzUYefnxHULBl8=
+=======
+"@atom/common@^2.5.12":
+  version "2.5.12"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.5.12.tgz#57d347f99a187e66bbd312ba83c35e5d1ce4add8"
+  integrity sha1-V9NH+ZoYfma70xK6g8NeXRzkrdg=
+>>>>>>> 1377d3ec718c46c580cad4b31ffbf327a13fcc92
   dependencies:
     "@atom/authorization" "^1.2.3"
     "@automapper/classes" "^7.0.2"

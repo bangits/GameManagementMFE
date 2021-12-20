@@ -7,7 +7,8 @@ export const API_ROUTES = {
     GET_PROVIDER_NAMES: PROVIDER_ROUTE + '/ProvidersName',
     CHANGE_STATUS: PROVIDER_ROUTE + '/UpdateStatus',
     PROVIDER_GET_GAME_TYPES: '/GameTypes/GetGameTypesAndCount',
-    EDIT_GENERAL_INFORMATION: '/Providers'
+    EDIT_GENERAL_INFORMATION: '/Providers',
+    PARTNER_PROVIDER: PROVIDER_ROUTE + '/PartnerId'
   },
   GAMES: {
     BASE_ROUTE: GAME_ROUTE,
@@ -21,7 +22,8 @@ export const API_ROUTES = {
     GET_GAME_PLATFORMS: '/GamePlatform',
     LAUNCH_GAME: '/Rival/gameLaunch',
     CHANGE_STATUS: GAME_ROUTE + '/status',
-    EDIT_GAME_INFO: '/Info'
+    EDIT_GAME_INFO: GAME_ROUTE + '/Info',
+    GET_BY_ID: GAME_ROUTE + '/id'
   }
 };
 

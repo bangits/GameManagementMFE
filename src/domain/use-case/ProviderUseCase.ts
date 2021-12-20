@@ -3,6 +3,7 @@ import {
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
+  GetProviderByPartnerIdResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
   GetProvidersByIdResponseModel
@@ -12,6 +13,7 @@ import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
+  GetProviderByPartnerIdViewModel,
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
   GetProvidersViewModel,
@@ -84,5 +86,15 @@ export class ProviderUseCase {
     );
 
     return this.providerRepository.editProviderGeneralInfo(editProviderGeneralInfoResponseModel);
+  };
+
+  getProviderByPartnerId = async (partnerId: PrimaryKey): Promise<GetProviderByPartnerIdViewModel> => {
+    const getProviderByPartnerIdResponseModel = await this.providerRepository.getProviderByPartnerId(partnerId);
+
+    return await mapper.map(
+      getProviderByPartnerIdResponseModel,
+      GetProviderByPartnerIdViewModel,
+      GetProviderByPartnerIdResponseModel
+    );
   };
 }

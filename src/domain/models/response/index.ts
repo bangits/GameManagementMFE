@@ -8,6 +8,7 @@ export * from './GetGameThemesResponseModel';
 export * from './GetGameTypesAndCountResponseModel';
 export * from './GetGameTypesResponseModel';
 export * from './GetGameVolatilitiesResponseModel';
+export * from './GetProviderByPartnerIdResponseModel';
 export * from './GetProviderGamesResponseModel';
 export * from './GetProviderNamesResponseModel';
 export * from './GetProviderResponseModel';

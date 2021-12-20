@@ -50,9 +50,14 @@ export class GameRepository implements IGameRepository {
   };
 
   getGameById = async (gameId: PrimaryKey): Promise<GetGameByIdResponseModel> => {
-    return await this.httpService.get<GetGameByIdResponseModel, {}>({
-      url: API_ROUTES.GAMES.BASE_ROUTE + `/${gameId}`
+    const getGameByIdResponseModel = await this.httpService.get<GetGameByIdResponseModel[], {}>({
+      url: API_ROUTES.GAMES.GET_BY_ID,
+      query: {
+        ids: [gameId]
+      }
     });
+
+    return getGameByIdResponseModel[0] || null;
   };
 
   getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel> => {
@@ -74,10 +79,12 @@ export class GameRepository implements IGameRepository {
   };
 
   gameLaunch = async (gameLauncherRequestModel: GameLaunchRequestModel): Promise<string> => {
-    return await this.gameLauncherHttpService.get<string, GameLaunchRequestModel>({
-      url: API_ROUTES.GAMES.LAUNCH_GAME,
-      query: gameLauncherRequestModel
-    });
+    return (
+      await this.gameLauncherHttpService.get<{ gameLaunchUrl: string }, GameLaunchRequestModel>({
+        url: API_ROUTES.GAMES.LAUNCH_GAME,
+        query: gameLauncherRequestModel
+      })
+    )?.gameLaunchUrl;
   };
 
   getClassNames = cachedFn(CACHE_CONSTANTS.GetClassNamesResponse, async (): Promise<GetClassNamesResponseModel> => {

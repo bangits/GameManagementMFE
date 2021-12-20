@@ -5,6 +5,7 @@ import {
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
   GetGameTypesAndCountResponseModel,
+  GetProviderByPartnerIdResponseModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
@@ -77,6 +78,15 @@ export class ProviderRepository implements IProviderRepository {
     return await this.httpService.put<ActionResponseModel, {}, EditProviderGeneralInformationRequestModel>({
       url: API_ROUTES.PROVIDERS.EDIT_GENERAL_INFORMATION,
       body: editProviderGeneralInformationRequestModel
+    });
+  };
+
+  getProviderByPartnerId = async (partnerId: PrimaryKey): Promise<GetProviderByPartnerIdResponseModel> => {
+    return await this.httpService.get<GetProviderByPartnerIdResponseModel, {}>({
+      url: API_ROUTES.PROVIDERS.PARTNER_PROVIDER,
+      query: {
+        partnerId: partnerId
+      }
     });
   };
 }
