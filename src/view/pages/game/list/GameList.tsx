@@ -154,12 +154,10 @@ function GameList({
           type: 'number'
         }
       },
-
       {
         name: 'externalId' as keyof GamesFiltersViewModel,
         type: 'input' as const,
         label: t.get('externalId'),
-
         props: {
           label: t.get('externalId'),
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD
@@ -175,7 +173,6 @@ function GameList({
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD
         }
       },
-
       {
         name: 'providerIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
@@ -458,6 +455,7 @@ function GameList({
     [t]
   );
 
+  
   return (
     <PageWrapper title={t.get('games')} showButton buttonProps={addGameButtonProps}>
       <TablePage
