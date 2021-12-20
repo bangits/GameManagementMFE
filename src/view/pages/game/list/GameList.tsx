@@ -198,6 +198,7 @@ function GameList({
           <GameTypesSelect
             inputLabel={t.get('type')}
             fullWidth
+            isMulti
             onChange={(changedValue) => onChange('type', changedValue)}
             showAll
             value={filterValues.type}
