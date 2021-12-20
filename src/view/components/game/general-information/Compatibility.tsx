@@ -33,8 +33,8 @@ export interface CompatibilityProps {
 
 const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
   enum SupportedBrowsersEnum { //Needs to create in enums section
-    SAFARI = 1,
-    CHROME,
+    CHROME = 1,
+    SAFARI,
     FIREFOX,
     EDGE,
     OPERA
@@ -73,10 +73,10 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
       landscape: t.get('landscape'),
       mobile: t.get('mobile'),
       mobileScreenMode: t.get('mobileScreenMode'),
-      platform: t.get('platform'),
+      platform: t.get('devices'),
       portrait: t.get('portrait'),
       tablet: t.get('tablet'),
-      tabletScreenMode: t.get('tabletScreenMode')
+      tabletScreenMode: t.get('tableScreenMode')
     }),
     [t]
   );
@@ -182,15 +182,6 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
     [t]
   );
 
-  const supportedBrowsers = useMemo<GameCompatibilityProps['supportedBrowsers']>(
-    () => ({
-      browsersEnum: SupportedBrowsersEnum,
-      initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
-      disabled: true
-    }),
-    [data.gameSupportedBrowsers]
-  );
-
   const editGameCompatibilityValidationScheme = useAsync(
     () => editGameCompatibilityValidations(translationValidations),
     [translationValidations],
@@ -229,10 +220,19 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                 <>
                   <CompatibilityCheckboxesGroup
                     translations={compatibilityCheckboxesTranslations}
+                    platformInitialValues={data.gamePlatformGames.map((platform) => platform.id)}
+                    mobileInitialValues={[
+                      ...(data.mobileScreenModeIsPortrait ? [1] : []),
+                      ...(data.mobileScreenModeIsLandscape ? [2] : [])
+                    ]}
+                    tabletInitialValues={[
+                      ...(data.tabletScreenModeIsPortrait ? [1] : []),
+                      ...(data.tabletScreenModeIsLandscape ? [2] : [])
+                    ]}
                     platformCheckboxesValues={{
                       mobile: 1,
-                      desktop: 2,
-                      tablet: 3
+                      tablet: 2,
+                      desktop: 3
                     }}
                     mobileCheckboxesValues={{
                       portrait: 1,
@@ -242,6 +242,17 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                       portrait: 1,
                       landscape: 2
                     }}
+                    onPlatformChange={(values) => {
+                      form.setFieldValue('platformIds', values);
+                    }}
+                    onMobileModeChange={(values) => {
+                      form.setFieldValue('mobileScreenModeIsPortrait', values.includes(1));
+                      form.setFieldValue('mobileScreenModeIsLandscape', values.includes(2));
+                    }}
+                    onTabletModeChange={(values) => {
+                      form.setFieldValue('tabletScreenModeIsPortrait', values.includes(1));
+                      form.setFieldValue('tabletScreenModeIsLandscape', values.includes(2));
+                    }}
                   />
                   <div className='details-form-wrapper'>
                     <EditFormFields fields={compatibilityFields} renderInputs={renderInputs} />
@@ -249,7 +260,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                   <LabelGroup title={t.get('supportedBrowsers')}>
                     <BrowsersCheckboxGroup
                       browsersEnum={SupportedBrowsersEnum}
-                      initialValues={data.gameSupportedBrowsers.map((browser) => browser.id)}
+                      values={form.values.supportedBrowserIds}
                       onChange={(values) => {
                         form.setFieldValue('supportedBrowserIds', values);
                       }}
@@ -260,7 +271,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
               editedModeChildren={
                 <GameCompatibility
                   translations={translations}
-                  devices={[1, 2, 3]}
+                  devices={data.gamePlatformGames.map((platform) => platform.id)}
                   mobilePortrait={data.mobileScreenModeIsPortrait}
                   mobileLandscape={data.mobileScreenModeIsLandscape}
                   desktopPortrait={data.tabletScreenModeIsPortrait}
