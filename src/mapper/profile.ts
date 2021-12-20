@@ -477,7 +477,7 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.gameCurrencies,
       mapFrom((source) =>
         source.gameCurrencies.map((currency) => ({
-          title: currency.name,
+          title: currency.code,
           id: currency.id
         }))
       )

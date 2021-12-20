@@ -188,7 +188,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
       initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
       disabled: true
     }),
-    [data]
+    [data.gameSupportedBrowsers]
   );
 
   const editGameCompatibilityValidationScheme = useAsync(
@@ -276,7 +276,11 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                     imgSrc: country?.imgURL
                   }))}
                   currencies={data.gameCurrencies.map((currency) => ({ title: currency?.title }))}
-                  supportedBrowsers={supportedBrowsers}
+                  supportedBrowsers={{
+                    browsersEnum: SupportedBrowsersEnum,
+                    initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
+                    disabled: true
+                  }}
                 />
               }
             />

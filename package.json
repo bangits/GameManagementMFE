@@ -87,7 +87,7 @@
   },
   "dependencies": {
     "@atom/authorization": "^1.2.8",
-    "@atom/design-system": "^2.3.7",
+    "@atom/design-system": "2.3.8",
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
     "@reduxjs/toolkit": "^1.6.2",

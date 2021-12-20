@@ -96,10 +96,11 @@ const GameDetails: FC<GameDetailsProps> = ({
         onClick: onPlayButtonClick
       },
       playDemoButtonProps: {
-        onClick: onDemoButtonClick
+        onClick: onDemoButtonClick,
+        disabled: !data.hasDemo
       }
     }),
-    []
+    [data]
   );
 
   return (
