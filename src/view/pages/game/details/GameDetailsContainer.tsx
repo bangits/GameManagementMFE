@@ -1,9 +1,8 @@
 import { gameApi } from '@/adapter/redux/api';
 import { GameStatusesEnum } from '@/domain/models';
 import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
-import { GameActionsViewModel, GamesDetailsViewModel, GamesViewModel } from '@/view/models';
+import { GameActionsViewModel } from '@/view/models';
 import { useActionWithDialog, useTranslation } from '@atom/common';
-import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import GameDetails from './GameDetails';
@@ -12,8 +11,6 @@ const GameDetailsContainer = () => {
   const params = useParams<{ gameId: string }>();
 
   const { data, isFetching, originalArgs } = gameApi.useGetGameByIdQuery(+params.gameId);
-
-  console.log(data);
 
   const t = useTranslation();
 

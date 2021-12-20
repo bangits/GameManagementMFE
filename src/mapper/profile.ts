@@ -231,7 +231,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.targetMarkets,
       mapFrom((source) =>
         source.targetMarkets.map((market) => ({
-          tagName: market.name
+          tagName: market.name,
+          imgSrc: market.flag
         }))
       )
     )
@@ -239,7 +240,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.certifiedCountries,
       mapFrom((source) =>
         source.certifiedCountries.map((countries) => ({
-          tagName: countries.name
+          tagName: countries.name,
+          imgSrc: countries.flag
         }))
       )
     )
@@ -247,7 +249,8 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.restrictedCountries,
       mapFrom((source) =>
         source.restrictedCountries.map((countries) => ({
-          tagName: countries.name
+          tagName: countries.name,
+          imgSrc: countries.flag
         }))
       )
     );

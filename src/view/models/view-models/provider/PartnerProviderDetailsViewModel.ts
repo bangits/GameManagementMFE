@@ -10,11 +10,14 @@ export class PartnerProviderDetailsViewModel {
   }[];
   targetMarkets: {
     tagName: string;
+    imgSrc: string;
   }[];
   certifiedCountries: {
     tagName: string;
+    imgSrc: string;
   }[];
   restrictedCountries: {
     tagName: string;
+    imgSrc: string;
   }[];
 }
