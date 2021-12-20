@@ -4,6 +4,7 @@ import {
   AddProviderRequestModel,
   ChangeGameStatusRequestModel,
   ChangeProviderStatusRequestModel,
+  EditGameCompatibilityRequestModel,
   EditGameInformationRequestModel,
   EditGamePropertiesRequestModel,
   EditProviderGeneralInformationRequestModel,
@@ -23,8 +24,9 @@ import {
   AddGameViewModel,
   AddProviderViewModel,
   ChangeGameStatusViewModel,
-  ChangeProviderStatusViewModel,
-  EditGameInformationViewModel, EditGamePropertiesViewModel, EditProviderGeneralInformationViewModel,
+  ChangeProviderStatusViewModel, EditGameCompatibilityViewModel, EditGameInformationViewModel,
+  EditGamePropertiesViewModel,
+  EditProviderGeneralInformationViewModel,
   GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
@@ -574,17 +576,82 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => convertDateForRequestModel(source.releaseDate))
     );
 
-  mapper.createMap(EditGamePropertiesViewModel, EditGamePropertiesRequestModel)
+  mapper
+    .createMap(EditGamePropertiesViewModel, EditGamePropertiesRequestModel)
     .forMember(
       (destination) => destination.gameFeatures,
-      mapFrom((source) => source.featureIds.map(featureId => ({
-        itemId: featureId
-      })))
+      mapFrom((source) =>
+        source.featureIds.map((featureId) => ({
+          itemId: featureId
+        }))
+      )
     )
     .forMember(
       (destination) => destination.themes,
-      mapFrom((source) => source.themesIds.map(themeId => ({
-        itemId: themeId
-      })))
+      mapFrom((source) =>
+        source.themesIds.map((themeId) => ({
+          itemId: themeId
+        }))
+      )
+    );
+
+  mapper
+    .createMap(EditGameCompatibilityViewModel, EditGameCompatibilityRequestModel)
+    .forMember(
+      (destination) => destination.supportedBrowsers,
+      mapFrom((source) =>
+        source.supportedBrowserIds.map((id) => ({
+          itemId: id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gamePlatforms,
+      mapFrom((source) =>
+        source.platformIds.map((id) => ({
+          itemId: id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.supportedCurrencies,
+      mapFrom((source) =>
+        source.supportedCurrencyIds.map((id) => ({
+          currencyId: id,
+          defaultCurrency: false
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.uiLanguages,
+      mapFrom((source) =>
+        source.uiLanguageIds.map((id) => ({
+          itemId: id,
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.operatingLanguages,
+      mapFrom((source) =>
+        source.operatingLanguagesIds.map((id) => ({
+          itemId: id,
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) =>
+        source.certifiedCountryIds.map((id) => ({
+          itemId: id,
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) =>
+        source.restrictedCountryIds.map((id) => ({
+          itemId: id,
+        }))
+      )
     )
 };

@@ -1,41 +1,37 @@
-import { PrimaryKey } from "@atom/common";
-import { AutoMap } from "@automapper/classes";
+import { PrimaryKey } from '@atom/common';
+import { AutoMap } from '@automapper/classes';
 
 export class EditGameCompatibilityViewModel {
+  @AutoMap()
+  mobileScreenModeIsPortrait: boolean;
 
-    @AutoMap()
-    mobileScreenModeIsPortrait: boolean;
+  @AutoMap()
+  mobileScreenModeIsLandscape: boolean;
+  @AutoMap()
+  tabletScreenModeIsPortrait: boolean;
 
-    @AutoMap()
-    mobileScreenModeIsLandscape: boolean
-        ;
-    @AutoMap()
-    tabletScreenModeIsPortrait: boolean;
+  @AutoMap()
+  tabletScreenModeIsLandscape: boolean;
+  @AutoMap()
+  gameId: PrimaryKey;
 
-    @AutoMap()
-    tabletScreenModeIsLandscape: boolean
-        ;
-    @AutoMap()
-    gameId: PrimaryKey;
+  @AutoMap()
+  lastUpdatedByUserId: PrimaryKey;
 
-    @AutoMap()
-    lastUpdatedByUserId: PrimaryKey;
+  @AutoMap()
+  lastUpdatedByUserEmail: string;
 
-    @AutoMap()
-    lastUpdatedByUserEmail: string;
+  supportedBrowserIds: PrimaryKey[];
 
-    supportedBrowserIds: PrimaryKey[];
+  platformIds: PrimaryKey[];
 
-    platformIds: PrimaryKey[];
+  supportedCurrencyIds: PrimaryKey[];
 
-    supportedCurrencyIds: PrimaryKey[];
+  uiLanguageIds: PrimaryKey[];
 
-    uiLanguageIds: PrimaryKey[];
+  operatingLanguagesIds: PrimaryKey[];
 
-    operatingLanguagesIds: PrimaryKey[];
+  certifiedCountryIds: PrimaryKey[];
 
-    certifiedCountryIds: PrimaryKey[];
-
-    restrictedCountryIds: PrimaryKey[];
-
+  restrictedCountryIds: PrimaryKey[];
 }

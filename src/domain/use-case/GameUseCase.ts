@@ -1,7 +1,9 @@
 import { DI_CONSTANTS } from '@/di/constants';
 import {
   AddGameRequestModel,
-  ChangeGameStatusRequestModel, EditGameInformationRequestModel, EditGamePropertiesRequestModel, GameLaunchRequestModel,
+  ChangeGameStatusRequestModel, EditGameCompatibilityRequestModel, EditGameInformationRequestModel,
+  EditGamePropertiesRequestModel,
+  GameLaunchRequestModel,
   GetGameByIdResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
@@ -11,7 +13,8 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
-  ChangeGameStatusViewModel, EditGamePropertiesViewModel, GameLaunchViewModel,
+  ChangeGameStatusViewModel, EditGameCompatibilityViewModel, EditGameInformationViewModel, EditGamePropertiesViewModel,
+  GameLaunchViewModel,
   GamesDetailsViewModel,
   GamesFiltersViewModel,
   GetClassNamesViewModel,
@@ -21,13 +24,10 @@ import {
   GetGamesViewModel,
   GetGameThemesViewModel,
   GetGameTypesViewModel,
-  GetGameVolatilitiesViewModel,
-  ProviderGamesViewModel
+  GetGameVolatilitiesViewModel, ProviderGamesFilterViewModel, ProviderGamesViewModel
 } from '@/view/models';
-import { ProviderGamesFilterViewModel } from '@/view/models/view-models/game/ProviderGamesFilterViewModel';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
-import { EditGameInformationViewModel } from './../../view/models/view-models/game/EditGameInformationViewModel';
 import { IGameRepository } from './../boundaries';
 @injectable()
 export class GameUseCase {
@@ -139,7 +139,9 @@ export class GameUseCase {
     return this.gameRepository.editGameInfo(editGameInfoResponseModel);
   };
 
-  editGameProperties = async (editGamePropertiesViewModel: EditGamePropertiesViewModel): Promise<ActionResponseModel> => {
+  editGameProperties = async (
+    editGamePropertiesViewModel: EditGamePropertiesViewModel
+  ): Promise<ActionResponseModel> => {
     const editGamePropertiesResponseModel = mapper.map(
       editGamePropertiesViewModel,
       EditGamePropertiesRequestModel,
@@ -147,5 +149,16 @@ export class GameUseCase {
     );
 
     return this.gameRepository.editGameProperties(editGamePropertiesResponseModel);
+  };
+  editGameCompatibility = async (
+    editGameCompatibilityViewModel: EditGameCompatibilityViewModel
+  ): Promise<ActionResponseModel> => {
+    const editGamePropertiesResponseModel = mapper.map(
+      editGameCompatibilityViewModel,
+      EditGameCompatibilityRequestModel,
+      EditGameCompatibilityViewModel
+    );
+
+    return this.gameRepository.editGameCompatibility(editGamePropertiesResponseModel);
   };
 }

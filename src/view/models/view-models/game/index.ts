@@ -1,5 +1,6 @@
 export * from './AddGameViewModel';
 export * from './ChangeGameStatusViewModel';
+export * from './EditGameCompatibilityViewModel';
 export * from './EditGameInformationViewModel';
 export * from './EditGamePropertiesViewModel';
 export * from './GameActionsViewModel';

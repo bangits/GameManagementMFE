@@ -90,6 +90,8 @@ const GameDetails: FC<GameDetailsProps> = ({
     <PageWrapper>
       <GameDetailsPage
         gameName={data.gameName}
+        backgroundImgUrl={data.backGroundImage}
+        mainImgUrl={data.icon}
         gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}

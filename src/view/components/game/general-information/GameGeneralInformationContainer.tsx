@@ -17,9 +17,9 @@ const GameGeneralInformationContainer: FC<GameGeneralInformationContainer> = ({ 
 
   const isEdit = location.search.includes('isEdit');
 
-
   const [editGameInfo] = gameApi.useEditGameInformationMutation();
   const [editGameProperties] = gameApi.useEditGamePropertiesMutation();
+  const [editGameCompatibility] = gameApi.useEditGameCompatibilityMutation();
 
   const showSuccessAlert = useCallback(() => alert.success({ alertLabel: t.get('successAlertMessage') }), [t]);
 
@@ -30,7 +30,12 @@ const GameGeneralInformationContainer: FC<GameGeneralInformationContainer> = ({ 
   }, []);
 
   const onGamePropertiesSubmit = useCallback((data) => {
-    editGameProperties(data).unwrap().then(showSuccessAlert).catch(showErrorAlert);    
+    editGameProperties(data).unwrap().then(showSuccessAlert).catch(showErrorAlert);
+  }, []);
+
+  const onGameCompatibilitySubmit = useCallback((data) => {
+    editGameCompatibility(data).unwrap().then(showSuccessAlert).catch(showErrorAlert)
+    console.log(data);
   }, []);
 
   return (
@@ -38,6 +43,7 @@ const GameGeneralInformationContainer: FC<GameGeneralInformationContainer> = ({ 
       data={data}
       onGameInfoSubmit={onGameInfoSubmit}
       onGamePropertiesSubmit={onGamePropertiesSubmit}
+      onGameCompatibilitySubmit={onGameCompatibilitySubmit}
       isEdit={isEdit}
     />
   );
