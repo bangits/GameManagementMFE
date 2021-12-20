@@ -32,3 +32,4 @@ export const { bootstrap, mount, unmount } = lifecycles;
 export * from './adapter/react-context';
 export * from './domain/models/response';
 export * from './view/components';
+export * from './view/models';
