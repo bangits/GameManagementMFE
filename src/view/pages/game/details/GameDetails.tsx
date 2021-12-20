@@ -96,16 +96,19 @@ const GameDetails: FC<GameDetailsProps> = ({
         onClick: onPlayButtonClick
       },
       playDemoButtonProps: {
-        onClick: onDemoButtonClick
+        onClick: onDemoButtonClick,
+        disabled: !data.hasDemo
       }
     }),
-    []
+    [data]
   );
 
   return (
     <PageWrapper>
       <GameDetailsPage
         gameName={data.gameName}
+        backgroundImgUrl={data.backGroundImage}
+        mainImgUrl={data.icon}
         gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
         breadCrumbs={breadCrumbs}
         noDataText={t.get('emptyValue')}

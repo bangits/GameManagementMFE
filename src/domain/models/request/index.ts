@@ -2,6 +2,7 @@ export * from './AddGameRequestModel';
 export * from './AddProviderRequestModel';
 export * from './ChangeGameStatusRequestModel';
 export * from './ChangeProviderStatusRequestModel';
+export * from './EditGameCompatibilityRequestModel';
 export * from './EditGameInformationRequestModel';
 export * from './EditGamePropertiesRequestModel';
 export * from './EditProviderGeneralInformationRequestModel';

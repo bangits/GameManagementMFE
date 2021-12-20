@@ -3,6 +3,7 @@ import { IGameRepository } from '@/domain/boundaries';
 import {
   AddGameRequestModel,
   ChangeGameStatusRequestModel,
+  EditGameCompatibilityRequestModel,
   EditGamePropertiesRequestModel,
   GameLaunchRequestModel,
   GetClassNamesResponseModel,
@@ -157,6 +158,14 @@ export class GameRepository implements IGameRepository {
     return await this.httpService.put<ActionResponseModel, {}, EditGamePropertiesRequestModel>({
       url: API_ROUTES.GAMES.EDIT_GAME_PROPERTIES,
       body: editGamePropertiesRequestModel
+    });
+  };
+  editGameCompatibility = async (
+    editGameCompatibilityRequestModel: EditGameCompatibilityRequestModel
+  ): Promise<ActionResponseModel> => {
+    return await this.httpService.put<ActionResponseModel, {}, EditGameCompatibilityRequestModel>({
+      url: API_ROUTES.GAMES.EDIT_GAME_COMPATIBILITY,
+      body: editGameCompatibilityRequestModel
     });
   };
 }

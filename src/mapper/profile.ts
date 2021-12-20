@@ -4,6 +4,7 @@ import {
   AddProviderRequestModel,
   ChangeGameStatusRequestModel,
   ChangeProviderStatusRequestModel,
+  EditGameCompatibilityRequestModel,
   EditGameInformationRequestModel,
   EditGamePropertiesRequestModel,
   EditProviderGeneralInformationRequestModel,
@@ -24,6 +25,7 @@ import {
   AddProviderViewModel,
   ChangeGameStatusViewModel,
   ChangeProviderStatusViewModel,
+  EditGameCompatibilityViewModel,
   EditGameInformationViewModel,
   EditGamePropertiesViewModel,
   EditProviderGeneralInformationViewModel,
@@ -475,7 +477,7 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.gameCurrencies,
       mapFrom((source) =>
         source.gameCurrencies.map((currency) => ({
-          title: currency.name,
+          title: currency.code,
           id: currency.id
         }))
       )
@@ -591,6 +593,66 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) =>
         source.themesIds.map((themeId) => ({
           itemId: themeId
+        }))
+      )
+    );
+
+  mapper
+    .createMap(EditGameCompatibilityViewModel, EditGameCompatibilityRequestModel)
+    .forMember(
+      (destination) => destination.supportedBrowsers,
+      mapFrom((source) =>
+        source.supportedBrowserIds.map((id) => ({
+          itemId: id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.gamePlatforms,
+      mapFrom((source) =>
+        source.platformIds.map((id) => ({
+          itemId: id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.supportedCurrencies,
+      mapFrom((source) =>
+        source.supportedCurrencyIds.map((id) => ({
+          currencyId: id,
+          defaultCurrency: false
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.uiLanguages,
+      mapFrom((source) =>
+        source.uiLanguageIds.map((id) => ({
+          itemId: id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.operatingLanguages,
+      mapFrom((source) =>
+        source.operatingLanguagesIds.map((id) => ({
+          itemId: id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.certifiedCountries,
+      mapFrom((source) =>
+        source.certifiedCountryIds.map((id) => ({
+          itemId: id
+        }))
+      )
+    )
+    .forMember(
+      (destination) => destination.restrictedCountries,
+      mapFrom((source) =>
+        source.restrictedCountryIds.map((id) => ({
+          itemId: id
         }))
       )
     );
