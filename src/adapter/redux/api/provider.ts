@@ -59,7 +59,8 @@ export const providerApi = createApi({
           methodArguments: [partnerId]
         };
       },
-      providesTags: ['ProviderDetails']
+      providesTags: ['ProviderDetails'],
+      keepUnusedDataFor: 10
     }),
     getProviderGameTypesAndCount: build.query<ProviderGamesTypesViewModel[], {}>({
       query: (partnerId: PrimaryKey) => {

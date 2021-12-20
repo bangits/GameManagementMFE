@@ -13,7 +13,7 @@ export const showProviderInActivateDialog = ({ t, onSubmit, column }: ProviderIn
     description: (
       <>
         {t.get('providerInActivateDescirptionFirstPart')}
-        <strong>{Array.isArray(column) ? column.length : <>"{column.providerName}""</>}</strong>
+        <strong>{Array.isArray(column) ? column.length : <>"{column.providerName}"</>}</strong>
 
         {Array.isArray(column)
           ? t.get('multipleProviderInActivateDescirptionLastPart')
