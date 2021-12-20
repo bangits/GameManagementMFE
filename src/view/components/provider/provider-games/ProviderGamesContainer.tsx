@@ -92,10 +92,14 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
       gameTypes={providerGameTypes || []}
       games={games}
       onChange={onFiltersChange}
-      onGameClick={(gameId) => {
+      onGameClick={(gameId, isDemo) => {
+        const clickedGame = games.find((game) => game.id === gameId);
+
+        if (!clickedGame) return;
+
         gameLaunchService.publish({
-          gameId,
-          gameLaunchUrl: 'https://demo.casinocontroller.com/rival/engine/EmbedGame/EmbedGame.php',
+          gameId: clickedGame.externalId,
+          gameLaunchUrl: isDemo ? clickedGame.providerAbsoluteDemoUrl : clickedGame.providerAbsoluteUrl,
           providerId
         });
       }}

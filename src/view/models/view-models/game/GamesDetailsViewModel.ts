@@ -70,7 +70,7 @@ export class GamesDetailsViewModel {
   providerAbsoluteUrl: string;
 
   @AutoMap()
-  providerDemoUrl: string;
+  providerAbsoluteDemoUrl: string;
 
   gameName: string;
   gameId: PrimaryKey;
