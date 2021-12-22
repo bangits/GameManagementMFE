@@ -242,7 +242,6 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                       portrait: 1,
                       landscape: 2
                     }}
-                    
                     onMobileModeChange={(values) => {
                       form.setFieldValue('mobileScreenModeIsPortrait', values.includes(1));
                       form.setFieldValue('mobileScreenModeIsLandscape', values.includes(2));

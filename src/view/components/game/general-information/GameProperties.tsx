@@ -2,7 +2,8 @@ import { editGamePropertiesValidations } from '@/domain/validators/editGamePrope
 import { GameFeaturesSelect, GameThemesSelect, GameVolatilitiesSelect } from '@/view';
 import { EditGamePropertiesViewModel, GamesDetailsViewModel } from '@/view/models';
 import {
-  convertToDecimalNumberFixed2, createRenderInputs,
+  convertToDecimalNumberFixed2,
+  createRenderInputs,
   CustomSelectProps,
   useAsync,
   useTranslation,
