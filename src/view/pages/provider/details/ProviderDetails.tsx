@@ -50,7 +50,9 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
       createdBy: t.get('createdBy'),
       generalInformation: t.get('generalInformation'),
       games: t.get('games'),
-      editButton: t.get('edit')
+      editButton: t.get('edit'),
+      lastUpdatedBy: t.get('lastUpdateBy'),
+      lastUpdatedDate: t.get('lastUpdateDate')
     }),
     [t]
   );
@@ -96,6 +98,8 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
   return (
     <PageWrapper>
       <ProviderDetailsPage
+        lastUpdatedBy={data.lastUpdatedByUserEmail}
+        lastUpdatedDate={data.lastUpdatedDate && convertDate(data.lastUpdatedDate)}
         noDataText={t.get('emptyValue')}
         totalGameCount={data.gameCount ? `${data.gameCount}` : ''}
         creationDate={convertDate(data.creationDate)}
