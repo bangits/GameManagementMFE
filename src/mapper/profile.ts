@@ -18,7 +18,8 @@ import {
   GetProviderRequestModel,
   GetProviderResponseModel,
   GetProvidersByIdResponseModel,
-  ProviderGamesResponseModel
+  ProviderGamesResponseModel,
+  UpdateImagesRequestModel
 } from '@/domain/models';
 import {
   AddGameViewModel,
@@ -40,7 +41,8 @@ import {
   ProviderGamesViewModel,
   ProviderGameViewModel,
   ProvidersFiltersViewModel,
-  ProvidersViewModel
+  ProvidersViewModel,
+  UpdateGameImagesViewModel
 } from '@/view/models';
 import { convertDate, convertDateForRequestModel } from '@atom/common';
 import autoMapper, { MappingProfile } from '@automapper/core';
@@ -333,11 +335,11 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.creationDate,
-      mapFrom((source) => (source.creationDate ? `${convertDate(source.creationDate, 'DD/MM/YYYY HH:MM:SS')}` : 'N/A'))
+      mapFrom((source) => (source.creationDate ? `${convertDate(source.creationDate, 'MM/DD/YYYY HH:MM:SS')}` : 'N/A'))
     )
     .forMember(
       (destination) => destination.releaseDate,
-      mapFrom((source) => (source.releaseDate ? `${convertDate(source.releaseDate, 'DD/MM/YYYY')}` : 'N/A'))
+      mapFrom((source) => (source.releaseDate ? `${convertDate(source.releaseDate, 'MM/DD/YYYY')}` : 'N/A'))
     );
 
   mapper
@@ -446,10 +448,29 @@ export const baseProfile: MappingProfile = (mapper) => {
       mapFrom((source) => 1)
     )
     .forMember(
+      (destination) => destination.anon,
+      mapFrom((source) => (source.isDemo ? 1 : null))
+    )
+    .forMember(
+      (destination) => destination.anonOnly,
+      mapFrom((source) => (source.isDemo ? 1 : null))
+    )
+    .forMember(
       (destination) => destination.providerId,
       mapFrom((source) => 1)
     );
 
+  //# Game Images Upload
+  mapper
+    .createMap(UpdateGameImagesViewModel, UpdateImagesRequestModel)
+    .forMember(
+      (destination) => destination.lastUpdatedByUserEmail,
+      mapFrom((source) => 'test@gmail․com')
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserId,
+      mapFrom((source) => 1)
+    );
   //#Get Games By Id
   mapper
     .createMap(GetGameByIdResponseModel, GamesDetailsViewModel)

@@ -19,6 +19,7 @@ const GameDetailsContainer = () => {
   const dispatch = useDispatch();
 
   const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
+  const [updateGameImages] = gameApi.useUpdateImagesMutation();
 
   const { openDialogFn: onActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
     dialogFn: showGameActivateDialog,
@@ -71,10 +72,50 @@ const GameDetailsContainer = () => {
       gameLaunchService.publish({
         gameId: data.externalId,
         gameLaunchUrl: isDemo ? data.providerAbsoluteDemoUrl : data.providerAbsoluteUrl,
-        providerId: data.providerId
+        providerId: data.providerId,
+        isDemo,
+        gameBackground: data.backGroundImage
       });
     },
     [data]
+  );
+
+  const onGameBackgroundChange = useCallback(
+    (imageSrc: string) => {
+      updateGameImages({
+        backGroundImage: imageSrc,
+        gameId: data.gameId,
+        icon: data.icon
+      }).then(() => {
+        dispatch(
+          gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
+            Object.assign(draft, {
+              backGroundImage: imageSrc
+            });
+          })
+        );
+      });
+    },
+    [data, originalArgs]
+  );
+
+  const onGameMainImageChange = useCallback(
+    (imageSrc: string) => {
+      updateGameImages({
+        backGroundImage: data.backGroundImage,
+        gameId: data.gameId,
+        icon: imageSrc
+      }).then(() => {
+        dispatch(
+          gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
+            Object.assign(draft, {
+              icon: imageSrc
+            });
+          })
+        );
+      });
+    },
+    [data, originalArgs]
   );
 
   if (!data) return null;
@@ -96,6 +137,8 @@ const GameDetailsContainer = () => {
           name: data.gameName
         })
       }
+      onGameBackgroundChange={onGameBackgroundChange}
+      onGameMainImageChange={onGameMainImageChange}
       shouldShowActivateButton={data.statusId === GameStatusesEnum.INACTIVE}
       shouldShowInActivateButton={data.statusId === GameStatusesEnum.ACTIVE}
     />

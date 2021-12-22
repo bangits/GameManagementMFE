@@ -58,7 +58,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
         {
           title: t.get('releaseDate'),
           variant: 'default',
-          value: data.releaseDate && convertDate(data.releaseDate)
+          value: data.releaseDate && convertDate(data.releaseDate, 'MM/DD/YYYY')
         },
         {
           title: t.get('class'),

@@ -17,7 +17,8 @@ import {
   GetGameTypesResponseModel,
   GetGameVolatilitiesResponseModel,
   GetProviderGamesRequestModel,
-  GetProviderGamesResponseModel
+  GetProviderGamesResponseModel,
+  UpdateImagesRequestModel
 } from '@/domain/models';
 import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -62,11 +63,11 @@ export class GameRepository implements IGameRepository {
     return getGameByIdResponseModel[0] || null;
   };
 
-  getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel> => {
+  getGameTypes = async (parentTypeIds?: PrimaryKey): Promise<GetGameTypesResponseModel> => {
     return await this.httpService.get<GetGameTypesResponseModel, {}>({
       url: API_ROUTES.GAMES.GET_GAME_TYPES,
       query: {
-        parentTypeId
+        parentTypeIds
       }
     });
   };
@@ -152,6 +153,7 @@ export class GameRepository implements IGameRepository {
       body: editGameInfoRequestModel
     });
   };
+
   editGameProperties = async (
     editGamePropertiesRequestModel: EditGamePropertiesRequestModel
   ): Promise<ActionResponseModel> => {
@@ -160,6 +162,7 @@ export class GameRepository implements IGameRepository {
       body: editGamePropertiesRequestModel
     });
   };
+
   editGameCompatibility = async (
     editGameCompatibilityRequestModel: EditGameCompatibilityRequestModel
   ): Promise<ActionResponseModel> => {
@@ -167,5 +170,14 @@ export class GameRepository implements IGameRepository {
       url: API_ROUTES.GAMES.EDIT_GAME_COMPATIBILITY,
       body: editGameCompatibilityRequestModel
     });
+  };
+
+  updateGameImages = async (updateImagesRequestModel: UpdateImagesRequestModel): Promise<true> => {
+    await this.httpService.put<ActionResponseModel, {}, UpdateImagesRequestModel>({
+      url: API_ROUTES.GAMES.UPDATE_IMAGES,
+      body: updateImagesRequestModel
+    });
+
+    return true;
   };
 }

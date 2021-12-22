@@ -1,4 +1,4 @@
-import { PrimaryKey, UseTranslationReturnValue } from '@atom/common';
+import { UseTranslationReturnValue } from '@atom/common';
 import { dialog, Icons } from '@atom/design-system';
 import { GameActionsViewModel } from '../models';
 
@@ -18,7 +18,7 @@ export const showGameInActivateDialog = ({ t, onSubmit, column }: GameInActivate
 
         {Array.isArray(column)
           ? t.get('multipleGameInActivateDescriptionLastPart')
-          : t.get('gameInActivateDescriptionLastParts')}
+          : t.get('gameInActivateDescriptionLastPart')}
       </>
     ),
     cancelButtonText: t.get('cancel'),
