@@ -563,11 +563,7 @@ export const baseProfile: MappingProfile = (mapper) => {
     .createMap(EditGameInformationViewModel, EditGameInformationRequestModel)
     .forMember(
       (destination) => destination.subTypeId,
-      mapFrom((source) => source.gameTypeId)
-    )
-    .forMember(
-      (destination) => destination.subTypeId,
-      mapFrom((source) => source.subTypeId)
+      mapFrom((source) => source.subTypeId || source.gameTypeId)
     )
     .forMember(
       (destination) => destination.hasDemo,
