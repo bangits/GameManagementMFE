@@ -114,16 +114,18 @@ const GameDetails: FC<GameDetailsProps> = ({
         minCropBoxHeight={gameImagesConfig.MIN_BACKGROUND_HEIGHT}
         title={t.get('gameBackground')}
         onChange={onGameBackgroundChange}
-        initialImage={data.backGroundImage}>
-        {(openMainImageUploader) => (
+        initialImage={data.backGroundImage}
+        aspectRatio={2 / 1}>
+        {(openBackgroundImageUploader) => (
           <>
             <BannerUploader
               minCropBoxWidth={gameImagesConfig.MIN_GAME_IMAGE_WIDTH}
               minCropBoxHeight={gameImagesConfig.MIN_GAME_IMAGE_HEIGHT}
               title={t.get('gameLogo')}
               onChange={onGameMainImageChange}
-              initialImage={data.icon}>
-              {(openBackgroundImageUploader) => (
+              initialImage={data.icon}
+              aspectRatio={1}>
+              {(openMainImageUploader) => (
                 <GameDetailsPage
                   gameName={data.gameName}
                   backgroundImgUrl={data.backGroundImage}

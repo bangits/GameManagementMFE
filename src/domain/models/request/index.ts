@@ -11,3 +11,4 @@ export * from './GetGameRequestModel';
 export * from './GetProviderGamesRequestModel';
 export * from './GetProviderRequestModel';
 export * from './UpdateImagesRequestModel';
+export * from './UpdateProviderLogoRequestModel';

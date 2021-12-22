@@ -8,7 +8,8 @@ export const API_ROUTES = {
     CHANGE_STATUS: PROVIDER_ROUTE + '/UpdateStatus',
     PROVIDER_GET_GAME_TYPES: '/GameTypes/GetGameTypesAndCount',
     EDIT_GENERAL_INFORMATION: '/Providers',
-    PARTNER_PROVIDER: PROVIDER_ROUTE + '/PartnerId'
+    PARTNER_PROVIDER: PROVIDER_ROUTE + '/PartnerId',
+    UPDATE_LOGO: PROVIDER_ROUTE + '/Logo'
   },
   GAMES: {
     BASE_ROUTE: GAME_ROUTE,

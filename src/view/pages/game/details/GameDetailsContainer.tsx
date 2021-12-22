@@ -105,15 +105,17 @@ const GameDetailsContainer = () => {
         backGroundImage: data.backGroundImage,
         gameId: data.gameId,
         icon: imageSrc
-      }).then(() => {
-        dispatch(
-          gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
-            Object.assign(draft, {
-              icon: imageSrc
-            });
-          })
-        );
-      });
+      })
+        .unwrap()
+        .then(() => {
+          dispatch(
+            gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
+              Object.assign(draft, {
+                icon: imageSrc
+              });
+            })
+          );
+        });
     },
     [data, originalArgs]
   );

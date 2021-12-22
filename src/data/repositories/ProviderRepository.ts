@@ -9,7 +9,8 @@ import {
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
-  GetProvidersByIdResponseModel
+  GetProvidersByIdResponseModel,
+  UpdateProviderLogoRequestModel
 } from '@/domain/models';
 import { ActionResponseModel, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -87,6 +88,13 @@ export class ProviderRepository implements IProviderRepository {
       query: {
         partnerId: partnerId
       }
+    });
+  };
+
+  updateProviderLogo = async (updateProviderLogoRequestModel: UpdateProviderLogoRequestModel): Promise<boolean> => {
+    return await this.httpService.put<boolean, {}, UpdateProviderLogoRequestModel>({
+      url: API_ROUTES.PROVIDERS.UPDATE_LOGO,
+      body: updateProviderLogoRequestModel
     });
   };
 }

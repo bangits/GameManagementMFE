@@ -3,7 +3,7 @@ import { ProviderStatusesEnum } from '@/domain/models';
 import { showProviderActivateDialog, showProviderInActivateDialog } from '@/view/dialogs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
 import { useActionWithDialog, useTranslation } from '@atom/common';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProviderDetails from './ProviderDetails';
@@ -18,6 +18,7 @@ const ProviderDetailsContainer = () => {
   const { data, isFetching, originalArgs } = providerApi.useGetProvidersByIdQuery(+params.providerId);
 
   const [changeProviderStatus] = providerApi.useChangeProviderStatusMutation();
+  const [updateProviderLogo] = providerApi.useUpdateProviderLogoMutation();
 
   const { openDialogFn: onActivateButtonClick } = useActionWithDialog<ProviderDetailsViewModel>({
     dialogFn: showProviderActivateDialog,
@@ -53,6 +54,26 @@ const ProviderDetailsContainer = () => {
     getColumnId: (column) => column.id
   });
 
+  const onProviderLogoChange = useCallback(
+    (updatedLogo) => {
+      updateProviderLogo({
+        logo: updatedLogo,
+        providerId: data.providerId
+      })
+        .unwrap()
+        .then(() => {
+          dispatch(
+            providerApi.util.updateQueryData('getProvidersById', originalArgs, (draft) => {
+              Object.assign(draft, {
+                logo: updatedLogo
+              });
+            })
+          );
+        });
+    },
+    [data]
+  );
+
   if (!data) return null;
 
   return (
@@ -62,6 +83,7 @@ const ProviderDetailsContainer = () => {
       onInActivateButtonClick={() => onInActivateButtonClick(data)}
       shouldShowActivateButton={data.statusId === ProviderStatusesEnum.Inactive}
       shouldShowInActivateButton={data.statusId === ProviderStatusesEnum.Active}
+      onProviderLogoChange={onProviderLogoChange}
     />
   );
 };

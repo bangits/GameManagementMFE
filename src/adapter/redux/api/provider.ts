@@ -7,7 +7,8 @@ import {
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
   ProviderGamesTypesViewModel,
-  ProvidersFiltersViewModel
+  ProvidersFiltersViewModel,
+  UpdateProviderLogoViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
@@ -78,6 +79,14 @@ export const providerApi = createApi({
         };
       },
       invalidatesTags: ['ProviderDetails']
+    }),
+    updateProviderLogo: build.mutation<boolean, UpdateProviderLogoViewModel>({
+      query: (updateProviderLogoViewModel: UpdateProviderLogoViewModel) => {
+        return {
+          methodName: 'updateProviderLogo',
+          methodArguments: [updateProviderLogoViewModel]
+        };
+      }
     })
   })
 });

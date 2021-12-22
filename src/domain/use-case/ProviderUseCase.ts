@@ -6,7 +6,8 @@ import {
   GetProviderByPartnerIdResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
-  GetProvidersByIdResponseModel
+  GetProvidersByIdResponseModel,
+  UpdateProviderLogoRequestModel
 } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
@@ -18,7 +19,8 @@ import {
   GetProvidersByIdViewModel,
   GetProvidersViewModel,
   ProviderGamesTypesViewModel,
-  ProvidersFiltersViewModel
+  ProvidersFiltersViewModel,
+  UpdateProviderLogoViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -91,10 +93,20 @@ export class ProviderUseCase {
   getProviderByPartnerId = async (partnerId: PrimaryKey): Promise<GetProviderByPartnerIdViewModel> => {
     const getProviderByPartnerIdResponseModel = await this.providerRepository.getProviderByPartnerId(partnerId);
 
-    return await mapper.map(
+    return mapper.map(
       getProviderByPartnerIdResponseModel,
       GetProviderByPartnerIdViewModel,
       GetProviderByPartnerIdResponseModel
     );
+  };
+
+  updateProviderLogo = async (updateProviderLogoViewModel: UpdateProviderLogoViewModel): Promise<boolean> => {
+    const updateProviderLogoRequestModel = mapper.map(
+      updateProviderLogoViewModel,
+      UpdateProviderLogoRequestModel,
+      UpdateProviderLogoViewModel
+    );
+
+    return await this.providerRepository.updateProviderLogo(updateProviderLogoRequestModel);
   };
 }

@@ -19,7 +19,8 @@ import {
   GetProviderResponseModel,
   GetProvidersByIdResponseModel,
   ProviderGamesResponseModel,
-  UpdateImagesRequestModel
+  UpdateImagesRequestModel,
+  UpdateProviderLogoRequestModel
 } from '@/domain/models';
 import {
   AddGameViewModel,
@@ -42,7 +43,8 @@ import {
   ProviderGameViewModel,
   ProvidersFiltersViewModel,
   ProvidersViewModel,
-  UpdateGameImagesViewModel
+  UpdateGameImagesViewModel,
+  UpdateProviderLogoViewModel
 } from '@/view/models';
 import { convertDate, convertDateForRequestModel } from '@atom/common';
 import autoMapper, { MappingProfile } from '@automapper/core';
@@ -471,6 +473,19 @@ export const baseProfile: MappingProfile = (mapper) => {
       (destination) => destination.lastUpdatedByUserId,
       mapFrom((source) => 1)
     );
+
+  //# Provider Logo Upload
+  mapper
+    .createMap(UpdateProviderLogoViewModel, UpdateProviderLogoRequestModel)
+    .forMember(
+      (destination) => destination.lastUpdatedByUserEmail,
+      mapFrom((source) => 'test@gmail․com')
+    )
+    .forMember(
+      (destination) => destination.lastUpdatedByUserId,
+      mapFrom((source) => 1)
+    );
+
   //#Get Games By Id
   mapper
     .createMap(GetGameByIdResponseModel, GamesDetailsViewModel)
