@@ -354,7 +354,7 @@ export const baseProfile: MappingProfile = (mapper) => {
     )
     .forMember(
       (destination) => destination.rtp,
-      mapFrom((source) => source.rtp || null)
+      mapFrom((source) => +source.rtp || null)
     );
 
   mapper.createMap(GetGameResponseModel, GetGamesViewModel).forMember(

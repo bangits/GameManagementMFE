@@ -20,6 +20,7 @@ export class AddGameViewModel {
   createdByUserEmail: string;
 
   rtp: PrimaryKey | '';
+
   hasDemo: '0' | '1';
   typeId: PrimaryKey;
   subTypeId: PrimaryKey;

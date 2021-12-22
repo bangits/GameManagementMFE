@@ -4,7 +4,7 @@ export class PartnerProviderDetailsViewModel {
   providerId: PrimaryKey;
 
   totalGameCount: PrimaryKey;
-
+  isActive: boolean;
   currencies: {
     title: string;
   }[];

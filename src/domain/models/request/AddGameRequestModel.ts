@@ -11,8 +11,6 @@ export class AddGameRequestModel {
   @AutoMap()
   releaseDate: string;
   @AutoMap()
-  rtp: PrimaryKey;
-  @AutoMap()
   volatilityId: PrimaryKey;
   @AutoMap()
   classId: PrimaryKey;
@@ -21,6 +19,7 @@ export class AddGameRequestModel {
   @AutoMap()
   createdByUserEmail: string;
 
+  rtp: PrimaryKey;
   hasDemo: boolean;
   subTypeId: PrimaryKey;
 }

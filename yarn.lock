@@ -39,6 +39,7 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
+<<<<<<< HEAD
 "@atom/common@^2.8.16":
   version "2.8.16"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.16.tgz#e4cd6e9e68cdcf8dcbb8e6c8d63ab13f9274a411"
@@ -60,6 +61,12 @@
   version "2.3.2"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.3.2.tgz#4c6638fee5b42c8f6ab7e3803583e92000f5d7cf"
   integrity sha1-TGY4/uW0LI9qt+OANYPpIAD1188=
+=======
+"@atom/design-system@2.3.11":
+  version "2.3.11"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.3.11.tgz#5db40b00767487b2b6513ae980cbc74faf020973"
+  integrity sha1-XbQLAHZ0h7K2UTrpgMvHT68CCXM=
+>>>>>>> 5849b44982e38c389007ecd829a5dba236e65534
   dependencies:
     "@atom/common" "^2.3.4"
     "@my-ui/core" "^2.26.22"
