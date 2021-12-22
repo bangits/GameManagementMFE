@@ -101,7 +101,9 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
         gameLaunchService.publish({
           gameId: clickedGame.externalId,
           gameLaunchUrl: isDemo ? clickedGame.providerAbsoluteDemoUrl : clickedGame.providerAbsoluteUrl,
-          providerId
+          providerId,
+          isDemo,
+          gameBackground: clickedGame.backGroundImage
         });
       }}
       onAddGameClick={onAddGameClick}

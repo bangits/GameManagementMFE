@@ -25,6 +25,7 @@ export const API_ROUTES = {
     EDIT_GAME_INFO: GAME_ROUTE + '/Info',
     GET_BY_ID: GAME_ROUTE + '/id',
     EDIT_GAME_PROPERTIES: GAME_ROUTE + '/Property',
+    UPDATE_IMAGES: GAME_ROUTE + '/Images',
     EDIT_GAME_COMPATIBILITY: GAME_ROUTE + '/Compability'
   }
 };

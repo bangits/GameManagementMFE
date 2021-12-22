@@ -9,7 +9,9 @@ export const GameLauncherContainer = () => {
   const { user } = useContext(AuthenticatedContext);
 
   const [gameLaunchConfig, setGameLaunchConfig] =
-    useState<Omit<GameLaunchViewModel, 'userId' | 'currency' | 'currencyId' | 'lang'>>(null);
+    useState<Omit<GameLaunchViewModel, 'userId' | 'currency' | 'currencyId' | 'lang' | 'projectId' | 'returnUrl'>>(
+      null
+    );
 
   const { data: gameIframeUrl } = gameApi.useLaunchGameQuery(
     gameLaunchConfig && {
@@ -17,7 +19,9 @@ export const GameLauncherContainer = () => {
       userId: user.userId,
       currency: user.currencyName,
       currencyId: user.currencyId,
-      lang: user.languageName
+      lang: user.languageName,
+      projectId: 1,
+      returnUrl: window.location.href
     },
     {
       refetchOnMountOrArgChange: true,
@@ -34,7 +38,7 @@ export const GameLauncherContainer = () => {
   return (
     <GameLauncher
       iframeUrl={gameIframeUrl}
-      gameBackgroundUrl={null}
+      gameBackgroundUrl={gameLaunchConfig.gameBackground}
       onCloseButtonClick={() => setGameLaunchConfig(null)}
     />
   );

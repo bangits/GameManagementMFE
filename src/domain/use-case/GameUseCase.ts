@@ -10,7 +10,8 @@ import {
   GetGameRequestModel,
   GetGameResponseModel,
   GetProviderGamesRequestModel,
-  GetProviderGamesResponseModel
+  GetProviderGamesResponseModel,
+  UpdateImagesRequestModel
 } from '@/domain/models';
 import { mapper } from '@/mapper';
 import {
@@ -31,7 +32,8 @@ import {
   GetGameTypesViewModel,
   GetGameVolatilitiesViewModel,
   ProviderGamesFilterViewModel,
-  ProviderGamesViewModel
+  ProviderGamesViewModel,
+  UpdateGameImagesViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -157,6 +159,7 @@ export class GameUseCase {
 
     return this.gameRepository.editGameProperties(editGamePropertiesResponseModel);
   };
+
   editGameCompatibility = async (
     editGameCompatibilityViewModel: EditGameCompatibilityViewModel
   ): Promise<ActionResponseModel> => {
@@ -167,5 +170,17 @@ export class GameUseCase {
     );
 
     return this.gameRepository.editGameCompatibility(editGamePropertiesResponseModel);
+  };
+
+  updateGameImages = async (updateGameImagesViewModel: UpdateGameImagesViewModel): Promise<boolean> => {
+    const updateImagesRequestModel = mapper.map(
+      updateGameImagesViewModel,
+      UpdateImagesRequestModel,
+      UpdateGameImagesViewModel
+    );
+
+    await this.gameRepository.updateGameImages(updateImagesRequestModel);
+
+    return true;
   };
 }
