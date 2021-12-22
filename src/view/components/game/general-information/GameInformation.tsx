@@ -93,7 +93,21 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
           name: 'gameTypeId',
           label: t.get('gameTypes'),
           component: (props: CustomSelectProps) => {
-            return <GameTypesSelect {...props} fullWidth inputLabel={t.get('gameTypes')} />;
+            const form = useFormikContext<EditGameInformationViewModel>();
+
+            return (
+              <GameTypesSelect
+                {...props}
+                fullWidth
+                onChange={(value) => {
+                  form.setFieldValue('gameTypeId', value);
+                  form.setFieldTouched('gameTypeId', true);
+
+                  form.setFieldValue('subTypeId', null);
+                }}
+                inputLabel={t.get('gameTypes')}
+              />
+            );
           }
         },
         {
@@ -102,6 +116,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
           label: t.get('subType'),
           component: (props: CustomSelectProps) => {
             const form = useFormikContext<EditGameInformationViewModel>();
+
             return (
               <GameTypesSelect {...props} gameTypeId={form.values.gameTypeId} fullWidth inputLabel={t.get('subType')} />
             );

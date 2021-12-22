@@ -242,15 +242,20 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                       portrait: 1,
                       landscape: 2
                     }}
-                    onPlatformChange={(values) => {
-                      form.setFieldValue('platformIds', values);
-                    }}
                     onMobileModeChange={(values) => {
                       form.setFieldValue('mobileScreenModeIsPortrait', values.includes(1));
                       form.setFieldValue('mobileScreenModeIsLandscape', values.includes(2));
                     }}
                     onTabletModeChange={(values) => {
                       form.setFieldValue('tabletScreenModeIsPortrait', values.includes(1));
+                      form.setFieldValue('tabletScreenModeIsLandscape', values.includes(2));
+                    }}
+                    onPlatformChange={(values) => {
+                      form.setFieldValue('platformIds', values);
+
+                      form.setFieldValue('mobileScreenModeIsPortrait', values.includes(1));
+                      form.setFieldValue('mobileScreenModeIsLandscape', values.includes(1));
+                      form.setFieldValue('tabletScreenModeIsPortrait', values.includes(2));
                       form.setFieldValue('tabletScreenModeIsLandscape', values.includes(2));
                     }}
                   />

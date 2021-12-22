@@ -52,7 +52,9 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
       createdBy: t.get('createdBy'),
       generalInformation: t.get('generalInformation'),
       games: t.get('games'),
-      editButton: t.get('edit')
+      editButton: t.get('edit'),
+      lastUpdatedBy: t.get('lastUpdateBy'),
+      lastUpdatedDate: t.get('lastUpdateDate')
     }),
     [t]
   );

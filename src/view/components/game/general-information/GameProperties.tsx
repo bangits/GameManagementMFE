@@ -2,6 +2,7 @@ import { editGamePropertiesValidations } from '@/domain/validators/editGamePrope
 import { GameFeaturesSelect, GameThemesSelect, GameVolatilitiesSelect } from '@/view';
 import { EditGamePropertiesViewModel, GamesDetailsViewModel } from '@/view/models';
 import {
+  convertToDecimalNumberFixed2,
   createRenderInputs,
   CustomSelectProps,
   useAsync,
@@ -52,7 +53,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
         {
           title: t.get('maxWin'),
           variant: 'default',
-          value: data.maxWin
+          value: data.maxWin && convertToDecimalNumberFixed2(data.maxWin)
         }
       ]
     }),

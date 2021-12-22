@@ -251,7 +251,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
               editedModeChildren={
                 <>
                   <ProvidersGeneralInfo
-                    noDataText={t.get('notCompleted')}
+                    noDataText={t.get('emptyValue')}
                     totalMarket={totalMarket}
                     certifiedCountries={certifiedCountries}
                     restrictedtCountries={restrictedCountries}
