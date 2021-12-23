@@ -29,6 +29,9 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
 
   const editedFormProps = useMemo<FlexibleFormProps['editedFormProps']>(
     () => ({
+      editButtonTooltipText: t.get('edit'),
+      viewMoreLabel: t.get('viewMore'),
+      viewLessLabel: t.get('viewLess'),
       options: [
         {
           title: t.get('gameName'),
@@ -77,6 +80,8 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
 
   const editFormProps = useMemo<FlexibleFormProps['editFormProps']>(
     () => ({
+      applyButtonTooltipText: t.get('apply'),
+      closeButtonTooltipText: t.get('close'),
       fields: [
         {
           type: 'input',

@@ -113,6 +113,8 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
 
   const editFormProps = useMemo<FlexibleFormProps['editFormProps']>(
     () => ({
+      applyButtonTooltipText: t.get('apply'),
+      closeButtonTooltipText: t.get('close'),
       fields: [
         {
           type: 'select' as const,
@@ -245,7 +247,9 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
               col={12}
               editedFormProps={{
                 options: [],
-                viewMoreLabel: 'View More'
+                viewMoreLabel: t.get('viewMore'),
+                viewLessLabel: t.get('viewLess'),
+                editButtonTooltipText: t.get('edit')
               }}
               onSubmit={async (onClose) => {
                 await form.submitForm();

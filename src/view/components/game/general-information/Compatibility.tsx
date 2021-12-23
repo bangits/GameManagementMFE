@@ -209,12 +209,16 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
               title={t.get('compatibility')}
               col={12}
               editedFormProps={{
-                viewMoreLabel: 'View More',
-                options: []
+                viewMoreLabel: t.get('viewMore'),
+                viewLessLabel: t.get('viewLess'),
+                options: [],
+                editButtonTooltipText: t.get('edit')
               }}
               editFormProps={{
                 fields: [],
-                renderInputs
+                renderInputs,
+                applyButtonTooltipText: t.get('apply'),
+                closeButtonTooltipText: t.get('close')
               }}
               editModeChildren={
                 <>
