@@ -100,7 +100,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         {(openLogoImageUploader) => (
           <ProviderDetailsPage
             lastUpdatedBy={data.lastUpdatedByUserEmail}
-            lastUpdatedDate={data.lastUpdatedDate}
+            lastUpdatedDate={convertDate(data.lastUpdatedDate)}
             noDataText={t.get('emptyValue')}
             totalGameCount={data.gameCount ? `${data.gameCount}` : ''}
             creationDate={convertDate(data.creationDate)}
