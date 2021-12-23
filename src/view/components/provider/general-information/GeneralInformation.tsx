@@ -1,6 +1,7 @@
 import { editProviderGeneralInfoValidations } from '@/domain/validators';
 import { EditProviderGeneralInformationViewModel, ProviderDetailsViewModel } from '@/view/models';
 import {
+  copyToClipboard,
   CountriesSelect,
   createRenderInputs,
   CurrencySelect,
@@ -34,7 +35,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
 
   const totalMarket = useMemo<ProvidersGeneralInfoProps['totalMarket']>(
     () => ({
-      title: t.get('totalMarket'),
+      title: t.get('targetMarkets'),
       total: `${data.targetMarkets.length} ${t.get('countries')}`,
       countries: data.targetMarkets.map((markets) => ({ tagName: markets.tagName, imgSrc: markets.imgSrc }))
     }),
@@ -84,6 +85,9 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
         showEvent: 'click',
         text: t.get('copied'),
         placement: 'right'
+      },
+      onClick: () => {
+        copyToClipboard(data.absoluteUrl);
       }
     }),
     [t, data]
@@ -97,6 +101,9 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
         showEvent: 'click',
         text: t.get('copied'),
         placement: 'right'
+      },
+      onClick: () => {
+        copyToClipboard(data.absoluteDemoUrl);
       }
     }),
     [t, data]
