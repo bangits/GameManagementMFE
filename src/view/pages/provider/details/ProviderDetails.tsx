@@ -99,6 +99,8 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         aspectRatio={2 / 1}>
         {(openLogoImageUploader) => (
           <ProviderDetailsPage
+            lastUpdatedBy={data.lastUpdatedByUserEmail}
+            lastUpdatedDate={convertDate(data.lastUpdatedDate)}
             noDataText={t.get('emptyValue')}
             totalGameCount={data.gameCount ? `${data.gameCount}` : ''}
             creationDate={convertDate(data.creationDate)}
