@@ -478,9 +478,9 @@ function GameList({
             </>
           ) : (
             <>
-              {t.get('youDontHavePartnersAdded')}
+              {t.get('youDontHaveGameAdded')}
               <br />
-              {t.get('pleaseAddPartner')}
+              {t.get('pleaseAddGame')}
             </>
           ),
           loadingRowsIds: gameTableLoadingIds,
