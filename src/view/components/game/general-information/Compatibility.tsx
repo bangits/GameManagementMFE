@@ -209,12 +209,16 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
               title={t.get('compatibility')}
               col={12}
               editedFormProps={{
-                viewMoreLabel: 'View More',
-                options: []
+                viewMoreLabel: t.get('viewMore'),
+                viewLessLabel: t.get('viewLess'),
+                options: [],
+                editButtonTooltipText: t.get('edit')
               }}
               editFormProps={{
                 fields: [],
-                renderInputs
+                renderInputs,
+                applyButtonTooltipText: t.get('apply'),
+                closeButtonTooltipText: t.get('close')
               }}
               editModeChildren={
                 <>
@@ -242,15 +246,20 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                       portrait: 1,
                       landscape: 2
                     }}
-                    onPlatformChange={(values) => {
-                      form.setFieldValue('platformIds', values);
-                    }}
                     onMobileModeChange={(values) => {
                       form.setFieldValue('mobileScreenModeIsPortrait', values.includes(1));
                       form.setFieldValue('mobileScreenModeIsLandscape', values.includes(2));
                     }}
                     onTabletModeChange={(values) => {
                       form.setFieldValue('tabletScreenModeIsPortrait', values.includes(1));
+                      form.setFieldValue('tabletScreenModeIsLandscape', values.includes(2));
+                    }}
+                    onPlatformChange={(values) => {
+                      form.setFieldValue('platformIds', values);
+
+                      form.setFieldValue('mobileScreenModeIsPortrait', values.includes(1));
+                      form.setFieldValue('mobileScreenModeIsLandscape', values.includes(1));
+                      form.setFieldValue('tabletScreenModeIsPortrait', values.includes(2));
                       form.setFieldValue('tabletScreenModeIsLandscape', values.includes(2));
                     }}
                   />

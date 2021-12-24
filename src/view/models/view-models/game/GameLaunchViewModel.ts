@@ -17,8 +17,18 @@ export class GameLaunchViewModel {
   providerId: PrimaryKey;
 
   @AutoMap()
+  projectId: PrimaryKey;
+
+  @AutoMap()
   gameLaunchUrl: string;
 
   @AutoMap()
   lang: string;
+
+  @AutoMap()
+  returnUrl: string;
+
+  gameBackground: string;
+
+  isDemo: boolean;
 }

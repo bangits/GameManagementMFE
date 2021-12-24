@@ -1,7 +1,7 @@
 import { GeneralInformationContainer, ProviderGamesContainer } from '@/view';
-import { providerStatusesConfig } from '@/view/configs';
+import { providerImagesConfig, providerStatusesConfig } from '@/view/configs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
-import { convertDate, redirectToURL, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, redirectToURL, useTranslation } from '@atom/common';
 import {
   PageWrapper,
   ProviderDetails as ProviderDetailsPage,
@@ -15,6 +15,7 @@ export interface ProviderDetailsProps {
   onInActivateButtonClick: () => void;
   shouldShowActivateButton: boolean;
   shouldShowInActivateButton: boolean;
+  onProviderLogoChange: (logo: string) => void;
 }
 
 const ProviderDetails: FC<ProviderDetailsProps> = ({
@@ -22,7 +23,8 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
   onActivateButtonClick,
   onInActivateButtonClick,
   shouldShowActivateButton,
-  shouldShowInActivateButton
+  shouldShowInActivateButton,
+  onProviderLogoChange
 }) => {
   const t = useTranslation();
 
@@ -36,10 +38,10 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         }
       },
       {
-        label: t.get('novomaticDetails')
+        label: `${data.providerName} ${t.get('details')}`
       }
     ],
-    [t]
+    [t, data]
   );
 
   const translations = useMemo<ProviderDetailsPageProps['translations']>(
@@ -50,18 +52,11 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
       createdBy: t.get('createdBy'),
       generalInformation: t.get('generalInformation'),
       games: t.get('games'),
-      editButton: t.get('edit')
+      editButton: t.get('edit'),
+      lastUpdatedBy: t.get('lastUpdateBy'),
+      lastUpdatedDate: t.get('lastUpdateDate')
     }),
     [t]
-  );
-
-  const mainDetailsInfo = useMemo<ProviderDetailsPageProps['mainDetailsInfo']>(
-    () => ({
-      src: data.logo,
-      label: data.providerName,
-      id: data.providerId ? `${t.get('id')} ${data.providerId}` : t.get('emptyValue')
-    }),
-    [t, data]
   );
 
   const statusInfo = useMemo<ProviderDetailsPageProps['statusInfo']>(
@@ -95,18 +90,33 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
 
   return (
     <PageWrapper>
-      <ProviderDetailsPage
-        noDataText={t.get('emptyValue')}
-        totalGameCount={data.gameCount ? `${data.gameCount}` : ''}
-        creationDate={convertDate(data.creationDate)}
-        createdBy={data.createdByUserEmail}
-        translations={translations}
-        mainDetailsInfo={mainDetailsInfo}
-        statusInfo={statusInfo}
-        breadCrumb={breadCrumb}
-        gamesTabContent={<ProviderGamesContainer providerId={data.id} providerStatusId={data.statusId} />}
-        generalInformationContext={<GeneralInformationContainer data={data} />}
-      />
+      <BannerUploader
+        minCropBoxWidth={providerImagesConfig.MIN_IMAGE_WIDTH}
+        minCropBoxHeight={providerImagesConfig.MIN_IMAGE_HEIGHT}
+        title={t.get('providerLogo')}
+        onChange={onProviderLogoChange}
+        initialImage={data.logo}
+        aspectRatio={2 / 1}>
+        {(openLogoImageUploader) => (
+          <ProviderDetailsPage
+            lastUpdatedBy={data.lastUpdatedByUserEmail}
+            lastUpdatedDate={convertDate(data.lastUpdatedDate)}
+            noDataText={t.get('emptyValue')}
+            totalGameCount={data.gameCount ? `${data.gameCount}` : ''}
+            creationDate={convertDate(data.creationDate)}
+            createdBy={data.createdByUserEmail}
+            translations={translations}
+            statusInfo={statusInfo}
+            breadCrumb={breadCrumb}
+            providerId={`${t.get('id')} ${data.providerId}`}
+            providerName={data.providerName}
+            backgroundImgUrl={data.logo}
+            onBackgroundImgClick={openLogoImageUploader}
+            gamesTabContent={<ProviderGamesContainer providerId={data.id} providerStatusId={data.statusId} />}
+            generalInformationContext={<GeneralInformationContainer data={data} />}
+          />
+        )}
+      </BannerUploader>
     </PageWrapper>
   );
 };

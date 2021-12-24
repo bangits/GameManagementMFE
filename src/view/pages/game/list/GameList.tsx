@@ -60,8 +60,8 @@ function GameList({
     () => [
       {
         Header: t.get('logo'),
-        accessor: 'logo' as keyof GamesViewModel,
-        variant: 'image' as const,
+        accessor: 'icon' as keyof GamesViewModel,
+        variant: 'hovered-image' as const,
         disableSortBy: true
       },
       {
@@ -478,9 +478,9 @@ function GameList({
             </>
           ) : (
             <>
-              {t.get('youDontHavePartnersAdded')}
+              {t.get('youDontHaveGameAdded')}
               <br />
-              {t.get('pleaseAddPartner')}
+              {t.get('pleaseAddGame')}
             </>
           ),
           loadingRowsIds: gameTableLoadingIds,

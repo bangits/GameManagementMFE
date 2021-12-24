@@ -1,7 +1,7 @@
 import { GameGeneralInformationContainer } from '@/view';
-import { gameStatusesConfig } from '@/view/configs';
+import { gameImagesConfig, gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
-import { convertDate, redirectToURL, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, redirectToURL, useTranslation } from '@atom/common';
 import {
   GameDetails as GameDetailsPage,
   GameDetailsProps as GameDetailsPageProps,
@@ -18,6 +18,8 @@ export interface GameDetailsProps {
   onActivateButtonClick: () => void;
   onPlayButtonClick: () => void;
   onDemoButtonClick: () => void;
+  onGameBackgroundChange: (image: string) => void;
+  onGameMainImageChange: (image: string) => void;
 }
 
 const GameDetails: FC<GameDetailsProps> = ({
@@ -27,7 +29,9 @@ const GameDetails: FC<GameDetailsProps> = ({
   onActivateButtonClick,
   onInActivateButtonClick,
   onPlayButtonClick,
-  onDemoButtonClick
+  onDemoButtonClick,
+  onGameBackgroundChange,
+  onGameMainImageChange
 }) => {
   const t = useTranslation();
 
@@ -105,22 +109,46 @@ const GameDetails: FC<GameDetailsProps> = ({
 
   return (
     <PageWrapper>
-      <GameDetailsPage
-        gameName={data.gameName}
-        backgroundImgUrl={data.backGroundImage}
-        mainImgUrl={data.icon}
-        gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
-        breadCrumbs={breadCrumbs}
-        noDataText={t.get('emptyValue')}
-        statusInfo={statusInfo}
-        creationDate={convertDate(data.creationDate)}
-        createdBy={data.createdByUserEmail}
-        lastUpdateDate={convertDate(data.lastUpdatedDate)}
-        lastUpdateBy={data.lastUpdatedByUserEmail}
-        generalInformationContext={<GameGeneralInformationContainer data={data} />}
-        buttons={buttons}
-        translations={translations}
-      />
+      <BannerUploader
+        minCropBoxWidth={gameImagesConfig.MIN_BACKGROUND_WIDTH}
+        minCropBoxHeight={gameImagesConfig.MIN_BACKGROUND_HEIGHT}
+        title={t.get('gameBackground')}
+        onChange={onGameBackgroundChange}
+        initialImage={data.backGroundImage}
+        aspectRatio={2 / 1}>
+        {(openBackgroundImageUploader) => (
+          <>
+            <BannerUploader
+              minCropBoxWidth={gameImagesConfig.MIN_GAME_IMAGE_WIDTH}
+              minCropBoxHeight={gameImagesConfig.MIN_GAME_IMAGE_HEIGHT}
+              title={t.get('gameLogo')}
+              onChange={onGameMainImageChange}
+              initialImage={data.icon}
+              aspectRatio={1}>
+              {(openMainImageUploader) => (
+                <GameDetailsPage
+                  gameName={data.gameName}
+                  backgroundImgUrl={data.backGroundImage}
+                  onMainImgClick={openMainImageUploader}
+                  onBackgroundImgClick={openBackgroundImageUploader}
+                  mainImgUrl={data.icon}
+                  gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
+                  breadCrumbs={breadCrumbs}
+                  noDataText={t.get('emptyValue')}
+                  statusInfo={statusInfo}
+                  creationDate={convertDate(data.creationDate)}
+                  createdBy={data.createdByUserEmail}
+                  lastUpdateDate={convertDate(data.lastUpdatedDate)}
+                  lastUpdateBy={data.lastUpdatedByUserEmail}
+                  generalInformationContext={<GameGeneralInformationContainer data={data} />}
+                  buttons={buttons}
+                  translations={translations}
+                />
+              )}
+            </BannerUploader>
+          </>
+        )}
+      </BannerUploader>
     </PageWrapper>
   );
 };

@@ -8,7 +8,8 @@ import {
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
-  GetProvidersByIdResponseModel
+  GetProvidersByIdResponseModel,
+  UpdateProviderLogoRequestModel
 } from '../models';
 
 export interface IProviderRepository {
@@ -22,4 +23,5 @@ export interface IProviderRepository {
     editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel
   ): Promise<ActionResponseModel>;
   getProviderByPartnerId(partnerId: PrimaryKey): Promise<GetProviderByPartnerIdResponseModel>;
+  updateProviderLogo(updateProviderLogoRequestModel: UpdateProviderLogoRequestModel): Promise<boolean>;
 }

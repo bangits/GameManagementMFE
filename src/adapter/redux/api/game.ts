@@ -17,7 +17,8 @@ import {
   GetGameTypesViewModel,
   GetGameVolatilitiesViewModel,
   ProviderGamesFilterViewModel,
-  ProviderGamesViewModel
+  ProviderGamesViewModel,
+  UpdateGameImagesViewModel
 } from '@/view/models';
 import { ChangeGameStatusViewModel } from '@/view/models/view-models/game/ChangeGameStatusViewModel';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
@@ -162,6 +163,14 @@ export const gameApi = createApi({
         };
       },
       invalidatesTags: ['getGameById']
+    }),
+    updateImages: build.mutation<boolean, UpdateGameImagesViewModel>({
+      query: (updateGameImagesViewModel: UpdateGameImagesViewModel) => {
+        return {
+          methodName: 'updateGameImages',
+          methodArguments: [updateGameImagesViewModel]
+        };
+      }
     })
   })
 });

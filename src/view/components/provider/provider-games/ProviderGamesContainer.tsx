@@ -101,10 +101,15 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
         gameLaunchService.publish({
           gameId: clickedGame.externalId,
           gameLaunchUrl: isDemo ? clickedGame.providerAbsoluteDemoUrl : clickedGame.providerAbsoluteUrl,
-          providerId
+          providerId,
+          isDemo,
+          gameBackground: clickedGame.backGroundImage
         });
       }}
       onAddGameClick={onAddGameClick}
+      onGameDetailsClick={(gameId) =>
+        redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', gameId.toString()))
+      }
       isLoadingGames={isFetching}
       isAllGamesLoaded={isAllGamesLoaded}
       isTabLoading={isGameTypesFetching || isTabLoading}

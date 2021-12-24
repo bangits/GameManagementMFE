@@ -17,7 +17,8 @@ import {
   GetGameTypesResponseModel,
   GetGameVolatilitiesResponseModel,
   GetProviderGamesRequestModel,
-  GetProviderGamesResponseModel
+  GetProviderGamesResponseModel,
+  UpdateImagesRequestModel
 } from '../models';
 
 export interface IGameRepository {
@@ -40,4 +41,5 @@ export interface IGameRepository {
   editGameCompatibility(
     editGameCompatibilityRequestModel: EditGameCompatibilityRequestModel
   ): Promise<ActionResponseModel>;
+  updateGameImages(updateImagesRequestModel: UpdateImagesRequestModel): Promise<true>;
 }
