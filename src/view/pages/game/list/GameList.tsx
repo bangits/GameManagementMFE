@@ -208,7 +208,7 @@ function GameList({
         label: t.get('subType'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
-            inputLabel={t .get('subType')}
+            inputLabel={t.get('subType')}
             fullWidth
             isMulti
             value={filterValues.subTypeIds}
