@@ -64,6 +64,8 @@ export class GameRepository implements IGameRepository {
   };
 
   getGameTypes = async (parentTypeIds?: PrimaryKey): Promise<GetGameTypesResponseModel> => {
+    console.log(parentTypeIds);
+    
     return await this.httpService.get<GetGameTypesResponseModel, {}>({
       url: API_ROUTES.GAMES.GET_GAME_TYPES,
       query: {
