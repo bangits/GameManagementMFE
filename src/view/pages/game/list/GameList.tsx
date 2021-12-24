@@ -197,8 +197,8 @@ function GameList({
             fullWidth
             isMulti
             onChange={(changedValue) => onChange('type', changedValue)}
-            showAll
             value={filterValues.type}
+            selectAll
           />
         )
       },
@@ -208,7 +208,7 @@ function GameList({
         label: t.get('subType'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
-            inputLabel={t.get('subType')}
+            inputLabel={t .get('subType')}
             fullWidth
             isMulti
             value={filterValues.subTypeIds}
