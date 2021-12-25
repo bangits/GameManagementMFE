@@ -179,6 +179,7 @@ function GameList({
         label: t.get('providerName'),
         component: ({ onChange, filterValues }) => (
           <ProviderSelect
+            selectAll
             inputLabel={t.get('providerName')}
             fullWidth
             isMulti
@@ -193,6 +194,7 @@ function GameList({
         label: t.get('type'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
+            selectAll
             inputLabel={t.get('type')}
             fullWidth
             isMulti
@@ -208,6 +210,7 @@ function GameList({
         label: t.get('subType'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
+            selectAll
             inputLabel={t.get('subType')}
             fullWidth
             isMulti
@@ -250,6 +253,7 @@ function GameList({
 
         component: ({ onChange, filterValues }) => (
           <GameClassSelect
+            selectAll
             inputLabel={t.get('class')}
             fullWidth
             value={filterValues.classIds}
@@ -279,6 +283,7 @@ function GameList({
 
         component: ({ onChange, filterValues }) => (
           <GameThemesSelect
+            selectAll
             inputLabel={t.get('gameThemes')}
             fullWidth
             isMulti
@@ -294,6 +299,7 @@ function GameList({
 
         component: ({ onChange, filterValues }) => (
           <GameFeaturesSelect
+            selectAll
             inputLabel={t.get('gameFeatures')}
             fullWidth
             isMulti
@@ -309,6 +315,7 @@ function GameList({
 
         component: ({ onChange, filterValues }) => (
           <GamePlatformSelect
+            selectAll
             inputLabel={t.get('gamePlatforms')}
             fullWidth
             isMulti
@@ -323,6 +330,7 @@ function GameList({
         label: t.get('supportedCurrencies'),
         component: ({ onChange, filterValues }) => (
           <CurrencySelect
+            selectAll
             isMulti
             inputLabel={t.get('supportedCurrencies')}
             fullWidth
@@ -337,6 +345,7 @@ function GameList({
         label: t.get('supportedBrowsers'),
         component: ({ onChange, filterValues }) => (
           <GameSupportedBrowsersSelect
+            selectAll
             isMulti
             inputLabel={t.get('gameSupportedBrowserIds')}
             fullWidth
@@ -352,6 +361,7 @@ function GameList({
         label: t.get('certifiedCountries'),
         component: ({ onChange, filterValues }) => (
           <CountriesSelect
+            selectAll
             isMulti
             inputLabel={t.get('certifiedCountries')}
             fullWidth
@@ -366,6 +376,7 @@ function GameList({
         label: t.get('restrictedCountries'),
         component: ({ onChange, filterValues }) => (
           <CountriesSelect
+            selectAll
             isMulti
             inputLabel={t.get('restrictedCountries')}
             fullWidth
@@ -380,6 +391,7 @@ function GameList({
         label: t.get('volatility'),
         component: ({ onChange, filterValues }) => (
           <GameVolatilitiesSelect
+            selectAll
             isMulti
             inputLabel={t.get('volatility')}
             fullWidth
@@ -394,6 +406,7 @@ function GameList({
         label: t.get('uILanguages'),
         component: ({ onChange, filterValues }) => (
           <LanguageSelect
+            selectAll
             isMulti
             inputLabel={t.get('uILanguages')}
             fullWidth

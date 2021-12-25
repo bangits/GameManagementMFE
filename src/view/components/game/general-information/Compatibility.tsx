@@ -55,7 +55,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
       landscape: t.get('landscape'),
       mobile: t.get('mobile'),
       mobileScreenMode: t.get('mobileScreenMode'),
-      noDataText: t.get('notCompleted'),
+      noDataText: t.get('emptyValue'),
       operatingLanguages: t.get('operatingLanguages'),
       portrait: t.get('portrait'),
       restrictedCountries: t.get('restrictedCountries'),
