@@ -34,38 +34,59 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
   );
 
   const totalMarket = useMemo<ProvidersGeneralInfoProps['totalMarket']>(
-    () => ({
-      title: t.get('targetMarkets'),
-      total: `${data.targetMarkets.length} ${t.get('countries')}`,
-      countries: data.targetMarkets.map((markets) => ({ tagName: markets.tagName, imgSrc: markets.imgSrc }))
-    }),
+    () =>
+      data.targetMarkets.length > 1
+        ? {
+            title: t.get('targetMarkets'),
+            total: `${data.targetMarkets.length} ${t.get('countries')}`,
+            countries: data.targetMarkets.map((markets) => ({ tagName: markets.tagName, imgSrc: markets.imgSrc }))
+          }
+        : {
+            title: t.get('targetMarkets'),
+            countries: data.targetMarkets.map((markets) => ({ tagName: markets.tagName, imgSrc: markets.imgSrc }))
+          },
     [t, data]
   );
 
   const certifiedCountries = useMemo<ProvidersGeneralInfoProps['certifiedCountries']>(
-    () => ({
-      title: t.get('certifiedCountries'),
-      total: `${data.certifiedCountries.length} ${t.get('countries')}`,
-      countries: data.certifiedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
-    }),
+    () =>
+      data.certifiedCountries.length > 1
+        ? {
+            title: t.get('certifiedCountries'),
+            total: `${data.certifiedCountries.length} ${t.get('countries')}`,
+            countries: data.certifiedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
+          }
+        : {
+            title: t.get('certifiedCountries'),
+            countries: data.certifiedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
+          },
     [t, data]
   );
 
   const restrictedCountries = useMemo<ProvidersGeneralInfoProps['restrictedtCountries']>(
-    () => ({
-      title: t.get('restrictedCountries'),
-      total: `${data.restrictedCountries.length} ${t.get('countries')}`,
-      countries: data.restrictedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
-    }),
+    () =>
+      data.restrictedCountries.length > 1
+        ? {
+            title: t.get('restrictedCountries'),
+            total: `${data.restrictedCountries.length} ${t.get('countries')}`,
+            countries: data.restrictedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
+          }
+        : {
+            title: t.get('restrictedCountries'),
+            countries: data.restrictedCountries.map((country) => ({ tagName: country.tagName, imgSrc: country.imgSrc }))
+          },
     [t, data]
   );
 
   const supportedCurrencies = useMemo<ProvidersGeneralInfoProps['supportedCurrencies']>(
-    () => ({
-      title: t.get('supportedCurrencies'),
-      total: `${data.providerCurrencies.length} ${t.get('supportedCurrencies')}`,
-      currencies: data.providerCurrencies
-    }),
+    () =>
+      data.providerCurrencies.length > 1
+        ? {
+            title: t.get('supportedCurrencies'),
+            total: `${data.providerCurrencies.length} ${t.get('supportedCurrencies')}`,
+            currencies: data.providerCurrencies
+          }
+        : { title: t.get('supportedCurrencies'), currencies: data.providerCurrencies },
     [t, data]
   );
 

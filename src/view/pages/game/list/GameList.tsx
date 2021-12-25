@@ -199,8 +199,8 @@ function GameList({
             fullWidth
             isMulti
             onChange={(changedValue) => onChange('type', changedValue)}
-            showAll
             value={filterValues.type}
+            selectAll
           />
         )
       },

@@ -29,8 +29,8 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
             {...props}
             fullWidth
             inputLabel={t.get('type')}
-            onChange={(value, event) => {
-              props.onChange(value, event);
+            onChange={(value, event, options) => {
+              props.onChange(value, event, options);
               form.setFieldValue('subTypeId', null);
             }}
           />

@@ -49,7 +49,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
   const translations = useMemo<GameCompatibilityProps['translations']>(
     () => ({
       certifiedCountries: t.get('certifiedCountries'),
-      currencies: t.get('currencies'),
+      currencies: t.get('supportedCurrencies'),
       desktop: t.get('desktop'),
       devices: t.get('devices'),
       landscape: t.get('landscape'),
