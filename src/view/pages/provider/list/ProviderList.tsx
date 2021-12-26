@@ -135,6 +135,7 @@ function ProviderList({
         fetchData={onFiltersChange}
         isFilteredData={isFilteredData}
         isFetching={isFetching}
+        isLoading={isFetching}
         filterProps={{
           defaultOpened: false,
           initialValues: filtersInitialValues,

@@ -147,9 +147,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
       initialValues={{ ...initialValues, providerId }}
       validationSchema={validationSchema}
       onSubmit={(data, form) => onSubmit(data, form)}>
-      {(form) => {
-        console.log(form);
-
+      {() => {
         return (
           <Form noValidate className='min-height-content-wrapper'>
             <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />

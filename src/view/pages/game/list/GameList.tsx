@@ -200,7 +200,6 @@ function GameList({
             isMulti
             onChange={(changedValue) => onChange('type', changedValue)}
             value={filterValues.type}
-            selectAll
           />
         )
       },
@@ -473,6 +472,7 @@ function GameList({
       <TablePage
         fetchData={onFiltersChange}
         isFetching={isFetching}
+        isLoading={isFetching}
         isFilteredData={isFilteredData}
         filterProps={{
           defaultOpened: false,
