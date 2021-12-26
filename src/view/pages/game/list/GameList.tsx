@@ -200,7 +200,6 @@ function GameList({
             isMulti
             onChange={(changedValue) => onChange('type', changedValue)}
             value={filterValues.type}
-            selectAll
           />
         )
       },
