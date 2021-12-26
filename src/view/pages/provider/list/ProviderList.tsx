@@ -40,34 +40,34 @@ function ProviderList({
     () => [
       {
         Header: 'Logo',
-        accessor: 'logo',
+        accessor: 'logo' as keyof ProvidersViewModel,
         disableSortBy: true,
-        variant: 'image' as const
+        variant: 'hovered-image' as const
       },
       {
         Header: 'Provider name',
-        accessor: 'providerName',
+        accessor: 'providerName' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.PROVIDER_NAME
       },
       {
         Header: 'Provider ID',
-        accessor: 'providerId',
+        accessor: 'providerId' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.ID
       },
       {
         Header: 'Partner ID',
-        accessor: 'partnerId',
+        accessor: 'partnerId' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.PARTNER_ID
       },
       {
         Header: 'Total game count',
-        accessor: 'totalGameCount',
+        accessor: 'totalGameCount' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.GAME_COUNT
       },
 
       {
         Header: 'Status',
-        accessor: 'status',
+        accessor: 'status' as keyof ProvidersViewModel,
         variant: 'status' as const,
         getVariant: (value: string) => providerStatusesConfig[value].variant,
         getVariantName: (value: string) => t.get(providerStatusesConfig[value].translationKey),
