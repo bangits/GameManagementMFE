@@ -39,10 +39,10 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/common@^2.8.29":
-  version "2.8.29"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.29.tgz#0322e64fa44378c46b1b58a37600b07c7d4794b6"
-  integrity sha1-AyLmT6RDeMRrG1ijdgCwfH1HlLY=
+"@atom/common@^2.8.31":
+  version "2.8.31"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.8.31.tgz#eeebf6513d4b936763a429400b6ed58ddf4dc26f"
+  integrity sha1-7uv2UT1Lk2djpClAC27Vjd9Nwm8=
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
@@ -71,12 +71,12 @@
     react-jss "^10.8.2"
     react-sortable-hoc "^2.0.0"
 
-"@atom/design-system@^2.4.0":
-  version "2.4.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.4.0.tgz#d1ab11642912757f8ec17215a988300b7bbc8140"
-  integrity sha1-0asRZCkSdX+OwXIVqYgwC3u8gUA=
+"@atom/design-system@^2.4.1":
+  version "2.4.1"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.4.1.tgz#a11eace4717f58ff3f553a38ceca900ab6bee57a"
+  integrity sha1-oR6s5HF/WP8/VTo4zsqQCra+5Xo=
   dependencies:
-    "@my-ui/core" "^2.28.41"
+    "@my-ui/core" "^2.28.48"
     classnames "^2.3.1"
     react "^17.0.2"
     react-cropper "^2.1.8"
@@ -1530,10 +1530,10 @@
     react-transition-group "^4.4.2"
     throttle-debounce "^3.0.1"
 
-"@my-ui/core@^2.28.41":
-  version "2.28.46"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.28.46.tgz#0d484ecb2a734559eee2dffdb2f4a1d0fd6572c6"
-  integrity sha1-DUhOyypzRVnu4t/9svSh0P1lcsY=
+"@my-ui/core@^2.28.48":
+  version "2.28.55"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-2.28.55.tgz#e40d84f268fc91dec83894ce358307996cfe526a"
+  integrity sha1-5A2E8mj8kd7IOJTONYMHmWz+Umo=
   dependencies:
     "@my-ui/react-datepicker" "^1.5.0"
     "@my-ui/react-select" "1.1.6"
