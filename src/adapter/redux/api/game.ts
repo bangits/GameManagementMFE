@@ -53,7 +53,8 @@ export const gameApi = createApi({
           methodName: 'addGame',
           methodArguments: [addGameViewModel]
         };
-      }
+      },
+      invalidatesTags: ['Games']
     }),
     getGameTypes: build.query<GetGameTypesViewModel, {}>({
       query: (parentTypeId?: PrimaryKey) => {
@@ -144,7 +145,7 @@ export const gameApi = createApi({
           methodArguments: [editGameInformationView]
         };
       },
-      invalidatesTags: ['getGameById']
+      invalidatesTags: ['getGameById', 'Games']
     }),
     editGameProperties: build.mutation<ActionResponseModel, {}>({
       query: (editGamePropertiesView: EditGamePropertiesViewModel) => {
@@ -153,7 +154,7 @@ export const gameApi = createApi({
           methodArguments: [editGamePropertiesView]
         };
       },
-      invalidatesTags: ['getGameById']
+      invalidatesTags: ['getGameById', 'Games']
     }),
     editGameCompatibility: build.mutation<ActionResponseModel, {}>({
       query: (editGameCompatibilityView: EditGameCompatibilityViewModel) => {
@@ -162,7 +163,7 @@ export const gameApi = createApi({
           methodArguments: [editGameCompatibilityView]
         };
       },
-      invalidatesTags: ['getGameById']
+      invalidatesTags: ['getGameById', 'Games']
     }),
     updateImages: build.mutation<boolean, UpdateGameImagesViewModel>({
       query: (updateGameImagesViewModel: UpdateGameImagesViewModel) => {
@@ -170,7 +171,8 @@ export const gameApi = createApi({
           methodName: 'updateGameImages',
           methodArguments: [updateGameImagesViewModel]
         };
-      }
+      },
+      invalidatesTags: ['Games']
     })
   })
 });

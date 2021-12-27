@@ -12,18 +12,20 @@ import {
 import { gameStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel } from '@/view/models';
+import { AuthenticatedContext } from '@atom/authorization';
 import {
   CountriesSelect,
   CurrencySelect,
   INPUT_MAX_VALUES,
   LanguageSelect,
+  PageIdsEnum,
   PrimaryKey,
   redirectToURL,
   TablePage,
   useTranslation
 } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 export interface GameListProps {
   onFiltersChange: (parameters: FetchDataParameters<GamesViewModel, GamesFiltersViewModel>) => void;
   filters: GamesFiltersViewModel;
@@ -54,6 +56,8 @@ function GameList({
   shouldShowInActivateButton,
   gameTableLoadingIds
 }: GameListProps) {
+  const { user } = useContext(AuthenticatedContext);
+
   const t = useTranslation();
 
   const tableColumns = useMemo(
@@ -513,6 +517,8 @@ function GameList({
             }
           ]
         }}
+        pageId={PageIdsEnum.GAMES_PAGE}
+        userId={user.userId}
         rowCount={rowCount}
         getEditUrl={(column) =>
           ROUTES.baseUrl +
