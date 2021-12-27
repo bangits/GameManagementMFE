@@ -472,6 +472,7 @@ function GameList({
       <TablePage
         fetchData={onFiltersChange}
         isFetching={isFetching}
+        isLoading={isFetching}
         isFilteredData={isFilteredData}
         filterProps={{
           defaultOpened: false,
