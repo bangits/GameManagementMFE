@@ -2,9 +2,10 @@ import { ProviderStatusesEnum } from '@/domain/models/enums';
 import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
-import { PrimaryKey, TablePage, useTranslation } from '@atom/common';
+import { AuthenticatedContext } from '@atom/authorization';
+import { PageIdsEnum, PrimaryKey, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 
 export interface ProviderListProps {
   onFiltersChange: (parameters: FetchDataParameters<ProvidersViewModel, ProvidersFiltersViewModel>) => void;
@@ -36,6 +37,8 @@ function ProviderList({
   shouldShowInActivateButton,
   partnersTableLoadingIds
 }: ProviderListProps) {
+  const { user } = useContext(AuthenticatedContext);
+
   const tableColumns = useMemo(
     () => [
       {
@@ -176,6 +179,8 @@ function ProviderList({
             </>
           )
         }}
+        pageId={PageIdsEnum.PROVIDERS_PAGE}
+        userId={user.userId}
         rowCount={rowCount}
         getEditUrl={(column) =>
           ROUTES.baseUrl +

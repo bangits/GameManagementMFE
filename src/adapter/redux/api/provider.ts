@@ -78,7 +78,7 @@ export const providerApi = createApi({
           methodArguments: [editProviderGeneralInfoViewModel]
         };
       },
-      invalidatesTags: ['ProviderDetails']
+      invalidatesTags: ['ProviderDetails', 'Providers']
     }),
     updateProviderLogo: build.mutation<boolean, UpdateProviderLogoViewModel>({
       query: (updateProviderLogoViewModel: UpdateProviderLogoViewModel) => {
@@ -86,7 +86,8 @@ export const providerApi = createApi({
           methodName: 'updateProviderLogo',
           methodArguments: [updateProviderLogoViewModel]
         };
-      }
+      },
+      invalidatesTags: ['Providers']
     })
   })
 });
