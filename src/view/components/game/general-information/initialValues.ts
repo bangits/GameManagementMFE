@@ -14,7 +14,7 @@ export const getEditGameInfoInitialValues = (data: GamesDetailsViewModel): EditG
     lastUpdatedUserEmail: data.lastUpdatedByUserEmail || null,
     lastUpdatedUserId: 1,
     name: data.gameName,
-    releaseDate: new Date(data.releaseDate),
+    releaseDate: data.releaseDate && new Date(data.releaseDate),
     subTypeId: data.subType?.id || null,
     gameTypeId: data.type?.id || null,
     providerId: data.providerId
