@@ -1,7 +1,7 @@
 import { GameClassSelect, GameTypesSelect, GameVolatilitiesSelect, ProviderSelect } from '@/view';
-import { GAME_MIN_RELEASE_DATE, ROUTES } from '@/view/constants';
+import { GAME_MIN_RELEASE_DATE } from '@/view/constants';
 import { AddGameViewModel } from '@/view/models';
-import { createRenderInputs, CustomSelectProps, PrimaryKey, redirectToURL, useTranslation } from '@atom/common';
+import { createRenderInputs, CustomSelectProps, PrimaryKey, useTranslation } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
 import { FastField, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
 import { FC, useMemo } from 'react';
@@ -134,7 +134,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
       firstButtonProps: {
         children: t.get('close'),
         type: 'button' as const,
-        onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.gamesList)
+        onClick: () => history.back()
       }
     }),
     [t]
