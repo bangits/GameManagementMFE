@@ -71,6 +71,7 @@ const ProviderListContainer = () => {
         results={results || []}
         isFilteredData={firstRequestId !== requestId}
         isFetching={isFetching}
+        refetch={refetch}
         rowCount={rowCount}
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy

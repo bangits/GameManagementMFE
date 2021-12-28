@@ -99,6 +99,7 @@ const GameListContainer = () => {
       <GameList
         results={results || []}
         rowCount={rowCount || 1}
+        refetch={refetch}
         isFilteredData={firstRequestId !== requestId}
         isFetching={isFetching}
         filters={filters}

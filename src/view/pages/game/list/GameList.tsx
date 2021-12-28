@@ -28,6 +28,7 @@ import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useContext, useMemo } from 'react';
 export interface GameListProps {
   onFiltersChange: (parameters: FetchDataParameters<GamesViewModel, GamesFiltersViewModel>) => void;
+  refetch: () => void;
   filters: GamesFiltersViewModel;
   results: GamesViewModel[];
   rowCount: number;
@@ -54,7 +55,8 @@ function GameList({
   shouldShowActivateButton,
   onInActivateButtonClick,
   shouldShowInActivateButton,
-  gameTableLoadingIds
+  gameTableLoadingIds,
+  refetch
 }: GameListProps) {
   const { user } = useContext(AuthenticatedContext);
 
@@ -478,6 +480,7 @@ function GameList({
         isFetching={isFetching}
         isLoading={isFetching}
         isFilteredData={isFilteredData}
+        refetch={refetch}
         filterProps={{
           defaultOpened: false,
           initialValues: filters,

@@ -9,6 +9,7 @@ import { useContext, useMemo } from 'react';
 
 export interface ProviderListProps {
   onFiltersChange: (parameters: FetchDataParameters<ProvidersViewModel, ProvidersFiltersViewModel>) => void;
+  refetch: () => void;
   results: ProvidersViewModel[];
   rowCount: number;
   isFilteredData: boolean;
@@ -139,6 +140,7 @@ function ProviderList({
         isFilteredData={isFilteredData}
         isFetching={isFetching}
         isLoading={isFetching}
+        refetch={refetch}
         filterProps={{
           defaultOpened: false,
           initialValues: filtersInitialValues,
