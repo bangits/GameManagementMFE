@@ -1,12 +1,12 @@
 import { EditGameInformationViewModel } from '@/view/models';
-import { regexLibrary, UseValidationTranslationReturnValue } from '@atom/common';
-import { string, number, object, SchemaOf, date } from 'yup';
+import { UseValidationTranslationReturnValue } from '@atom/common';
+import { date, number, object, SchemaOf, string } from 'yup';
 
 export const editGameInfoValidations = async (
   t: UseValidationTranslationReturnValue
 ): Promise<SchemaOf<Omit<EditGameInformationViewModel, 'lastUpdatedUserId' | 'lastUpdatedUserEmail' | 'hasDemo'>>> => {
   return object({
-    name: string().max(50, t.max(50)).matches(regexLibrary.TEXT_INPUT, t.textInput()),
+    name: string().required(t.required()).max(50, t.max(50)),
     classId: number().nullable(),
     externalId: string()
       .max(30, t.max(30))

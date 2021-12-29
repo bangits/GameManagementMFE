@@ -17,8 +17,6 @@ const GeneralInformationContainer: FC<GeneralInformationContainerProps> = ({ dat
 
   const isEdit = location.search.includes('isEdit');
 
-  console.log(isEdit);
-
   const params = useParams<{ providerId: string }>();
 
   const [editProviderGeneralInfo] = providerApi.useEditProviderGeneralInfoMutation();

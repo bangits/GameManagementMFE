@@ -408,12 +408,12 @@ function GameList({
       {
         name: 'gameUiLanguageIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
-        label: t.get('uILanguages'),
+        label: t.get('uiLanguages'),
         component: ({ onChange, filterValues }) => (
           <LanguageSelect
             selectAll
             isMulti
-            inputLabel={t.get('uILanguages')}
+            inputLabel={t.get('uiLanguages')}
             fullWidth
             value={filterValues.gameUiLanguageIds}
             onChange={(changedValue) => onChange('gameUiLanguageIds', changedValue)}
@@ -467,7 +467,6 @@ function GameList({
   const addGameButtonProps = useMemo(
     () => ({
       children: t.get('add'),
-      startIcon: <Icons.PlusCircle />,
       onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd)
     }),
     [t]

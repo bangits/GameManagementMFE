@@ -102,7 +102,7 @@ const GameListContainer = () => {
         refetch={refetch}
         isFilteredData={firstRequestId !== requestId}
         isFetching={isFetching}
-        filters={filters}
+        filters={initialFilters}
         onFiltersChange={(parameters) => {
           const sorting = parameters.sortedBy
             ? {

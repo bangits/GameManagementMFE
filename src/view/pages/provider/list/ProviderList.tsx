@@ -36,7 +36,8 @@ function ProviderList({
   shouldShowActivateButton,
   onInActivateButtonClick,
   shouldShowInActivateButton,
-  partnersTableLoadingIds
+  partnersTableLoadingIds,
+  refetch
 }: ProviderListProps) {
   const { user } = useContext(AuthenticatedContext);
 
