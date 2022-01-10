@@ -40,38 +40,39 @@ function ProviderList({
   refetch
 }: ProviderListProps) {
   const { user } = useContext(AuthenticatedContext);
+  const t = useTranslation();
 
   const tableColumns = useMemo(
     () => [
       {
-        Header: 'Logo',
+        Header: t.get('logo'),
         accessor: 'logo' as keyof ProvidersViewModel,
         disableSortBy: true,
         variant: 'hovered-image' as const
       },
       {
-        Header: 'Provider name',
+        Header: t.get('providerName'),
         accessor: 'providerName' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.PROVIDER_NAME
       },
       {
-        Header: 'Provider ID',
+        Header: t.get('providerId'),
         accessor: 'providerId' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.ID
       },
       {
-        Header: 'Partner ID',
+        Header: t.get('partnerId'),
         accessor: 'partnerId' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.PARTNER_ID
       },
       {
-        Header: 'Total game count',
+        Header: t.get('totalGameCount'),
         accessor: 'totalGameCount' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.GAME_COUNT
       },
 
       {
-        Header: 'Status',
+        Header: t.get('status'),
         accessor: 'status' as keyof ProvidersViewModel,
         variant: 'status' as const,
         getVariant: (value: string) => providerStatusesConfig[value].variant,
@@ -82,7 +83,6 @@ function ProviderList({
     []
   );
 
-  const t = useTranslation();
 
   const filtersList = useMemo(
     () => [
