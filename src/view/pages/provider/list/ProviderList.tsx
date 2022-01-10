@@ -83,7 +83,6 @@ function ProviderList({
     []
   );
 
-
   const filtersList = useMemo(
     () => [
       {
