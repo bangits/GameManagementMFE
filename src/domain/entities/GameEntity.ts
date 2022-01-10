@@ -1,8 +1,6 @@
-import { Country, Currency, PrimaryKey } from '@atom/common';
+import { BaseEntity, Country, Currency, PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 import { GameStatusesEnum } from '../models';
-import { BaseEntity } from './BaseEntity';
-
 export class Game extends BaseEntity {
   @AutoMap()
   externalId: PrimaryKey;

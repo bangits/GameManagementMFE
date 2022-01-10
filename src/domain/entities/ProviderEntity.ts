@@ -1,7 +1,6 @@
-import { Country, Currency, PrimaryKey } from '@atom/common';
+import { BaseEntity, Country, Currency, PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 import { ProviderStatusesEnum } from '../models';
-import { BaseEntity } from './BaseEntity';
 
 export class Provider extends BaseEntity {
   status: {
