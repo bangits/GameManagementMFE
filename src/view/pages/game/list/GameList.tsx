@@ -144,7 +144,7 @@ function GameList({
         getVariantName: (value: GameStatusesEnum) => t.get(gameStatusesConfig[value].translationKey)
       }
     ],
-    []
+    [t]
   );
 
   const filtersList = useMemo(

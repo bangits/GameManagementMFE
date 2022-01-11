@@ -80,7 +80,7 @@ function ProviderList({
         disableSortBy: true
       }
     ],
-    []
+    [t]
   );
 
   const filtersList = useMemo(
