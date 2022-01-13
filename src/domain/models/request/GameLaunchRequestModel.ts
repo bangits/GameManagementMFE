@@ -26,5 +26,6 @@ export class GameLaunchRequestModel {
   @AutoMap()
   returnUrl: string;
 
+  @AutoMap()
   isDemo: boolean;
 }

@@ -148,11 +148,7 @@ export const generateGameMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.providerId,
-      mapFrom((source) => 1)
-    )
-    .forMember(
-      (destination) => destination.isDemo,
-      mapFrom((source) => source.isDemo)
+      mapFrom((source) => (source.gameId === 'AllLuckyClover' ? 2 : 1))
     );
   //#endregion
 

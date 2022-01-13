@@ -28,6 +28,7 @@ export class GameLaunchViewModel {
   @AutoMap()
   returnUrl: string;
 
+  @AutoMap()
   isDemo: boolean;
 
   gameBackground: string;
