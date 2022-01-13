@@ -55,10 +55,10 @@
     react-jss "^10.8.2"
     react-sortable-hoc "^2.0.0"
 
-"@atom/design-system@^2.4.5":
-  version "2.4.5"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.4.5.tgz#b30cf9619375f0b6409f2245681aab45d53363df"
-  integrity sha1-swz5YZN18LZAnyJFaBqrRdUzY98=
+"@atom/design-system@^2.4.6":
+  version "2.4.6"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.4.6.tgz#7e9aaf4921effa8c4d906ccf41a2961831498de4"
+  integrity sha1-fpqvSSHv+oxNkGzPQaKWGDFJjeQ=
   dependencies:
     "@my-ui/core" "^3.0.6"
     classnames "^2.3.1"
