@@ -147,16 +147,12 @@ export const generateGameMappings = (mapper: Mapper) => {
       mapFrom((source) => 1)
     )
     .forMember(
-      (destination) => destination.anon,
-      mapFrom((source) => (source.isDemo ? 1 : null))
-    )
-    .forMember(
-      (destination) => destination.anonOnly,
-      mapFrom((source) => (source.isDemo ? 1 : null))
-    )
-    .forMember(
       (destination) => destination.providerId,
       mapFrom((source) => 1)
+    )
+    .forMember(
+      (destination) => destination.isDemo,
+      mapFrom((source) => source.isDemo)
     );
   //#endregion
 

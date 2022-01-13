@@ -23,7 +23,7 @@ export class DiContainer {
     this.diContainer.bind(DI_CONSTANTS.GameLauncherHttpService).toDynamicValue(
       () =>
         new HttpService({
-          baseURL: 'http://52.143.74.18/api/v1'
+          baseURL: 'http://51.143.121.28/api/v1'
         })
     );
 

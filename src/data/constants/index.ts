@@ -21,7 +21,7 @@ export const API_ROUTES = {
     GET_GAME_VOLATILITIES: '/Volatility',
     GET_GAME_SUPPORTED_BROWSERS: '/SupportedBrowsers',
     GET_GAME_PLATFORMS: '/GamePlatform',
-    LAUNCH_GAME: '/Rival/gameLaunch',
+    LAUNCH_GAME: '/GameLaunch',
     CHANGE_STATUS: GAME_ROUTE + '/status',
     EDIT_GAME_INFO: GAME_ROUTE + '/Info',
     GET_BY_ID: GAME_ROUTE + '/id',

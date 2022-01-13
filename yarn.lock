@@ -42,10 +42,23 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/design-system@^2.2.6", "@atom/design-system@^2.4.4":
+"@atom/design-system@^2.2.6":
   version "2.4.4"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.4.4.tgz#c9c2cad6fcdc8aac0b68dca1f732ea249574feed"
   integrity sha1-ycLK1vzciqwLaNyh9zLqJJV0/u0=
+  dependencies:
+    "@my-ui/core" "^3.0.6"
+    classnames "^2.3.1"
+    react "^17.0.2"
+    react-cropper "^2.1.8"
+    react-dom "^17.0.2"
+    react-jss "^10.8.2"
+    react-sortable-hoc "^2.0.0"
+
+"@atom/design-system@^2.4.5":
+  version "2.4.5"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.4.5.tgz#b30cf9619375f0b6409f2245681aab45d53363df"
+  integrity sha1-swz5YZN18LZAnyJFaBqrRdUzY98=
   dependencies:
     "@my-ui/core" "^3.0.6"
     classnames "^2.3.1"

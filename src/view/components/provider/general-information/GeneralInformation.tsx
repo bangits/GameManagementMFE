@@ -63,7 +63,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
     [t, data]
   );
 
-  const restrictedCountries = useMemo<ProvidersGeneralInfoProps['restrictedtCountries']>(
+  const restrictedCountries = useMemo<ProvidersGeneralInfoProps['restrictedCountries']>(
     () =>
       data.restrictedCountries.length > 1
         ? {
@@ -286,7 +286,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
                     noDataText={t.get('emptyValue')}
                     totalMarket={totalMarket}
                     certifiedCountries={certifiedCountries}
-                    restrictedtCountries={restrictedCountries}
+                    restrictedCountries={restrictedCountries}
                     supportedCurrencies={supportedCurrencies}
                     licenses={licenses}
                     realURL={realURL}

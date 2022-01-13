@@ -24,12 +24,8 @@ export class GameLaunchRequestModel {
   lang: string;
 
   @AutoMap()
-  hasDemo: boolean;
-
-  @AutoMap()
   returnUrl: string;
 
-  anonOnly: 1;
+  isDemo: boolean;
 
-  anon: 1;
 }
