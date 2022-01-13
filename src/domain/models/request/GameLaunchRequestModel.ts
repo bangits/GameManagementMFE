@@ -27,5 +27,4 @@ export class GameLaunchRequestModel {
   returnUrl: string;
 
   isDemo: boolean;
-
 }
