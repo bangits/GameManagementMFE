@@ -145,10 +145,6 @@ export const generateGameMappings = (mapper: Mapper) => {
     .forMember(
       (destination) => destination.projectId,
       mapFrom((source) => 1)
-    )
-    .forMember(
-      (destination) => destination.providerId,
-      mapFrom((source) => (source.gameId === 'AllLuckyClover' ? 2 : 1))
     );
   //#endregion
 
@@ -270,7 +266,10 @@ export const generateGameMappings = (mapper: Mapper) => {
           name: theme.name
         }))
       )
-    );
+    ) .forMember(
+      (destination) => destination.releaseDate,
+      mapFrom((source) => source.releaseDate)
+    )
   //#endregion
 
   //#region Game Status Change Mapping
