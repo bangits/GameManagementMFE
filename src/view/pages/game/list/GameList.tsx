@@ -15,10 +15,13 @@ import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel } from '
 import { AuthenticatedContext } from '@atom/authorization';
 import {
   CountriesSelect,
-  CurrencySelect, historyService, INPUT_MAX_VALUES,
+  CurrencySelect,
+  historyService,
+  INPUT_MAX_VALUES,
   LanguageSelect,
   PageIdsEnum,
-  PrimaryKey, TablePage,
+  PrimaryKey,
+  TablePage,
   useTranslation
 } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';

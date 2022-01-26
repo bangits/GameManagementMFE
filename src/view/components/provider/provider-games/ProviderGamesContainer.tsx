@@ -108,7 +108,9 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
       }}
       onAddGameClick={onAddGameClick}
       onGameDetailsClick={(gameId) =>
-        historyService.redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', gameId.toString()))
+        historyService.redirectToURL(
+          ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', gameId.toString())
+        )
       }
       isLoadingGames={isFetching}
       isAllGamesLoaded={isAllGamesLoaded}
