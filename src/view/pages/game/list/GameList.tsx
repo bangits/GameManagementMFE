@@ -15,13 +15,10 @@ import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel } from '
 import { AuthenticatedContext } from '@atom/authorization';
 import {
   CountriesSelect,
-  CurrencySelect,
-  INPUT_MAX_VALUES,
+  CurrencySelect, historyService, INPUT_MAX_VALUES,
   LanguageSelect,
   PageIdsEnum,
-  PrimaryKey,
-  redirectToURL,
-  TablePage,
+  PrimaryKey, TablePage,
   useTranslation
 } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
@@ -467,7 +464,7 @@ function GameList({
   const addGameButtonProps = useMemo(
     () => ({
       children: t.get('add'),
-      onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd)
+      onClick: () => historyService.redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd)
     }),
     [t]
   );

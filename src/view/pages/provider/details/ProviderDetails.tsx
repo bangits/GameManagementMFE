@@ -1,7 +1,7 @@
 import { GeneralInformationContainer, ProviderGamesContainer } from '@/view';
 import { providerImagesConfig, providerStatusesConfig } from '@/view/configs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
-import { BannerUploader, convertDate, redirectToURL, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, historyService, useTranslation } from '@atom/common';
 import {
   PageWrapper,
   ProviderDetails as ProviderDetailsPage,
@@ -34,7 +34,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         label: t.get('providerManagement'),
         isRedirect: true,
         componentProps: {
-          onClick: () => redirectToURL('/game/providers')
+          onClick: () => historyService.redirectToURL('/game/providers')
         }
       },
       {
@@ -88,7 +88,6 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     [data, shouldShowActivateButton, shouldShowInActivateButton, t]
   );
 
-
   return (
     <PageWrapper>
       <BannerUploader
@@ -113,7 +112,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
             providerName={data.providerName}
             backgroundImgUrl={data.logo}
             onBackgroundImgClick={openLogoImageUploader}
-            gamesTabContent={<ProviderGamesContainer providerId={data.providerId} providerStatusId={data.statusId} />}
+            gamesTabContent={<ProviderGamesContainer providerId={data.id} providerStatusId={data.statusId} />}
             generalInformationContext={<GeneralInformationContainer data={data} />}
           />
         )}

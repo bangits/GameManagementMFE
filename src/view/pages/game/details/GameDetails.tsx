@@ -1,7 +1,7 @@
 import { GameGeneralInformationContainer } from '@/view';
 import { gameImagesConfig, gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
-import { BannerUploader, convertDate, redirectToURL, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, historyService, useTranslation } from '@atom/common';
 import {
   GameDetails as GameDetailsPage,
   GameDetailsProps as GameDetailsPageProps,
@@ -41,7 +41,7 @@ const GameDetails: FC<GameDetailsProps> = ({
         label: t.get('gameManagement'),
         isRedirect: true,
         componentProps: {
-          onClick: () => redirectToURL('/game')
+          onClick: () => historyService.redirectToURL('/game')
         }
       },
       {
