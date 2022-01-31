@@ -5,7 +5,9 @@ import {
   convertToDecimalNumberFixed2,
   createRenderInputs,
   CustomForm,
-  CustomSelectProps, historyService, useAsync,
+  CustomSelectProps,
+  historyService,
+  useAsync,
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
