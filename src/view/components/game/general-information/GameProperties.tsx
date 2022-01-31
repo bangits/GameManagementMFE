@@ -4,13 +4,13 @@ import { EditGamePropertiesViewModel, GamesDetailsViewModel } from '@/view/model
 import {
   convertToDecimalNumberFixed2,
   createRenderInputs,
-  CustomSelectProps,
-  useAsync,
+  CustomForm,
+  CustomSelectProps, historyService, useAsync,
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
 import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
-import { FastField, Form, Formik } from 'formik';
+import { FastField, Form } from 'formik';
 import React, { FC, useMemo } from 'react';
 import { getEditGamePropertiesValues } from './initialValues';
 
@@ -144,10 +144,15 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
     null
   );
 
+  const initialValues = useMemo(() => getEditGamePropertiesValues(data), [data]);
   return (
-    <Formik
-      onSubmit={onSubmit}
-      initialValues={getEditGamePropertiesValues(data)}
+    <CustomForm
+      showKeepChangesModal
+      onSubmit={(data, _, isValuesSameAsInitialValues) => {
+        if (!isValuesSameAsInitialValues) onSubmit(data);
+      }}
+      enableReinitialize
+      initialValues={initialValues}
       validationSchema={editGameInformationValidationScheme}>
       {(form) => {
         return (
@@ -156,6 +161,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
               isEdit={isEdit}
               noDataText={t.get('emptyValue')}
               title={t.get('gameProperties')}
+              onClose={() => historyService.unblock()}
               onSubmit={async (onClose) => {
                 await form.submitForm();
 
@@ -169,7 +175,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
           </Form>
         );
       }}
-    </Formik>
+    </CustomForm>
   );
 };
 

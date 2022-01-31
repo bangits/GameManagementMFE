@@ -28,9 +28,6 @@ export class GamesDetailsViewModel {
   backGroundImage: string;
 
   @AutoMap()
-  releaseDate: string;
-
-  @AutoMap()
   creationDate: string;
 
   @AutoMap()
@@ -72,6 +69,7 @@ export class GamesDetailsViewModel {
   @AutoMap()
   providerAbsoluteDemoUrl: string;
 
+  releaseDate: string;
   gameName: string;
   gameId: PrimaryKey;
   statusId: GameStatusesEnum;

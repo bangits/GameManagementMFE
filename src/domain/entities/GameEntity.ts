@@ -42,9 +42,6 @@ export class Game extends BaseEntity {
   backGroundImage: string;
 
   @AutoMap()
-  releaseDate: string;
-
-  @AutoMap()
   creationDate: string;
 
   @AutoMap()
@@ -85,6 +82,8 @@ export class Game extends BaseEntity {
 
   @AutoMap()
   providerAbsoluteDemoUrl: string;
+
+  releaseDate: string;
 
   status: {
     id: GameStatusesEnum;
