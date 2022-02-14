@@ -6,7 +6,7 @@ export const GameTypesSelect = (props: CustomSelectProps & { gameTypeId?: Primar
 
   const { data: gameTypes } = gameApi.useGetGameTypesQuery(props.gameTypeId);
 
-  if (!gameTypes) return null;
+  // if (!gameTypes) return null;
 
   return (
     <>
