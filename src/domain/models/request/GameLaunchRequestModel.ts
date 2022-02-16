@@ -18,6 +18,9 @@ export class GameLaunchRequestModel {
   providerId: PrimaryKey;
 
   @AutoMap()
+  providerName: string;
+
+  @AutoMap()
   gameLaunchUrl: string;
 
   @AutoMap()

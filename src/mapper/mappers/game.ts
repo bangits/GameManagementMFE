@@ -266,10 +266,11 @@ export const generateGameMappings = (mapper: Mapper) => {
           name: theme.name
         }))
       )
-    ) .forMember(
+    )
+    .forMember(
       (destination) => destination.releaseDate,
       mapFrom((source) => source.releaseDate)
-    )
+    );
   //#endregion
 
   //#region Game Status Change Mapping

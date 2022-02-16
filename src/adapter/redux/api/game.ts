@@ -36,7 +36,8 @@ export const gameApi = createApi({
           methodName: 'getGames',
           methodArguments: [gamesFiltersViewModel]
         };
-      }
+      },
+      providesTags: ['Games']
     }),
     getGameById: build.query<GamesDetailsViewModel, {}>({
       query: (partnerId: PrimaryKey) => {

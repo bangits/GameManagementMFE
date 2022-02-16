@@ -56,7 +56,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
         {
           title: t.get('provider'),
           variant: 'default',
-          value: data?.provideName
+          value: data?.providerName
         },
         {
           title: t.get('releaseDate'),

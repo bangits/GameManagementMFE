@@ -9,10 +9,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface ProviderGamesContainerProps {
   providerId: PrimaryKey;
+  providerName: string;
   providerStatusId: ProviderStatusesEnum;
 }
 
-export const ProviderGamesContainer = ({ providerId, providerStatusId }: ProviderGamesContainerProps) => {
+export const ProviderGamesContainer = ({ providerId, providerStatusId, providerName }: ProviderGamesContainerProps) => {
   const t = useTranslation();
 
   const [filters, setFilters] = useState<ProviderGamesFilterViewModel>({
@@ -102,6 +103,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId }: Provide
           gameId: clickedGame.externalId,
           gameLaunchUrl: isDemo ? clickedGame.providerAbsoluteDemoUrl : clickedGame.providerAbsoluteUrl,
           providerId,
+          providerName,
           isDemo,
           gameBackground: clickedGame.backGroundImage
         });

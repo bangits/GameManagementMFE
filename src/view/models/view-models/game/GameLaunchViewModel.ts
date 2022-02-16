@@ -17,6 +17,9 @@ export class GameLaunchViewModel {
   providerId: PrimaryKey;
 
   @AutoMap()
+  providerName: string;
+
+  @AutoMap()
   projectId: PrimaryKey;
 
   @AutoMap()

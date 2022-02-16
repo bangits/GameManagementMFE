@@ -88,7 +88,6 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     [data, shouldShowActivateButton, shouldShowInActivateButton, t]
   );
 
-
   return (
     <PageWrapper>
       <BannerUploader
@@ -113,7 +112,13 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
             providerName={data.providerName}
             backgroundImgUrl={data.logo}
             onBackgroundImgClick={openLogoImageUploader}
-            gamesTabContent={<ProviderGamesContainer providerId={data.providerId} providerStatusId={data.statusId} />}
+            gamesTabContent={
+              <ProviderGamesContainer
+                providerName={data.providerName}
+                providerId={data.providerId}
+                providerStatusId={data.statusId}
+              />
+            }
             generalInformationContext={<GeneralInformationContainer data={data} />}
           />
         )}

@@ -13,7 +13,7 @@ export class GamesDetailsViewModel {
   className: string;
 
   @AutoMap()
-  provideName: string;
+  providerName: string;
 
   @AutoMap()
   volatilityName: string;
