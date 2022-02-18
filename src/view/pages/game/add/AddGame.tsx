@@ -1,9 +1,9 @@
 import { GameClassSelect, GameTypesSelect, GameVolatilitiesSelect, ProviderSelect } from '@/view';
 import { GAME_MIN_RELEASE_DATE } from '@/view/constants';
 import { AddGameViewModel } from '@/view/models';
-import { createRenderInputs, CustomSelectProps, PrimaryKey, useTranslation } from '@atom/common';
+import { createRenderInputs, CustomForm, CustomSelectProps, PrimaryKey, useTranslation } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
-import { FastField, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
+import { FastField, Form, FormikHelpers, useFormikContext } from 'formik';
 import { FC, useMemo } from 'react';
 import { SchemaOf } from 'yup';
 import { initialValues } from './initialValues';
@@ -143,7 +143,8 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
   return (
-    <Formik
+    <CustomForm
+      showKeepChangesModal
       initialValues={{ ...initialValues, providerId }}
       validationSchema={validationSchema}
       onSubmit={(data, form) => onSubmit(data, form)}>
@@ -154,7 +155,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
           </Form>
         );
       }}
-    </Formik>
+    </CustomForm>
   );
 };
 

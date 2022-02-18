@@ -4,7 +4,9 @@ import {
   CountriesSelect,
   createRenderInputs,
   CurrencySelect,
+  CustomForm,
   CustomSelectProps,
+  historyService,
   LanguageSelect,
   useAsync,
   useTranslation,
@@ -21,7 +23,7 @@ import {
   GameCompatibilityProps,
   LabelGroup
 } from '@atom/design-system';
-import { FastField, Form, Formik } from 'formik';
+import { FastField, Form } from 'formik';
 import React, { FC, useMemo } from 'react';
 import { getEditGameCompatibilityValues } from './initialValues';
 
@@ -187,16 +189,22 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
     [translationValidations],
     null
   );
+  const initialValues = useMemo(() => getEditGameCompatibilityValues(data), [data]);
 
   return (
-    <Formik
-      onSubmit={onSubmit}
-      initialValues={getEditGameCompatibilityValues(data)}
+    <CustomForm
+      showKeepChangesModal
+      onSubmit={(data, _, isValuesSameAsInitialValues) => {
+        if (!isValuesSameAsInitialValues) onSubmit(data);
+      }}
+      enableReinitialize
+      initialValues={initialValues}
       validationSchema={editGameCompatibilityValidationScheme}>
       {(form) => {
         return (
           <Form noValidate>
             <FlexibleForm
+              onClose={() => historyService.unblock()}
               onSubmit={async (onClose) => {
                 await form.submitForm();
 
@@ -307,7 +315,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
           </Form>
         );
       }}
-    </Formik>
+    </CustomForm>
   );
 };
 

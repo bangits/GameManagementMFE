@@ -4,13 +4,15 @@ import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/mode
 import {
   convertDate,
   createRenderInputs,
+  CustomForm,
   CustomSelectProps,
+  historyService,
   useAsync,
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
 import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
-import { FastField, Form, Formik, useFormikContext } from 'formik';
+import { FastField, Form, useFormikContext } from 'formik';
 import React, { FC, useMemo } from 'react';
 import { getEditGameInfoInitialValues } from './initialValues';
 
@@ -138,7 +140,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
         {
           type: 'datepicker' as const,
           name: 'releaseDate',
-          label: t.get('registrationDate')
+          label: t.get('releaseDate')
         },
         {
           type: 'select' as const,
@@ -179,10 +181,16 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
     null
   );
 
+  const initialValues = useMemo(() => getEditGameInfoInitialValues(data), [data]);
+
   return (
-    <Formik
-      onSubmit={onSubmit}
-      initialValues={getEditGameInfoInitialValues(data)}
+    <CustomForm
+      showKeepChangesModal
+      onSubmit={(data, _, isValuesSameAsInitialValues) => {
+        if (!isValuesSameAsInitialValues) onSubmit(data);
+      }}
+      initialValues={initialValues}
+      enableReinitialize
       validationSchema={editGameInformationValidationScheme}>
       {(form) => {
         return (
@@ -190,6 +198,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
             <FlexibleForm
               isEdit={isEdit}
               title={t.get('gameInformation')}
+              onClose={() => historyService.unblock()}
               onSubmit={async (onClose) => {
                 await form.submitForm();
 
@@ -203,7 +212,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
           </Form>
         );
       }}
-    </Formik>
+    </CustomForm>
   );
 };
 

@@ -5,20 +5,22 @@ import {
   CountriesSelect,
   createRenderInputs,
   CurrencySelect,
+  CustomForm,
   CustomSelect,
   CustomSelectProps,
+  historyService,
   useAsync,
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
 import { FlexibleForm, FlexibleFormProps, ProvidersGeneralInfo, ProvidersGeneralInfoProps } from '@atom/design-system';
-import { FastField, Form, Formik } from 'formik';
+import { FastField, Form } from 'formik';
 import React, { FC, useMemo } from 'react';
 import { editProviderGeneralInfoInitialValues } from './initialValues';
 
 export interface GeneralInformationProps {
   data: ProviderDetailsViewModel;
-  onSubmit: (data: EditProviderGeneralInformationViewModel) => void;
+  onSubmit: (data: Omit<EditProviderGeneralInformationViewModel, 'providerId'>) => void;
   isEdit: boolean;
 }
 
@@ -26,12 +28,6 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
   const t = useTranslation();
 
   const translationValidations = useValidationTranslation();
-
-  const editProviderGeneralInfoValidationSchema = useAsync(
-    () => editProviderGeneralInfoValidations(translationValidations),
-    [translationValidations],
-    null
-  );
 
   const totalMarket = useMemo<ProvidersGeneralInfoProps['totalMarket']>(
     () =>
@@ -253,11 +249,20 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
     }),
     []
   );
-
+  const initialValues = useMemo(() => editProviderGeneralInfoInitialValues(data), [data]);
+  const editProviderGeneralInfoValidationSchema = useAsync(
+    () => editProviderGeneralInfoValidations(translationValidations),
+    [translationValidations],
+    null
+  );
   return (
-    <Formik
-      onSubmit={onSubmit}
-      initialValues={editProviderGeneralInfoInitialValues(data)}
+    <CustomForm
+      showKeepChangesModal
+      onSubmit={(data, _, isValuesSameAsInitialValues) => {
+        if (!isValuesSameAsInitialValues) onSubmit(data);
+      }}
+      initialValues={initialValues}
+      enableReinitialize
       validationSchema={editProviderGeneralInfoValidationSchema}>
       {(form) => {
         return (
@@ -272,6 +277,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
                 viewLessLabel: t.get('viewLess'),
                 editButtonTooltipText: t.get('edit')
               }}
+              onClose={() => historyService.unblock()}
               onSubmit={async (onClose) => {
                 await form.submitForm();
 
@@ -298,7 +304,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
           </Form>
         );
       }}
-    </Formik>
+    </CustomForm>
   );
 };
 

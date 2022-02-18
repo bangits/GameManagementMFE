@@ -16,11 +16,11 @@ import { AuthenticatedContext } from '@atom/authorization';
 import {
   CountriesSelect,
   CurrencySelect,
+  historyService,
   INPUT_MAX_VALUES,
   LanguageSelect,
   PageIdsEnum,
   PrimaryKey,
-  redirectToURL,
   TablePage,
   useTranslation
 } from '@atom/common';
@@ -467,7 +467,7 @@ function GameList({
   const addGameButtonProps = useMemo(
     () => ({
       children: t.get('add'),
-      onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd)
+      onClick: () => historyService.redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd)
     }),
     [t]
   );

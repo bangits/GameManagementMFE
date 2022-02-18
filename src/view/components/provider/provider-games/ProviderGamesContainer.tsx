@@ -3,7 +3,7 @@ import { ProviderStatusesEnum } from '@/domain/models';
 import { ROUTES } from '@/view/constants';
 import { ProviderGamesFilterViewModel } from '@/view/models';
 import { gameLaunchService } from '@/view/services';
-import { PrimaryKey, redirectToURL, useFirstValue, useTranslation } from '@atom/common';
+import { historyService, PrimaryKey, useFirstValue, useTranslation } from '@atom/common';
 import { ProviderGames } from '@atom/design-system';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -62,7 +62,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
   );
 
   const onAddGameClick = useCallback(() => {
-    redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd + `?providerId=${providerId}`);
+    historyService.redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameAdd + `?providerId=${providerId}`);
   }, [providerId]);
 
   const hasGames = !!firstGames?.results?.length;
@@ -110,7 +110,9 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
       }}
       onAddGameClick={onAddGameClick}
       onGameDetailsClick={(gameId) =>
-        redirectToURL(ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', gameId.toString()))
+        historyService.redirectToURL(
+          ROUTES.baseUrl + ROUTES.game + ROUTES.gameDetails.replace(':gameId', gameId.toString())
+        )
       }
       isLoadingGames={isFetching}
       isAllGamesLoaded={isAllGamesLoaded}
