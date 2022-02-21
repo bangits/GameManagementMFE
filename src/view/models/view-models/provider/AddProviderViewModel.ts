@@ -3,14 +3,14 @@ import { AutoMap } from '@automapper/classes';
 
 export class AddProviderViewModel {
   @AutoMap()
-  name: string;
+  aggregator: PrimaryKey;
 
   @AutoMap()
-  logo: string;
+  providerNames: string[];
 
-  providerCurrencies: PrimaryKey[];
-  defaultCurrency: PrimaryKey;
-  targetMarkets: PrimaryKey[];
-  certifiedCountries: PrimaryKey[];
-  restrictedCountries: PrimaryKey[];
+  @AutoMap()
+  absoluteDemoUrl: string;
+
+  @AutoMap()
+  absoluteRealUrl: string;
 }

@@ -4,14 +4,11 @@ import { array, number, object, SchemaOf, string } from 'yup';
 
 export const AddProviderValidationSchema = async (
   t: UseValidationTranslationReturnValue
-): Promise<SchemaOf<AddProviderViewModel>> => {
+): Promise<SchemaOf<Omit<AddProviderViewModel, 'license'>>> => {
   return object({
-    name: string().required(t.required()).max(40, t.max(40)),
-    logo: string().required(t.required()),
-    providerCurrencies: array().of(number()).min(1, t.required()).required(t.required()),
-    defaultCurrency: number().min(1, t.required()).required(t.required()),
-    targetMarkets: array().of(number()),
-    certifiedCountries: array().of(number()),
-    restrictedCountries: array().of(number())
+    aggregator: number().required(t.required()).nullable(),
+    providerNames: array().required(t.required()),
+    absoluteDemoUrl: string(),
+    absoluteRealUrl: string()
   });
 };

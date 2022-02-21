@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import { ROUTES } from './constants';
 import {
   AddGameContainer,
+  AddProviderContainer,
   GameDetailsContainer,
   GameListContainer,
   ProviderDetailsContainer,
@@ -39,7 +40,9 @@ const App = () => {
                       <Route path={`${url}${ROUTES.providersList}`} exact>
                         <ProviderListContainer />
                       </Route>
-
+                      <Route path={`${url}${ROUTES.providersAdd}`} exact>
+                        <AddProviderContainer />
+                      </Route>
                       <Route path={`${url}${ROUTES.providerDetails}`} exact>
                         <ProviderDetailsContainer />
                       </Route>

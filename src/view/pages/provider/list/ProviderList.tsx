@@ -3,7 +3,8 @@ import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
 import { AuthenticatedContext } from '@atom/authorization';
-import { PageIdsEnum, PrimaryKey, TablePage, useTranslation } from '@atom/common';
+//@ts-ignore
+import { PageIdsEnum, PrimaryKey, TablePage, useTranslation, historyService } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useContext, useMemo } from 'react';
 
@@ -133,8 +134,16 @@ function ProviderList({
     [t]
   );
 
+  const addProviderButtonProps = useMemo(
+    () => ({
+      children: t.get('add'),
+      onClick: () => historyService.redirectToURL(ROUTES.baseUrl + ROUTES.providers + ROUTES.providersAdd)
+    }),
+    [t]
+  );
+
   return (
-    <PageWrapper title={t.get('providers')}>
+    <PageWrapper title={t.get('providers')} showButton buttonProps={addProviderButtonProps}>
       <TablePage
         fetchData={onFiltersChange}
         isFilteredData={isFilteredData}

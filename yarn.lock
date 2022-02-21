@@ -46,7 +46,11 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
+<<<<<<< Updated upstream
 "@atom/common@^0.1.0":
+=======
+"@atom/common@^0.1.1":
+>>>>>>> Stashed changes
   version "0.1.1"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-0.1.1.tgz#af4f81ad658996ebdbf79c892a5861514e751476"
   integrity sha1-r0+BrWWJluvb95yJKlhhUU51FHY=

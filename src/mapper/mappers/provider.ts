@@ -88,24 +88,8 @@ export const generateProviderMappings = (mapper: Mapper) => {
   //#endregion
 
   //#region Ade New Provider mapping
-  mapper
-    .createMap(AddProviderViewModel, AddProviderRequestModel)
-    .forMember(
-      (destination) => destination.certifiedCountries,
-      mapFrom((source) => transformToCountryModel(source.certifiedCountries))
-    )
-    .forMember(
-      (destination) => destination.providerCurrencies,
-      mapFrom((source) => transformToCountryModel(source.providerCurrencies, source.defaultCurrency))
-    )
-    .forMember(
-      (destination) => destination.restrictedCountries,
-      mapFrom((source) => transformToCountryModel(source.restrictedCountries))
-    )
-    .forMember(
-      (destination) => destination.targetMarkets,
-      mapFrom((source) => transformToCountryModel(source.targetMarkets))
-    );
+  mapper.createMap(AddProviderViewModel, AddProviderRequestModel);
+
   //#endregion
 
   //#region Change Provider Status Mapping
