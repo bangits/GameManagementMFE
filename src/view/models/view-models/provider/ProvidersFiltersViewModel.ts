@@ -9,6 +9,8 @@ export class ProvidersFiltersViewModel extends PagedModel {
   @AutoMap()
   providerName: string;
 
+  integrationTypeId: PrimaryKey;
+
   @AutoMap()
   partnerId: PrimaryKey | '';
 

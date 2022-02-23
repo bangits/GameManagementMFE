@@ -475,6 +475,7 @@ function GameList({
   return (
     <PageWrapper title={t.get('games')} showButton buttonProps={addGameButtonProps}>
       <TablePage
+        showFilters
         fetchData={onFiltersChange}
         isFetching={isFetching}
         isLoading={isFetching}

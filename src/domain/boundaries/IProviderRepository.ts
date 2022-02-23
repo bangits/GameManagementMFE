@@ -3,6 +3,7 @@ import {
   AddProviderRequestModel,
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
+  GetProviderIntegrationTypesResponseModel,
   GetGameTypesAndCountResponseModel,
   GetProviderByPartnerIdResponseModel,
   GetProviderNamesResponseModel,
@@ -15,7 +16,9 @@ import {
 export interface IProviderRepository {
   getProviders(getProviderRequestModel: GetProviderRequestModel): Promise<GetProviderResponseModel>;
   getProviderNames(isActive?: boolean): Promise<GetProviderNamesResponseModel>;
-  addProviders(addProviderRequestModel: AddProviderRequestModel): Promise<boolean>;
+  getProviderIntegrationTypes(): Promise<GetProviderIntegrationTypesResponseModel>;
+
+  addProvider(addProviderRequestModel: AddProviderRequestModel): Promise<boolean>;
   changeProviderStatus(changeProviderStatus: ChangeProviderStatusRequestModel): Promise<ActionResponseModel>;
   getProvidersById(providerId: PrimaryKey): Promise<GetProvidersByIdResponseModel>;
   getProviderGameTypesAndCount(providerId: PrimaryKey): Promise<GetGameTypesAndCountResponseModel[]>;

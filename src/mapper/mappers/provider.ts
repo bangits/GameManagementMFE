@@ -59,6 +59,10 @@ export const generateProviderMappings = (mapper: Mapper) => {
     .forMember(
       (destination) => destination.statusIds,
       mapFrom((source) => source.status)
+    )
+    .forMember(
+      (destination) => destination.IntegrationTypeId,
+      mapFrom((source) => source.integrationTypeId)
     );
   //#endregion
 
@@ -87,9 +91,20 @@ export const generateProviderMappings = (mapper: Mapper) => {
     );
   //#endregion
 
+  const mod = {
+    partnerId: null,
+    providerName: '',
+    realUrl: '',
+    demoUrl: '',
+    providers: []
+  };
   //#region Ade New Provider mapping
-  mapper.createMap(AddProviderViewModel, AddProviderRequestModel);
+  mapper.createMap(AddProviderViewModel, AddProviderRequestModel).forMember(
+    (destination) => destination.demoUrl,
+    mapFrom((source) => source.absoluteDemoUrl)
+  );
 
+  //#endregion
   //#endregion
 
   //#region Change Provider Status Mapping

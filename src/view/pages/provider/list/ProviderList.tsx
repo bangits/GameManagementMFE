@@ -1,4 +1,5 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
+import { ProviderIntegrationTypesSelect } from '@/view';
 import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
@@ -88,7 +89,7 @@ function ProviderList({
     () => [
       {
         label: t.get('providerId'),
-        name: 'providerId',
+        name: 'providerId' as keyof ProvidersViewModel,
         type: 'input' as const,
         props: {
           label: t.get('providerId'),
@@ -97,7 +98,7 @@ function ProviderList({
       },
       {
         label: t.get('partnerId'),
-        name: 'partnerId',
+        name: 'partnerId' as keyof ProvidersViewModel,
         type: 'input' as const,
         props: {
           label: t.get('partnerId'),
@@ -105,11 +106,27 @@ function ProviderList({
         }
       },
       {
-        name: 'providerName',
+        name: 'providerName' as keyof ProvidersViewModel,
         type: 'input' as const,
         label: t.get('providerName'),
         props: {
           label: t.get('providerName')
+        }
+      },
+      {
+        name: 'integrationType' as keyof ProvidersViewModel,
+        type: 'custom' as const,
+        label: t.get('integrationTypeName'),
+        component: ({ onChange, filterValues }) => {
+          console.log(filterValues);
+          return (
+            <ProviderIntegrationTypesSelect
+              inputLabel={t.get('IntegrationTypeId')}
+              fullWidth
+              value={filterValues.integrationTypeId}
+              onChange={(changedValue) => onChange('integrationTypeId', changedValue)}
+            />
+          );
         }
       },
       {
@@ -145,6 +162,7 @@ function ProviderList({
   return (
     <PageWrapper title={t.get('providers')} showButton buttonProps={addProviderButtonProps}>
       <TablePage
+        showFilters
         fetchData={onFiltersChange}
         isFilteredData={isFilteredData}
         isFetching={isFetching}

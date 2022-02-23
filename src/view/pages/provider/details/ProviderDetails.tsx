@@ -49,6 +49,8 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
       totalGameCount: t.get('totalGameCount'),
       status: t.get('status'),
       creationDate: t.get('creationDate'),
+      integrationType: t.get('integrationTypeName'),
+      partnerName: t.get('aggregator'),
       createdBy: t.get('createdBy'),
       generalInformation: t.get('generalInformation'),
       games: t.get('games'),
@@ -99,6 +101,9 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         aspectRatio={2 / 1}>
         {(openLogoImageUploader) => (
           <ProviderDetailsPage
+            //@ts-expect-error expiring
+            partnerName={data.partnerName}
+            integrationType={data.integrationTypeName}
             lastUpdatedBy={data.lastUpdatedByUserEmail}
             lastUpdatedDate={convertDate(data.lastUpdatedDate)}
             noDataText={t.get('emptyValue')}
