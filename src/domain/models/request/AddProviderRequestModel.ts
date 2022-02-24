@@ -1,15 +1,22 @@
-import { CountryModel } from '@atom/common';
+import { CountryModel, PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 
 export class AddProviderRequestModel {
-  @AutoMap()
-  name: string;
+  partnerId: PrimaryKey;
+  providerName: string;
+  realUrl: string;
+  demoUrl: string;
+  providers: AddProviderModel[];
+}
 
-  @AutoMap()
-  logo: string;
-
-  providerCurrencies: CountryModel[];
-  targetMarkets: CountryModel[];
-  certifiedCountries: CountryModel[];
-  restrictedCountries: CountryModel[];
+interface AddProviderModel {
+  providers: [
+    {
+      partnerId: PrimaryKey;
+      providerName: string;
+      partnerName: PrimaryKey;
+      realUrl: string;
+      demoUrl: string;
+    }
+  ];
 }

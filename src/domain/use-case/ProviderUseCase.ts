@@ -20,7 +20,8 @@ import {
   GetProvidersViewModel,
   ProviderGamesTypesViewModel,
   ProvidersFiltersViewModel,
-  UpdateProviderLogoViewModel
+  UpdateProviderLogoViewModel,
+  GetProviderIntegrationTypesViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -51,9 +52,9 @@ export class ProviderUseCase {
     return getProviderNamesResponse.map((r) => ({ value: r.id, label: r.name }));
   };
 
-  addProviders = async (addProviderViewModel: AddProviderViewModel): Promise<boolean> => {
+  addProvider = async (addProviderViewModel: AddProviderViewModel): Promise<boolean> => {
     const addProviderRequestModel = mapper.map(addProviderViewModel, AddProviderRequestModel, AddProviderViewModel);
-    return this.providerRepository.addProviders(addProviderRequestModel);
+    return this.providerRepository.addProvider(addProviderRequestModel);
   };
 
   changeProviderStatus = async (
@@ -108,5 +109,12 @@ export class ProviderUseCase {
     );
 
     return await this.providerRepository.updateProviderLogo(updateProviderLogoRequestModel);
+  };
+  getProviderIntegrationTypes = async (): Promise<GetProviderIntegrationTypesViewModel> => {
+    const getProviderIntegrationTypesResponse = await this.providerRepository.getProviderIntegrationTypes();
+
+    console.log(getProviderIntegrationTypesResponse);
+    //@ts-expect-error if you read this commit, please delete this
+    return getProviderIntegrationTypesResponse.map((r) => ({ value: r.id, label: r.name }));
   };
 }

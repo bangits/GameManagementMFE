@@ -5,6 +5,8 @@ export class GetProviderByPartnerIdResponseModel {
 
   gameCount: PrimaryKey;
 
+  integrationTypeName: string;
+
   targetMarkets: Country[];
   providerCurrencies: Currency[];
   certifiedCountries: Country[];

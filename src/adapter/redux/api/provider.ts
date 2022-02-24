@@ -8,7 +8,8 @@ import {
   GetProvidersByIdViewModel,
   ProviderGamesTypesViewModel,
   ProvidersFiltersViewModel,
-  UpdateProviderLogoViewModel
+  UpdateProviderLogoViewModel,
+  GetProviderIntegrationTypesViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';
@@ -37,18 +38,10 @@ export const providerApi = createApi({
       },
       invalidatesTags: ['Providers']
     }),
-    getProviderNames: build.query<GetProviderNamesViewModel, {}>({
-      query: (isActive?) => {
-        return {
-          methodName: 'getProviderNames',
-          methodArguments: [isActive]
-        };
-      }
-    }),
     addProvider: build.mutation({
       query: (addProviderViewModel: AddProviderViewModel) => {
         return {
-          methodName: 'addProviders',
+          methodName: 'addProvider',
           methodArguments: [addProviderViewModel]
         };
       }
@@ -68,6 +61,14 @@ export const providerApi = createApi({
         return {
           methodName: 'getProviderGameTypesAndCount',
           methodArguments: [partnerId]
+        };
+      }
+    }),
+    getProviderIntegrationTypes: build.query<GetProviderIntegrationTypesViewModel, {}>({
+      query: () => {
+        return {
+          methodName: 'getProviderIntegrationTypes',
+          methodArguments: []
         };
       }
     }),

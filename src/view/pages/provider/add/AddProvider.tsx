@@ -6,7 +6,7 @@ import {
   createRenderInputs,
   CurrencySelect,
   CustomSelectProps,
-  redirectToURL,
+  historyService,
   SelectOptionType,
   useTranslation
 } from '@atom/common';
@@ -32,28 +32,41 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
         type: 'select' as const,
         name: 'aggregator',
         component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti fullWidth inputLabel={t.get('aggregator')} />
+          <CountriesSelect {...props} fullWidth inputLabel={t.get('aggregator')} />
         )
       },
       {
         type: 'input' as const,
+        name: 'absoluteDemoUrl',
+        label: t.get('absoluteDemoURL'),
+        props: {
+          optional: true,
+          optionalText: 'asdsad',
+          text: t.get('companyLogoType')
+        }
+      },
+      {
+        type: 'input' as const,
         name: 'providerName',
-        label: t.get('providerName'),
+        label: t.get('providerNames'),
         props: {
           optional: true,
           optionalText: t.get('optional')
         }
       },
-
       {
         type: 'input' as const,
-        name: 'absoluteDemoURL',
-        label: t.get('absoluteDemoURL')
+        name: 'absoluteRealUrl',
+        label: t.get('absoluteRealURL'),
+        props: {
+          optional: true,
+          optionalText: t.get('optional')
+        }
       },
       {
         type: 'input' as const,
-        name: 'absoluteRealURL',
-        label: t.get('absoluteRealURL')
+        name: 'externalId',
+        label: t.get('externalId')
       }
     ],
     [selectedProviderCurrencies, t]
@@ -68,7 +81,7 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
       firstButtonProps: {
         children: t.get('close'),
         type: 'button' as const,
-        onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.providers + ROUTES.providersList)
+        onClick: () => historyService.redirectToURL(ROUTES.baseUrl + ROUTES.providers + ROUTES.providersList)
       }
     }),
     [t]
@@ -78,7 +91,9 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {() => {
+      {(form) => {
+        console.log(form);
+
         return (
           <Form noValidate className='min-height-content-wrapper'>
             <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />

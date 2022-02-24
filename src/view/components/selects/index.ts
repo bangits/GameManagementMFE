@@ -6,3 +6,5 @@ export * from './GameThemesSelect';
 export * from './GameTypesSelect';
 export * from './GameVolatilitiesSelect';
 export * from './ProviderSelect';
+export * from './ProviderIntegrationTypesSelect';
+export * from './GameNamesSelect';

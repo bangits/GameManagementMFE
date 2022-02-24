@@ -6,8 +6,8 @@ export const AddProviderValidationSchema = async (
   t: UseValidationTranslationReturnValue
 ): Promise<SchemaOf<Omit<AddProviderViewModel, 'license'>>> => {
   return object({
-    aggregator: number().required(t.required()).nullable(),
-    providerNames: array().required(t.required()),
+    aggregator: number().required(t.required()).nullable().max(40, t.max(40)),
+    providerNames: array().required(t.textInput()),
     absoluteDemoUrl: string(),
     absoluteRealUrl: string()
   });

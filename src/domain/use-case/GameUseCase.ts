@@ -33,7 +33,8 @@ import {
   GetGameVolatilitiesViewModel,
   ProviderGamesFilterViewModel,
   ProviderGamesViewModel,
-  UpdateGameImagesViewModel
+  UpdateGameImagesViewModel,
+  GetGameNamesViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -68,6 +69,13 @@ export class GameUseCase {
     const getGameTypesResponse = await this.gameRepository.getGameTypes(parentTypeId);
 
     return getGameTypesResponse.results.map((r) => ({ value: r.id, label: r.name }));
+  };
+  getGameNames = async (isActive): Promise<GetGameNamesViewModel> => {
+    if (isActive !== undefined && !isActive) return [];
+
+    const getGameNamesResponse = await this.gameRepository.getGameNames(isActive);
+
+    return getGameNamesResponse.map((r) => ({ value: r.id, label: r.name }));
   };
 
   getClassNames = async (): Promise<GetClassNamesViewModel> => {

@@ -14,6 +14,7 @@ const ProviderListContainer = () => {
       providerId: '',
       partnerId: '',
       providerName: '',
+      integrationTypeId: null,
       currency: [],
       gameCount: {
         from: null,

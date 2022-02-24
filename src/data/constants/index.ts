@@ -8,10 +8,13 @@ export const API_ROUTES = {
     CHANGE_STATUS: PROVIDER_ROUTE + '/UpdateStatus',
     PROVIDER_GET_GAME_TYPES: '/GameTypes/GetGameTypesAndCount',
     EDIT_GENERAL_INFORMATION: '/Providers',
+    GET_PROVIDER_INTEGRATION_TYPES: 'IntegrationType',
+    GET_: '/Providers',
     PARTNER_PROVIDER: PROVIDER_ROUTE + '/PartnerId',
     UPDATE_LOGO: PROVIDER_ROUTE + '/Logo'
   },
   GAMES: {
+    GET_GAME_NAMES: GAME_ROUTE + '/GamesName',
     BASE_ROUTE: GAME_ROUTE,
     GET_PROVIDER_GAMES: GAME_ROUTE + '/ProviderId',
     GET_GAME_TYPES: '/GameTypes',
@@ -39,5 +42,6 @@ export const CACHE_CONSTANTS = {
   GetGameFeaturesResponse: 'GetGameFeaturesResponse',
   GetGamePlatformsResponse: 'GetGamePlatformsResponse',
   GetGameVolatilitiesResponse: 'GetGameVolatilitiesResponse',
+  GetProviderIntegrationTypesResponse: '/IntegrationTypes',
   GetGameSupportedBrowsersResponse: 'GetGameSupportedBrowsersResponse'
 };
