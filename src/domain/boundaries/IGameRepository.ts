@@ -9,6 +9,7 @@ import {
   GetClassNamesResponseModel,
   GetGameByIdResponseModel,
   GetGameFeaturesResponseModel,
+  GetGameNamesResponseModel,
   GetGamePlatformsResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
@@ -25,6 +26,7 @@ export interface IGameRepository {
   getGames(getGameRequestModel: GetGameRequestModel): Promise<GetGameResponseModel>;
   addGame(addGameRequestModel: AddGameRequestModel): Promise<boolean>;
   getGameById(id: PrimaryKey): Promise<GetGameByIdResponseModel>;
+  getGameNames(isActive?: boolean): Promise<GetGameNamesResponseModel>;
 
   getGameTypes(parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel>;
   getClassNames(): Promise<GetClassNamesResponseModel>;

@@ -15,3 +15,4 @@ export * from './GetProviderResponseModel';
 export * from './GetProvidersByIdResponseModel';
 export * from './ProviderGamesResponseModel';
 export * from './GetProviderIntegrationTypesResponseModel';
+export * from './GetGameNamesResponseModel';

@@ -5,6 +5,7 @@ import { AutoMap } from '@automapper/classes';
 export class GamesFiltersViewModel extends PagedModel {
   @AutoMap()
   externalId: PrimaryKey | '';
+  
   @AutoMap()
   icon: string;
   @AutoMap()

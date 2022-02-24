@@ -38,14 +38,6 @@ export const providerApi = createApi({
       },
       invalidatesTags: ['Providers']
     }),
-    getProviderNames: build.query<GetProviderNamesViewModel, {}>({
-      query: (isActive?) => {
-        return {
-          methodName: 'getProviderNames',
-          methodArguments: [isActive]
-        };
-      }
-    }),
     addProvider: build.mutation({
       query: (addProviderViewModel: AddProviderViewModel) => {
         return {

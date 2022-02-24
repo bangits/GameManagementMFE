@@ -114,7 +114,7 @@ export class ProviderUseCase {
     const getProviderIntegrationTypesResponse = await this.providerRepository.getProviderIntegrationTypes();
 
     console.log(getProviderIntegrationTypesResponse);
-    //@ts-ignore
+    //@ts-expect-error if you read this commit, please delete this
     return getProviderIntegrationTypesResponse.map((r) => ({ value: r.id, label: r.name }));
   };
 }

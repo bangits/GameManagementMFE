@@ -4,7 +4,6 @@ import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
 import { AuthenticatedContext } from '@atom/authorization';
-//@ts-ignore
 import { PageIdsEnum, PrimaryKey, TablePage, useTranslation, historyService } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useContext, useMemo } from 'react';
