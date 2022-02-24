@@ -5,7 +5,6 @@ import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 export const GameClassSelect = (props: CustomSelectProps) => {
-
   const t = useTranslation();
   const { gameUseCase } = useContext(GameManagementContext);
 
@@ -16,7 +15,6 @@ export const GameClassSelect = (props: CustomSelectProps) => {
   useEffect(() => {
     gameUseCase.getClassNames().then(setGameClasses);
   }, []);
-
 
   return (
     <>

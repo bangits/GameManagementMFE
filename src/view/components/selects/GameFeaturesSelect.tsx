@@ -4,9 +4,7 @@ import { GameManagementContext } from '@/atom-game-management';
 import { GetGameFeaturesViewModel } from '@/view/models/view-models';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
-
 export const GameFeaturesSelect = (props: CustomSelectProps) => {
-
   const t = useTranslation();
   const { gameUseCase } = useContext(GameManagementContext);
 
@@ -17,7 +15,6 @@ export const GameFeaturesSelect = (props: CustomSelectProps) => {
   useEffect(() => {
     gameUseCase.getGameFeatures().then(setGameFeatures);
   }, []);
-
 
   return (
     <>
