@@ -117,7 +117,6 @@ function ProviderList({
         type: 'custom' as const,
         label: t.get('integrationTypeName'),
         component: ({ onChange, filterValues }) => {
-          console.log(filterValues);
           return (
             <ProviderIntegrationTypesSelect
               inputLabel={t.get('IntegrationTypeId')}
