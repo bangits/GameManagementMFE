@@ -1,7 +1,7 @@
 import { AddProviderViewModel } from '@/atom-game-management';
 
 export const initialValues: AddProviderViewModel = {
-  providerName: '',
+  providerNames: [],
   absoluteDemoUrl: '',
   absoluteRealUrl: '',
   aggregator: null

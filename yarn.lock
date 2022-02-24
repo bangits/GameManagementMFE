@@ -46,14 +46,10 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-<<<<<<< Updated upstream
-"@atom/common@^0.1.0":
-=======
-"@atom/common@^0.1.1":
->>>>>>> Stashed changes
-  version "0.1.1"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-0.1.1.tgz#af4f81ad658996ebdbf79c892a5861514e751476"
-  integrity sha1-r0+BrWWJluvb95yJKlhhUU51FHY=
+"@atom/common@^0.1.6":
+  version "0.1.6"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-0.1.6.tgz#f45ad037aca8454e12811d298afb7267504a1d18"
+  integrity sha1-9FrQN6yoRU4SgR0pivtyZ1BKHRg=
   dependencies:
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
@@ -1571,20 +1567,32 @@
     throttle-debounce "^3.0.1"
 
 "@my-ui/core@^3.1.0":
-  version "0.1.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-0.1.0.tgz#ae17c5f76d8eceaf598db83c73f0feca24253979"
-  integrity sha1-rhfF922Ozq9Zjbg8c/D+yiQlOXk=
+  version "0.2.1"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-0.2.1.tgz#6a53d66dac2268e53364b079f036638fbb0f0d4c"
+  integrity sha1-alPWbawiaOUzZLB58DZjj7sPDUw=
   dependencies:
-    "@my-ui/react-datepicker" "^1.5.0"
-    "@my-ui/react-select" "1.1.6"
-    "@my-ui/react-table" "1.3.0"
-    "@my-ui/scrollbar" "^1.0.2"
+    "@my-ui/react-datepicker" "^0.1.0"
+    "@my-ui/react-select" "0.1.0"
+    "@my-ui/react-table" "0.1.0"
+    "@my-ui/scrollbar" "^0.1.0"
     classnames "^2.3.1"
     react-flip-move "^3.0.4"
     react-jss "^10.8.0"
     react-paginate "^7.1.5"
     react-transition-group "^4.4.2"
     throttle-debounce "^3.0.1"
+
+"@my-ui/react-datepicker@^0.1.0":
+  version "0.1.0"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/react-datepicker/-/react-datepicker-0.1.0.tgz#37620758055e36e426e4732cf8035fef87157cca"
+  integrity sha1-N2IHWAVeNuQm5HMs+ANf74cVfMo=
+  dependencies:
+    "@popperjs/core" "^2.9.2"
+    classnames "^2.2.6"
+    date-fns "^2.0.1"
+    prop-types "^15.7.2"
+    react-onclickoutside "^6.10.0"
+    react-popper "^2.2.5"
 
 "@my-ui/react-datepicker@^1.5.0":
   version "1.5.0"
@@ -1597,6 +1605,19 @@
     prop-types "^15.7.2"
     react-onclickoutside "^6.10.0"
     react-popper "^2.2.5"
+
+"@my-ui/react-select@0.1.0":
+  version "0.1.0"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/react-select/-/react-select-0.1.0.tgz#03da220c23d143e8d26df1984cd8fadab5f66452"
+  integrity sha1-A9oiDCPRQ+jSbfGYTNj62rX2ZFI=
+  dependencies:
+    "@babel/runtime" "^7.12.0"
+    "@emotion/cache" "^11.4.0"
+    "@emotion/react" "^11.1.1"
+    "@types/react-transition-group" "^4.4.0"
+    memoize-one "^5.0.0"
+    prop-types "^15.6.0"
+    react-transition-group "^4.3.0"
 
 "@my-ui/react-select@1.1.6":
   version "1.1.6"
@@ -1611,10 +1632,24 @@
     prop-types "^15.6.0"
     react-transition-group "^4.3.0"
 
+"@my-ui/react-table@0.1.0":
+  version "0.1.0"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/react-table/-/react-table-0.1.0.tgz#bdfdfc84623485909d5501d1e7bec4657acf16a1"
+  integrity sha1-vf38hGI0hZCdVQHR577EZXrPFqE=
+
 "@my-ui/react-table@1.3.0":
   version "1.3.0"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/react-table/-/react-table-1.3.0.tgz#b1746c61b797781e45fb7bcc446949fbe71bcd41"
   integrity sha1-sXRsYbeXeB5F+3vMRGlJ++cbzUE=
+
+"@my-ui/scrollbar@^0.1.0":
+  version "0.1.0"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/scrollbar/-/scrollbar-0.1.0.tgz#a08d8d9e1407566562ddfd82ec68740a2464fe8b"
+  integrity sha1-oI2NnhQHVmVi3f2C7Gh0CiRk/os=
+  dependencies:
+    dom-css "^2.0.0"
+    prop-types "^15.5.10"
+    raf "^3.1.0"
 
 "@my-ui/scrollbar@^1.0.2":
   version "1.0.2"

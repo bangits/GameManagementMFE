@@ -28,7 +28,7 @@ import {
 } from '@/view/models';
 import { convertDate } from '@atom/common';
 import autoMapper, { Mapper } from '@automapper/core';
-import { convertToCountryTab, transformToCountryModel } from '../transformFunctions';
+import { convertToCountryTab } from '../transformFunctions';
 
 const { mapFrom, mapWith } = autoMapper;
 
@@ -183,7 +183,7 @@ export const generateProviderMappings = (mapper: Mapper) => {
       mapFrom((source) => source.lastUpdatedByUserEmail)
     )
     .forMember(
-      (destination) => destination.providerId,
+      (destination) => destination.id,
       mapFrom((source) => source.id)
     );
   //#endregion
