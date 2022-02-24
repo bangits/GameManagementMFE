@@ -77,7 +77,7 @@ export class GameUseCase {
 
     return getGameNamesResponse.map((r) => ({ value: r.id, label: r.name }));
   };
-  
+
   getClassNames = async (): Promise<GetClassNamesViewModel> => {
     const getClassNamesResponse = await this.gameRepository.getClassNames();
 
