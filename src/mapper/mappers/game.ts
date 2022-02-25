@@ -101,7 +101,7 @@ export const generateGameMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.creationDate,
-      mapFrom((source) => (source.creationDate ? `${convertDate(source.creationDate, 'MM/DD/YYYY HH:MM:SS')}` : 'N/A'))
+      mapFrom((source) => (source.creationDate ? `${convertDate(source.creationDate)}` : 'N/A'))
     )
     .forMember(
       (destination) => destination.releaseDate,

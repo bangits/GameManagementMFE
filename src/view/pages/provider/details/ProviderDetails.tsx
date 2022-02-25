@@ -113,14 +113,14 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
             translations={translations}
             statusInfo={statusInfo}
             breadCrumb={breadCrumb}
-            providerId={`${t.get('id')} ${data.providerId}`}
+            providerId={`${t.get('id')} ${data.id}`}
             providerName={data.providerName}
             backgroundImgUrl={data.logo}
             onBackgroundImgClick={openLogoImageUploader}
             gamesTabContent={
               <ProviderGamesContainer
                 providerName={data.providerName}
-                providerId={data.providerId}
+                providerId={data.id}
                 providerStatusId={data.statusId}
               />
             }
