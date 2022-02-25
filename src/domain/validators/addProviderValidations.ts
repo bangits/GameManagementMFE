@@ -8,7 +8,7 @@ export const AddProviderValidationSchema = async (
   return object({
     aggregator: number().required(t.required()).nullable().max(40, t.max(40)),
     providerNames: array().required(t.textInput()),
-    absoluteDemoUrl: string(),
-    absoluteRealUrl: string()
+    absoluteDemoUrl: string().trim(),
+    absoluteRealUrl: string().trim()
   });
 };
