@@ -4,12 +4,11 @@ import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
-  GetProviderNamesViewModel,
+  GetProviderIntegrationTypesViewModel,
   GetProvidersByIdViewModel,
   ProviderGamesTypesViewModel,
   ProvidersFiltersViewModel,
-  UpdateProviderLogoViewModel,
-  GetProviderIntegrationTypesViewModel
+  UpdateProviderLogoViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { createApi } from '@reduxjs/toolkit/query/react';

@@ -46,19 +46,11 @@
     single-spa-react "^4.4.0"
     yup "^0.32.10"
 
-<<<<<<< HEAD
 "@atom/common@^0.1.6":
   version "0.1.6"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-0.1.6.tgz#f45ad037aca8454e12811d298afb7267504a1d18"
   integrity sha1-9FrQN6yoRU4SgR0pivtyZ1BKHRg=
-=======
-"@atom/common@^0.1.2", "@atom/common@^2.8.38":
-  version "0.1.2"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-0.1.2.tgz#a4ae630c4ebd34819ffaf9e127e80a3fa6b77df9"
-  integrity sha1-pK5jDE69NIGf+vnhJ+gKP6a3ffk=
->>>>>>> a63308e0178a3af9faed3a5c1a1a52d10344836f
   dependencies:
-    "@atom/common" "^2.8.38"
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
     "@microsoft/signalr" "^6.0.1"
@@ -72,20 +64,6 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/design-system@^0.1.0":
-  version "0.1.0"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-0.1.0.tgz#cca9e14ab333a76b8d638ba905aa4e3a3676d6fb"
-  integrity sha1-zKnhSrMzp2uNY4upBapOOjZ21vs=
-  dependencies:
-    "@my-ui/core" "^3.1.0"
-    classnames "^2.3.1"
-    react "^17.0.2"
-    react-cropper "^2.1.8"
-    react-dom "^17.0.2"
-    react-jss "^10.8.2"
-    react-sortable-hoc "^2.0.0"
-    react-transition-group "^4.4.2"
-
 "@atom/design-system@^2.2.6":
   version "2.4.4"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.4.4.tgz#c9c2cad6fcdc8aac0b68dca1f732ea249574feed"
@@ -98,6 +76,20 @@
     react-dom "^17.0.2"
     react-jss "^10.8.2"
     react-sortable-hoc "^2.0.0"
+
+"@atom/design-system@^2.7.3":
+  version "2.7.3"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.7.3.tgz#ea606c52752271808ca13b84fdf6148b19770ba6"
+  integrity sha1-6mBsUnUicYCMoTuE/fYUixl3C6Y=
+  dependencies:
+    "@my-ui/core" "^3.1.0"
+    classnames "^2.3.1"
+    react "^17.0.2"
+    react-cropper "^2.1.8"
+    react-dom "^17.0.2"
+    react-jss "^10.8.2"
+    react-sortable-hoc "^2.0.0"
+    react-transition-group "^4.4.2"
 
 "@atom/game-management@^1.0.3":
   version "1.0.3"
@@ -896,6 +888,9 @@
   version "7.16.7"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@babel/plugin-transform-object-super/-/plugin-transform-object-super-7.16.7.tgz#ac359cf8d32cf4354d27a46867999490b6c32a94"
   integrity sha1-rDWc+NMs9DVNJ6RoZ5mUkLbDKpQ=
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.16.7"
+    "@babel/helper-replace-supers" "^7.16.7"
 
 "@babel/plugin-transform-parameters@^7.16.7":
   version "7.16.7"
@@ -948,6 +943,8 @@
   version "7.16.7"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.16.7.tgz#9e7576dc476cb89ccc5096fff7af659243b4adeb"
   integrity sha1-nnV23EdsuJzMUJb/969lkkO0res=
+  dependencies:
+    regenerator-transform "^0.14.2"
 
 "@babel/plugin-transform-reserved-words@^7.16.7":
   version "7.16.7"
@@ -1152,6 +1149,13 @@
   version "7.16.7"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@babel/runtime/-/runtime-7.16.7.tgz#03ff99f64106588c9c403c6ecb8c3bafbbdff1fa"
   integrity sha1-A/+Z9kEGWIycQDxuy4w7r7vf8fo=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.8.4":
+  version "7.17.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.2.tgz#66f68591605e59da47523c631416b18508779941"
+  integrity sha512-hzeyJyMA1YGdJTuWU0e/j4wKXrU4OMFvY2MSlaI9B7VQb0r5cxTE3EAIS2Q7Tn2RIcDkRvTA/v2JsAEhxe99uw==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -8126,6 +8130,13 @@ regenerator-runtime@^0.13.4:
   version "0.13.9"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
   integrity sha1-iSV0Kpj/2QgUmI11Zq0wyjsmO1I=
+
+regenerator-transform@^0.14.2:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.14.5.tgz#c98da154683671c9c4dcb16ece736517e1b7feb4"
+  integrity sha512-eOf6vka5IO151Jfsw2NO9WpGX58W6wWmefK3I1zEGr0lOD0u8rwPaNqQL1aRxUaxLeKO3ArNh3VYg1KbaD+FFw==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
