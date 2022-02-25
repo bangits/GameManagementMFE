@@ -1,14 +1,21 @@
-import { gameApi } from '@/adapter/redux/api';
+import { GameManagementContext, GetGamePlatformsViewModel } from '@/atom-game-management';
 import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 export const GamePlatformSelect = (props: CustomSelectProps) => {
   const t = useTranslation();
+  const { gameUseCase } = useContext(GameManagementContext);
 
-  const { data: gamePlatform } = gameApi.useGetGamePlatformsQuery({});
+  const [providerNames, setProviderNames] = useState<GetGamePlatformsViewModel>([]);
 
+  const selectOptions = useMemo(() => providerNames.map((c) => ({ value: c.value, label: c.label })), [providerNames]);
+
+  useEffect(() => {
+    gameUseCase.getGamePlatforms().then(setProviderNames);
+  }, []);
   return (
     <>
-      <CustomSelect {...props} fullWidth options={gamePlatform || []} inputLabel={t.get('gamePlatforms')} />
+      <CustomSelect {...props} fullWidth options={selectOptions || []} inputLabel={t.get('gamePlatforms')} />
     </>
   );
 };

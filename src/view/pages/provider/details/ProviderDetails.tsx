@@ -101,7 +101,6 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         aspectRatio={2 / 1}>
         {(openLogoImageUploader) => (
           <ProviderDetailsPage
-            //@ts-expect-error expiring
             partnerName={data.partnerName}
             integrationType={data.integrationTypeName}
             lastUpdatedBy={data.lastUpdatedByUserEmail}
