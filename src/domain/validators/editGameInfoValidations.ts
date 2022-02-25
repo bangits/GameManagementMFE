@@ -6,9 +6,10 @@ export const editGameInfoValidations = async (
   t: UseValidationTranslationReturnValue
 ): Promise<SchemaOf<Omit<EditGameInformationViewModel, 'lastUpdatedUserId' | 'lastUpdatedUserEmail' | 'hasDemo'>>> => {
   return object({
-    name: string().required(t.required()).max(50, t.max(50)),
+    name: string().trim().required(t.required()).max(50, t.max(50)),
     classId: number().nullable(),
     externalId: string()
+      .trim()
       .max(30, t.max(30))
       .required(t.required())
       // eslint-disable-next-line no-useless-escape
