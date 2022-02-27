@@ -1,12 +1,12 @@
 import { providerApi } from '@/adapter/redux/api';
 import { AddProviderCustomErrorsEnum, AddProviderViewModel } from '@/atom-game-management';
-import { AddProviderValidationSchema } from '@/domain/validators';
-import { useAsync, useLoading, useTranslation, useValidationTranslation, historyService } from '@atom/common';
+import { getAddProviderValidationSchema } from '@/domain/validators';
+import { ROUTES } from '@/view/constants';
+import { historyService, useAsync, useLoading, useTranslation, useValidationTranslation } from '@atom/common';
+import { alert } from '@atom/design-system';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import AddProvider, { AddProviderProps } from './AddProvider';
-import { alert } from '@atom/design-system';
-import { ROUTES } from '@/view/constants';
 
 const AddProviderContainer: FC = () => {
   const [addProvider, { status }] = providerApi.useAddProviderMutation();
@@ -17,7 +17,7 @@ const AddProviderContainer: FC = () => {
 
   const translation = useTranslation();
 
-  const addProviderValidationSchema = useAsync(() => AddProviderValidationSchema(t), [t], null);
+  const addProviderValidationSchema = useAsync(() => getAddProviderValidationSchema(t), [t], null);
 
   const customErrors = useMemo<
     Record<AddProviderCustomErrorsEnum, { fieldKey: keyof AddProviderViewModel; errorMessage: string }[]>

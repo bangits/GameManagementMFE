@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@atom/authorization@^0.1.0":
+"@atom/authorization@^0.1.0", "@atom/authorization@^1.2.9":
   version "0.1.0"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/authorization/-/authorization-0.1.0.tgz#53821524dc41fae2d8657298429cdcb2be4d9d34"
   integrity sha1-U4IVJNxB+uLYZXKYQpzcsr5NnTQ=
@@ -77,21 +77,12 @@
     react-jss "^10.8.2"
     react-sortable-hoc "^2.0.0"
 
-<<<<<<< HEAD
-"@atom/design-system@^2.8.1":
-  version "2.8.1"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.8.1.tgz#a72011d556fbb6be3473ac7a0fe28d451a3aab21"
-  integrity sha1-pyAR1Vb7tr40c6x6D+KNRRo6qyE=
+"@atom/design-system@^2.7.8":
+  version "2.7.8"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.7.8.tgz#21c324ca84236022dbf6da1d4d32d62334bda32a"
+  integrity sha1-IcMkyoQjYCLb9todTTLWIzS9oyo=
   dependencies:
     "@my-ui/core" "^0.3.0"
-=======
-"@atom/design-system@^2.7.3":
-  version "2.7.3"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.7.3.tgz#ea606c52752271808ca13b84fdf6148b19770ba6"
-  integrity sha1-6mBsUnUicYCMoTuE/fYUixl3C6Y=
-  dependencies:
-    "@my-ui/core" "^3.1.0"
->>>>>>> bb2e31158991e9e68329dfc7ab4fc8a30803984d
     classnames "^2.3.1"
     react "^17.0.2"
     react-cropper "^2.1.8"
@@ -127,6 +118,25 @@
   integrity sha1-kYgfs4XKOQpg4X+7dK2XlLzIkVQ=
   dependencies:
     "@atom/authorization" "^1.2.3"
+    "@automapper/classes" "^7.0.2"
+    "@automapper/core" "^7.0.2"
+    "@reduxjs/toolkit" "^1.6.2"
+    formik "^2.2.9"
+    inversify "^5.1.1"
+    react "^17.0.2"
+    react-dom "^17.0.2"
+    react-redux "^7.2.5"
+    react-router-dom "^5.3.0"
+    reflect-metadata "^0.1.13"
+    single-spa-react "^4.2.0"
+    yup "^0.32.10"
+
+"@atom/partner-management@^1.1.0":
+  version "1.1.0"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/partner-management/-/partner-management-1.1.0.tgz#fa89a08a8472b0a741e66783a30bcf919a210491"
+  integrity sha1-+omgioRysKdB5meDowvPkZohBJE=
+  dependencies:
+    "@atom/authorization" "^1.2.9"
     "@automapper/classes" "^7.0.2"
     "@automapper/core" "^7.0.2"
     "@reduxjs/toolkit" "^1.6.2"

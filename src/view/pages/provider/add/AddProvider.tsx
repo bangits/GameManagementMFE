@@ -1,21 +1,12 @@
 import { ROUTES } from '@/view/constants';
 import { AddProviderViewModel } from '@/view/models';
-import {
-  ChangedSelect,
-  CountriesSelect,
-  createRenderInputs,
-  CurrencySelect,
-  CustomSelectProps,
-  historyService,
-  SelectOptionType,
-  useTranslation
-} from '@atom/common';
+import { createRenderInputs, historyService, useTranslation } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
-import { FastField, Field, Form, Formik, FormikProps, FormikHelpers } from 'formik';
+import { AtomPartnerProvider, BrandNameSelect, BusinessActivities } from '@atom/partner-management';
+import { FastField, Form, Formik, FormikHelpers } from 'formik';
 import { FC, useMemo, useRef } from 'react';
 import { SchemaOf } from 'yup';
 import { initialValues } from './initialValues';
-import { BrandNameSelect, AtomPartnerProvider } from '@atom/partner-management';
 
 export interface AddProviderProps {
   onSubmit: (data: AddProviderViewModel, form: FormikHelpers<typeof initialValues>) => void;
@@ -25,7 +16,6 @@ export interface AddProviderProps {
 
 const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
   const selectedAggregatorName = useRef<string>(null);
-  const selectedProviderName = useRef<string>(null);
 
   const t = useTranslation();
 
@@ -46,14 +36,16 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
                 }}
                 fullWidth
                 inputLabel={t.get('aggregator')}
+                businessActivityId={BusinessActivities.GAME_AGGREGATOR}
               />
             </AtomPartnerProvider>
           );
         }
       },
       {
-        type: 'input' as const,
-        name: 'input'
+        type: 'custom' as const,
+        component: () => null,
+        name: ''
       },
       {
         type: 'input' as const,
@@ -63,7 +55,6 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
           label: t.get('companyLogoType')
         }
       },
-
       {
         type: 'input' as const,
         name: 'absoluteRealUrl',
@@ -78,17 +69,14 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
         props: {
           fromToProps: {
             toInputProps: {
-              placeholder: t.get('providerExternalId')
+              label: t.get('providerExternalId')
             },
-            fromInputProps: !selectedProviderName.current
-              ? {
-                  explanation: 'Add Provider',
-                  color: 'danger',
-                  placeholder: t.get('providerName')
-                }
-              : { placeholder: t.get('providerName') }
+            fromInputProps: {
+              label: t.get('providerName')
+            }
           },
-          toolTipTitle: 'click'
+          tooltipTitle: t.get('addProvider'),
+          invalidTooltipTitle: t.get('pleaseFillFields')
         }
       }
     ],
@@ -117,18 +105,15 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(data, formikHelpers) => {
-        console.log(data);
-
         if (!data.providers.length) return;
+
         onSubmit({ ...data, partnerName: selectedAggregatorName.current }, formikHelpers);
       }}>
-      {(form) => {
-        return (
-          <Form noValidate className='min-height-content-wrapper'>
-            <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
-          </Form>
-        );
-      }}
+      {() => (
+        <Form noValidate className='min-height-content-wrapper'>
+          <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
+        </Form>
+      )}
     </Formik>
   );
 };
