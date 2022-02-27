@@ -1,19 +1,21 @@
-import { gameApi } from '@/adapter/redux/api';
+import { GameManagementContext, GetGameBrowsersViewModes } from '@/atom-game-management';
 import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 export const GameSupportedBrowsersSelect = (props: CustomSelectProps) => {
   const t = useTranslation();
+  const { gameUseCase } = useContext(GameManagementContext);
 
-  const { data: gameSupportedBrowsers } = gameApi.useGetGameSupportedBrowsersQuery({});
+  const [providerNames, setProviderNames] = useState<GetGameBrowsersViewModes>([]);
 
+  const selectOptions = useMemo(() => providerNames.map((c) => ({ value: c.value, label: c.label })), [providerNames]);
+
+  useEffect(() => {
+    gameUseCase.getGamePlatforms().then(setProviderNames);
+  }, []);
   return (
     <>
-      <CustomSelect
-        {...props}
-        fullWidth
-        options={gameSupportedBrowsers || []}
-        inputLabel={t.get('supportedBrowsers')}
-      />
+      <CustomSelect {...props} fullWidth options={selectOptions || []} inputLabel={t.get('supportedBrowsers')} />
     </>
   );
 };
