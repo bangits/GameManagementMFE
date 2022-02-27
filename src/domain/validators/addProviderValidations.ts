@@ -4,10 +4,17 @@ import { array, number, object, SchemaOf, string } from 'yup';
 
 export const AddProviderValidationSchema = async (
   t: UseValidationTranslationReturnValue
-): Promise<SchemaOf<Omit<AddProviderViewModel, 'license'>>> => {
+): Promise<SchemaOf<AddProviderViewModel>> => {
   return object({
-    aggregator: number().required(t.required()).nullable().max(40, t.max(40)),
-    providerNames: array().required(t.textInput()),
+    partnerId: number().required(t.required()).nullable(),
+    partnerName: string(),
+    providers: array().of(
+      object({
+        id: number(),
+        externalId: string(),
+        providerName: string()
+      })
+    ),
     absoluteDemoUrl: string(),
     absoluteRealUrl: string()
   });

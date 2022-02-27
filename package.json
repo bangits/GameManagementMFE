@@ -1,6 +1,6 @@
 {
   "name": "@atom/game-management",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "",
   "types": "./dist/atom-game-management.d.ts",
   "files": [
@@ -87,7 +87,7 @@
   },
   "dependencies": {
     "@atom/authorization": "^0.1.0",
-    "@atom/design-system": "^0.1.0",
+    "@atom/design-system": "^2.8.1",
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
     "@reduxjs/toolkit": "^1.6.2",

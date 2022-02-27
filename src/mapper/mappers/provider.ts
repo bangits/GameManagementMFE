@@ -91,17 +91,19 @@ export const generateProviderMappings = (mapper: Mapper) => {
     );
   //#endregion
 
-  const mod = {
-    partnerId: null,
-    providerName: '',
-    realUrl: '',
-    demoUrl: '',
-    providers: []
-  };
   //#region Ade New Provider mapping
   mapper.createMap(AddProviderViewModel, AddProviderRequestModel).forMember(
-    (destination) => destination.demoUrl,
-    mapFrom((source) => source.absoluteDemoUrl)
+    (destination) => destination.providers,
+    mapFrom((source) =>
+      source.providers.map(({ id, ...provider }) => ({
+        ...provider,
+        partnerId: source.partnerId,
+        partnerName: source.partnerName,
+        realUrl: source.absoluteRealUrl,
+        demoUrl: source.absoluteDemoUrl,
+        externalId: provider.externalId
+      }))
+    )
   );
 
   //#endregion

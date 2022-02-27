@@ -35,17 +35,15 @@ export class ProviderRepository implements IProviderRepository {
   };
 
   addProvider = async (addProviderRequestModel: AddProviderRequestModel) => {
-    await this.httpService.post<void, {}, AddProviderRequestModel>({
+    await this.httpService.post<void, {}, AddProviderRequestModel['providers']>({
       url: API_ROUTES.PROVIDERS.BASE_ROUTE,
-      body: addProviderRequestModel
+      body: addProviderRequestModel.providers
     });
 
     return true;
   };
 
   getProviders = async (getProviderRequestModel: GetProviderRequestModel): Promise<GetProviderResponseModel> => {
-    console.log(getProviderRequestModel);
-
     return await this.httpService.get<GetProviderResponseModel, GetProviderRequestModel>({
       url: API_ROUTES.PROVIDERS.BASE_ROUTE,
       query: getProviderRequestModel
