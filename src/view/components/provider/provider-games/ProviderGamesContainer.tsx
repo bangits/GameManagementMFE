@@ -101,6 +101,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
 
         gameLaunchService.publish({
           gameId: clickedGame.externalId,
+          gameExternalId: clickedGame.id.toString(),
           gameLaunchUrl: isDemo ? clickedGame.providerAbsoluteDemoUrl : clickedGame.providerAbsoluteUrl,
           providerId,
           providerName,

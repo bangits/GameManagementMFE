@@ -71,6 +71,7 @@ const GameDetailsContainer = () => {
     (isDemo: boolean) => () => {
       gameLaunchService.publish({
         gameId: data.externalId,
+        gameExternalId: data.gameId.toString(),
         gameLaunchUrl: isDemo ? data.providerAbsoluteDemoUrl : data.providerAbsoluteUrl,
         providerId: data.providerId,
         isDemo,

@@ -41,6 +41,7 @@ function ProviderList({
   refetch
 }: ProviderListProps) {
   const { user } = useContext(AuthenticatedContext);
+
   const t = useTranslation();
 
   const tableColumns = useMemo(

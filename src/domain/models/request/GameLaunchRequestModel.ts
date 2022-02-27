@@ -14,6 +14,8 @@ export class GameLaunchRequestModel {
   @AutoMap()
   gameId: PrimaryKey | string;
 
+  externalGameId: PrimaryKey | string;
+
   @AutoMap()
   providerId: PrimaryKey;
 
