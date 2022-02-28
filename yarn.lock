@@ -77,17 +77,10 @@
     react-jss "^10.8.2"
     react-sortable-hoc "^2.0.0"
 
-<<<<<<< HEAD
 "@atom/design-system@^2.7.8":
   version "2.7.8"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.7.8.tgz#21c324ca84236022dbf6da1d4d32d62334bda32a"
   integrity sha1-IcMkyoQjYCLb9todTTLWIzS9oyo=
-=======
-"@atom/design-system@^2.8.1":
-  version "2.8.1"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-2.8.1.tgz#a72011d556fbb6be3473ac7a0fe28d451a3aab21"
-  integrity sha1-pyAR1Vb7tr40c6x6D+KNRRo6qyE=
->>>>>>> 2747504b1a2d051e7c8951be722b23616a75e450
   dependencies:
     "@my-ui/core" "^0.3.0"
     classnames "^2.3.1"
@@ -914,9 +907,6 @@
   version "7.16.7"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@babel/plugin-transform-object-super/-/plugin-transform-object-super-7.16.7.tgz#ac359cf8d32cf4354d27a46867999490b6c32a94"
   integrity sha1-rDWc+NMs9DVNJ6RoZ5mUkLbDKpQ=
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.16.7"
-    "@babel/helper-replace-supers" "^7.16.7"
 
 "@babel/plugin-transform-parameters@^7.16.7":
   version "7.16.7"
@@ -969,8 +959,6 @@
   version "7.16.7"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.16.7.tgz#9e7576dc476cb89ccc5096fff7af659243b4adeb"
   integrity sha1-nnV23EdsuJzMUJb/969lkkO0res=
-  dependencies:
-    regenerator-transform "^0.14.2"
 
 "@babel/plugin-transform-reserved-words@^7.16.7":
   version "7.16.7"

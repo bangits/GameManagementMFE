@@ -20,6 +20,9 @@ export class Provider extends BaseEntity {
   @AutoMap()
   partnerName: string;
 
+  @AutoMap()
+  integrationTypeName: string;
+  
   name: string;
   gameCount: number;
   lastUpdatedDate: string;
