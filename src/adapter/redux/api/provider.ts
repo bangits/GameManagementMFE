@@ -43,7 +43,8 @@ export const providerApi = createApi({
           methodName: 'addProvider',
           methodArguments: [addProviderViewModel]
         };
-      }
+      },
+      invalidatesTags: ['Providers']
     }),
     getProvidersById: build.query<GetProvidersByIdViewModel, {}>({
       query: (partnerId: PrimaryKey) => {

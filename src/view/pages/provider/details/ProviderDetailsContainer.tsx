@@ -58,7 +58,7 @@ const ProviderDetailsContainer = () => {
     (updatedLogo) => {
       updateProviderLogo({
         logo: updatedLogo,
-        providerId: data.providerId
+        providerId: data.id
       })
         .unwrap()
         .then(() => {

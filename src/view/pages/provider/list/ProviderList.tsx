@@ -41,6 +41,7 @@ function ProviderList({
   refetch
 }: ProviderListProps) {
   const { user } = useContext(AuthenticatedContext);
+
   const t = useTranslation();
 
   const tableColumns = useMemo(
@@ -115,12 +116,13 @@ function ProviderList({
       {
         name: 'integrationType' as keyof ProvidersViewModel,
         type: 'custom' as const,
-        label: t.get('integrationTypeName'),
+        label: t.get('integrationType'),
         component: ({ onChange, filterValues }) => {
           return (
             <ProviderIntegrationTypesSelect
               inputLabel={t.get('IntegrationTypeId')}
               fullWidth
+              selectAll
               value={filterValues.integrationTypeId}
               onChange={(changedValue) => onChange('integrationTypeId', changedValue)}
             />
