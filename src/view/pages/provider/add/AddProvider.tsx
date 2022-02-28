@@ -8,7 +8,6 @@ import { FC, useMemo, useRef } from 'react';
 import { SchemaOf } from 'yup';
 import { initialValues } from './initialValues';
 
-BusinessActivities;
 export interface AddProviderProps {
   onSubmit: (data: AddProviderViewModel, form: FormikHelpers<typeof initialValues>) => void;
 
@@ -73,7 +72,7 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
               label: t.get('providerExternalId')
             },
             fromInputProps: {
-              label: t.get('providerName'),
+              label: t.get('providerName')
             }
           },
           tooltipTitle: t.get('addProvider'),

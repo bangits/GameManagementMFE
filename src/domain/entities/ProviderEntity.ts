@@ -22,7 +22,7 @@ export class Provider extends BaseEntity {
 
   @AutoMap()
   integrationTypeName: string;
-  
+
   name: string;
   gameCount: number;
   lastUpdatedDate: string;
