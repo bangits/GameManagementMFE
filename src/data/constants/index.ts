@@ -14,7 +14,7 @@ export const API_ROUTES = {
     UPDATE_LOGO: PROVIDER_ROUTE + '/Logo'
   },
   GAMES: {
-    GET_GAME_NAMES: GAME_ROUTE + '/GamesName',
+    GET_GAME_NAMES: GAME_ROUTE + '/GetAllGameNames',
     BASE_ROUTE: GAME_ROUTE,
     GET_PROVIDER_GAMES: GAME_ROUTE + '/ProviderId',
     GET_GAME_TYPES: '/GameTypes',
