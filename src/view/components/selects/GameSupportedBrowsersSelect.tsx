@@ -11,7 +11,7 @@ export const GameSupportedBrowsersSelect = (props: CustomSelectProps) => {
   const selectOptions = useMemo(() => providerNames.map((c) => ({ value: c.value, label: c.label })), [providerNames]);
 
   useEffect(() => {
-    gameUseCase.getGamePlatforms().then(setProviderNames);
+    gameUseCase.getGameSupportedBrowsers().then(setProviderNames);
   }, []);
   return (
     <>
