@@ -1,6 +1,5 @@
 import { gameApi } from '@/adapter/redux/api';
 import { GameStatusesEnum } from '@/domain/models';
-import { GameLauncherContainer } from '@/view';
 import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
 import { GamesFiltersViewModel, GamesViewModel, GetGamesViewModel } from '@/view/models';
 import { SortTypesEnum, useActionWithDialog, useFirstValue, useTranslation } from '@atom/common';
@@ -94,8 +93,6 @@ const GameListContainer = () => {
 
   return (
     <>
-      <GameLauncherContainer />
-
       <GameList
         results={results || []}
         rowCount={rowCount || 1}
