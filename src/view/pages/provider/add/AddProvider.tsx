@@ -109,11 +109,17 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
 
         onSubmit({ ...data, partnerName: selectedAggregatorName.current }, formikHelpers);
       }}>
-      {() => (
-        <Form noValidate className='min-height-content-wrapper'>
-          <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
-        </Form>
-      )}
+      {(log) => {
+        console.log(log);
+
+        return (
+          <>
+            <Form noValidate className='min-height-content-wrapper'>
+              <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
+            </Form>
+          </>
+        );
+      }}
     </Formik>
   );
 };
