@@ -1,12 +1,13 @@
 import { ROUTES } from '@/view/constants';
 import { AddProviderViewModel } from '@/view/models';
-import { createRenderInputs, historyService, useTranslation } from '@atom/common';
+import { createRenderInputs, CustomForm, historyService, useTranslation } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
 import { AtomPartnerProvider, BrandNameSelect, BusinessActivities } from '@atom/partner-management';
-import { FastField, Form, Formik, FormikHelpers } from 'formik';
+import { FastField, Form, FormikHelpers, useFormikContext } from 'formik';
 import { FC, useMemo, useRef } from 'react';
 import { SchemaOf } from 'yup';
 import { initialValues } from './initialValues';
+import ProvidersFormContainer from './ProvidersFormContainer';
 
 export interface AddProviderProps {
   onSubmit: (data: AddProviderViewModel, form: FormikHelpers<typeof initialValues>) => void;
@@ -50,34 +51,18 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
       {
         type: 'input' as const,
         name: 'absoluteDemoUrl',
-        label: t.get('absoluteDemoURL'),
-        props: {
-          label: t.get('companyLogoType')
-        }
+        label: t.get('absoluteDemoURL')
       },
       {
         type: 'input' as const,
         name: 'absoluteRealUrl',
-        label: t.get('absoluteRealURL'),
-        props: {}
+        label: t.get('absoluteRealURL')
       },
       {
-        type: 'from-to-input' as const,
+        type: 'custom' as const,
         col: 12,
         name: 'providers' as keyof AddProviderViewModel,
-        label: t.get('providerName'),
-        props: {
-          fromToProps: {
-            toInputProps: {
-              label: t.get('providerExternalId')
-            },
-            fromInputProps: {
-              label: t.get('providerName')
-            }
-          },
-          tooltipTitle: t.get('addProvider'),
-          invalidTooltipTitle: t.get('pleaseFillFields')
-        }
+        component: ProvidersFormContainer
       }
     ],
     [t]
@@ -101,7 +86,7 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
   return (
-    <Formik
+    <CustomForm
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(data, formikHelpers) => {
@@ -109,18 +94,12 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
 
         onSubmit({ ...data, partnerName: selectedAggregatorName.current }, formikHelpers);
       }}>
-      {(log) => {
-        console.log(log);
-
-        return (
-          <>
-            <Form noValidate className='min-height-content-wrapper'>
-              <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
-            </Form>
-          </>
-        );
-      }}
-    </Formik>
+      {() => (
+        <Form noValidate className='min-height-content-wrapper'>
+          <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
+        </Form>
+      )}
+    </CustomForm>
   );
 };
 

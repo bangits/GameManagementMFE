@@ -87,7 +87,7 @@
   },
   "dependencies": {
     "@atom/authorization": "^0.1.0",
-    "@atom/design-system": "^2.7.8",
+    "@atom/design-system": "^2.9.1",
     "@atom/partner-management": "^1.1.0",
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
