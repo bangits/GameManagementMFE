@@ -65,6 +65,7 @@ const ProvidersForm = (props: ProvidersFormProps) => {
       }}
       tooltipTitle={t.get('addProvider')}
       invalidTooltipTitle={t.get('pleaseFillFields')}
+      fillProviderTooltipTitle={t.get('pleaseAddProvider')}
     />
   );
 };
