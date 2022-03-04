@@ -9,10 +9,19 @@ const ProvidersFormContainer = () => {
 
   const validationSchema = useAsync(() => getAddProviderFormsValidationSchema(t), [t], null);
 
+  if (!validationSchema) return null;
+
   return (
     <FastField name='providers'>
       {({ form }: FieldProps) => (
-        <Formik initialValues={providersFormInitialValues} onSubmit={() => null} validationSchema={validationSchema}>
+        <Formik
+          initialValues={providersFormInitialValues}
+          onSubmit={() => null}
+          validationSchema={validationSchema}
+          initialTouched={{
+            providerExternalId: false,
+            providerName: false
+          }}>
           <ProvidersForm
             onChange={(values) => form.setFieldValue('providers', values)}
             explanation={form.touched.providers && form.errors.providers?.toString()}

@@ -21,6 +21,9 @@ export class Provider extends BaseEntity {
   partnerName: string;
 
   @AutoMap()
+  externalId: string;
+
+  @AutoMap()
   integrationTypeName: string;
 
   name: string;

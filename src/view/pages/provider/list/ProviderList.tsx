@@ -58,6 +58,11 @@ function ProviderList({
         sortingId: ProviderStatusesSortingEnum.PROVIDER_NAME
       },
       {
+        Header: t.get('externalId'),
+        accessor: 'externalId' as keyof ProvidersViewModel,
+        sortingId: ProviderStatusesSortingEnum.EXTERNAL_ID
+      },
+      {
         Header: t.get('providerId'),
         accessor: 'providerId' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.ID
@@ -72,7 +77,6 @@ function ProviderList({
         accessor: 'totalGameCount' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.GAME_COUNT
       },
-
       {
         Header: t.get('status'),
         accessor: 'status' as keyof ProvidersViewModel,

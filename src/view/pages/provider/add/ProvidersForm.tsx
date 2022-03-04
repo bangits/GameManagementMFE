@@ -18,14 +18,18 @@ const ProvidersForm = (props: ProvidersFormProps) => {
 
   const t = useTranslation();
 
-  const onInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    form.handleChange(e);
+  const onInputChange = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      await form.handleChange(e);
+      form.handleBlur(e);
 
-    setExplanation('');
-  }, []);
+      setExplanation('');
+    },
+    [form]
+  );
 
   useEffect(() => {
-    if (props.shouldTriggerFormSubmitting) form.submitForm();
+    if (props.shouldTriggerFormSubmitting && props.isAddProviderFormSubmitting) form.submitForm();
   }, [props.isAddProviderFormSubmitting]);
 
   useEffect(() => {
@@ -45,7 +49,6 @@ const ProvidersForm = (props: ProvidersFormProps) => {
         fromInputProps: {
           label: t.get('providerName'),
           onChange: onInputChange,
-          onBlur: form.handleBlur,
           name: 'providerName' as keyof ProviderFormValues,
           id: 'providerName' as keyof ProviderFormValues,
           explanation: form.touched.providerName && form.errors.providerName,
@@ -55,7 +58,6 @@ const ProvidersForm = (props: ProvidersFormProps) => {
         toInputProps: {
           label: t.get('providerExternalId'),
           onChange: onInputChange,
-          onBlur: form.handleBlur,
           name: 'providerExternalId' as keyof ProviderFormValues,
           id: 'providerExternalId' as keyof ProviderFormValues,
           explanation: form.touched.providerExternalId && form.errors.providerExternalId,
