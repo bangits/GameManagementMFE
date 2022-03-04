@@ -3,6 +3,5 @@ export enum ProviderStatusesSortingEnum {
   PARTNER_ID,
   PROVIDER_NAME,
   GAME_COUNT,
-  EXTERNAL_ID,
-
+  EXTERNAL_ID
 }
