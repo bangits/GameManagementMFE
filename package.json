@@ -25,7 +25,7 @@
     "build-declarations": "tsc -p tsconfig.declarations.json && tscpaths -p tsconfig.declarations.json -s ./src -o ./dist"
   },
   "devDependencies": {
-    "@atom/common": "^0.1.6",
+    "@atom/common": "^0.1.14",
     "@atom/design-system": "2.3.8",
     "@babel/core": "^7.14.6",
     "@babel/eslint-parser": "^7.14.7",
