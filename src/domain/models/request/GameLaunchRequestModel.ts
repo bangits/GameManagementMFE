@@ -5,6 +5,8 @@ export class GameLaunchRequestModel {
   playerId: PrimaryKey;
   projectId: PrimaryKey;
 
+  device: string;
+
   @AutoMap()
   currencyId: PrimaryKey;
 
