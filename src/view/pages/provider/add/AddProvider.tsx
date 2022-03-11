@@ -51,12 +51,18 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
       {
         type: 'input' as const,
         name: 'absoluteDemoUrl',
-        label: t.get('absoluteDemoURL')
+        label: t.get('absoluteDemoURL'),
+        props: {
+          optionalText: t.get('optional')
+        }
       },
       {
         type: 'input' as const,
         name: 'absoluteRealUrl',
-        label: t.get('absoluteRealURL')
+        label: t.get('absoluteRealURL'),
+        props: {
+          optionalText: t.get('optional')
+        }
       },
       {
         type: 'custom' as const,
