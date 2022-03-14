@@ -17,6 +17,7 @@ export interface ProviderListProps {
   isFetching: boolean;
   filtersInitialValues: ProvidersFiltersViewModel;
   partnersTableLoadingIds: PrimaryKey[];
+  providerName?: string;
 
   // actions
   onActivateButtonClick: (column: ProvidersViewModel | ProvidersViewModel[]) => void;
@@ -38,7 +39,8 @@ function ProviderList({
   onInActivateButtonClick,
   shouldShowInActivateButton,
   partnersTableLoadingIds,
-  refetch
+  refetch,
+  providerName
 }: ProviderListProps) {
   const { user } = useContext(AuthenticatedContext);
 
@@ -114,7 +116,8 @@ function ProviderList({
         type: 'input' as const,
         label: t.get('providerName'),
         props: {
-          label: t.get('providerName')
+          label: t.get('providerName'),
+          disabled: !!providerName
         }
       },
       {
@@ -164,7 +167,7 @@ function ProviderList({
   );
 
   return (
-    <PageWrapper title={t.get('providers')} showButton buttonProps={addProviderButtonProps}>
+    <PageWrapper title={t.get('providers')} showButton={!providerName} buttonProps={addProviderButtonProps}>
       <TablePage
         showFilters
         fetchData={onFiltersChange}

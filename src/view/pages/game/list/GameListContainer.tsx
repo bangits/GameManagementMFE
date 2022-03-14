@@ -2,12 +2,17 @@ import { gameApi } from '@/adapter/redux/api';
 import { GameStatusesEnum } from '@/domain/models';
 import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
 import { GamesFiltersViewModel, GamesViewModel, GetGamesViewModel } from '@/view/models';
+import { AuthenticatedContext } from '@atom/authorization';
 import { SortTypesEnum, useActionWithDialog, useFirstValue, useTranslation } from '@atom/common';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import GameList from './GameList';
 
 const GameListContainer = () => {
   const t = useTranslation();
+
+  const { user } = useContext(AuthenticatedContext);
+
+  const providerId = user.userId === 8285 ? 10002 : user.userId === 8286 ? 5 : user.userId === 8287 ? 6 : undefined;
 
   const initialFilters = useMemo<GamesFiltersViewModel>(
     () => ({
@@ -15,7 +20,7 @@ const GameListContainer = () => {
       externalId: '',
       icon: '',
       name: '',
-      providerIds: '',
+      providerIds: providerId ? [providerId.toString()] : '',
       volatilityIds: '',
       rtp: { from: '', to: '' },
       classIds: '',
@@ -94,6 +99,7 @@ const GameListContainer = () => {
   return (
     <>
       <GameList
+        providerId={providerId}
         results={results || []}
         rowCount={rowCount || 1}
         refetch={refetch}
