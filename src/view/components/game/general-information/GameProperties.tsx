@@ -74,7 +74,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
           type: 'select' as const,
           name: 'featureIds',
           label: t.get('gameFeatures'),
-          component: (props: CustomSelectProps) => {
+          component: (props) => {
             return (
               <GameFeaturesSelect
                 {...props}

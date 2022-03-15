@@ -31,6 +31,10 @@ export const GameLauncherContainer = () => {
 
   useEffect(() => {
     gameLaunchService.subscribe(setGameLaunchConfig);
+
+    return () => {
+      setGameLaunchConfig(null);
+    };
   }, []);
 
   if (!gameLaunchConfig) return null;

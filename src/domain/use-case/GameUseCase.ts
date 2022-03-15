@@ -25,6 +25,7 @@ import {
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
+  GetGameNamesViewModel,
   GetGamePlatformsViewModel,
   GetGameSupportedBrowsersViewModel,
   GetGamesViewModel,
@@ -33,8 +34,7 @@ import {
   GetGameVolatilitiesViewModel,
   ProviderGamesFilterViewModel,
   ProviderGamesViewModel,
-  UpdateGameImagesViewModel,
-  GetGameNamesViewModel
+  UpdateGameImagesViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -93,7 +93,7 @@ export class GameUseCase {
   getGameFeatures = async (): Promise<GetGameFeaturesViewModel> => {
     const getGameFeaturesResponse = await this.gameRepository.getGameFeatures();
 
-    return getGameFeaturesResponse.results.map((r) => ({ value: r.id, label: r.name }));
+    return getGameFeaturesResponse.results.map((r) => ({ value: r.id, label: r.name, gameIds: r.gameIds }));
   };
 
   getGameVolatilities = async (): Promise<GetGameVolatilitiesViewModel> => {

@@ -304,7 +304,6 @@ function GameList({
         name: 'gameFeatureIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
         label: t.get('gameFeatures'),
-
         component: ({ onChange, filterValues }) => (
           <GameFeaturesSelect
             selectAll
