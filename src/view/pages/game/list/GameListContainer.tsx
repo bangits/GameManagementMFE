@@ -58,6 +58,7 @@ const GameListContainer = () => {
   const { results, rowCount } = (data || {}) as GetGamesViewModel;
 
   const firstRequestId = useFirstValue(requestId);
+  const firstData = useFirstValue(data);
 
   const { openDialogFn: onActivateButtonClick, columnLoadingIds: activeColumnLoadingIds } =
     useActionWithDialog<GamesViewModel>({
@@ -104,6 +105,7 @@ const GameListContainer = () => {
         rowCount={rowCount || 1}
         refetch={refetch}
         isFilteredData={firstRequestId !== requestId}
+        isFirstResultEmpty={firstData && !firstData.results.length}
         isFetching={isFetching}
         filters={initialFilters}
         onFiltersChange={(parameters) => {

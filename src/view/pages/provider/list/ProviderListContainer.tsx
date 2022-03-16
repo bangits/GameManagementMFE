@@ -45,6 +45,7 @@ const ProviderListContainer = () => {
   const { results, rowCount } = (data || {}) as GetProvidersViewModel;
 
   const firstRequestId = useFirstValue(requestId);
+  const firstData = useFirstValue(data);
 
   const { openDialogFn: onActivateButtonClick, columnLoadingIds: activeColumnLoadingIds } =
     useActionWithDialog<ProvidersViewModel>({
@@ -78,6 +79,7 @@ const ProviderListContainer = () => {
         results={results || []}
         providerName={providerName}
         isFilteredData={firstRequestId !== requestId}
+        isFirstResultEmpty={firstData && !firstData.results.length}
         isFetching={isFetching}
         refetch={refetch}
         rowCount={rowCount}

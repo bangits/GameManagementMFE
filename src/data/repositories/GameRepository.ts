@@ -9,6 +9,7 @@ import {
   GetClassNamesResponseModel,
   GetGameByIdResponseModel,
   GetGameFeaturesResponseModel,
+  GetGameNamesResponseModel,
   GetGamePlatformsResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
@@ -18,8 +19,7 @@ import {
   GetGameVolatilitiesResponseModel,
   GetProviderGamesRequestModel,
   GetProviderGamesResponseModel,
-  UpdateImagesRequestModel,
-  GetGameNamesResponseModel
+  UpdateImagesRequestModel
 } from '@/domain/models';
 import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -43,6 +43,7 @@ export class GameRepository implements IGameRepository {
       query: getGameRequestModel
     });
   };
+
   getGameNames = async (isActive): Promise<GetGameNamesResponseModel> => {
     return await this.httpService.get<GetGameNamesResponseModel, {}>({
       url: API_ROUTES.GAMES.GET_GAME_NAMES,

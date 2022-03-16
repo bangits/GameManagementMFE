@@ -33,6 +33,7 @@ export interface GameListProps {
   results: GamesViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFirstResultEmpty: boolean;
   isFetching: boolean;
   gameTableLoadingIds: PrimaryKey[];
   providerId?: PrimaryKey;
@@ -51,6 +52,7 @@ function GameList({
   onFiltersChange,
   rowCount,
   isFilteredData,
+  isFirstResultEmpty,
   isFetching,
   onActivateButtonClick,
   shouldShowActivateButton,
@@ -491,8 +493,8 @@ function GameList({
         tableProps={{
           data: results,
           columns: tableColumns,
-          illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? (
+          illustrationIcon: !isFirstResultEmpty ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
+          emptyText: !isFirstResultEmpty ? (
             <>
               {t.get('tables.emptyResultFirstSentence')}
               <br />

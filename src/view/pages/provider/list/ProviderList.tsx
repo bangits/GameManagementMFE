@@ -14,6 +14,7 @@ export interface ProviderListProps {
   results: ProvidersViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFirstResultEmpty: boolean;
   isFetching: boolean;
   filtersInitialValues: ProvidersFiltersViewModel;
   partnersTableLoadingIds: PrimaryKey[];
@@ -32,6 +33,7 @@ function ProviderList({
   onFiltersChange,
   rowCount,
   isFilteredData,
+  isFirstResultEmpty,
   filtersInitialValues,
   isFetching,
   onActivateButtonClick,
@@ -200,8 +202,8 @@ function ProviderList({
             }
           ],
 
-          illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? (
+          illustrationIcon: !isFirstResultEmpty ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
+          emptyText: !isFirstResultEmpty ? (
             <>
               {t.get('tables.emptyResultFirstSentence')}
               <br />
