@@ -1,6 +1,6 @@
 import { GameRepository, ProviderRepository } from '@/data';
 import { GameUseCase, ProviderUseCase } from '@/domain/use-case';
-import { CacheService, HttpService } from '@atom/common';
+import { CacheService, enviromentService, HttpService } from '@atom/common';
 import { Container } from 'inversify';
 import { DI_CONSTANTS } from './constants';
 
@@ -17,13 +17,13 @@ export class DiContainer {
     this.diContainer.bind(DI_CONSTANTS.HttpService).toDynamicValue(
       () =>
         new HttpService({
-          baseURL: 'http://20.120.144.194/api/v1'
+          url: enviromentService.get<{ gameManager: string }>('apiUrlPaths').gameManager
         })
     );
     this.diContainer.bind(DI_CONSTANTS.GameLauncherHttpService).toDynamicValue(
       () =>
         new HttpService({
-          baseURL: 'http://51.143.121.28/api/v1'
+          url: enviromentService.get<{ gameLaunchManger: string }>('apiUrlPaths').gameLaunchManger
         })
     );
 
