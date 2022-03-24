@@ -17,13 +17,13 @@ export class DiContainer {
     this.diContainer.bind(DI_CONSTANTS.HttpService).toDynamicValue(
       () =>
         new HttpService({
-          url: enviromentService.get<{ gameManager: string }>('apiUrlPaths').gameManager
+          baseURL: enviromentService.get<{ gameManager: string }>('apiUrlPaths').gameManager
         })
     );
     this.diContainer.bind(DI_CONSTANTS.GameLauncherHttpService).toDynamicValue(
       () =>
         new HttpService({
-          url: enviromentService.get<{ gameLaunchManger: string }>('apiUrlPaths').gameLaunchManger
+          baseURL: enviromentService.get<{ gameLaunchManger: string }>('apiUrlPaths').gameLaunchManger
         })
     );
 
