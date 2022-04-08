@@ -105,7 +105,6 @@ export const gameApi = createApi({
         };
       }
     }),
-
     getGamePlatforms: build.query<GetGamePlatformsViewModel, {}>({
       query: () => {
         return {

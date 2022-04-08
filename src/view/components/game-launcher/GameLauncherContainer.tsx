@@ -13,7 +13,7 @@ export const GameLauncherContainer = () => {
       null
     );
 
-  const { data: gameIframeUrl } = gameApi.useLaunchGameQuery(
+  const { data: gameIframeUrl, isFetching } = gameApi.useLaunchGameQuery(
     gameLaunchConfig && {
       ...gameLaunchConfig,
       userId: user.userId,
@@ -41,7 +41,7 @@ export const GameLauncherContainer = () => {
 
   return (
     <GameLauncher
-      iframeUrl={gameIframeUrl}
+      iframeUrl={!isFetching ? gameIframeUrl : ''}
       gameBackgroundUrl={gameLaunchConfig.gameBackground}
       onCloseButtonClick={() => setGameLaunchConfig(null)}
     />
