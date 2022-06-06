@@ -1,10 +1,11 @@
+/* eslint-disable promise/catch-or-return */
 import { gameApi } from '@/adapter/redux/api';
 import { GameStatusesEnum } from '@/domain/models';
 import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
 import { GameActionsViewModel } from '@/view/models';
 import { gameLaunchService } from '@/view/services';
 import { useActionWithDialog, useTranslation } from '@atom/common';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import GameDetails from './GameDetails';
@@ -14,13 +15,15 @@ const GameDetailsContainer = () => {
 
   const { data, isFetching, originalArgs } = gameApi.useGetGameByIdQuery(+params.gameId);
 
+  const [loading, setLoading] = useState(false);
   const t = useTranslation();
 
   const dispatch = useDispatch();
 
   const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
-  const [updateGameImages] = gameApi.useUpdateImagesMutation();
+  const [updateGameImages, { isLoading }] = gameApi.useUpdateImagesMutation();
 
+  console.log(isLoading);
   const { openDialogFn: onActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
     dialogFn: showGameActivateDialog,
     actionFn: (gameIds) =>
@@ -126,6 +129,7 @@ const GameDetailsContainer = () => {
 
   return (
     <GameDetails
+      imageLoader={isLoading}
       data={data}
       onPlayButtonClick={createGameLauncher(false)}
       onDemoButtonClick={createGameLauncher(true)}

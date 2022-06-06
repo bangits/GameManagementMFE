@@ -1,7 +1,7 @@
 import { GameGeneralInformationContainer } from '@/view';
 import { gameImagesConfig, gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
-import { BannerUploader, convertDate, historyService, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, historyService, redirectToURL, useTranslation } from '@atom/common';
 import {
   GameDetails as GameDetailsPage,
   GameDetailsProps as GameDetailsPageProps,
@@ -20,6 +20,7 @@ export interface GameDetailsProps {
   onDemoButtonClick: () => void;
   onGameBackgroundChange: (image: string) => void;
   onGameMainImageChange: (image: string) => void;
+  imageLoader?: boolean;
 }
 
 const GameDetails: FC<GameDetailsProps> = ({
@@ -31,7 +32,8 @@ const GameDetails: FC<GameDetailsProps> = ({
   onPlayButtonClick,
   onDemoButtonClick,
   onGameBackgroundChange,
-  onGameMainImageChange
+  onGameMainImageChange,
+  imageLoader
 }) => {
   const t = useTranslation();
 
@@ -41,7 +43,7 @@ const GameDetails: FC<GameDetailsProps> = ({
         label: t.get('gameManagement'),
         isRedirect: true,
         componentProps: {
-          onClick: () => historyService.redirectToURL('/game')
+          onClick: () => redirectToURL('/game')
         }
       },
       {
@@ -127,6 +129,7 @@ const GameDetails: FC<GameDetailsProps> = ({
               aspectRatio={1}>
               {(openMainImageUploader) => (
                 <GameDetailsPage
+                  isLoadingImage={imageLoader}
                   gameName={data.gameName}
                   backgroundImgUrl={data.backGroundImage}
                   onMainImgClick={openMainImageUploader}
