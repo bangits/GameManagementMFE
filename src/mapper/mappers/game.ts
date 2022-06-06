@@ -24,7 +24,7 @@ import {
   GetGamesViewModel,
   UpdateGameImagesViewModel
 } from '@/view/models';
-import { convertDate, convertDateForRequestModel, getDeviceType } from '@atom/common';
+import { convertDate, convertDateForRequestModel, getClientBrowser, getDeviceType } from '@atom/common';
 import autoMapper, { Mapper } from '@automapper/core';
 
 const { mapFrom, mapWith } = autoMapper;
@@ -148,11 +148,19 @@ export const generateGameMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.externalGameId,
-      mapFrom((source) => source.gameExternalId)
+      mapFrom((source) => source.gameId)
+    )
+    .forMember(
+      (destination) => destination.gameId,
+      mapFrom((source) => +source.gameExternalId)
     )
     .forMember(
       (destination) => destination.device,
       mapFrom(() => getDeviceType())
+    )
+    .forMember(
+      (destination) => destination.browser,
+      mapFrom(() => getClientBrowser())
     );
   //#endregion
 

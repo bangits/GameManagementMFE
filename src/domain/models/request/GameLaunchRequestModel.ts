@@ -6,6 +6,7 @@ export class GameLaunchRequestModel {
   projectId: PrimaryKey;
 
   device: string;
+  browser: string;
 
   @AutoMap()
   currencyId: PrimaryKey;
