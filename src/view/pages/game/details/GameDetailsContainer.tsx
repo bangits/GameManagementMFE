@@ -23,7 +23,6 @@ const GameDetailsContainer = () => {
   const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
   const [updateGameImages, { isLoading }] = gameApi.useUpdateImagesMutation();
 
-  console.log(isLoading);
   const { openDialogFn: onActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
     dialogFn: showGameActivateDialog,
     actionFn: (gameIds) =>
