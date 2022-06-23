@@ -124,6 +124,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
               />
             }
             generalInformationContext={<GeneralInformationContainer data={data} />}
+            isCmsUser={false}
           />
         )}
       </BannerUploader>
