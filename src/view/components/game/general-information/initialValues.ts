@@ -34,7 +34,7 @@ export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGa
 };
 export const getEditGameCompatibilityValues = (data: GamesDetailsViewModel): EditGameCompatibilityViewModel => {
   return {
-    certifiedCountryIds: data.gameCertifiedCountries.map((country) => country.id),
+    certifiedCountryIds: data.gameCertifiedCountries?.map((country) => country.id) || [],
     gameId: data.gameId || null,
     lastUpdatedByUserEmail: data.lastUpdatedByUserEmail || null,
     lastUpdatedByUserId: 1,
@@ -44,9 +44,9 @@ export const getEditGameCompatibilityValues = (data: GamesDetailsViewModel): Edi
     platformIds: data.gamePlatformGames.map((platform) => platform.id),
     restrictedCountryIds: data.gameRestrictedCountries.map((country) => country.id),
     supportedBrowserIds: data.gameSupportedBrowsers.map((browser) => browser.id),
-    supportedCurrencyIds: data.gameCurrencies.map((currency) => currency.id),
+    supportedCurrencyIds: data.gameCurrencies?.map((currency) => currency.id) || [],
     tabletScreenModeIsLandscape: data.tabletScreenModeIsLandscape || false,
     tabletScreenModeIsPortrait: data.tabletScreenModeIsPortrait || false,
-    uiLanguageIds: data.gameUILanguages.map((language) => language.id)
+    uiLanguageIds: data.gameUILanguages?.map((language) => language.id) || []
   };
 };

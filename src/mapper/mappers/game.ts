@@ -202,39 +202,43 @@ export const generateGameMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.gameCurrencies,
-      mapFrom((source) =>
-        source.gameCurrencies.map((currency) => ({
-          title: currency.code,
-          id: currency.id
-        }))
+      mapFrom(
+        (source) =>
+          source.gameCurrencies?.map((currency) => ({
+            title: currency.code,
+            id: currency.id
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.gameUILanguages,
-      mapFrom((source) =>
-        source.gameUILanguages.map((language) => ({
-          title: language.name,
-          id: language.id
-        }))
+      mapFrom(
+        (source) =>
+          source.gameUILanguages?.map((language) => ({
+            title: language.name,
+            id: language.id
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.gameOperatingLanguages,
-      mapFrom((source) =>
-        source.gameOperatingLanguages.map((language) => ({
-          title: language.name,
-          id: language.id
-        }))
+      mapFrom(
+        (source) =>
+          source.gameOperatingLanguages?.map((language) => ({
+            title: language.name,
+            id: language.id
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.gameCertifiedCountries,
-      mapFrom((source) =>
-        source.gameCertifiedCountries.map((country) => ({
-          tagName: country.name,
-          id: country.id,
-          imgURL: country.flag
-        }))
+      mapFrom(
+        (source) =>
+          source.gameCertifiedCountries?.map((country) => ({
+            tagName: country.name,
+            id: country.id,
+            imgURL: country.flag
+          })) || []
       )
     )
     .forMember(
