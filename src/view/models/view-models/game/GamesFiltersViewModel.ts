@@ -48,5 +48,4 @@ export class GamesFiltersViewModel extends PagedModel {
   rtp: { from: number | ''; to: number | '' };
   type: PrimaryKey | '';
   subTypeIds: PrimaryKey[];
-  status: GameStatusesEnum;
 }
