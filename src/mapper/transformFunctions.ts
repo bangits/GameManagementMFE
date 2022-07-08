@@ -4,8 +4,8 @@ export const transformToCountryModel = (array: PrimaryKey[], defaultCountryId?: 
   array.map((countryId) => ({ countryId, defaultCurrency: countryId === defaultCountryId }));
 
 export const convertToCountryTab = (transformModel: { flag: string; id: PrimaryKey; name: string }[]) =>
-  transformModel.map((model) => ({
+  transformModel?.map((model) => ({
     tagName: model.name,
     id: model.id,
     imgSrc: model.flag
-  }));
+  })) || [];
