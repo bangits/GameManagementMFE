@@ -45,8 +45,9 @@ export class GamesFiltersViewModel extends PagedModel {
   releaseDate: [Date, Date];
   creationDate: [Date, Date];
 
+  status: GameStatusesEnum;
+
   rtp: { from: number | ''; to: number | '' };
   type: PrimaryKey | '';
   subTypeIds: PrimaryKey[];
-  status: GameStatusesEnum;
 }
