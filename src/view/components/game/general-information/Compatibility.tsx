@@ -8,6 +8,8 @@ import {
   CustomSelectProps,
   historyService,
   LanguageSelect,
+  //@ts-expect-error deleted for update atom/common
+  SupportedBrowsersEnum,
   useAsync,
   useTranslation,
   useValidationTranslation
@@ -34,14 +36,6 @@ export interface CompatibilityProps {
 }
 
 const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
-  enum SupportedBrowsersEnum { //Needs to create in enums section
-    CHROME = 1,
-    SAFARI,
-    FIREFOX,
-    EDGE,
-    OPERA
-  }
-
   const t = useTranslation();
 
   const translationValidations = useValidationTranslation();
@@ -308,7 +302,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                   currencies={data.gameCurrencies?.map((currency) => ({ title: currency?.title })) || []}
                   supportedBrowsers={{
                     browsersEnum: SupportedBrowsersEnum,
-                    initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
+                    initialValues: data.gameSupportedBrowsers.map((browser) => browser.name),
                     disabled: true
                   }}
                 />

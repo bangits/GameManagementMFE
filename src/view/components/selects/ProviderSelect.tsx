@@ -1,4 +1,4 @@
-import { GameManagementContext, GetProviderNamesViewModel, ProviderNames } from '@/atom-game-management';
+import { GameManagementContext, GetProviderNamesViewModel } from '@/atom-game-management';
 import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
 import { useContext, useEffect, useMemo, useState } from 'react';
 

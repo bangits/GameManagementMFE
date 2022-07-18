@@ -1,7 +1,7 @@
 import { GameGeneralInformationContainer } from '@/view';
 import { gameImagesConfig, gameStatusesConfig } from '@/view/configs';
 import { GamesDetailsViewModel } from '@/view/models';
-import { BannerUploader, convertDate, historyService, redirectToURL, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, redirectToURL, useTranslation } from '@atom/common';
 import {
   GameDetails as GameDetailsPage,
   GameDetailsProps as GameDetailsPageProps,
@@ -129,7 +129,7 @@ const GameDetails: FC<GameDetailsProps> = ({
               aspectRatio={1}>
               {(openMainImageUploader) => (
                 <GameDetailsPage
-                  isLoadingImage={imageLoader}
+                  // isLoadingImage={imageLoader}
                   gameName={data.gameName}
                   backgroundImgUrl={data.backGroundImage}
                   onMainImgClick={openMainImageUploader}
