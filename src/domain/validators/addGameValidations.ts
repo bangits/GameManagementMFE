@@ -8,11 +8,12 @@ export const addGameValidationSchema = async (
   return object({
     providerId: number().typeError(t.required()),
     externalId: string()
-      .max(30, t.max(30))
+      .trim()
+      .max(100, t.max(100))
       .required(t.required())
       // eslint-disable-next-line no-useless-escape
-      .matches(/^([0-9a-zA-Z()_\-])*$/, t.textInput()),
-    name: string().required(t.required()).max(50, t.max(50)),
+      .matches(/^([0-9a-zA-Z()_\- ])*$/, t.textInput()),
+    name: string().trim().required(t.required()).max(50, t.max(50)),
     typeId: number().typeError(t.required()).required(t.required()),
     subTypeId: number().nullable(),
     releaseDate: string().nullable(),

@@ -6,10 +6,11 @@ export const editGameInfoValidations = async (
   t: UseValidationTranslationReturnValue
 ): Promise<SchemaOf<Omit<EditGameInformationViewModel, 'lastUpdatedUserId' | 'lastUpdatedUserEmail' | 'hasDemo'>>> => {
   return object({
-    name: string().required(t.required()).max(50, t.max(50)),
+    name: string().trim().required(t.required()).max(50, t.max(50)),
     classId: number().nullable(),
     externalId: string()
-      .max(30, t.max(30))
+      .trim()
+      .max(100, t.max(100))
       .required(t.required())
       // eslint-disable-next-line no-useless-escape
       .matches(/^([0-9a-zA-Z()._\-])*$/, t.textInput()),

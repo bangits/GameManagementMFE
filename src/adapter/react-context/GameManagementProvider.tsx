@@ -19,7 +19,8 @@ export const GameManagementProvider: FC<GameManagementProviderProps> = ({ childr
   return (
     <GameManagementContext.Provider
       value={{
-        providerUseCase: containerInstance.diContainer.get(DI_CONSTANTS.PROVIDER.ProviderUseCase)
+        providerUseCase: containerInstance.diContainer.get(DI_CONSTANTS.PROVIDER.ProviderUseCase),
+        gameUseCase: containerInstance.diContainer.get(DI_CONSTANTS.GAME.GameUseCase)
       }}>
       {children}
     </GameManagementContext.Provider>

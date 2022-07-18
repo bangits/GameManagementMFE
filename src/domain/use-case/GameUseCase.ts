@@ -25,6 +25,7 @@ import {
   GamesFiltersViewModel,
   GetClassNamesViewModel,
   GetGameFeaturesViewModel,
+  GetGameNamesViewModel,
   GetGamePlatformsViewModel,
   GetGameSupportedBrowsersViewModel,
   GetGamesViewModel,
@@ -69,6 +70,13 @@ export class GameUseCase {
 
     return getGameTypesResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };
+  getGameNames = async (isActive): Promise<GetGameNamesViewModel> => {
+    if (isActive !== undefined && !isActive) return [];
+
+    const getGameNamesResponse = await this.gameRepository.getGameNames(isActive);
+
+    return getGameNamesResponse.map((r) => ({ value: r.id, label: r.name }));
+  };
 
   getClassNames = async (): Promise<GetClassNamesViewModel> => {
     const getClassNamesResponse = await this.gameRepository.getClassNames();
@@ -85,7 +93,7 @@ export class GameUseCase {
   getGameFeatures = async (): Promise<GetGameFeaturesViewModel> => {
     const getGameFeaturesResponse = await this.gameRepository.getGameFeatures();
 
-    return getGameFeaturesResponse.results.map((r) => ({ value: r.id, label: r.name }));
+    return getGameFeaturesResponse.results.map((r) => ({ value: r.id, label: r.name, gameIds: r.gameIds }));
   };
 
   getGameVolatilities = async (): Promise<GetGameVolatilitiesViewModel> => {

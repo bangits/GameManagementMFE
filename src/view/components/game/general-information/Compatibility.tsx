@@ -8,6 +8,8 @@ import {
   CustomSelectProps,
   historyService,
   LanguageSelect,
+  //@ts-expect-error deleted for update atom/common
+  SupportedBrowsersEnum,
   useAsync,
   useTranslation,
   useValidationTranslation
@@ -34,14 +36,6 @@ export interface CompatibilityProps {
 }
 
 const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
-  enum SupportedBrowsersEnum { //Needs to create in enums section
-    CHROME = 1,
-    SAFARI,
-    FIREFOX,
-    EDGE,
-    OPERA
-  }
-
   const t = useTranslation();
 
   const translationValidations = useValidationTranslation();
@@ -293,20 +287,22 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
                   mobileLandscape={data.mobileScreenModeIsLandscape}
                   desktopPortrait={data.tabletScreenModeIsPortrait}
                   desktopLandscape={data.tabletScreenModeIsLandscape}
-                  uiLanguages={data.gameUILanguages.map((language) => ({ title: language?.title }))}
-                  operatingLanguages={data.gameOperatingLanguages.map((language) => ({ title: language?.title }))}
-                  certifiedCountries={data.gameCertifiedCountries.map((country) => ({
-                    tagName: country?.tagName,
-                    imgSrc: country?.imgURL
-                  }))}
+                  uiLanguages={data.gameUILanguages?.map((language) => ({ title: language?.title })) || []}
+                  operatingLanguages={data.gameOperatingLanguages?.map((language) => ({ title: language?.title }))}
+                  certifiedCountries={
+                    data.gameCertifiedCountries?.map((country) => ({
+                      tagName: country?.tagName,
+                      imgSrc: country?.imgURL
+                    })) || []
+                  }
                   restrictedCountries={data.gameRestrictedCountries.map((country) => ({
                     tagName: country?.tagName,
                     imgSrc: country?.imgURL
                   }))}
-                  currencies={data.gameCurrencies.map((currency) => ({ title: currency?.title }))}
+                  currencies={data.gameCurrencies?.map((currency) => ({ title: currency?.title })) || []}
                   supportedBrowsers={{
                     browsersEnum: SupportedBrowsersEnum,
-                    initialValues: data.gameSupportedBrowsers.map((browser) => browser.id),
+                    initialValues: data.gameSupportedBrowsers.map((browser) => browser.name),
                     disabled: true
                   }}
                 />

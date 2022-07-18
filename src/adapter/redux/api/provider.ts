@@ -4,7 +4,7 @@ import {
   AddProviderViewModel,
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
-  GetProviderNamesViewModel,
+  GetProviderIntegrationTypesViewModel,
   GetProvidersByIdViewModel,
   ProviderGamesTypesViewModel,
   ProvidersFiltersViewModel,
@@ -37,21 +37,14 @@ export const providerApi = createApi({
       },
       invalidatesTags: ['Providers']
     }),
-    getProviderNames: build.query<GetProviderNamesViewModel, {}>({
-      query: (isActive?) => {
-        return {
-          methodName: 'getProviderNames',
-          methodArguments: [isActive]
-        };
-      }
-    }),
     addProvider: build.mutation({
       query: (addProviderViewModel: AddProviderViewModel) => {
         return {
-          methodName: 'addProviders',
+          methodName: 'addProvider',
           methodArguments: [addProviderViewModel]
         };
-      }
+      },
+      invalidatesTags: ['Providers']
     }),
     getProvidersById: build.query<GetProvidersByIdViewModel, {}>({
       query: (partnerId: PrimaryKey) => {
@@ -68,6 +61,14 @@ export const providerApi = createApi({
         return {
           methodName: 'getProviderGameTypesAndCount',
           methodArguments: [partnerId]
+        };
+      }
+    }),
+    getProviderIntegrationTypes: build.query<GetProviderIntegrationTypesViewModel, {}>({
+      query: () => {
+        return {
+          methodName: 'getProviderIntegrationTypes',
+          methodArguments: []
         };
       }
     }),

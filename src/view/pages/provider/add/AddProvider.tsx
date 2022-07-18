@@ -1,62 +1,77 @@
 import { ROUTES } from '@/view/constants';
 import { AddProviderViewModel } from '@/view/models';
-import {
-  ChangedSelect,
-  CountriesSelect,
-  createRenderInputs,
-  CurrencySelect,
-  CustomSelectProps,
-  redirectToURL,
-  SelectOptionType,
-  useTranslation
-} from '@atom/common';
+import { createRenderInputs, CustomForm, historyService, useTranslation } from '@atom/common';
 import { Form as AtomForm } from '@atom/design-system';
-import { FastField, Field, Form, Formik, FormikProps } from 'formik';
-import { FC, useMemo, useState } from 'react';
+import { AtomPartnerProvider, BrandNameSelect, BusinessActivities } from '@atom/partner-management';
+import { FastField, Form, FormikHelpers, useFormikContext } from 'formik';
+import { FC, useMemo, useRef } from 'react';
 import { SchemaOf } from 'yup';
 import { initialValues } from './initialValues';
+import ProvidersFormContainer from './ProvidersFormContainer';
 
 export interface AddProviderProps {
-  onSubmit: (data: typeof initialValues) => void;
+  onSubmit: (data: AddProviderViewModel, form: FormikHelpers<typeof initialValues>) => void;
+
   validationSchema: SchemaOf<AddProviderViewModel> | null;
 }
 
 const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
-  const t = useTranslation();
+  const selectedAggregatorName = useRef<string>(null);
 
-  const [selectedProviderCurrencies, setSelectedProviderCurrencies] = useState<SelectOptionType[]>([]);
+  const t = useTranslation();
 
   const atomFormFields = useMemo(
     () => [
       {
         type: 'select' as const,
-        name: 'aggregator',
-        component: (props: CustomSelectProps) => (
-          <CountriesSelect {...props} isMulti fullWidth inputLabel={t.get('aggregator')} />
-        )
+        name: 'partnerId',
+        component: (props) => {
+          return (
+            <AtomPartnerProvider>
+              <BrandNameSelect
+                {...props}
+                onChange={(value, _, options) => {
+                  props.onChange(value);
+
+                  selectedAggregatorName.current = options.find((o) => o.value === value)?.label;
+                }}
+                fullWidth
+                inputLabel={t.get('aggregator')}
+                businessActivityId={BusinessActivities.GAME_AGGREGATOR}
+              />
+            </AtomPartnerProvider>
+          );
+        }
+      },
+      {
+        type: 'custom' as const,
+        component: () => null,
+        name: ''
       },
       {
         type: 'input' as const,
-        name: 'providerName',
-        label: t.get('providerName'),
+        name: 'absoluteDemoUrl',
+        label: t.get('absoluteDemoURL'),
         props: {
-          optional: true,
           optionalText: t.get('optional')
         }
       },
-
       {
         type: 'input' as const,
-        name: 'absoluteDemoURL',
-        label: t.get('absoluteDemoURL')
+        name: 'absoluteRealUrl',
+        label: t.get('absoluteRealURL'),
+        props: {
+          optionalText: t.get('optional')
+        }
       },
       {
-        type: 'input' as const,
-        name: 'absoluteRealURL',
-        label: t.get('absoluteRealURL')
+        type: 'custom' as const,
+        col: 12,
+        name: 'providers' as keyof AddProviderViewModel,
+        component: ProvidersFormContainer
       }
     ],
-    [selectedProviderCurrencies, t]
+    [t]
   );
 
   const atomFormProps = useMemo(
@@ -68,7 +83,7 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
       firstButtonProps: {
         children: t.get('close'),
         type: 'button' as const,
-        onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.providers + ROUTES.providersList)
+        onClick: () => historyService.redirectToURL(ROUTES.baseUrl + ROUTES.providers + ROUTES.providersList)
       }
     }),
     [t]
@@ -77,15 +92,20 @@ const AddProvider: FC<AddProviderProps> = ({ onSubmit, validationSchema }) => {
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {() => {
-        return (
-          <Form noValidate className='min-height-content-wrapper'>
-            <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
-          </Form>
-        );
-      }}
-    </Formik>
+    <CustomForm
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={(data, formikHelpers) => {
+        if (!data.providers.length) return;
+
+        onSubmit({ ...data, partnerName: selectedAggregatorName.current }, formikHelpers);
+      }}>
+      {() => (
+        <Form noValidate className='min-height-content-wrapper'>
+          <AtomForm renderInputs={renderInputs} fields={atomFormFields} {...atomFormProps} />
+        </Form>
+      )}
+    </CustomForm>
   );
 };
 

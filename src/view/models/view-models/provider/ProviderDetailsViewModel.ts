@@ -12,6 +12,12 @@ export class ProviderDetailsViewModel {
   providerId: PrimaryKey;
 
   @AutoMap()
+  partnerName: string;
+
+  @AutoMap()
+  integrationTypeName: string;
+
+  @AutoMap()
   id: PrimaryKey;
 
   targetMarkets: {

@@ -1,6 +1,7 @@
 import { editGameInfoValidations } from '@/domain/validators';
 import { GameClassSelect, GameTypesSelect, ProviderSelect } from '@/view';
 import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/models';
+import { AuthenticatedContext } from '@atom/authorization';
 import {
   convertDate,
   createRenderInputs,
@@ -13,7 +14,7 @@ import {
 } from '@atom/common';
 import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
 import { FastField, Form, useFormikContext } from 'formik';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useContext, useMemo } from 'react';
 import { getEditGameInfoInitialValues } from './initialValues';
 
 export interface GameInformationProps {
@@ -26,6 +27,8 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
   const t = useTranslation();
 
   const translationValidations = useValidationTranslation();
+
+  const { user } = useContext(AuthenticatedContext);
 
   const renderInputs = useMemo(() => createRenderInputs(FastField), []);
 
@@ -189,7 +192,10 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
       onSubmit={(data, _, isValuesSameAsInitialValues) => {
         if (!isValuesSameAsInitialValues) onSubmit(data);
       }}
-      initialValues={initialValues}
+      initialValues={{
+        ...initialValues,
+        lastUpdatedUserEmail: user.email
+      }}
       enableReinitialize
       validationSchema={editGameInformationValidationScheme}>
       {(form) => {

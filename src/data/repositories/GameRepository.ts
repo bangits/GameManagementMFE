@@ -9,6 +9,7 @@ import {
   GetClassNamesResponseModel,
   GetGameByIdResponseModel,
   GetGameFeaturesResponseModel,
+  GetGameNamesResponseModel,
   GetGamePlatformsResponseModel,
   GetGameRequestModel,
   GetGameResponseModel,
@@ -20,7 +21,7 @@ import {
   GetProviderGamesResponseModel,
   UpdateImagesRequestModel
 } from '@/domain/models';
-import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
+import { ActionResponseModel, cachedFn, ICacheService, IHttpService, MAX_PAGE_SIZE, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 import { EditGameInformationRequestModel } from './../../domain/models/request/EditGameInformationRequestModel';
@@ -40,6 +41,15 @@ export class GameRepository implements IGameRepository {
     return await this.httpService.get<GetGameResponseModel, GetGameRequestModel>({
       url: API_ROUTES.GAMES.BASE_ROUTE,
       query: getGameRequestModel
+    });
+  };
+
+  getGameNames = async (isActive): Promise<GetGameNamesResponseModel> => {
+    return await this.httpService.get<GetGameNamesResponseModel, {}>({
+      url: API_ROUTES.GAMES.GET_GAME_NAMES,
+      query: {
+        isActive
+      }
     });
   };
 
@@ -67,7 +77,8 @@ export class GameRepository implements IGameRepository {
     return await this.httpService.get<GetGameTypesResponseModel, {}>({
       url: API_ROUTES.GAMES.GET_GAME_TYPES,
       query: {
-        parentTypeIds
+        parentTypeIds,
+        pageSize: MAX_PAGE_SIZE
       }
     });
   };

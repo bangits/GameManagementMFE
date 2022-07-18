@@ -13,8 +13,8 @@ export const editProviderGeneralInfoValidations = async (
   >
 > => {
   return object({
-    absoluteDemoUrl: string().nullable().max(200, t.max(200)).matches(regexLibrary.WEB_SITE, t.website()),
-    absoluteRealUrl: string().nullable().max(200, t.max(200)).matches(regexLibrary.WEB_SITE, t.website()),
+    absoluteDemoUrl: string().trim().nullable().max(200, t.max(200)).matches(regexLibrary.WEB_SITE, t.website()),
+    absoluteRealUrl: string().trim().nullable().max(200, t.max(200)).matches(regexLibrary.WEB_SITE, t.website()),
     certifiedCountriesId: array().of(number()).nullable(),
     licensesId: array().of(number()).nullable(),
     restrictedCountriesId: array().of(number()).nullable(),

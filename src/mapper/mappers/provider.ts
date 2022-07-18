@@ -28,7 +28,7 @@ import {
 } from '@/view/models';
 import { convertDate } from '@atom/common';
 import autoMapper, { Mapper } from '@automapper/core';
-import { convertToCountryTab, transformToCountryModel } from '../transformFunctions';
+import { convertToCountryTab } from '../transformFunctions';
 
 const { mapFrom, mapWith } = autoMapper;
 
@@ -59,6 +59,10 @@ export const generateProviderMappings = (mapper: Mapper) => {
     .forMember(
       (destination) => destination.statusIds,
       mapFrom((source) => source.status)
+    )
+    .forMember(
+      (destination) => destination.IntegrationTypeId,
+      mapFrom((source) => source.integrationTypeId)
     );
   //#endregion
 
@@ -88,8 +92,21 @@ export const generateProviderMappings = (mapper: Mapper) => {
   //#endregion
 
   //#region Ade New Provider mapping
-  mapper.createMap(AddProviderViewModel, AddProviderRequestModel);
+  mapper.createMap(AddProviderViewModel, AddProviderRequestModel).forMember(
+    (destination) => destination.providers,
+    mapFrom((source) =>
+      source.providers.map(({ id, ...provider }) => ({
+        ...provider,
+        partnerId: source.partnerId,
+        partnerName: source.partnerName,
+        realUrl: source.absoluteRealUrl,
+        demoUrl: source.absoluteDemoUrl,
+        externalId: provider.externalId
+      }))
+    )
+  );
 
+  //#endregion
   //#endregion
 
   //#region Change Provider Status Mapping
@@ -114,11 +131,12 @@ export const generateProviderMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.providerCurrencies,
-      mapFrom((source) =>
-        source.providerCurrencies.map((currency) => ({
-          title: currency.name,
-          id: currency.id
-        }))
+      mapFrom(
+        (source) =>
+          source.providerCurrencies?.map((currency) => ({
+            title: currency.name,
+            id: currency.id
+          })) || []
       )
     )
     .forMember(
@@ -135,11 +153,12 @@ export const generateProviderMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.providerLicenses,
-      mapFrom((source) =>
-        source.providerLicenses.map((license) => ({
-          title: license.name,
-          id: license.id
-        }))
+      mapFrom(
+        (source) =>
+          source.providerLicenses?.map((license) => ({
+            title: license.name,
+            id: license.id
+          })) || []
       )
     )
     .forMember(
@@ -183,7 +202,7 @@ export const generateProviderMappings = (mapper: Mapper) => {
       mapFrom((source) => source.lastUpdatedByUserEmail)
     )
     .forMember(
-      (destination) => destination.providerId,
+      (destination) => destination.id,
       mapFrom((source) => source.id)
     );
   //#endregion
@@ -201,37 +220,41 @@ export const generateProviderMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.currencies,
-      mapFrom((source) =>
-        source.providerCurrencies.map((currencies) => ({
-          title: currencies.name
-        }))
+      mapFrom(
+        (source) =>
+          source.providerCurrencies?.map((currencies) => ({
+            title: currencies.name
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.targetMarkets,
-      mapFrom((source) =>
-        source.targetMarkets.map((market) => ({
-          tagName: market.name,
-          imgSrc: market.flag
-        }))
+      mapFrom(
+        (source) =>
+          source.targetMarkets?.map((market) => ({
+            tagName: market.name,
+            imgSrc: market.flag
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.certifiedCountries,
-      mapFrom((source) =>
-        source.certifiedCountries.map((countries) => ({
-          tagName: countries.name,
-          imgSrc: countries.flag
-        }))
+      mapFrom(
+        (source) =>
+          source.certifiedCountries?.map((countries) => ({
+            tagName: countries.name,
+            imgSrc: countries.flag
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.restrictedCountries,
-      mapFrom((source) =>
-        source.restrictedCountries.map((countries) => ({
-          tagName: countries.name,
-          imgSrc: countries.flag
-        }))
+      mapFrom(
+        (source) =>
+          source.restrictedCountries?.map((countries) => ({
+            tagName: countries.name,
+            imgSrc: countries.flag
+          })) || []
       )
     );
   //#endregion
@@ -283,43 +306,48 @@ export const generateProviderMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.providerLicenses,
-      mapFrom((source) =>
-        source.licensesId.map((licenseId) => ({
-          licenseId
-        }))
+      mapFrom(
+        (source) =>
+          source.licensesId?.map((licenseId) => ({
+            licenseId
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.targetMarkets,
-      mapFrom((source) =>
-        source.targetMarketsId.map((countryId) => ({
-          countryId
-        }))
+      mapFrom(
+        (source) =>
+          source.targetMarketsId?.map((countryId) => ({
+            countryId
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.certifiedCountries,
-      mapFrom((source) =>
-        source.certifiedCountriesId.map((countryId) => ({
-          countryId
-        }))
+      mapFrom(
+        (source) =>
+          source.certifiedCountriesId?.map((countryId) => ({
+            countryId
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.restrictedCountries,
-      mapFrom((source) =>
-        source.restrictedCountriesId.map((countryId) => ({
-          countryId
-        }))
+      mapFrom(
+        (source) =>
+          source.restrictedCountriesId?.map((countryId) => ({
+            countryId
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.providerCurrencies,
-      mapFrom((source) =>
-        source.providerCurrenciesId.map((currency) => ({
-          currencyId: currency,
-          defaultCurrency: false
-        }))
+      mapFrom(
+        (source) =>
+          source.providerCurrenciesId?.map((currency) => ({
+            currencyId: currency,
+            defaultCurrency: false
+          })) || []
       )
     );
   //#endregion

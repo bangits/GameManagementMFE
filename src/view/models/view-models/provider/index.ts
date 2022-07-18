@@ -10,3 +10,4 @@ export * from './ProviderGamesTypesViewModel';
 export * from './ProvidersFiltersViewModel';
 export * from './ProvidersViewModel';
 export * from './UpdateProviderLogoViewModel';
+export * from './GetProviderNames';

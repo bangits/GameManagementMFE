@@ -1,7 +1,8 @@
 import { GeneralInformationContainer, ProviderGamesContainer } from '@/view';
 import { providerImagesConfig, providerStatusesConfig } from '@/view/configs';
+import { ROUTES } from '@/view/constants';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
-import { BannerUploader, convertDate, historyService, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, historyService, redirectToURL, useTranslation } from '@atom/common';
 import {
   PageWrapper,
   ProviderDetails as ProviderDetailsPage,
@@ -34,7 +35,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         label: t.get('providerManagement'),
         isRedirect: true,
         componentProps: {
-          onClick: () => historyService.redirectToURL('/game/providers')
+          onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.providers)
         }
       },
       {
@@ -49,6 +50,8 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
       totalGameCount: t.get('totalGameCount'),
       status: t.get('status'),
       creationDate: t.get('creationDate'),
+      integrationType: t.get('integrationTypeName'),
+      partnerName: t.get('aggregator'),
       createdBy: t.get('createdBy'),
       generalInformation: t.get('generalInformation'),
       games: t.get('games'),
@@ -99,6 +102,8 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         aspectRatio={2 / 1}>
         {(openLogoImageUploader) => (
           <ProviderDetailsPage
+            partnerName={data.partnerName}
+            integrationType={data.integrationTypeName}
             lastUpdatedBy={data.lastUpdatedByUserEmail}
             lastUpdatedDate={convertDate(data.lastUpdatedDate)}
             noDataText={t.get('emptyValue')}
@@ -108,18 +113,19 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
             translations={translations}
             statusInfo={statusInfo}
             breadCrumb={breadCrumb}
-            providerId={`${t.get('id')} ${data.providerId}`}
+            providerId={`${t.get('id')} ${data.id}`}
             providerName={data.providerName}
             backgroundImgUrl={data.logo}
             onBackgroundImgClick={openLogoImageUploader}
             gamesTabContent={
               <ProviderGamesContainer
                 providerName={data.providerName}
-                providerId={data.providerId}
+                providerId={data.id}
                 providerStatusId={data.statusId}
               />
             }
             generalInformationContext={<GeneralInformationContainer data={data} />}
+            isCmsUser={false}
           />
         )}
       </BannerUploader>

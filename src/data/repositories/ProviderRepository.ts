@@ -10,11 +10,12 @@ import {
   GetProviderRequestModel,
   GetProviderResponseModel,
   GetProvidersByIdResponseModel,
-  UpdateProviderLogoRequestModel
+  UpdateProviderLogoRequestModel,
+  GetProviderIntegrationTypesResponseModel
 } from '@/domain/models';
-import { ActionResponseModel, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
+import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
-import { API_ROUTES } from '../constants';
+import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 
 @injectable()
 export class ProviderRepository implements IProviderRepository {
@@ -33,10 +34,10 @@ export class ProviderRepository implements IProviderRepository {
     });
   };
 
-  addProviders = async (addProviderRequestModel: AddProviderRequestModel) => {
-    await this.httpService.post<void, {}, AddProviderRequestModel>({
+  addProvider = async (addProviderRequestModel: AddProviderRequestModel) => {
+    await this.httpService.post<void, {}, AddProviderRequestModel['providers']>({
       url: API_ROUTES.PROVIDERS.BASE_ROUTE,
-      body: addProviderRequestModel
+      body: addProviderRequestModel.providers
     });
 
     return true;
@@ -73,6 +74,14 @@ export class ProviderRepository implements IProviderRepository {
     });
   };
 
+  getProviderIntegrationTypes = cachedFn(
+    CACHE_CONSTANTS.GetProviderIntegrationTypesResponse,
+    async (): Promise<GetProviderIntegrationTypesResponseModel> => {
+      return await this.httpService.get<GetProviderIntegrationTypesResponseModel, {}>({
+        url: API_ROUTES.PROVIDERS.GET_PROVIDER_INTEGRATION_TYPES
+      });
+    }
+  ).bind(this);
   editProviderGeneralInfo = async (
     editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel
   ): Promise<ActionResponseModel> => {

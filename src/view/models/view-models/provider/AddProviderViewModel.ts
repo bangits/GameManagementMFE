@@ -2,15 +2,17 @@ import { PrimaryKey } from '@atom/common';
 import { AutoMap } from '@automapper/classes';
 
 export class AddProviderViewModel {
-  @AutoMap()
-  aggregator: PrimaryKey;
+  partnerId: PrimaryKey;
 
-  @AutoMap()
-  providerNames: string[];
+  partnerName: string;
 
-  @AutoMap()
+  providers: {
+    id: PrimaryKey;
+    externalId: string;
+    providerName: string;
+  }[];
+
   absoluteDemoUrl: string;
 
-  @AutoMap()
   absoluteRealUrl: string;
 }

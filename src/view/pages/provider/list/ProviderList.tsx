@@ -1,10 +1,10 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
+import { ProviderIntegrationTypesSelect } from '@/view';
 import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
 import { AuthenticatedContext } from '@atom/authorization';
-//@ts-ignore
-import { PageIdsEnum, PrimaryKey, TablePage, useTranslation, historyService } from '@atom/common';
+import { historyService, PageIdsEnum, PrimaryKey, TablePage, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useContext, useMemo } from 'react';
 
@@ -14,9 +14,11 @@ export interface ProviderListProps {
   results: ProvidersViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFirstResultEmpty: boolean;
   isFetching: boolean;
   filtersInitialValues: ProvidersFiltersViewModel;
   partnersTableLoadingIds: PrimaryKey[];
+  providerName?: string;
 
   // actions
   onActivateButtonClick: (column: ProvidersViewModel | ProvidersViewModel[]) => void;
@@ -31,6 +33,7 @@ function ProviderList({
   onFiltersChange,
   rowCount,
   isFilteredData,
+  isFirstResultEmpty,
   filtersInitialValues,
   isFetching,
   onActivateButtonClick,
@@ -38,9 +41,11 @@ function ProviderList({
   onInActivateButtonClick,
   shouldShowInActivateButton,
   partnersTableLoadingIds,
-  refetch
+  refetch,
+  providerName
 }: ProviderListProps) {
   const { user } = useContext(AuthenticatedContext);
+
   const t = useTranslation();
 
   const tableColumns = useMemo(
@@ -57,6 +62,11 @@ function ProviderList({
         sortingId: ProviderStatusesSortingEnum.PROVIDER_NAME
       },
       {
+        Header: t.get('externalId'),
+        accessor: 'externalId' as keyof ProvidersViewModel,
+        sortingId: ProviderStatusesSortingEnum.EXTERNAL_ID
+      },
+      {
         Header: t.get('providerId'),
         accessor: 'providerId' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.ID
@@ -71,7 +81,6 @@ function ProviderList({
         accessor: 'totalGameCount' as keyof ProvidersViewModel,
         sortingId: ProviderStatusesSortingEnum.GAME_COUNT
       },
-
       {
         Header: t.get('status'),
         accessor: 'status' as keyof ProvidersViewModel,
@@ -88,7 +97,7 @@ function ProviderList({
     () => [
       {
         label: t.get('providerId'),
-        name: 'providerId',
+        name: 'providerId' as keyof ProvidersViewModel,
         type: 'input' as const,
         props: {
           label: t.get('providerId'),
@@ -97,7 +106,7 @@ function ProviderList({
       },
       {
         label: t.get('partnerId'),
-        name: 'partnerId',
+        name: 'partnerId' as keyof ProvidersViewModel,
         type: 'input' as const,
         props: {
           label: t.get('partnerId'),
@@ -105,11 +114,28 @@ function ProviderList({
         }
       },
       {
-        name: 'providerName',
+        name: 'providerName' as keyof ProvidersViewModel,
         type: 'input' as const,
         label: t.get('providerName'),
         props: {
-          label: t.get('providerName')
+          label: t.get('providerName'),
+          disabled: !!providerName
+        }
+      },
+      {
+        name: 'integrationType' as keyof ProvidersViewModel,
+        type: 'custom' as const,
+        label: t.get('integrationType'),
+        component: ({ onChange, filterValues }) => {
+          return (
+            <ProviderIntegrationTypesSelect
+              inputLabel={t.get('IntegrationTypeId')}
+              fullWidth
+              selectAll
+              value={filterValues.integrationTypeId}
+              onChange={(changedValue) => onChange('integrationTypeId', changedValue)}
+            />
+          );
         }
       },
       {
@@ -143,8 +169,9 @@ function ProviderList({
   );
 
   return (
-    <PageWrapper title={t.get('providers')} showButton buttonProps={addProviderButtonProps}>
+    <PageWrapper title={t.get('providers')} showButton={!providerName} buttonProps={addProviderButtonProps}>
       <TablePage
+        showFilters
         fetchData={onFiltersChange}
         isFilteredData={isFilteredData}
         isFetching={isFetching}
@@ -175,8 +202,8 @@ function ProviderList({
             }
           ],
 
-          illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? (
+          illustrationIcon: !isFirstResultEmpty ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
+          emptyText: !isFirstResultEmpty ? (
             <>
               {t.get('tables.emptyResultFirstSentence')}
               <br />

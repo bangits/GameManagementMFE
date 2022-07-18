@@ -10,7 +10,7 @@ export const editGamePropertiesValidations = async (
   return object({
     featureIds: array().of(number()).nullable(),
     maxWin: number().nullable(),
-    rtp: number().max(99, t.maxValue(99)).min(0.1, t.min(0.1)).nullable(),
+    rtp: number().max(100, t.maxValue(100)).min(0.1, t.min(0.1)).nullable(),
     themesIds: array().of(number()).nullable(),
     volatilityId: number().nullable()
   });

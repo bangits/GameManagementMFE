@@ -33,8 +33,10 @@ export interface GameListProps {
   results: GamesViewModel[];
   rowCount: number;
   isFilteredData: boolean;
+  isFirstResultEmpty: boolean;
   isFetching: boolean;
   gameTableLoadingIds: PrimaryKey[];
+  providerId?: PrimaryKey;
 
   // actions
   onActivateButtonClick: (column: GamesViewModel | GamesViewModel[]) => void;
@@ -50,13 +52,15 @@ function GameList({
   onFiltersChange,
   rowCount,
   isFilteredData,
+  isFirstResultEmpty,
   isFetching,
   onActivateButtonClick,
   shouldShowActivateButton,
   onInActivateButtonClick,
   shouldShowInActivateButton,
   gameTableLoadingIds,
-  refetch
+  refetch,
+  providerId
 }: GameListProps) {
   const { user } = useContext(AuthenticatedContext);
 
@@ -190,7 +194,8 @@ function GameList({
             fullWidth
             isMulti
             onChange={(changedValue) => onChange('providerIds', changedValue)}
-            value={filterValues.providerIds}
+            value={providerId ? [providerId] : filterValues.providerIds}
+            isDisabled={!!providerId}
           />
         )
       },
@@ -301,7 +306,6 @@ function GameList({
         name: 'gameFeatureIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
         label: t.get('gameFeatures'),
-
         component: ({ onChange, filterValues }) => (
           <GameFeaturesSelect
             selectAll
@@ -461,7 +465,7 @@ function GameList({
         }
       }
     ],
-    [t]
+    [t, providerId]
   );
 
   const addGameButtonProps = useMemo(
@@ -473,8 +477,9 @@ function GameList({
   );
 
   return (
-    <PageWrapper title={t.get('games')} showButton buttonProps={addGameButtonProps}>
+    <PageWrapper title={t.get('games')} showButton={!providerId} buttonProps={addGameButtonProps}>
       <TablePage
+        showFilters
         fetchData={onFiltersChange}
         isFetching={isFetching}
         isLoading={isFetching}
@@ -488,8 +493,8 @@ function GameList({
         tableProps={{
           data: results,
           columns: tableColumns,
-          illustrationIcon: isFilteredData ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
-          emptyText: isFilteredData ? (
+          illustrationIcon: !isFirstResultEmpty ? <Icons.NoDataIcon /> : <Icons.EmptyDataIcon />,
+          emptyText: !isFirstResultEmpty ? (
             <>
               {t.get('tables.emptyResultFirstSentence')}
               <br />

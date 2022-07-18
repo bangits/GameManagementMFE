@@ -21,7 +21,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
     gameTypeId: null,
     pagination: {
       page: 1,
-      pageSize: 18
+      pageSize: 32
     },
     providerId
   });
@@ -89,6 +89,8 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
 
   return (
     <ProviderGames
+      //@ts-expect-error design-system verison
+      isShowActivateOrDeactivateButton={false}
       searchInputMaxLength={30}
       translations={translations}
       gameTypes={providerGameTypes || []}
@@ -101,6 +103,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
 
         gameLaunchService.publish({
           gameId: clickedGame.externalId,
+          gameExternalId: clickedGame.id.toString(),
           gameLaunchUrl: isDemo ? clickedGame.providerAbsoluteDemoUrl : clickedGame.providerAbsoluteUrl,
           providerId,
           providerName,

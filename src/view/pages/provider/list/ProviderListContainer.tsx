@@ -2,18 +2,25 @@ import { providerApi } from '@/adapter/redux/api';
 import { ProviderStatusesEnum } from '@/domain/models';
 import { showProviderActivateDialog, showProviderInActivateDialog } from '@/view/dialogs';
 import { GetProvidersViewModel, ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
+import { AuthenticatedContext } from '@atom/authorization';
 import { SortTypesEnum, useActionWithDialog, useFirstValue, useTranslation } from '@atom/common';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import ProviderList from './ProviderList';
 
 const ProviderListContainer = () => {
   const t = useTranslation();
 
+  const { user } = useContext(AuthenticatedContext);
+
+  const providerName =
+    user.userId === 8285 ? 'Golden Race' : user.userId === 8286 ? 'Rival' : user.userId === 8287 ? 'Bgaming' : '';
+
   const filtersInitialValues = useMemo<ProvidersFiltersViewModel>(
     () => ({
       providerId: '',
       partnerId: '',
-      providerName: '',
+      providerName,
+      integrationTypeId: null,
       currency: [],
       gameCount: {
         from: null,
@@ -26,7 +33,7 @@ const ProviderListContainer = () => {
         pageSize: 20
       }
     }),
-    []
+    [providerName]
   );
 
   const [filters, setFilters] = useState<ProvidersFiltersViewModel>(filtersInitialValues);
@@ -38,6 +45,7 @@ const ProviderListContainer = () => {
   const { results, rowCount } = (data || {}) as GetProvidersViewModel;
 
   const firstRequestId = useFirstValue(requestId);
+  const firstData = useFirstValue(data);
 
   const { openDialogFn: onActivateButtonClick, columnLoadingIds: activeColumnLoadingIds } =
     useActionWithDialog<ProvidersViewModel>({
@@ -69,7 +77,9 @@ const ProviderListContainer = () => {
     <>
       <ProviderList
         results={results || []}
+        providerName={providerName}
         isFilteredData={firstRequestId !== requestId}
+        isFirstResultEmpty={firstData && !firstData.results.length}
         isFetching={isFetching}
         refetch={refetch}
         rowCount={rowCount}

@@ -17,6 +17,15 @@ export class Provider extends BaseEntity {
   @AutoMap()
   providerId: PrimaryKey;
 
+  @AutoMap()
+  partnerName: string;
+
+  @AutoMap()
+  externalId: string;
+
+  @AutoMap()
+  integrationTypeName: string;
+
   name: string;
   gameCount: number;
   lastUpdatedDate: string;
