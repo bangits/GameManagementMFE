@@ -8,7 +8,7 @@ export const getAddProviderFormsValidationSchema = async (
   return object({
     providerExternalId: string()
       .trim()
-      .max(30, t.max(30))
+      .max(100, t.max(100))
       // eslint-disable-next-line no-useless-escape
       .matches(/^([0-9a-zA-Z()_\- ])*$/, t.textInput())
       .required(t.required()),

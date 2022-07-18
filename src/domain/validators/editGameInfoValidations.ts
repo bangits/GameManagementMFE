@@ -10,7 +10,7 @@ export const editGameInfoValidations = async (
     classId: number().nullable(),
     externalId: string()
       .trim()
-      .max(30, t.max(30))
+      .max(100, t.max(100))
       .required(t.required())
       // eslint-disable-next-line no-useless-escape
       .matches(/^([0-9a-zA-Z()._\-])*$/, t.textInput()),

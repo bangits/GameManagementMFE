@@ -1,7 +1,8 @@
 import { GeneralInformationContainer, ProviderGamesContainer } from '@/view';
 import { providerImagesConfig, providerStatusesConfig } from '@/view/configs';
+import { ROUTES } from '@/view/constants';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
-import { BannerUploader, convertDate, historyService, useTranslation } from '@atom/common';
+import { BannerUploader, convertDate, historyService, redirectToURL, useTranslation } from '@atom/common';
 import {
   PageWrapper,
   ProviderDetails as ProviderDetailsPage,
@@ -34,7 +35,7 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
         label: t.get('providerManagement'),
         isRedirect: true,
         componentProps: {
-          onClick: () => historyService.redirectToURL('/game/providers')
+          onClick: () => redirectToURL(ROUTES.baseUrl + ROUTES.providers)
         }
       },
       {

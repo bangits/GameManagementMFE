@@ -21,7 +21,7 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
     gameTypeId: null,
     pagination: {
       page: 1,
-      pageSize: 24
+      pageSize: 32
     },
     providerId
   });
