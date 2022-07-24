@@ -140,7 +140,7 @@ export const generateGameMappings = (mapper: Mapper) => {
     .createMap(GameLaunchViewModel, GameLaunchRequestModel)
     .forMember(
       (destination) => destination.playerId,
-      mapFrom((source) => source.userId)
+      mapFrom((source) => source.userId.toString())
     )
     .forMember(
       (destination) => destination.projectId,
@@ -152,7 +152,7 @@ export const generateGameMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.gameId,
-      mapFrom((source) => +source.gameExternalId)
+      mapFrom((source) => source.gameExternalId.toString())
     )
     .forMember(
       (destination) => destination.device,
