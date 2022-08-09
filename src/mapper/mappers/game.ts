@@ -243,48 +243,53 @@ export const generateGameMappings = (mapper: Mapper) => {
     )
     .forMember(
       (destination) => destination.gameRestrictedCountries,
-      mapFrom((source) =>
-        source.gameRestrictedCountries.map((countries) => ({
-          tagName: countries.name,
-          id: countries.id,
-          imgURL: countries.flag
-        }))
+      mapFrom(
+        (source) =>
+          source.gameRestrictedCountries?.map((countries) => ({
+            tagName: countries.name,
+            id: countries.id,
+            imgURL: countries.flag
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.gamePlatformGames,
-      mapFrom((source) =>
-        source.gamePlatformGames.map((platform) => ({
-          id: platform.id,
-          name: platform.name
-        }))
+      mapFrom(
+        (source) =>
+          source.gamePlatformGames?.map((platform) => ({
+            id: platform.id,
+            name: platform.name
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.gameSupportedBrowsers,
-      mapFrom((source) =>
-        source.gameSupportedBrowsers.map((browser) => ({
-          id: browser.id,
-          name: browser.name
-        }))
+      mapFrom(
+        (source) =>
+          source.gameSupportedBrowsers?.map((browser) => ({
+            id: browser.id,
+            name: browser.name
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.gameFeatures,
-      mapFrom((source) =>
-        source.gameFeatures.map((feature) => ({
-          id: feature.id,
-          name: feature.name
-        }))
+      mapFrom(
+        (source) =>
+          source.gameFeatures?.map((feature) => ({
+            id: feature.id,
+            name: feature.name
+          })) || []
       )
     )
     .forMember(
       (destination) => destination.gameThemes,
-      mapFrom((source) =>
-        source.gameThemes.map((theme) => ({
-          id: theme.id,
-          name: theme.name
-        }))
+      mapFrom(
+        (source) =>
+          source.gameThemes?.map((theme) => ({
+            id: theme.id,
+            name: theme.name
+          })) || []
       )
     )
     .forMember(

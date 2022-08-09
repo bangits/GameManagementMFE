@@ -15,13 +15,13 @@ import {
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
   GetProviderByPartnerIdViewModel,
+  GetProviderIntegrationTypesViewModel,
   GetProviderNamesViewModel,
   GetProvidersByIdViewModel,
   GetProvidersViewModel,
   ProviderGamesTypesViewModel,
   ProvidersFiltersViewModel,
-  UpdateProviderLogoViewModel,
-  GetProviderIntegrationTypesViewModel
+  UpdateProviderLogoViewModel
 } from '@/view/models';
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import { inject, injectable } from 'inversify';
@@ -114,7 +114,6 @@ export class ProviderUseCase {
   getProviderIntegrationTypes = async (): Promise<GetProviderIntegrationTypesViewModel> => {
     const getProviderIntegrationTypesResponse = await this.providerRepository.getProviderIntegrationTypes();
 
-    console.log(getProviderIntegrationTypesResponse);
     //@ts-expect-error if you read this commit, please delete this
     return getProviderIntegrationTypesResponse.map((r) => ({ value: r.id, label: r.name }));
   };
