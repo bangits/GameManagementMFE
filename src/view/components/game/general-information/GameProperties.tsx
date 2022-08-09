@@ -13,7 +13,7 @@ import {
 } from '@atom/common';
 import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
 import { FastField, Form } from 'formik';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { getEditGamePropertiesValues } from './initialValues';
 
 export interface GamePropertiesProps {
@@ -58,7 +58,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
         {
           title: t.get('maxWin'),
           variant: 'default',
-          value: data.maxWin && convertToDecimalNumberFixed2(data.maxWin)
+          value: data.maxWin && convertToDecimalNumberFixed2(+data.maxWin)
         }
       ]
     }),

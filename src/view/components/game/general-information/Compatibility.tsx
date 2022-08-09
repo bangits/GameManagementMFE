@@ -8,7 +8,6 @@ import {
   CustomSelectProps,
   historyService,
   LanguageSelect,
-  //@ts-expect-error deleted for update atom/common
   SupportedBrowsersEnum,
   useAsync,
   useTranslation,
@@ -26,7 +25,7 @@ import {
   LabelGroup
 } from '@atom/design-system';
 import { FastField, Form } from 'formik';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { getEditGameCompatibilityValues } from './initialValues';
 
 export interface CompatibilityProps {

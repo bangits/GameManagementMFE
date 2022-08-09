@@ -89,8 +89,6 @@ export const ProviderGamesContainer = ({ providerId, providerStatusId, providerN
 
   return (
     <ProviderGames
-      //@ts-expect-error design-system verison
-      isShowActivateOrDeactivateButton={false}
       searchInputMaxLength={30}
       translations={translations}
       gameTypes={providerGameTypes || []}
