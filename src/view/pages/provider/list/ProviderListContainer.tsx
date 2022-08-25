@@ -12,8 +12,14 @@ const ProviderListContainer = () => {
 
   const { user } = useContext(AuthenticatedContext);
 
-  const providerName =
-    user.userId === 8285 ? 'Golden Race' : user.userId === 8286 ? 'Rival' : user.userId === 8287 ? 'Bgaming' : '';
+  const providerNameHashMap = {
+    8285: 'Golden Race',
+    8286: 'Rival',
+    8287: 'Bgaming',
+    28435: 'PragmaticPlay'
+  };
+
+  const providerName = providerNameHashMap[user.userId] || '';
 
   const filtersInitialValues = useMemo<ProvidersFiltersViewModel>(
     () => ({
