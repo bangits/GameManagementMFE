@@ -12,7 +12,14 @@ const GameListContainer = () => {
 
   const { user } = useContext(AuthenticatedContext);
 
-  const providerId = user.userId === 8285 ? 10002 : user.userId === 8286 ? 5 : user.userId === 8287 ? 6 : undefined;
+  const providerUserIds = {
+    8285: 10002,
+    8286: 5,
+    8287: 6,
+    28435: 10416
+  };
+
+  const providerId = providerUserIds[user.userId];
 
   const initialFilters = useMemo<GamesFiltersViewModel>(
     () => ({
