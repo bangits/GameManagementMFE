@@ -13,6 +13,7 @@ const GameListContainer = () => {
   const { user } = useContext(AuthenticatedContext);
 
   const providerUserIds = {
+    28590: 10419,
     8285: 10002,
     8286: 5,
     8287: 6,

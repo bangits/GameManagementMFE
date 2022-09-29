@@ -13,6 +13,7 @@ const ProviderListContainer = () => {
   const { user } = useContext(AuthenticatedContext);
 
   const providerNameHashMap = {
+    28590: 'CTI',
     8285: 'Golden Race',
     8286: 'Rival',
     8287: 'Bgaming',
