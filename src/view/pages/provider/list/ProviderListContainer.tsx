@@ -15,6 +15,7 @@ const ProviderListContainer = () => {
   const providerNameHashMap = {
     28590: 'CTI',
     28675: 'Elbet',
+    28788: 'LSports',
     8285: 'Golden Race',
     8286: 'Rival',
     8287: 'Bgaming',
