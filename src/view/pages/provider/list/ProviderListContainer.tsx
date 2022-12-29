@@ -19,7 +19,8 @@ const ProviderListContainer = () => {
     8285: 'Golden Race',
     8286: 'Rival',
     8287: 'Bgaming',
-    28435: 'PragmaticPlay'
+    28435: 'PragmaticPlay',
+    29387: 'KaGame Play'
   };
 
   const providerName = providerNameHashMap[user.userId] || '';

@@ -19,7 +19,8 @@ const GameListContainer = () => {
     8285: 10002,
     8286: 5,
     8287: 6,
-    28435: 10416
+    28435: 10416,
+    29387: 10430
   };
 
   const providerId = providerUserIds[user.userId];
