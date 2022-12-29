@@ -20,7 +20,7 @@ const ProviderListContainer = () => {
     8286: 'Rival',
     8287: 'Bgaming',
     28435: 'PragmaticPlay',
-    29387: 'KaGame Play'
+    29387: 'KaGaming'
   };
 
   const providerName = providerNameHashMap[user.userId] || '';
