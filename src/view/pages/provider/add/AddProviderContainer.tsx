@@ -48,7 +48,6 @@ const AddProviderContainer: FC = () => {
           if (error.message) {
             customErrors[error.message]?.forEach((error) => {
               form.setFieldError(error.fieldKey, error.errorMessage);
-              console.log(form);
             });
           } else {
             alert.error({

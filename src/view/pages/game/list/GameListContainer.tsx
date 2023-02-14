@@ -113,7 +113,7 @@ const GameListContainer = () => {
       <GameList
         providerId={providerId}
         results={results || []}
-        rowCount={rowCount || 1}
+        rowCount={rowCount || 0}
         refetch={refetch}
         isFilteredData={firstRequestId !== requestId}
         isFirstResultEmpty={firstData && !firstData.results.length}
