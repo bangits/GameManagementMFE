@@ -18,7 +18,7 @@ export const GamePlatformSelect = (props: CustomSelectProps & { valueKey?: 'valu
   }, []);
   return (
     <>
-      <CustomSelect {...props} fullWidth options={selectOptions || []} inputLabel={t.get('gamePlatforms')} />
+      <CustomSelect inputLabel={t.get('gamePlatforms')} {...props} fullWidth options={selectOptions || []} />
     </>
   );
 };
