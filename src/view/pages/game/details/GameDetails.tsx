@@ -126,7 +126,7 @@ const GameDetails: FC<GameDetailsProps> = ({
               title={t.get('gameLogo')}
               onChange={onGameMainImageChange}
               initialImage={data.icon}
-              aspectRatio={1}>
+              aspectRatio={4 / 3}>
               {(openMainImageUploader) => (
                 <GameDetailsPage
                   // isLoadingImage={imageLoader}
