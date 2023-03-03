@@ -52,5 +52,5 @@ export class GetGameRequestModel extends PagedModel {
   subTypeId: PrimaryKey;
 
   @AutoMap()
-  statusIds:PrimaryKey[];
+  statusIds: PrimaryKey[];
 }
