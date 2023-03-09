@@ -37,6 +37,7 @@ export interface GameListProps {
   isFetching: boolean;
   gameTableLoadingIds: PrimaryKey[];
   providerId?: PrimaryKey;
+  gameId?: PrimaryKey;
 
   // actions
   onActivateButtonClick: (column: GamesViewModel | GamesViewModel[]) => void;
@@ -60,7 +61,8 @@ function GameList({
   shouldShowInActivateButton,
   gameTableLoadingIds,
   refetch,
-  providerId
+  providerId,
+  gameId
 }: GameListProps) {
   const { user } = useContext(AuthenticatedContext);
 
@@ -161,6 +163,7 @@ function GameList({
         props: {
           label: t.get('gameId'),
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD,
+          disabled: !!gameId,
           type: 'number'
         }
       },

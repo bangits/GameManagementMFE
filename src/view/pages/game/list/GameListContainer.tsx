@@ -24,11 +24,16 @@ const GameListContainer = () => {
     29387: 10430
   };
 
+  const gameUserIds = {
+    29559: 41419
+  };
+
   const providerId = providerUserIds[user.userId];
+  const gameId = gameUserIds[user.userId];
 
   const initialFilters = useMemo<GamesFiltersViewModel>(
     () => ({
-      gameId: '',
+      gameId: gameId || '',
       externalId: '',
       icon: '',
       name: '',
@@ -112,6 +117,7 @@ const GameListContainer = () => {
   return (
     <>
       <GameList
+        gameId={gameId}
         providerId={providerId}
         results={results || []}
         rowCount={rowCount || 0}
