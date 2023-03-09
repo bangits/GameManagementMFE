@@ -56,6 +56,7 @@ const GameListContainer = () => {
       gameSupportedBrowserIds: '',
       gameUiLanguageIds: [],
       gameOperatingLanguageIds: [],
+      statusIds: [],
       subTypeIds: [],
       type: '',
       pagination: {

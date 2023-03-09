@@ -3,6 +3,7 @@ import {
   GameClassSelect,
   GameFeaturesSelect,
   GamePlatformSelect,
+  GameStatusesSelect,
   GameSupportedBrowsersSelect,
   GameThemesSelect,
   GameTypesSelect,
@@ -466,6 +467,22 @@ function GameList({
           label: t.get('createdBy'),
           maxLength: INPUT_MAX_VALUES.INPUT_FIELD_LARGE
         }
+      },
+      {
+        name: 'statusIds' as keyof GamesFiltersViewModel,
+        type: 'custom' as const,
+        label: t.get('status'),
+
+        component: ({ onChange, filterValues }) => (
+          <GameStatusesSelect
+            selectAll
+            inputLabel={t.get('status')}
+            fullWidth
+            value={filterValues.statusIds}
+            isMulti
+            onChange={(changedValue) => onChange('statusIds', changedValue)}
+          />
+        )
       }
     ],
     [t, providerId]
