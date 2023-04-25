@@ -21,7 +21,8 @@ const GameListContainer = () => {
     8286: 5,
     8287: 6,
     28435: 10416,
-    29387: 10430
+    29387: 10430,
+    29629: 10426
   };
 
   const gameUserIds = {
