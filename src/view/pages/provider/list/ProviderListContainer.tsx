@@ -23,7 +23,8 @@ const ProviderListContainer = () => {
     28435: 'PragmaticPlay',
     29387: 'KaGaming',
     29559: 'Bgaming',
-    29629: 'Bet industries'
+    29629: 'Bet industries',
+    29631: 'Zeus'
   };
 
   const providerName = providerNameHashMap[user.userId] || '';
