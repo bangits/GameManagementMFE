@@ -17,6 +17,7 @@ const ProviderListContainer = () => {
     28675: 'Elbet',
     28788: 'LSports',
     8285: 'Golden Race',
+    29633: 'Endorphina',
     29531: 'Betsy',
     8286: 'Rival',
     8287: 'Bgaming',
