@@ -21,7 +21,7 @@ import {
   GetProviderGamesResponseModel,
   UpdateImagesRequestModel
 } from '@/domain/models';
-import { ActionResponseModel, cachedFn, ICacheService, IHttpService, MAX_PAGE_SIZE, PrimaryKey } from '@atom/common';
+import { ActionResponseModel, ICacheService, IHttpService, MAX_PAGE_SIZE, PrimaryKey, cachedFn } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 import { EditGameInformationRequestModel } from './../../domain/models/request/EditGameInformationRequestModel';
@@ -95,7 +95,7 @@ export class GameRepository implements IGameRepository {
   gameLaunch = async (gameLauncherRequestModel: GameLaunchRequestModel): Promise<string> => {
     return (
       await this.gameLauncherHttpService.post<{ gameLaunchUrl: string }, {}, GameLaunchRequestModel>({
-        url: API_ROUTES.GAMES.LAUNCH_GAME,
+        url: !gameLauncherRequestModel.isDemo ? API_ROUTES.GAMES.LAUNCH_GAME : API_ROUTES.GAMES.LAUNCH_GAME_DEMO,
         body: gameLauncherRequestModel
       })
     )?.gameLaunchUrl;
