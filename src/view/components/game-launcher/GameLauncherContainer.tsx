@@ -3,7 +3,7 @@ import { GameLaunchViewModel } from '@/view/models';
 import { gameLaunchService } from '@/view/services';
 import { AuthenticatedContext } from '@atom/authorization';
 import { GameLauncher } from '@atom/design-system';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 export const GameLauncherContainer = () => {
   const { user } = useContext(AuthenticatedContext);
@@ -29,8 +29,15 @@ export const GameLauncherContainer = () => {
     }
   );
 
+  const onClose = useCallback(() => setGameLaunchConfig(null), []);
+
   useEffect(() => {
     gameLaunchService.subscribe(setGameLaunchConfig);
+
+    window.addEventListener('message', (event) => {
+      // Endorphina provider
+      if (event.data === 'closeGame' || event.data?.messageId === 'gameExit') onClose();
+    });
 
     return () => {
       setGameLaunchConfig(null);
@@ -43,7 +50,7 @@ export const GameLauncherContainer = () => {
     <GameLauncher
       iframeUrl={!isFetching ? gameIframeUrl : ''}
       gameBackgroundUrl={gameLaunchConfig.gameBackground}
-      onCloseButtonClick={() => setGameLaunchConfig(null)}
+      onCloseButtonClick={onClose}
     />
   );
 };
