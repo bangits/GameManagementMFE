@@ -2,7 +2,7 @@ import { GameManagementContext, GetProviderNamesViewModel } from '@/atom-game-ma
 import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
-export const ProviderSelect = (props: Omit<CustomSelectProps & { isMain?: boolean }, 'options'>) => {
+export const ProviderSelect = ({ isMain, ...props }: Omit<CustomSelectProps & { isMain?: boolean }, 'options'>) => {
   const t = useTranslation();
   const { providerUseCase } = useContext(GameManagementContext);
 
@@ -11,7 +11,7 @@ export const ProviderSelect = (props: Omit<CustomSelectProps & { isMain?: boolea
   const selectOptions = useMemo(() => providerNames.map((c) => ({ value: c.value, label: c.label })), [providerNames]);
 
   useEffect(() => {
-    providerUseCase.getProviderNames(props.isMain).then(setProviderNames);
+    providerUseCase.getProviderNames(isMain).then(setProviderNames);
   }, []);
 
   return (
