@@ -310,10 +310,6 @@ export const generateGameMappings = (mapper: Mapper) => {
       mapFrom((source) => source.subTypeId || source.gameTypeId)
     )
     .forMember(
-      (destination) => destination.hasDemo,
-      mapFrom((source) => (source.hasDemo === '1' ? true : false))
-    )
-    .forMember(
       (destination) => destination.releaseDate,
       mapFrom((source) => convertDateForRequestModel(source.releaseDate))
     );

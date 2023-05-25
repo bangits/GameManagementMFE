@@ -2,18 +2,19 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { IProviderRepository } from '@/domain/boundaries';
 import {
   AddProviderRequestModel,
+  ChangeProviderFreeSpinSupportRequestModel,
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
   GetGameTypesAndCountResponseModel,
   GetProviderByPartnerIdResponseModel,
+  GetProviderIntegrationTypesResponseModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
   GetProvidersByIdResponseModel,
-  UpdateProviderLogoRequestModel,
-  GetProviderIntegrationTypesResponseModel
+  UpdateProviderLogoRequestModel
 } from '@/domain/models';
-import { ActionResponseModel, cachedFn, ICacheService, IHttpService, PrimaryKey } from '@atom/common';
+import { ActionResponseModel, ICacheService, IHttpService, PrimaryKey, cachedFn } from '@atom/common';
 import { inject, injectable } from 'inversify';
 import { API_ROUTES, CACHE_CONSTANTS } from '../constants';
 
@@ -82,6 +83,7 @@ export class ProviderRepository implements IProviderRepository {
       });
     }
   ).bind(this);
+
   editProviderGeneralInfo = async (
     editProviderGeneralInformationRequestModel: EditProviderGeneralInformationRequestModel
   ): Promise<ActionResponseModel> => {
@@ -97,6 +99,15 @@ export class ProviderRepository implements IProviderRepository {
       query: {
         partnerId: partnerId
       }
+    });
+  };
+
+  changeProviderFreeSpinSupport = async (
+    changeProviderFreeSpinSupportRequestModel: ChangeProviderFreeSpinSupportRequestModel
+  ): Promise<ActionResponseModel> => {
+    return await this.httpService.put({
+      url: API_ROUTES.PROVIDERS.CHANGE_FREE_SPIN_SUPPORT,
+      body: changeProviderFreeSpinSupportRequestModel
     });
   };
 

@@ -46,6 +46,7 @@ const GameListContainer = () => {
       rtp: { from: '', to: '' },
       classIds: '',
       hasDemo: null,
+      hasFreeSpin: null,
       status: null,
       gameThemeIds: [],
       gameFeatureIds: [],
@@ -76,6 +77,8 @@ const GameListContainer = () => {
   const { data, requestId, isFetching, refetch } = gameApi.useGetGamesQuery(filters);
 
   const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
+  const [changeGameFreeSpinSupport, { isLoading: isLoadingFreeSpinChange }] =
+    gameApi.useChangeGameFreeSpinSupportMutation();
 
   const { results, rowCount } = (data || {}) as GetGamesViewModel;
 
@@ -122,6 +125,13 @@ const GameListContainer = () => {
   return (
     <>
       <GameList
+        onFreeSpinSupportChange={(gameIds, hasFreeSpinSupport) =>
+          !isLoadingFreeSpinChange &&
+          changeGameFreeSpinSupport({
+            gameIds,
+            hasFreeSpinSupport
+          }).unwrap()
+        }
         gameId={gameId}
         providerId={providerId}
         results={results || []}

@@ -4,7 +4,9 @@ import { date, number, object, SchemaOf, string } from 'yup';
 
 export const editGameInfoValidations = async (
   t: UseValidationTranslationReturnValue
-): Promise<SchemaOf<Omit<EditGameInformationViewModel, 'lastUpdatedUserId' | 'lastUpdatedUserEmail' | 'hasDemo'>>> => {
+): Promise<
+  SchemaOf<Omit<EditGameInformationViewModel, 'lastUpdatedUserId' | 'lastUpdatedUserEmail' | 'hasDemo' | 'hasFreeSpin'>>
+> => {
   return object({
     name: string().trim().required(t.required()).max(50, t.max(50)),
     classId: number().nullable(),

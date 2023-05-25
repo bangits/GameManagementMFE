@@ -17,6 +17,9 @@ export class EditProviderGeneralInformationViewModel {
   @AutoMap()
   logo: string;
 
+  @AutoMap()
+  hasFreeSpin: boolean;
+
   providerCurrenciesId: PrimaryKey[];
   targetMarketsId: PrimaryKey[];
   certifiedCountriesId: PrimaryKey[];

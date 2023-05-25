@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { GameUseCase } from '@/domain/use-case';
 import {
   AddGameViewModel,
+  ChangeGameFreeSpinSupportViewModel,
   EditGameCompatibilityViewModel,
   EditGameInformationViewModel,
   EditGamePropertiesViewModel,
@@ -135,6 +136,15 @@ export const gameApi = createApi({
         return {
           methodName: 'changeGameStatus',
           methodArguments: [changeGameStatusViewModel]
+        };
+      },
+      invalidatesTags: ['Games']
+    }),
+    changeGameFreeSpinSupport: build.mutation<ActionResponseModel, ChangeGameFreeSpinSupportViewModel>({
+      query: (changeGameFreeSpinSupportViewModel) => {
+        return {
+          methodName: 'changeGameFreeSpinSupport',
+          methodArguments: [changeGameFreeSpinSupportViewModel]
         };
       },
       invalidatesTags: ['Games']

@@ -17,7 +17,11 @@ export class EditGameInformationViewModel {
   @AutoMap()
   classId: PrimaryKey;
 
-  hasDemo: string;
+  @AutoMap()
+  hasDemo: boolean;
+
+  @AutoMap()
+  hasFreeSpin: boolean;
 
   releaseDate: Date;
 

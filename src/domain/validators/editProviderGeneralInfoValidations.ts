@@ -8,7 +8,7 @@ export const editProviderGeneralInfoValidations = async (
   SchemaOf<
     Omit<
       EditProviderGeneralInformationViewModel,
-      'providerId' | 'lastUpdatedByUserId' | 'lastUpdatedByUserEmail' | 'logo'
+      'providerId' | 'lastUpdatedByUserId' | 'lastUpdatedByUserEmail' | 'logo' | 'hasFreeSpin'
     >
   >
 > => {

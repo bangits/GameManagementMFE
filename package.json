@@ -26,8 +26,6 @@
     "build-declarations": "tsc -p tsconfig.declarations.json && tscpaths -p tsconfig.declarations.json -s ./src -o ./dist"
   },
   "devDependencies": {
-    "@atom/common": "^2.2.11",
-    "@atom/design-system": "3.0.2",
     "@babel/core": "^7.14.6",
     "@babel/eslint-parser": "^7.14.7",
     "@babel/plugin-proposal-decorators": "^7.15.8",
@@ -42,6 +40,7 @@
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
+    "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.9",
     "@types/systemjs": "^6.1.0",
     "@types/testing-library__jest-dom": "^5.14.0",
@@ -88,14 +87,12 @@
   },
   "dependencies": {
     "@atom/authorization": "^0.1.0",
-    "@atom/design-system": "^3.9.35",
+    "@atom/common": "^2.5.6",
+    "@atom/design-system": "^4.7.16",
     "@atom/partner-management": "^1.1.0",
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
     "@reduxjs/toolkit": "^1.6.2",
-    "@types/react-router-dom": "^5.3.3",
-    "atom": "^1.4.1",
-    "build": "^0.1.4",
     "formik": "^2.2.9",
     "immer": "^9.0.7",
     "inversify": "^5.1.1",
@@ -105,7 +102,6 @@
     "react-router-dom": "^5.3.0",
     "reflect-metadata": "^0.1.13",
     "single-spa-react": "^4.2.0",
-    "yarn": "^1.22.19",
     "yup": "^0.32.10"
   },
   "externalDeps": [

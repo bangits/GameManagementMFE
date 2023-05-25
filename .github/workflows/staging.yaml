@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ['staging']
+    branches: ['staging', 'freespin-support']
   pull_request:
-    branches: ['staging']
+    branches: ['staging', 'freespin-support']
 
   workflow_dispatch:
 

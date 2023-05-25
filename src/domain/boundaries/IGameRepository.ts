@@ -1,6 +1,7 @@
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import {
   AddGameRequestModel,
+  ChangeGameFreeSpinSupportRequestModel,
   ChangeGameStatusRequestModel,
   EditGameCompatibilityRequestModel,
   EditGameInformationRequestModel,
@@ -38,6 +39,9 @@ export interface IGameRepository {
   getProviderGames(getProviderGamesRequestModel: GetProviderGamesRequestModel): Promise<GetProviderGamesResponseModel>;
   gameLaunch(gameLaunchRequestModel: GameLaunchRequestModel): Promise<string>;
   changeGameStatus(changeGameStatus: ChangeGameStatusRequestModel): Promise<ActionResponseModel>;
+  changeGameFreeSpinSupport(
+    changeGameFreeSpinSupportRequestModel: ChangeGameFreeSpinSupportRequestModel
+  ): Promise<ActionResponseModel>;
   editGameInfo(editGameInfoRequestModel: EditGameInformationRequestModel): Promise<ActionResponseModel>;
   editGameProperties(editGamePropertiesRequestModel: EditGamePropertiesRequestModel): Promise<ActionResponseModel>;
   editGameCompatibility(

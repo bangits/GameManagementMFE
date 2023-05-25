@@ -20,6 +20,9 @@ export class ProviderDetailsViewModel {
   @AutoMap()
   id: PrimaryKey;
 
+  @AutoMap()
+  hasFreeSpin: boolean;
+
   targetMarkets: {
     tagName: string;
     id: PrimaryKey;
