@@ -412,10 +412,10 @@
     regenerator-transform "^0.14.5"
     vite-plugin-svgr "^2.4.0"
 
-"@atom/design-system@^4.7.13":
-  version "4.7.13"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-4.7.13.tgz#00e059b6c3a9ad6640778b6b22797443c7776ed7"
-  integrity sha1-AOBZtsOprWZAd4trInl0Q8d3btc=
+"@atom/design-system@^4.7.15":
+  version "4.7.15"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-4.7.15.tgz#eaf64b3d0a5f665f26dd8bd361b1d12151b6b1e1"
+  integrity sha1-6vZLPQpfZl8m3YvTYbHRIVG2seE=
   dependencies:
     "@atom/common" "^2.4.6"
     "@my-ui/core" "^0.11.5"
