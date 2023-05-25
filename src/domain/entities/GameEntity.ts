@@ -51,6 +51,9 @@ export class Game extends BaseEntity {
   hasDemo: boolean;
 
   @AutoMap()
+  hasFreeSpin: boolean;
+
+  @AutoMap()
   mobileScreenModeIsPortrait: boolean;
 
   @AutoMap()

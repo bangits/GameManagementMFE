@@ -3,18 +3,18 @@ import { GameClassSelect, GameTypesSelect, ProviderSelect } from '@/view';
 import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/models';
 import { AuthenticatedContext } from '@atom/authorization';
 import {
-  convertDate,
-  createRenderInputs,
   CustomForm,
   CustomSelectProps,
+  convertDate,
+  createRenderInputs,
   historyService,
   useAsync,
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
-import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
+import { CheckboxWithLabel, FlexibleForm, FlexibleFormProps } from '@atom/design-system';
 import { FastField, Form, useFormikContext } from 'formik';
-import React, { FC, useContext, useMemo } from 'react';
+import { FC, useContext, useMemo } from 'react';
 import { getEditGameInfoInitialValues } from './initialValues';
 
 export interface GameInformationProps {
@@ -154,22 +154,45 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
           }
         },
         {
-          type: 'radio' as const,
+          type: 'custom' as const,
           name: 'hasDemo',
-          label: t.get('hasDemo'),
-          props: {
-            radios: [
-              {
-                label: t.get('yes'),
-                value: 1,
-                name: 'yes'
-              },
-              {
-                label: t.get('no'),
-                value: 0,
-                name: 'no'
-              }
-            ]
+          labelPositionRelative: true,
+          labelText: t.get('hasDemo'),
+          col: 2,
+          component: () => {
+            const form = useFormikContext<EditGameInformationViewModel>();
+
+            return (
+              <CheckboxWithLabel
+                className='mt-2'
+                checked={form.values.hasDemo}
+                variant='switch'
+                label={t.get('yes')}
+                onChange={(e) => form.setFieldValue('hasDemo', e.target.checked)}
+                startLabel={t.get('no')}
+              />
+            );
+          }
+        },
+        {
+          type: 'custom' as const,
+          name: 'hasFreeSpinSupport',
+          labelPositionRelative: true,
+          labelText: t.get('freeSpinApiSupport'),
+          col: 2,
+          component: () => {
+            const form = useFormikContext<EditGameInformationViewModel>();
+
+            return (
+              <CheckboxWithLabel
+                className='mt-2'
+                checked={form.values.hasFreeSpin}
+                variant='switch'
+                label={t.get('yes')}
+                onChange={(e) => form.setFieldValue('hasFreeSpin', e.target.checked)}
+                startLabel={t.get('no')}
+              />
+            );
           }
         }
       ],

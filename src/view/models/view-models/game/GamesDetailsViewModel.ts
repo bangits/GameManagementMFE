@@ -40,6 +40,9 @@ export class GamesDetailsViewModel {
   hasDemo: boolean;
 
   @AutoMap()
+  hasFreeSpin: boolean;
+
+  @AutoMap()
   mobileScreenModeIsPortrait: boolean;
 
   @AutoMap()
