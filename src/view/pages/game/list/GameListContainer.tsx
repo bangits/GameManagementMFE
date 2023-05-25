@@ -77,7 +77,8 @@ const GameListContainer = () => {
   const { data, requestId, isFetching, refetch } = gameApi.useGetGamesQuery(filters);
 
   const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
-  const [changeGameFreeSpinSupport] = gameApi.useChangeGameFreeSpinSupportMutation();
+  const [changeGameFreeSpinSupport, { isLoading: isLoadingFreeSpinChange }] =
+    gameApi.useChangeGameFreeSpinSupportMutation();
 
   const { results, rowCount } = (data || {}) as GetGamesViewModel;
 
@@ -125,6 +126,7 @@ const GameListContainer = () => {
     <>
       <GameList
         onFreeSpinSupportChange={(gameIds, hasFreeSpinSupport) =>
+          !isLoadingFreeSpinChange &&
           changeGameFreeSpinSupport({
             gameIds,
             hasFreeSpinSupport

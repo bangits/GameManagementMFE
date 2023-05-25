@@ -11,6 +11,9 @@ export class GetProviderRequestModel extends PagedModel {
   @AutoMap()
   providerName: string;
 
+  @AutoMap()
+  hasFreeSpin: boolean;
+
   IntegrationTypeId: PrimaryKey;
 
   name: string;

@@ -15,6 +15,9 @@ export class EditProviderGeneralInformationRequestModel {
   lastUpdatedByUserId: PrimaryKey;
 
   @AutoMap()
+  hasFreeSpin: boolean;
+
+  @AutoMap()
   lastUpdatedByUserEmail: string;
 
   providerCurrencies: {

@@ -11,7 +11,8 @@ export const API_ROUTES = {
     GET_PROVIDER_INTEGRATION_TYPES: 'IntegrationType',
     GET_: '/Providers',
     PARTNER_PROVIDER: PROVIDER_ROUTE + '/PartnerId',
-    UPDATE_LOGO: PROVIDER_ROUTE + '/Logo'
+    UPDATE_LOGO: PROVIDER_ROUTE + '/Logo',
+    CHANGE_FREE_SPIN_SUPPORT: PROVIDER_ROUTE + '/FreeSpinSupport'
   },
   GAMES: {
     GET_GAME_NAMES: GAME_ROUTE + '/GetAllGameNames',

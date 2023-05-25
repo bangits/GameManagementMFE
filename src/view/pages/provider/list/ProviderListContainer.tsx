@@ -38,6 +38,7 @@ const ProviderListContainer = () => {
       providerName,
       integrationTypeId: null,
       currency: [],
+      hasFreeSpin: null,
       gameCount: {
         from: null,
         to: null
@@ -57,6 +58,8 @@ const ProviderListContainer = () => {
   const { data, requestId, isFetching, refetch } = providerApi.useGetProviderQuery(filters);
 
   const [changeProviderStatus] = providerApi.useChangeProviderStatusMutation();
+  const [changeProviderFreeSpinSupport, { isLoading: isLoadingFreeSpinChange }] =
+    providerApi.useChangeProviderFreeSpinSupportMutation();
 
   const { results, rowCount } = (data || {}) as GetProvidersViewModel;
 
@@ -90,37 +93,42 @@ const ProviderListContainer = () => {
   );
 
   return (
-    <>
-      <ProviderList
-        results={results || []}
-        providerName={providerName}
-        isFilteredData={firstRequestId !== requestId}
-        isFirstResultEmpty={firstData && !firstData.results.length}
-        isFetching={isFetching}
-        refetch={refetch}
-        rowCount={rowCount}
-        onFiltersChange={(parameters) => {
-          const sorting = parameters.sortedBy
-            ? {
-                direction: parameters.sortedBy.desc ? SortTypesEnum.DESC : SortTypesEnum.ASC,
-                propertyId: parameters.sortedBy.id
-              }
-            : null;
+    <ProviderList
+      onFreeSpinSupportChange={(providerIds, hasFreeSpinSupport) =>
+        !isLoadingFreeSpinChange &&
+        changeProviderFreeSpinSupport({
+          providerIds,
+          hasFreeSpinSupport
+        }).unwrap()
+      }
+      results={results || []}
+      providerName={providerName}
+      isFilteredData={firstRequestId !== requestId}
+      isFirstResultEmpty={firstData && !firstData.results.length}
+      isFetching={isFetching}
+      refetch={refetch}
+      rowCount={rowCount}
+      onFiltersChange={(parameters) => {
+        const sorting = parameters.sortedBy
+          ? {
+              direction: parameters.sortedBy.desc ? SortTypesEnum.DESC : SortTypesEnum.ASC,
+              propertyId: parameters.sortedBy.id
+            }
+          : null;
 
-          setFilters({
-            ...filters,
-            ...parameters.filters,
-            sorting
-          });
-        }}
-        filtersInitialValues={filtersInitialValues}
-        onActivateButtonClick={onActivateButtonClick}
-        onInActivateButtonClick={onInActivateButtonClick}
-        shouldShowActivateButton={(column) => column.status === ProviderStatusesEnum.Inactive}
-        shouldShowInActivateButton={(column) => column.status === ProviderStatusesEnum.Active}
-        partnersTableLoadingIds={providerTableLoadingIds}
-      />
-    </>
+        setFilters({
+          ...filters,
+          ...parameters.filters,
+          sorting
+        });
+      }}
+      filtersInitialValues={filtersInitialValues}
+      onActivateButtonClick={onActivateButtonClick}
+      onInActivateButtonClick={onInActivateButtonClick}
+      shouldShowActivateButton={(column) => column.status === ProviderStatusesEnum.Inactive}
+      shouldShowInActivateButton={(column) => column.status === ProviderStatusesEnum.Active}
+      partnersTableLoadingIds={providerTableLoadingIds}
+    />
   );
 };
 

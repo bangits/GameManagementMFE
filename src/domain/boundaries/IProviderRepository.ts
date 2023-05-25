@@ -1,11 +1,12 @@
 import { ActionResponseModel, PrimaryKey } from '@atom/common';
 import {
   AddProviderRequestModel,
+  ChangeProviderFreeSpinSupportRequestModel,
   ChangeProviderStatusRequestModel,
   EditProviderGeneralInformationRequestModel,
-  GetProviderIntegrationTypesResponseModel,
   GetGameTypesAndCountResponseModel,
   GetProviderByPartnerIdResponseModel,
+  GetProviderIntegrationTypesResponseModel,
   GetProviderNamesResponseModel,
   GetProviderRequestModel,
   GetProviderResponseModel,
@@ -20,6 +21,9 @@ export interface IProviderRepository {
 
   addProvider(addProviderRequestModel: AddProviderRequestModel): Promise<boolean>;
   changeProviderStatus(changeProviderStatus: ChangeProviderStatusRequestModel): Promise<ActionResponseModel>;
+  changeProviderFreeSpinSupport(
+    changeProviderFreeSpinSupportRequestModel: ChangeProviderFreeSpinSupportRequestModel
+  ): Promise<ActionResponseModel>;
   getProvidersById(providerId: PrimaryKey): Promise<GetProvidersByIdResponseModel>;
   getProviderGameTypesAndCount(providerId: PrimaryKey): Promise<GetGameTypesAndCountResponseModel[]>;
   editProviderGeneralInfo(

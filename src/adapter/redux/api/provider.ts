@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { ProviderUseCase } from '@/domain/use-case';
 import {
   AddProviderViewModel,
+  ChangeProviderFreeSpinSupportViewModel,
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
   GetProviderIntegrationTypesViewModel,
@@ -33,6 +34,15 @@ export const providerApi = createApi({
         return {
           methodName: 'changeProviderStatus',
           methodArguments: [changeProviderStatusViewModel]
+        };
+      },
+      invalidatesTags: ['Providers']
+    }),
+    changeProviderFreeSpinSupport: build.mutation<ActionResponseModel, ChangeProviderFreeSpinSupportViewModel>({
+      query: (changeProviderFreeSpinSupportViewModel) => {
+        return {
+          methodName: 'changeProviderFreeSpinSupport',
+          methodArguments: [changeProviderFreeSpinSupportViewModel]
         };
       },
       invalidatesTags: ['Providers']

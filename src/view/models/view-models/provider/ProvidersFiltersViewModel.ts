@@ -9,6 +9,9 @@ export class ProvidersFiltersViewModel extends PagedModel {
   @AutoMap()
   providerName: string;
 
+  @AutoMap()
+  hasFreeSpin: boolean;
+
   integrationTypeId: PrimaryKey;
 
   @AutoMap()

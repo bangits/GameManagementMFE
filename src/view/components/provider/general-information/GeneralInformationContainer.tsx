@@ -2,7 +2,7 @@ import { providerApi } from '@/adapter/redux/api';
 import { EditProviderGeneralInformationViewModel, ProviderDetailsViewModel } from '@/view/models';
 import { useTranslation } from '@atom/common';
 import { alert } from '@atom/design-system';
-import React, { FC, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import GeneralInformation from './GeneralInformation';
 
@@ -35,11 +35,7 @@ const GeneralInformationContainer: FC<GeneralInformationContainerProps> = ({ dat
     [+params.providerId]
   );
 
-  return (
-    <>
-      <GeneralInformation data={data} onSubmit={onSubmit} isEdit={isEdit} />
-    </>
-  );
+  return <GeneralInformation data={data} onSubmit={onSubmit} isEdit={isEdit} />;
 };
 
 export default GeneralInformationContainer;
