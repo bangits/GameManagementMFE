@@ -1,5 +1,6 @@
 export * from './AddGameRequestModel';
 export * from './AddProviderRequestModel';
+export * from './ChangeGameFreeSpinSupportRequestModel';
 export * from './ChangeGameStatusRequestModel';
 export * from './ChangeProviderStatusRequestModel';
 export * from './EditGameCompatibilityRequestModel';

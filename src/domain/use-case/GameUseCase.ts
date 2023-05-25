@@ -16,6 +16,7 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddGameViewModel,
+  ChangeGameFreeSpinSupportViewModel,
   ChangeGameStatusViewModel,
   EditGameCompatibilityViewModel,
   EditGameInformationViewModel,
@@ -28,10 +29,10 @@ import {
   GetGameNamesViewModel,
   GetGamePlatformsViewModel,
   GetGameSupportedBrowsersViewModel,
-  GetGamesViewModel,
   GetGameThemesViewModel,
   GetGameTypesViewModel,
   GetGameVolatilitiesViewModel,
+  GetGamesViewModel,
   ProviderGamesFilterViewModel,
   ProviderGamesViewModel,
   UpdateGameImagesViewModel
@@ -144,6 +145,12 @@ export class GameUseCase {
     );
 
     return this.gameRepository.changeGameStatus(changeGameStatusRequestModel);
+  };
+
+  changeGameFreeSpinSupport = async (
+    changeGameFreeSpinSupportViewModel: ChangeGameFreeSpinSupportViewModel
+  ): Promise<ActionResponseModel> => {
+    return this.gameRepository.changeGameFreeSpinSupport(changeGameFreeSpinSupportViewModel);
   };
 
   editGameInfo = async (editGameInfoViewModel: EditGameInformationViewModel): Promise<ActionResponseModel> => {

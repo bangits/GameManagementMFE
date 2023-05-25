@@ -27,6 +27,7 @@ export const API_ROUTES = {
     LAUNCH_GAME: '/GameLaunch',
     LAUNCH_GAME_DEMO: '/GameLaunch/Demo',
     CHANGE_STATUS: GAME_ROUTE + '/status',
+    CHANGE_FREE_SPIN_SUPPORT: GAME_ROUTE + '/FreeSpinSupport',
     EDIT_GAME_INFO: GAME_ROUTE + '/Info',
     GET_BY_ID: GAME_ROUTE + '/id',
     EDIT_GAME_PROPERTIES: GAME_ROUTE + '/Property',

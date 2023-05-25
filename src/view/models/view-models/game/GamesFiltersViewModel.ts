@@ -24,6 +24,8 @@ export class GamesFiltersViewModel extends PagedModel {
   @AutoMap()
   hasDemo: boolean;
   @AutoMap()
+  hasFreeSpin: boolean;
+  @AutoMap()
   gameId: PrimaryKey | '';
   @AutoMap()
   createdBy: string;

@@ -23,6 +23,8 @@ export class GetGameRequestModel extends PagedModel {
   @AutoMap()
   hasDemo: boolean;
   @AutoMap()
+  hasFreeSpin: boolean;
+  @AutoMap()
   createdByUserEmail: string;
   @AutoMap()
   gameCurrencyIds: PrimaryKey[];
