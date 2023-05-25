@@ -77,6 +77,11 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
           title: t.get('hasDemo'),
           variant: 'default',
           value: data?.hasDemo ? t.get('yes') : t.get('no')
+        },
+        {
+          title: t.get('freeSpinApiSupport'),
+          variant: 'default',
+          value: data?.hasFreeSpin ? t.get('yes') : t.get('no')
         }
       ]
     }),
@@ -176,7 +181,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
         },
         {
           type: 'custom' as const,
-          name: 'hasFreeSpinSupport',
+          name: 'hasFreeSpin',
           labelPositionRelative: true,
           labelText: t.get('freeSpinApiSupport'),
           col: 2,
