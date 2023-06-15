@@ -13,6 +13,7 @@ export const editProviderGeneralInfoInitialValues = (
     providerCurrenciesId: data.providerCurrencies.map((currency) => currency.id) || null,
     restrictedCountriesId: data.restrictedCountries.map((country) => country.id) || null,
     targetMarketsId: data.targetMarkets.map((markets) => markets.id),
-    logo: data.logo || 'there is not a logo'
+    logo: data.logo,
+    hasFreeSpin: data.hasFreeSpin
   };
 };

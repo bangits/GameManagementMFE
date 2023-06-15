@@ -1,5 +1,6 @@
 import { GameStatusesEnum } from '@/domain/models';
 import {
+  FreeSpinPopover,
   GameClassSelect,
   GameFeaturesSelect,
   GamePlatformSelect,
@@ -12,17 +13,18 @@ import {
 } from '@/view';
 import { gameStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
-import { GamesFiltersViewModel, GameStatusesSortingEnum, GamesViewModel } from '@/view/models';
+import { GameStatusesSortingEnum, GamesFiltersViewModel, GamesViewModel } from '@/view/models';
 import { AuthenticatedContext } from '@atom/authorization';
 import {
+  ActionResponseModel,
   CountriesSelect,
   CurrencySelect,
-  historyService,
   INPUT_MAX_VALUES,
   LanguageSelect,
   PageIdsEnum,
   PrimaryKey,
   TablePage,
+  historyService,
   useTranslation
 } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
@@ -41,6 +43,8 @@ export interface GameListProps {
   gameId?: PrimaryKey;
 
   // actions
+  onFreeSpinSupportChange: (gameIds: PrimaryKey[], hasFreeSpinSupport: boolean) => Promise<ActionResponseModel>;
+
   onActivateButtonClick: (column: GamesViewModel | GamesViewModel[]) => void;
   shouldShowActivateButton: (column: GamesViewModel) => boolean;
 
@@ -63,7 +67,8 @@ function GameList({
   gameTableLoadingIds,
   refetch,
   providerId,
-  gameId
+  gameId,
+  onFreeSpinSupportChange
 }: GameListProps) {
   const { user } = useContext(AuthenticatedContext);
 
@@ -291,6 +296,19 @@ function GameList({
         }
       },
       {
+        label: t.get('freeSpinApiSupport'),
+        name: 'hasFreeSpin' as keyof GamesFiltersViewModel,
+        type: 'truthly-select' as const,
+        props: {
+          inputLabel: t.get('freeSpinApiSupport')
+        },
+        translations: {
+          trueValue: t.get('yes'),
+          falseValue: t.get('no'),
+          nullValue: t.get('all')
+        }
+      },
+      {
         name: 'gameThemeIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
         label: t.get('gameThemes'),
@@ -510,6 +528,21 @@ function GameList({
           initialValues: filters,
           filters: filtersList
         }}
+        tableBulkActions={[
+          {
+            component: (columns) => (
+              <FreeSpinPopover
+                onSubmit={(hasFreeSpinSupport) =>
+                  onFreeSpinSupportChange(
+                    columns.map((c) => c.gameId),
+                    hasFreeSpinSupport
+                  )
+                }
+              />
+            ),
+            shouldShow: () => true
+          }
+        ]}
         tableProps={{
           data: results,
           columns: tableColumns,

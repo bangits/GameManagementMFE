@@ -1,10 +1,10 @@
 import { ProviderStatusesEnum } from '@/domain/models/enums';
-import { ProviderIntegrationTypesSelect } from '@/view';
+import { FreeSpinPopover, ProviderIntegrationTypesSelect } from '@/view';
 import { providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
-import { ProvidersFiltersViewModel, ProviderStatusesSortingEnum, ProvidersViewModel } from '@/view/models';
+import { ProviderStatusesSortingEnum, ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
 import { AuthenticatedContext } from '@atom/authorization';
-import { historyService, PageIdsEnum, PrimaryKey, TablePage, useTranslation } from '@atom/common';
+import { ActionResponseModel, PageIdsEnum, PrimaryKey, TablePage, historyService, useTranslation } from '@atom/common';
 import { FetchDataParameters, Icons, PageWrapper } from '@atom/design-system';
 import { useContext, useMemo } from 'react';
 
@@ -21,6 +21,8 @@ export interface ProviderListProps {
   providerName?: string;
 
   // actions
+  onFreeSpinSupportChange: (providerIds: PrimaryKey[], hasFreeSpinSupport: boolean) => Promise<ActionResponseModel>;
+
   onActivateButtonClick: (column: ProvidersViewModel | ProvidersViewModel[]) => void;
   shouldShowActivateButton: (column: ProvidersViewModel) => boolean;
 
@@ -42,6 +44,7 @@ function ProviderList({
   shouldShowInActivateButton,
   partnersTableLoadingIds,
   refetch,
+  onFreeSpinSupportChange,
   providerName
 }: ProviderListProps) {
   const { user } = useContext(AuthenticatedContext);
@@ -97,7 +100,7 @@ function ProviderList({
     () => [
       {
         label: t.get('providerId'),
-        name: 'providerId' as keyof ProvidersViewModel,
+        name: 'providerId' as keyof ProvidersFiltersViewModel,
         type: 'input' as const,
         props: {
           label: t.get('providerId'),
@@ -106,7 +109,7 @@ function ProviderList({
       },
       {
         label: t.get('partnerId'),
-        name: 'partnerId' as keyof ProvidersViewModel,
+        name: 'partnerId' as keyof ProvidersFiltersViewModel,
         type: 'input' as const,
         props: {
           label: t.get('partnerId'),
@@ -114,7 +117,7 @@ function ProviderList({
         }
       },
       {
-        name: 'providerName' as keyof ProvidersViewModel,
+        name: 'providerName' as keyof ProvidersFiltersViewModel,
         type: 'input' as const,
         label: t.get('providerName'),
         props: {
@@ -123,7 +126,7 @@ function ProviderList({
         }
       },
       {
-        name: 'integrationType' as keyof ProvidersViewModel,
+        name: 'integrationType' as keyof ProvidersFiltersViewModel,
         type: 'custom' as const,
         label: t.get('integrationType'),
         component: ({ onChange, filterValues }) => {
@@ -140,7 +143,7 @@ function ProviderList({
       },
       {
         label: t.get('status'),
-        name: 'status',
+        name: 'status' as keyof ProvidersFiltersViewModel,
         type: 'select' as const,
         props: {
           selectAll: true,
@@ -154,6 +157,19 @@ function ProviderList({
           ],
           isSearchable: true,
           isMulti: true
+        }
+      },
+      {
+        label: t.get('freeSpinApiSupport'),
+        name: 'hasFreeSpin' as keyof ProvidersFiltersViewModel,
+        type: 'truthly-select' as const,
+        props: {
+          inputLabel: t.get('freeSpinApiSupport')
+        },
+        translations: {
+          trueValue: t.get('yes'),
+          falseValue: t.get('no'),
+          nullValue: t.get('all')
         }
       }
     ],
@@ -177,6 +193,21 @@ function ProviderList({
         isFetching={isFetching}
         isLoading={isFetching}
         refetch={refetch}
+        tableBulkActions={[
+          {
+            component: (columns) => (
+              <FreeSpinPopover
+                onSubmit={(hasFreeSpinSupport) =>
+                  onFreeSpinSupportChange(
+                    columns.map((c) => c.providerId),
+                    hasFreeSpinSupport
+                  )
+                }
+              />
+            ),
+            shouldShow: () => true
+          }
+        ]}
         filterProps={{
           defaultOpened: false,
           initialValues: filtersInitialValues,

@@ -10,14 +10,15 @@ export const getEditGameInfoInitialValues = (data: GamesDetailsViewModel): EditG
     classId: data.classId || null,
     externalId: data.externalId || null,
     gameId: data.gameId || null,
-    hasDemo: data.hasDemo ? '1' : '0',
+    hasDemo: data.hasDemo,
     lastUpdatedUserEmail: data.lastUpdatedByUserEmail || null,
     lastUpdatedUserId: 1,
     name: data.gameName,
     releaseDate: data.releaseDate && new Date(data.releaseDate),
     subTypeId: data.subType?.id || null,
     gameTypeId: data.type?.id || null,
-    providerId: data.providerId
+    providerId: data.providerId,
+    hasFreeSpin: data.hasFreeSpin
   };
 };
 export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGamePropertiesViewModel => {

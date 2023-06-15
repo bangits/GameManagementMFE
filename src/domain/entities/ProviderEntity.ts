@@ -24,6 +24,9 @@ export class Provider extends BaseEntity {
   externalId: string;
 
   @AutoMap()
+  hasFreeSpin: boolean;
+
+  @AutoMap()
   integrationTypeName: string;
 
   name: string;

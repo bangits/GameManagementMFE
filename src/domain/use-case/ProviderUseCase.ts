@@ -12,6 +12,7 @@ import {
 import { mapper } from '@/mapper';
 import {
   AddProviderViewModel,
+  ChangeProviderFreeSpinSupportViewModel,
   ChangeProviderStatusViewModel,
   EditProviderGeneralInformationViewModel,
   GetProviderByPartnerIdViewModel,
@@ -68,6 +69,12 @@ export class ProviderUseCase {
     );
 
     return this.providerRepository.changeProviderStatus(changeProviderStatusRequestModel);
+  };
+
+  changeProviderFreeSpinSupport = async (
+    changeProviderFreeSpinSupportViewModel: ChangeProviderFreeSpinSupportViewModel
+  ): Promise<ActionResponseModel> => {
+    return this.providerRepository.changeProviderFreeSpinSupport(changeProviderFreeSpinSupportViewModel);
   };
 
   getProvidersById = async (providerId: PrimaryKey): Promise<GetProvidersByIdViewModel> => {

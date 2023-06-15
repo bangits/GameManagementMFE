@@ -1,21 +1,27 @@
 import { editProviderGeneralInfoValidations } from '@/domain/validators';
 import { EditProviderGeneralInformationViewModel, ProviderDetailsViewModel } from '@/view/models';
 import {
-  copyToClipboard,
   CountriesSelect,
-  createRenderInputs,
   CurrencySelect,
   CustomForm,
   CustomSelect,
   CustomSelectProps,
+  copyToClipboard,
+  createRenderInputs,
   historyService,
   useAsync,
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
-import { FlexibleForm, FlexibleFormProps, ProvidersGeneralInfo, ProvidersGeneralInfoProps } from '@atom/design-system';
-import { FastField, Form } from 'formik';
-import React, { FC, useMemo } from 'react';
+import {
+  CheckboxWithLabel,
+  FlexibleForm,
+  FlexibleFormProps,
+  ProvidersGeneralInfo,
+  ProvidersGeneralInfoProps
+} from '@atom/design-system';
+import { FastField, Form, useFormikContext } from 'formik';
+import { FC, useMemo } from 'react';
 import { editProviderGeneralInfoInitialValues } from './initialValues';
 
 export interface GeneralInformationProps {
@@ -243,6 +249,26 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
           type: 'input' as const,
           name: 'absoluteDemoUrl',
           label: t.get('absoluteDemoURL')
+        },
+        {
+          type: 'custom' as const,
+          name: 'hasFreeSpin',
+          labelPositionRelative: true,
+          labelText: t.get('freeSpinApiSupport'),
+          component: () => {
+            const form = useFormikContext<EditProviderGeneralInformationViewModel>();
+
+            return (
+              <CheckboxWithLabel
+                className='mt-2'
+                checked={form.values.hasFreeSpin}
+                variant='switch'
+                label={t.get('yes')}
+                onChange={(e) => form.setFieldValue('hasFreeSpin', e.target.checked)}
+                startLabel={t.get('no')}
+              />
+            );
+          }
         }
       ],
       renderInputs
@@ -255,6 +281,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
     [translationValidations],
     null
   );
+
   return (
     <CustomForm
       showKeepChangesModal
@@ -290,6 +317,12 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
                 <>
                   <ProvidersGeneralInfo
                     noDataText={t.get('emptyValue')}
+                    labelGroups={[
+                      {
+                        title: t.get('freeSpinApiSupport'),
+                        content: data.hasFreeSpin ? t.get('yes') : t.get('no')
+                      }
+                    ]}
                     totalMarket={totalMarket}
                     certifiedCountries={certifiedCountries}
                     restrictedCountries={restrictedCountries}

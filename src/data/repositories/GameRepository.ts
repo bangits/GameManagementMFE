@@ -2,6 +2,7 @@ import { DI_CONSTANTS } from '@/di/constants';
 import { IGameRepository } from '@/domain/boundaries';
 import {
   AddGameRequestModel,
+  ChangeGameFreeSpinSupportRequestModel,
   ChangeGameStatusRequestModel,
   EditGameCompatibilityRequestModel,
   EditGamePropertiesRequestModel,
@@ -155,6 +156,15 @@ export class GameRepository implements IGameRepository {
     return await this.httpService.put<ActionResponseModel, ChangeGameStatusRequestModel, {}>({
       url: API_ROUTES.GAMES.CHANGE_STATUS,
       body: changeGameStatusRequestModel
+    });
+  };
+
+  changeGameFreeSpinSupport = async (
+    changeGameFreeSpinSupportRequestModel: ChangeGameFreeSpinSupportRequestModel
+  ): Promise<ActionResponseModel> => {
+    return await this.httpService.put({
+      url: API_ROUTES.GAMES.CHANGE_FREE_SPIN_SUPPORT,
+      body: changeGameFreeSpinSupportRequestModel
     });
   };
 
