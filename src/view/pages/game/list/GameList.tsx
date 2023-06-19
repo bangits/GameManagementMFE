@@ -203,7 +203,7 @@ function GameList({
             fullWidth
             isMulti
             onChange={(changedValue) => onChange('providerIds', changedValue)}
-            value={providerId ? [providerId] : filterValues.providerIds}
+            value={providerId ? (Array.isArray(providerId) ? providerId : [providerId]) : filterValues.providerIds}
             isDisabled={!!providerId}
           />
         )

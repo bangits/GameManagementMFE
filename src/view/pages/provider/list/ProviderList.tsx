@@ -133,6 +133,7 @@ function ProviderList({
           return (
             <ProviderIntegrationTypesSelect
               inputLabel={t.get('IntegrationTypeId')}
+              isDisabled={!!filtersInitialValues.integrationTypeId}
               fullWidth
               selectAll
               value={filterValues.integrationTypeId}
@@ -173,7 +174,7 @@ function ProviderList({
         }
       }
     ],
-    [t]
+    [t, filtersInitialValues]
   );
 
   const addProviderButtonProps = useMemo(

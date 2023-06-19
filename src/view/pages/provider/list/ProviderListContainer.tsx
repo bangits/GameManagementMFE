@@ -1,5 +1,5 @@
 import { providerApi } from '@/adapter/redux/api';
-import { ProviderStatusesEnum } from '@/domain/models';
+import { IntegrationTypesEnum, ProviderStatusesEnum } from '@/domain/models';
 import { showProviderActivateDialog, showProviderInActivateDialog } from '@/view/dialogs';
 import { GetProvidersViewModel, ProvidersFiltersViewModel, ProvidersViewModel } from '@/view/models';
 import { AuthenticatedContext } from '@atom/authorization';
@@ -18,6 +18,7 @@ const ProviderListContainer = () => {
     28788: 'LSports',
     8285: 'Golden Race',
     29633: 'Endorphina',
+    11065: 'Pragmatic Play',
     29638: 'Gamzix',
     29531: 'Betsy',
     8286: 'Rival',
@@ -36,7 +37,7 @@ const ProviderListContainer = () => {
       providerId: '',
       partnerId: '',
       providerName,
-      integrationTypeId: null,
+      integrationTypeId: providerName ? IntegrationTypesEnum.DIRECT : null,
       currency: [],
       hasFreeSpin: null,
       gameCount: {
