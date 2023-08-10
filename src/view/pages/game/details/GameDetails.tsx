@@ -1,41 +1,86 @@
-import { GameGeneralInformationContainer } from '@/view';
-import { gameImagesConfig, gameStatusesConfig } from '@/view/configs';
-import { GamesDetailsViewModel } from '@/view/models';
-import { BannerUploader, convertDate, redirectToURL, useTranslation } from '@atom/common';
-import {
-  GameDetails as GameDetailsPage,
-  GameDetailsProps as GameDetailsPageProps,
-  PageWrapper
-} from '@atom/design-system';
+import { gameApi } from '@/adapter/redux/api';
+import { GameActionsViewModel, GamesDetailsViewModel } from '@/atom-game-management';
+import { GameStatusesEnum } from '@/domain';
+import { GameDetailsSidebar, GameGeneralInformationContainer } from '@/view';
+import { gameStatusesConfig } from '@/view/configs';
+import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
+import { convertDate, redirectToURL, useActionWithDialog, useTranslation } from '@atom/common';
+import { DetailsPage, ItemDetails } from '@atom/design-system';
 import { FC, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 
 export interface GameDetailsProps {
   data: GamesDetailsViewModel;
-  // actions
-  shouldShowActivateButton: boolean;
-  shouldShowInActivateButton: boolean;
-  onInActivateButtonClick: () => void;
-  onActivateButtonClick: () => void;
+  isFetching: boolean;
+  originalArgs: any;
+  refetch: () => void;
   onPlayButtonClick: () => void;
   onDemoButtonClick: () => void;
-  onGameBackgroundChange: (image: string) => void;
-  onGameMainImageChange: (image: string) => void;
-  imageLoader?: boolean;
+  onGameBackgroundChange: () => void;
+  onGameMainImageChange: () => void;
 }
 
 const GameDetails: FC<GameDetailsProps> = ({
   data,
-  shouldShowActivateButton,
-  shouldShowInActivateButton,
-  onActivateButtonClick,
-  onInActivateButtonClick,
+  refetch,
+  isFetching,
+  originalArgs,
   onPlayButtonClick,
   onDemoButtonClick,
   onGameBackgroundChange,
-  onGameMainImageChange,
-  imageLoader
+  onGameMainImageChange
 }) => {
   const t = useTranslation();
+  const dispatch = useDispatch();
+
+  const [changeGameStatus, { isLoading }] = gameApi.useChangeGameStatusMutation();
+
+  const { openDialogFn: onActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
+    dialogFn: showGameActivateDialog,
+    actionFn: (gameIds) =>
+      changeGameStatus({
+        gameIds,
+        statusId: GameStatusesEnum.ACTIVE,
+        lastUpdatedByUserId: 2,
+        lastUpdatedByUserEmail: 'test@gmail․com'
+      }).unwrap(),
+    isFetching,
+    t,
+    refetch: () => {
+      dispatch(
+        gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
+          Object.assign(draft, {
+            statusId: GameStatusesEnum.ACTIVE
+          });
+        })
+      );
+    },
+    getColumnId: (column) => column.gameId
+  });
+
+  const { openDialogFn: onInActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
+    dialogFn: showGameInActivateDialog,
+    actionFn: (gameIds) => {
+      return changeGameStatus({
+        gameIds,
+        statusId: GameStatusesEnum.INACTIVE,
+        lastUpdatedByUserId: 2,
+        lastUpdatedByUserEmail: 'test@gmail.com'
+      }).unwrap();
+    },
+    isFetching,
+    t,
+    refetch: () => {
+      dispatch(
+        gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
+          Object.assign(draft, {
+            statusId: GameStatusesEnum.INACTIVE
+          });
+        })
+      );
+    },
+    getColumnId: (column) => column.gameId
+  });
 
   const breadCrumbs = useMemo(
     () => [
@@ -58,45 +103,38 @@ const GameDetails: FC<GameDetailsProps> = ({
       statusLabel: t.get(gameStatusesConfig[data.statusId].translationKey),
       variant: gameStatusesConfig[data.statusId].variant,
       actions: [
-        ...(shouldShowActivateButton
+        ...(data.statusId === GameStatusesEnum.INACTIVE
           ? [
               {
                 iconName: 'CheckButtonIcon' as const,
-                onClick: onActivateButtonClick,
+                onClick: () =>
+                  onActivateButtonClick({
+                    gameId: data.gameId,
+                    name: data.gameName
+                  }),
                 tooltipText: t.get('activate')
               }
             ]
           : []),
-        ...(shouldShowInActivateButton
+        ...(data.statusId === GameStatusesEnum.ACTIVE
           ? [
               {
                 iconName: 'BlockButtonIcon' as const,
-                onClick: onInActivateButtonClick,
+                onClick: () =>
+                  onInActivateButtonClick({
+                    gameId: data.gameId,
+                    name: data.gameName
+                  }),
                 tooltipText: t.get('inActivate')
               }
             ]
           : [])
       ]
     }),
-    [shouldShowInActivateButton, onActivateButtonClick, shouldShowActivateButton, onInActivateButtonClick, t]
+    [onActivateButtonClick, onInActivateButtonClick, data, t]
   );
 
-  const translations = useMemo<GameDetailsPageProps['translations']>(
-    () => ({
-      createdBy: t.get('createdBy'),
-      creationDate: t.get('creationDate'),
-      status: t.get('status'),
-      lastUpdateDate: t.get('lastUpdateDate'),
-      lastUpdateBy: t.get('lastUpdateBy'),
-      generalInformation: t.get('generalInformation'),
-      assets: t.get('assets'),
-      playButton: t.get('play'),
-      playDemoButton: t.get('playDemo')
-    }),
-    [t]
-  );
-
-  const buttons = useMemo<GameDetailsPageProps['buttons']>(
+  const buttons = useMemo(
     () => ({
       playButtonProps: {
         onClick: onPlayButtonClick
@@ -109,50 +147,43 @@ const GameDetails: FC<GameDetailsProps> = ({
     [data]
   );
 
+  const tabs = useMemo(
+    () => [
+      {
+        title: t.get('generalInformation'),
+        value: 1,
+        content: <GameGeneralInformationContainer data={data} />
+      },
+      {
+        title: t.get('assets'),
+        value: 2
+      }
+    ],
+    [data]
+  );
+
   return (
-    <PageWrapper>
-      <BannerUploader
-        minCropBoxWidth={gameImagesConfig.MIN_BACKGROUND_WIDTH}
-        minCropBoxHeight={gameImagesConfig.MIN_BACKGROUND_HEIGHT}
-        title={t.get('gameBackground')}
-        onChange={onGameBackgroundChange}
-        initialImage={data.backGroundImage}
-        aspectRatio={2 / 1}>
-        {(openBackgroundImageUploader) => (
-          <>
-            <BannerUploader
-              minCropBoxWidth={gameImagesConfig.MIN_GAME_IMAGE_WIDTH}
-              minCropBoxHeight={gameImagesConfig.MIN_GAME_IMAGE_HEIGHT}
-              title={t.get('gameLogo')}
-              onChange={onGameMainImageChange}
-              initialImage={data.icon}
-              aspectRatio={4 / 3}>
-              {(openMainImageUploader) => (
-                <GameDetailsPage
-                  // isLoadingImage={imageLoader}
-                  gameName={data.gameName}
-                  backgroundImgUrl={data.backGroundImage}
-                  onMainImgClick={openMainImageUploader}
-                  onBackgroundImgClick={openBackgroundImageUploader}
-                  mainImgUrl={data.icon}
-                  gameId={`${t.get('id')} ${data.gameId ? data.gameId : t.get('emptyValue')}`}
-                  breadCrumbs={breadCrumbs}
-                  noDataText={t.get('emptyValue')}
-                  statusInfo={statusInfo}
-                  creationDate={convertDate(data.creationDate)}
-                  createdBy={data.createdByUserEmail}
-                  lastUpdateDate={convertDate(data.lastUpdatedDate)}
-                  lastUpdateBy={data.lastUpdatedByUserEmail}
-                  generalInformationContext={<GameGeneralInformationContainer data={data} />}
-                  buttons={buttons}
-                  translations={translations}
-                />
-              )}
-            </BannerUploader>
-          </>
-        )}
-      </BannerUploader>
-    </PageWrapper>
+    <DetailsPage
+      breadCrumbLinks={breadCrumbs}
+      sidebarContent={
+        <GameDetailsSidebar
+          buttons={buttons}
+          backgroundImgUrl={data.backGroundImage || ''}
+          gameId={data.gameId}
+          gameName={data.gameName}
+          mainImgUrl={data.icon || ''}
+          statusInfo={statusInfo}
+          creationDate={convertDate(data.creationDate)}
+          createdBy={data.createdByUserEmail}
+          lastUpdateDate={convertDate(data.lastUpdatedDate)}
+          lastUpdateBy={data.lastUpdatedByUserEmail}
+          refetch={refetch}
+          onBackgroundImgClick={onGameBackgroundChange}
+          onMainImgClick={onGameMainImageChange}
+        />
+      }>
+      <ItemDetails tabs={tabs} defaultTabValue={1}></ItemDetails>
+    </DetailsPage>
   );
 };
 

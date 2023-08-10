@@ -20,13 +20,13 @@ import {
   EditFormFields,
   FlexibleForm,
   FlexibleFormProps,
-  GameCompatibility,
-  GameCompatibilityProps,
   LabelGroup
 } from '@atom/design-system';
 import { FastField, Form } from 'formik';
 import { FC, useMemo } from 'react';
 import { getEditGameCompatibilityValues } from './initialValues';
+import GameCompatibility, { GameCompatibilityProps } from './GameCompatibility';
+import { css } from 'styled-system/css';
 
 export interface CompatibilityProps {
   data: GamesDetailsViewModel;
@@ -195,7 +195,7 @@ const Compatibility: FC<CompatibilityProps> = ({ data, isEdit, onSubmit }) => {
       validationSchema={editGameCompatibilityValidationScheme}>
       {(form) => {
         return (
-          <Form noValidate>
+          <Form className={css({ width: '100%' })} noValidate>
             <FlexibleForm
               onClose={() => historyService.unblock()}
               onSubmit={async (onClose) => {
