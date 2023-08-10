@@ -7,11 +7,8 @@
     "dist"
   ],
   "scripts": {
-    "start": "webpack serve --mode=production",
-    "start:logger": "webpack serve --mode=production --env logger",
-    "start:standalone": "webpack serve --env standalone",
-    "build": "webpack --mode=production",
-    "analyze": "webpack --mode=production --env analyze",
+    "start": "concurrently \"yarn panda codegen\" \"tsc && vite build --watch\" \"yarn vite preview\"",
+    "build": "yarn panda codegen && tsc && vite build",
     "lint": "eslint src --ext js,ts,tsx",
     "format": "yarn pretty-quick",
     "check-format": "prettier --check .",
@@ -45,7 +42,6 @@
     "@types/redux-logger": "^3.0.9",
     "@types/systemjs": "^6.1.0",
     "@types/testing-library__jest-dom": "^5.14.0",
-    "@types/webpack-env": "^1.16.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^4.29.0",
     "babel-jest": "^27.0.5",
@@ -77,23 +73,18 @@
     "style-loader": "^3.2.1",
     "tsconfig-paths": "^3.11.0",
     "tscpaths": "^0.0.9",
-    "typescript": "^4.3.4",
-    "webpack": "^5.40.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-config-single-spa-react": "^3.0.0",
-    "webpack-config-single-spa-react-ts": "^3.0.0",
-    "webpack-config-single-spa-ts": "^3.0.0",
-    "webpack-dev-server": "^4.0.0-rc.0",
-    "webpack-merge": "^5.8.0"
+    "typescript": "^4.3.4"
   },
   "dependencies": {
     "@atom/authorization": "^0.1.0",
-    "@atom/design-system": "^3.9.35",
+    "@atom/design-system": "^5.6.15",
     "@atom/partner-management": "^1.1.0",
     "@automapper/classes": "^7.0.2",
     "@automapper/core": "^7.0.2",
+    "@pandacss/dev": "^0.10.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.0.4",
     "atom": "^1.4.1",
     "build": "^0.1.4",
     "formik": "^2.2.9",
@@ -105,19 +96,10 @@
     "react-router-dom": "^5.3.0",
     "reflect-metadata": "^0.1.13",
     "single-spa-react": "^4.2.0",
+    "vite": "^4.4.9",
     "yarn": "^1.22.19",
     "yup": "^0.32.10"
   },
-  "externalDeps": [
-    "formik",
-    "inversify",
-    "react-router-dom",
-    "reflect-metadata",
-    "yup",
-    "react-redux",
-    "@automapper/core",
-    "@automapper/classes"
-  ],
   "resolutions": {
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8"
