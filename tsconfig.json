@@ -20,6 +20,6 @@
     }
   },
   "typeRoots": ["node_modules"],
-  "types": ["system","reflect-metadata", "node"],
+  "types": ["system", "reflect-metadata", "node"],
   "typeAcquisition": { "enable": true }
 }
