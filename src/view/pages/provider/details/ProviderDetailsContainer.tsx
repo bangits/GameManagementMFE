@@ -2,11 +2,12 @@ import { providerApi } from '@/adapter/redux/api';
 import { ProviderStatusesEnum } from '@/domain/models';
 import { showProviderActivateDialog, showProviderInActivateDialog } from '@/view/dialogs';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
-import { useActionWithDialog, useTranslation } from '@atom/common';
+import { BannerUploader, useActionWithDialog, useTranslation } from '@atom/common';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProviderDetails from './ProviderDetails';
+import { providerImagesConfig } from '@/view/configs';
 
 const ProviderDetailsContainer = () => {
   const params = useParams<{ providerId: string }>();
@@ -54,7 +55,7 @@ const ProviderDetailsContainer = () => {
     getColumnId: (column) => column.id
   });
 
-  const onProviderLogoChange = useCallback(
+  const onBackgroundImgClick = useCallback(
     (updatedLogo) => {
       updateProviderLogo({
         logo: updatedLogo,
@@ -77,14 +78,24 @@ const ProviderDetailsContainer = () => {
   if (!data) return null;
 
   return (
-    <ProviderDetails
-      data={data}
-      onActivateButtonClick={() => onActivateButtonClick(data)}
-      onInActivateButtonClick={() => onInActivateButtonClick(data)}
-      shouldShowActivateButton={data.statusId === ProviderStatusesEnum.Inactive}
-      shouldShowInActivateButton={data.statusId === ProviderStatusesEnum.Active}
-      onProviderLogoChange={onProviderLogoChange}
-    />
+    <BannerUploader
+      minCropBoxWidth={providerImagesConfig.MIN_IMAGE_WIDTH}
+      minCropBoxHeight={providerImagesConfig.MIN_IMAGE_HEIGHT}
+      title={t.get('providerLogo')}
+      onChange={onBackgroundImgClick}
+      initialImage={data.logo}
+      aspectRatio={2 / 1}>
+      {(onBackgroundImgClick) => (
+        <ProviderDetails
+          data={data}
+          onActivateButtonClick={() => onActivateButtonClick(data)}
+          onInActivateButtonClick={() => onInActivateButtonClick(data)}
+          shouldShowActivateButton={data.statusId === ProviderStatusesEnum.Inactive}
+          shouldShowInActivateButton={data.statusId === ProviderStatusesEnum.Active}
+          onBackgroundImgClick={onBackgroundImgClick}
+        />
+      )}
+    </BannerUploader>
   );
 };
 

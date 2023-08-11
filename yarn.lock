@@ -465,7 +465,7 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/common@^2.1.7", "@atom/common@^2.2.11", "@atom/common@^2.2.49", "@atom/common@^2.2.54", "@atom/common@^2.2.62", "@atom/common@^2.2.73", "@atom/common@^2.2.85", "@atom/common@^2.2.88", "@atom/common@^2.4.1", "@atom/common@^2.4.6", "@atom/common@^2.5.5", "@atom/common@^2.7.7", "@atom/common@^2.8.1", "@atom/common@^2.8.9", "@atom/common@^2.9.0", "@atom/common@^2.9.7":
+"@atom/common@^2.1.7", "@atom/common@^2.2.49", "@atom/common@^2.2.54", "@atom/common@^2.2.62", "@atom/common@^2.2.73", "@atom/common@^2.2.85", "@atom/common@^2.2.88", "@atom/common@^2.4.1", "@atom/common@^2.4.6", "@atom/common@^2.5.5", "@atom/common@^2.7.7", "@atom/common@^2.8.1", "@atom/common@^2.8.9", "@atom/common@^2.9.0", "@atom/common@^2.9.7":
   version "2.9.8"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-2.9.8.tgz#9cf671072307511eead7fb826a49920a462860bc"
   integrity sha1-nPZxByMHUR7q1/uCakmSCkYoYLw=
@@ -485,7 +485,7 @@
     single-spa "^5.9.3"
     single-spa-react "^4.6.0"
 
-"@atom/common@^3.0.9":
+"@atom/common@^3.0.9", "@atom/common@^3.1.2":
   version "3.1.2"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/common/-/common-3.1.2.tgz#6829103c3cb301031335b6ef0244a57f71c04aa4"
   integrity sha1-aCkQPDyzAQMTNbbvAkSlf3HASqQ=

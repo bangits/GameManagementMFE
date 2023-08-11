@@ -37,7 +37,8 @@ export default defineConfig({
         '@atom/authorization',
         '@atom/design-system',
         '@atom/common',
-        '@atom/partner-management'
+        '@atom/partner-management',
+        '@atom/cms-label-management'
       ],
       output: {
         intro: `const process = {env: ${JSON.stringify(process.env)}}`
