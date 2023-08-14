@@ -56,7 +56,7 @@ const ProviderDetailsContainer = () => {
   });
 
   const onBackgroundImgClick = useCallback(
-    (updatedLogo) => {
+    (updatedLogo: string) => {
       updateProviderLogo({
         logo: updatedLogo,
         providerId: data.id

@@ -43,35 +43,21 @@ export const ProviderDetailsSidebar = ({ data, onBackgroundImgClick }: ProviderD
         onBackgroundImgClick={onBackgroundImgClick}
       />
 
-      {data.partnerName ? (
-        <div>
-          <NameDescription
-            noDataText={t.get('emptyValue')}
-            data={[
-              {
-                name: t.get('integrationTypeName'),
-                description: data.integrationTypeName
-              },
-              {
-                name: t.get('aggregator'),
-                description: data.partnerName
-              }
-            ]}
-          />
-        </div>
-      ) : (
-        <div>
-          <NameDescription
-            noDataText={t.get('emptyValue')}
-            data={[
-              {
-                name: t.get('integrationTypeName'),
-                description: data.integrationTypeName
-              }
-            ]}
-          />
-        </div>
-      )}
+      <div>
+        <NameDescription
+          noDataText={t.get('emptyValue')}
+          data={[
+            {
+              name: t.get('integrationTypeName'),
+              description: data.integrationTypeName
+            },
+            {
+              name: t.get('aggregator'),
+              description: data.partnerName
+            }
+          ]}
+        />
+      </div>
 
       <div className={css({ marginTop: '1rem' })}>
         <CountView noDataText={t.get('emptyValue')} title={t.get('totalGameCount')} count={data.gameCount as string} />
