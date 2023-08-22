@@ -8,7 +8,7 @@ export const useGameCompabilitesStyles = () => {
     FlexList: css({
       display: 'flex'
     }),
-    FlexList__item: css({ paddingRight: '2rem' }),
+    FlexList__item: css({ paddingRight: '2rem', marginRight: '2rem', color: 'red' }),
     CardSubtitle: css({
       display: 'block',
       fontFamily: 'inherit',
@@ -18,7 +18,10 @@ export const useGameCompabilitesStyles = () => {
     }),
     TagsCell: css({
       display: 'flex',
-      padding: '0.7rem 0 1.8rem 0'
+      padding: '0.7rem 0 1.8rem 0',
+
+      '& > svg': { marginRight: '1rem' },
+      '& > div': { marginRight: '1rem' }
     }),
     GameDetailsBase__notCompleted: css({ color: 'black-color', marginRight: '1rem' }),
     DeviceTag: css({

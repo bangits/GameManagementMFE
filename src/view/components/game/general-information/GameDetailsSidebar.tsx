@@ -57,7 +57,7 @@ export const GameDetailsSidebar = ({
         description: lastUpdateBy
       }
     ],
-    [t]
+    [t, creationDate, createdBy, lastUpdateDate, lastUpdateBy]
   );
 
   return (
