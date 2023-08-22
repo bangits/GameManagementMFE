@@ -525,30 +525,6 @@
     react-transition-group "^4.4.2"
     regenerator-transform "^0.14.5"
 
-"@atom/design-system@5.6.15", "@atom/design-system@^5.0.5", "@atom/design-system@^5.3.7", "@atom/design-system@^5.3.9", "@atom/design-system@^5.6.12", "@atom/design-system@^5.6.2", "@atom/design-system@^5.6.4":
-  version "5.6.15"
-  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-5.6.15.tgz#d8ad5a712725700922b16c7b9e3202d0531b3e99"
-  integrity sha1-2K1acSclcAkisWx7njIC0FMbPpk=
-  dependencies:
-    "@atom/common" "^2.4.6"
-    "@my-ui/core" "^0.11.80"
-    classnames "^2.3.1"
-    codemirror "^5.65.10"
-    draft-js "^0.11.7"
-    draftjs-to-html "^0.9.1"
-    react "17.0.0"
-    react-codemirror2 "^7.2.1"
-    react-cropper "^2.1.8"
-    react-dnd "15.1.2"
-    react-dnd-html5-backend "^16.0.1"
-    react-dom "17.0.0"
-    react-draft-wysiwyg "^1.15.0"
-    react-jss "^10.8.2"
-    react-sortable-hoc "^2.0.0"
-    react-transition-group "^4.4.5"
-    regenerator-transform "^0.14.5"
-    vite-plugin-svgr "^2.4.0"
-
 "@atom/design-system@^3.1.0", "@atom/design-system@^3.9.35":
   version "3.9.66"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-3.9.66.tgz#d4231a3c3f53752ccb19100209a59ad6182e9eb5"
@@ -573,6 +549,54 @@
   dependencies:
     "@atom/common" "^2.4.6"
     "@my-ui/core" "^0.11.31"
+    classnames "^2.3.1"
+    codemirror "^5.65.10"
+    draft-js "^0.11.7"
+    draftjs-to-html "^0.9.1"
+    react "17.0.0"
+    react-codemirror2 "^7.2.1"
+    react-cropper "^2.1.8"
+    react-dnd "15.1.2"
+    react-dnd-html5-backend "^16.0.1"
+    react-dom "17.0.0"
+    react-draft-wysiwyg "^1.15.0"
+    react-jss "^10.8.2"
+    react-sortable-hoc "^2.0.0"
+    react-transition-group "^4.4.5"
+    regenerator-transform "^0.14.5"
+    vite-plugin-svgr "^2.4.0"
+
+"@atom/design-system@^5.0.5", "@atom/design-system@^5.3.7", "@atom/design-system@^5.3.9", "@atom/design-system@^5.6.12", "@atom/design-system@^5.6.2", "@atom/design-system@^5.6.4":
+  version "5.6.15"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-5.6.15.tgz#d8ad5a712725700922b16c7b9e3202d0531b3e99"
+  integrity sha1-2K1acSclcAkisWx7njIC0FMbPpk=
+  dependencies:
+    "@atom/common" "^2.4.6"
+    "@my-ui/core" "^0.11.80"
+    classnames "^2.3.1"
+    codemirror "^5.65.10"
+    draft-js "^0.11.7"
+    draftjs-to-html "^0.9.1"
+    react "17.0.0"
+    react-codemirror2 "^7.2.1"
+    react-cropper "^2.1.8"
+    react-dnd "15.1.2"
+    react-dnd-html5-backend "^16.0.1"
+    react-dom "17.0.0"
+    react-draft-wysiwyg "^1.15.0"
+    react-jss "^10.8.2"
+    react-sortable-hoc "^2.0.0"
+    react-transition-group "^4.4.5"
+    regenerator-transform "^0.14.5"
+    vite-plugin-svgr "^2.4.0"
+
+"@atom/design-system@^5.6.16":
+  version "5.6.16"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@atom/design-system/-/design-system-5.6.16.tgz#52e4e4a30d89de14eb8441af7499068e250d4686"
+  integrity sha1-UuTkow2J3hTrhEGvdJkGjiUNRoY=
+  dependencies:
+    "@atom/common" "^2.4.6"
+    "@my-ui/core" "^0.11.82"
     classnames "^2.3.1"
     codemirror "^5.65.10"
     draft-js "^0.11.7"
@@ -2780,6 +2804,22 @@
   version "0.11.80"
   resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-0.11.80.tgz#383ec6936e13cd954d37b4100212fbecfec41a69"
   integrity sha1-OD7Gk24TzZVNN7QQAhL77P7EGmk=
+  dependencies:
+    "@my-ui/react-datepicker" "^1.5.0"
+    "@my-ui/react-select" "1.1.6"
+    "@my-ui/react-table" "1.3.0"
+    "@my-ui/scrollbar" "^1.0.2"
+    classnames "^2.3.1"
+    react-flip-move "^3.0.4"
+    react-jss "^10.8.0"
+    react-paginate "^7.1.5"
+    react-transition-group "^4.4.2"
+    throttle-debounce "^3.0.1"
+
+"@my-ui/core@^0.11.82":
+  version "0.11.82"
+  resolved "https://pkgs.dev.azure.com/bangitsllc/Common/_packaging/Bangits.Atom.Common/npm/registry/@my-ui/core/-/core-0.11.82.tgz#3744c2cb69624726755437a47dac8a0b43d12a34"
+  integrity sha1-N0TCy2liRyZ1VDekfayKC0PRKjQ=
   dependencies:
     "@my-ui/react-datepicker" "^1.5.0"
     "@my-ui/react-select" "1.1.6"
