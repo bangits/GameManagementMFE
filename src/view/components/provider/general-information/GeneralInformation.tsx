@@ -4,18 +4,18 @@ import {
   copyToClipboard,
   CountriesSelect,
   createRenderInputs,
-  CurrencySelect,
   CustomForm,
   CustomSelect,
   CustomSelectProps,
   historyService,
+  ResourceCurrencySelect,
   useAsync,
   useTranslation,
   useValidationTranslation
 } from '@atom/common';
 import { FlexibleForm, FlexibleFormProps, ProvidersGeneralInfo, ProvidersGeneralInfoProps } from '@atom/design-system';
 import { FastField, Form } from 'formik';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { editProviderGeneralInfoInitialValues } from './initialValues';
 import { css } from 'styled-system/css';
 
@@ -197,7 +197,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
           label: t.get('providerCurrencies'),
           component: (props: CustomSelectProps) => {
             return (
-              <CurrencySelect
+              <ResourceCurrencySelect
                 {...props}
                 isMulti
                 selectAll

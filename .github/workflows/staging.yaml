@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ['staging']
+    branches: ['staging', 'feat-refactor-details-pages']
   pull_request:
-    branches: ['staging']
+    branches: ['staging', 'feat-refactor-details-pages']
 
   workflow_dispatch:
 
