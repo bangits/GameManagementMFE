@@ -3,13 +3,21 @@ import { GetGameNamesViewModel } from '@/view/models/view-models';
 import { CustomSelect, CustomSelectProps, useTranslation } from '@atom/common';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
-export const GameNamesSelect = (props: Omit<CustomSelectProps & { isMain?: boolean }, 'options'>) => {
+export interface GameNamesSelectProps extends Omit<CustomSelectProps, 'options'> {
+  isMain?: boolean;
+  valueProp?: 'label' | 'value';
+}
+
+export const GameNamesSelect = ({ valueProp = 'value', ...props }: GameNamesSelectProps) => {
   const t = useTranslation();
   const { gameUseCase } = useContext(GameManagementContext);
 
   const [gameNames, setGameNames] = useState<GetGameNamesViewModel>([]);
 
-  const selectOptions = useMemo(() => gameNames.map((c) => ({ value: c.value, label: c.label })), [gameNames]);
+  const selectOptions = useMemo(
+    () => gameNames.map((c) => ({ value: c[valueProp], label: c.label })),
+    [valueProp, gameNames]
+  );
 
   useEffect(() => {
     gameUseCase.getGameNames(props.isMain).then(setGameNames);

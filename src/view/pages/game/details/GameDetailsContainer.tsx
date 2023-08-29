@@ -1,73 +1,22 @@
 /* eslint-disable promise/catch-or-return */
 import { gameApi } from '@/adapter/redux/api';
-import { GameStatusesEnum } from '@/domain/models';
-import { showGameActivateDialog, showGameInActivateDialog } from '@/view/dialogs';
-import { GameActionsViewModel } from '@/view/models';
 import { gameLaunchService } from '@/view/services';
-import { useActionWithDialog, useTranslation } from '@atom/common';
+import { BannerUploader, useTranslation } from '@atom/common';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import GameDetails from './GameDetails';
+import { gameImagesConfig } from '@/view/configs';
 
 const GameDetailsContainer = () => {
   const params = useParams<{ gameId: string }>();
-
-  const { data, isFetching, originalArgs } = gameApi.useGetGameByIdQuery(+params.gameId);
-
-  const [loading, setLoading] = useState(false);
   const t = useTranslation();
+
+  const { data, isFetching, refetch, originalArgs } = gameApi.useGetGameByIdQuery(+params.gameId);
 
   const dispatch = useDispatch();
 
-  const [changeGameStatus] = gameApi.useChangeGameStatusMutation();
   const [updateGameImages, { isLoading }] = gameApi.useUpdateImagesMutation();
-
-  const { openDialogFn: onActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
-    dialogFn: showGameActivateDialog,
-    actionFn: (gameIds) =>
-      changeGameStatus({
-        gameIds,
-        statusId: GameStatusesEnum.ACTIVE,
-        lastUpdatedByUserId: 2,
-        lastUpdatedByUserEmail: 'test@gmail․com'
-      }).unwrap(),
-    isFetching,
-    t,
-    refetch: () => {
-      dispatch(
-        gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
-          Object.assign(draft, {
-            statusId: GameStatusesEnum.ACTIVE
-          });
-        })
-      );
-    },
-    getColumnId: (column) => column.gameId
-  });
-
-  const { openDialogFn: onInActivateButtonClick } = useActionWithDialog<GameActionsViewModel>({
-    dialogFn: showGameInActivateDialog,
-    actionFn: (gameIds) =>
-      changeGameStatus({
-        gameIds,
-        statusId: GameStatusesEnum.INACTIVE,
-        lastUpdatedByUserId: 2,
-        lastUpdatedByUserEmail: 'test@gmail․com'
-      }).unwrap(),
-    isFetching,
-    t,
-    refetch: () => {
-      dispatch(
-        gameApi.util.updateQueryData('getGameById', originalArgs, (draft) => {
-          Object.assign(draft, {
-            statusId: GameStatusesEnum.INACTIVE
-          });
-        })
-      );
-    },
-    getColumnId: (column) => column.gameId
-  });
 
   const createGameLauncher = useCallback(
     (isDemo: boolean) => () => {
@@ -127,28 +76,38 @@ const GameDetailsContainer = () => {
   if (!data) return null;
 
   return (
-    <GameDetails
-      imageLoader={isLoading}
-      data={data}
-      onPlayButtonClick={createGameLauncher(false)}
-      onDemoButtonClick={createGameLauncher(true)}
-      onActivateButtonClick={() =>
-        onActivateButtonClick({
-          gameId: data.gameId,
-          name: data.gameName
-        })
-      }
-      onInActivateButtonClick={() =>
-        onInActivateButtonClick({
-          gameId: data.gameId,
-          name: data.gameName
-        })
-      }
-      onGameBackgroundChange={onGameBackgroundChange}
-      onGameMainImageChange={onGameMainImageChange}
-      shouldShowActivateButton={data.statusId === GameStatusesEnum.INACTIVE}
-      shouldShowInActivateButton={data.statusId === GameStatusesEnum.ACTIVE}
-    />
+    <>
+      <BannerUploader
+        minCropBoxWidth={gameImagesConfig.MIN_BACKGROUND_WIDTH}
+        minCropBoxHeight={gameImagesConfig.MIN_BACKGROUND_HEIGHT}
+        title={t.get('gameBackground')}
+        onChange={onGameBackgroundChange}
+        initialImage={data.backGroundImage}
+        aspectRatio={2 / 1}>
+        {(openBackgroundImageUploader) => (
+          <BannerUploader
+            minCropBoxWidth={gameImagesConfig.MIN_GAME_IMAGE_WIDTH}
+            minCropBoxHeight={gameImagesConfig.MIN_GAME_IMAGE_HEIGHT}
+            title={t.get('gameLogo')}
+            onChange={onGameMainImageChange}
+            initialImage={data.icon}
+            aspectRatio={4 / 3}>
+            {(openMainImageUploader) => (
+              <GameDetails
+                data={data}
+                isFetching={isFetching}
+                refetch={refetch}
+                originalArgs={originalArgs}
+                onPlayButtonClick={createGameLauncher(false)}
+                onDemoButtonClick={createGameLauncher(true)}
+                onGameBackgroundChange={openBackgroundImageUploader}
+                onGameMainImageChange={openMainImageUploader}
+              />
+            )}
+          </BannerUploader>
+        )}
+      </BannerUploader>
+    </>
   );
 };
 

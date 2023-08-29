@@ -2,13 +2,10 @@ import { GeneralInformationContainer, ProviderGamesContainer } from '@/view';
 import { providerImagesConfig, providerStatusesConfig } from '@/view/configs';
 import { ROUTES } from '@/view/constants';
 import { ProviderDetailsViewModel } from '@/view/models/view-models/provider/ProviderDetailsViewModel';
-import { BannerUploader, convertDate, historyService, redirectToURL, useTranslation } from '@atom/common';
-import {
-  PageWrapper,
-  ProviderDetails as ProviderDetailsPage,
-  ProviderDetailsProps as ProviderDetailsPageProps
-} from '@atom/design-system';
-import React, { FC, useMemo } from 'react';
+import { BannerUploader, convertDate, redirectToURL, useTranslation } from '@atom/common';
+import { DetailsPage, ItemDetails } from '@atom/design-system';
+import { FC, useMemo } from 'react';
+import { ProviderDetailsSidebar } from './ProviderDetailsSidebar';
 
 export interface ProviderDetailsProps {
   data: ProviderDetailsViewModel;
@@ -16,20 +13,13 @@ export interface ProviderDetailsProps {
   onInActivateButtonClick: () => void;
   shouldShowActivateButton: boolean;
   shouldShowInActivateButton: boolean;
-  onProviderLogoChange: (logo: string) => void;
+  onBackgroundImgClick: () => void;
 }
 
-const ProviderDetails: FC<ProviderDetailsProps> = ({
-  data,
-  onActivateButtonClick,
-  onInActivateButtonClick,
-  shouldShowActivateButton,
-  shouldShowInActivateButton,
-  onProviderLogoChange
-}) => {
+const ProviderDetails: FC<ProviderDetailsProps> = ({ data, onBackgroundImgClick }) => {
   const t = useTranslation();
 
-  const breadCrumb = useMemo<ProviderDetailsPageProps['breadCrumb']>(
+  const breadCrumb = useMemo(
     () => [
       {
         label: t.get('providerManagement'),
@@ -45,91 +35,35 @@ const ProviderDetails: FC<ProviderDetailsProps> = ({
     [t, data]
   );
 
-  const translations = useMemo<ProviderDetailsPageProps['translations']>(
-    () => ({
-      totalGameCount: t.get('totalGameCount'),
-      status: t.get('status'),
-      creationDate: t.get('creationDate'),
-      integrationType: t.get('integrationTypeName'),
-      partnerName: t.get('aggregator'),
-      createdBy: t.get('createdBy'),
-      generalInformation: t.get('generalInformation'),
-      games: t.get('games'),
-      editButton: t.get('edit'),
-      lastUpdatedBy: t.get('lastUpdateBy'),
-      lastUpdatedDate: t.get('lastUpdateDate')
-    }),
-    [t]
-  );
-
-  const statusInfo = useMemo<ProviderDetailsPageProps['statusInfo']>(
-    () => ({
-      label: t.get('status'),
-      statusLabel: t.get(providerStatusesConfig[data.statusId].translationKey),
-      variant: providerStatusesConfig[data.statusId].variant,
-      actions: [
-        ...(shouldShowActivateButton
-          ? [
-              {
-                iconName: 'CheckButtonIcon' as const,
-                onClick: onActivateButtonClick,
-                tooltipText: t.get('activate')
-              }
-            ]
-          : []),
-        ...(shouldShowInActivateButton
-          ? [
-              {
-                iconName: 'BlockButtonIcon' as const,
-                onClick: onInActivateButtonClick,
-                tooltipText: t.get('inActivate')
-              }
-            ]
-          : [])
-      ]
-    }),
-    [data, shouldShowActivateButton, shouldShowInActivateButton, t]
+  const tabs = useMemo(
+    () => [
+      {
+        title: t.get('generalInformation'),
+        value: 1,
+        content: <GeneralInformationContainer data={data} />
+      },
+      {
+        title: t.get('games'),
+        value: 2,
+        content: (
+          <ProviderGamesContainer
+            providerName={data.providerName}
+            providerId={data.id}
+            providerStatusId={data.statusId}
+          />
+        ),
+        disableScroll: true
+      }
+    ],
+    [data, t]
   );
 
   return (
-    <PageWrapper>
-      <BannerUploader
-        minCropBoxWidth={providerImagesConfig.MIN_IMAGE_WIDTH}
-        minCropBoxHeight={providerImagesConfig.MIN_IMAGE_HEIGHT}
-        title={t.get('providerLogo')}
-        onChange={onProviderLogoChange}
-        initialImage={data.logo}
-        aspectRatio={2 / 1}>
-        {(openLogoImageUploader) => (
-          <ProviderDetailsPage
-            partnerName={data.partnerName}
-            integrationType={data.integrationTypeName}
-            lastUpdatedBy={data.lastUpdatedByUserEmail}
-            lastUpdatedDate={convertDate(data.lastUpdatedDate)}
-            noDataText={t.get('emptyValue')}
-            totalGameCount={data.gameCount ? `${data.gameCount}` : ''}
-            creationDate={convertDate(data.creationDate)}
-            createdBy={data.createdByUserEmail}
-            translations={translations}
-            statusInfo={statusInfo}
-            breadCrumb={breadCrumb}
-            providerId={`${t.get('id')} ${data.id}`}
-            providerName={data.providerName}
-            backgroundImgUrl={data.logo}
-            onBackgroundImgClick={openLogoImageUploader}
-            gamesTabContent={
-              <ProviderGamesContainer
-                providerName={data.providerName}
-                providerId={data.id}
-                providerStatusId={data.statusId}
-              />
-            }
-            generalInformationContext={<GeneralInformationContainer data={data} />}
-            isCmsUser={false}
-          />
-        )}
-      </BannerUploader>
-    </PageWrapper>
+    <DetailsPage
+      breadCrumbLinks={breadCrumb}
+      sidebarContent={<ProviderDetailsSidebar data={data} onBackgroundImgClick={onBackgroundImgClick} />}>
+      <ItemDetails defaultTabValue={1} tabs={tabs} />
+    </DetailsPage>
   );
 };
 

@@ -15,6 +15,7 @@ import { FlexibleForm, FlexibleFormProps } from '@atom/design-system';
 import { FastField, Form } from 'formik';
 import { FC, useMemo } from 'react';
 import { getEditGamePropertiesValues } from './initialValues';
+import { css } from 'styled-system/css';
 
 export interface GamePropertiesProps {
   data: GamesDetailsViewModel;
@@ -158,7 +159,7 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
       validationSchema={editGameInformationValidationScheme}>
       {(form) => {
         return (
-          <Form noValidate>
+          <Form className={css({ width: '100%' })} noValidate>
             <FlexibleForm
               isEdit={isEdit}
               noDataText={t.get('emptyValue')}

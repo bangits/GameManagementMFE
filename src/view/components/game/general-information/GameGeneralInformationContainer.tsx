@@ -1,9 +1,9 @@
-import { gameApi } from '@/adapter/redux/api';
-import { GamesDetailsViewModel } from '@/view/models';
+import { FC, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from '@atom/common';
 import { alert } from '@atom/design-system';
-import React, { FC, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import { gameApi } from '@/adapter/redux/api';
+import { GamesDetailsViewModel } from '@/view/models';
 import GameGeneralInformation from './GameGeneralInformation';
 
 export interface GameGeneralInformationContainer {

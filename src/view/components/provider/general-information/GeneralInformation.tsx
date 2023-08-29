@@ -1,6 +1,9 @@
 import { editProviderGeneralInfoValidations } from '@/domain/validators';
 import { EditProviderGeneralInformationViewModel, ProviderDetailsViewModel } from '@/view/models';
 import {
+  copyToClipboard,
+  CountriesSelect,
+  createRenderInputs,
   CustomForm,
   CustomSelect,
   CustomSelectProps,
@@ -8,6 +11,7 @@ import {
   copyToClipboard,
   createRenderInputs,
   historyService,
+  ResourceCurrencySelect,
   useAsync,
   useTranslation,
   useValidationTranslation
@@ -16,6 +20,7 @@ import { FlexibleForm, FlexibleFormProps, ProvidersGeneralInfo, ProvidersGeneral
 import { FastField, Form } from 'formik';
 import { FC, useMemo } from 'react';
 import { editProviderGeneralInfoInitialValues } from './initialValues';
+import { css } from 'styled-system/css';
 
 export interface GeneralInformationProps {
   data: ProviderDetailsViewModel;
@@ -265,7 +270,7 @@ const GeneralInformation: FC<GeneralInformationProps> = ({ data, onSubmit, isEdi
       validationSchema={editProviderGeneralInfoValidationSchema}>
       {(form) => {
         return (
-          <Form noValidate>
+          <Form className={css({ width: '100%' })} noValidate>
             <FlexibleForm
               title=''
               isEdit={isEdit}

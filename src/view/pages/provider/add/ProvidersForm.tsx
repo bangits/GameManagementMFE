@@ -40,9 +40,8 @@ const ProvidersForm = (props: ProvidersFormProps) => {
     <AddProviderNameId
       {...props}
       explanation={explanation}
-      onChange={(...args) => {
-        props.onChange(...args);
-
+      onChange={([value, isAdded]) => {
+        props.onChange(value, isAdded);
         form.resetForm();
       }}
       fromToProps={{
