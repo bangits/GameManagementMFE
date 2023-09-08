@@ -15,9 +15,10 @@ export const editGameInfoValidations = async (
       // eslint-disable-next-line no-useless-escape
       .matches(/^([0-9a-zA-Z()._\-])*$/, t.textInput()),
     gameId: number().nullable(),
+    gameTypeId: number().nullable(),
+    categoryId: number().nullable().required(t.required()),
     subTypeId: number().nullable(),
     releaseDate: date().nullable(),
-    providerId: number().nullable(),
-    gameTypeId: number().nullable()
+    providerId: number().nullable()
   });
 };

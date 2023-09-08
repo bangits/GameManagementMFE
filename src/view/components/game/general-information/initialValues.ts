@@ -15,8 +15,9 @@ export const getEditGameInfoInitialValues = (data: GamesDetailsViewModel): EditG
     lastUpdatedUserId: 1,
     name: data.gameName,
     releaseDate: data.releaseDate && new Date(data.releaseDate),
-    subTypeId: data.subType?.id || null,
+    categoryId: data.category?.id,
     gameTypeId: data.type?.id || null,
+    subTypeId: data.subType?.id || null,
     providerId: data.providerId
   };
 };

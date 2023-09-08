@@ -30,5 +30,7 @@ export class EditGameInformationViewModel {
   @AutoMap()
   lastUpdatedUserEmail: string;
 
+  categoryId: PrimaryKey;
+
   gameTypeId: PrimaryKey;
 }
