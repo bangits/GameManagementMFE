@@ -27,8 +27,8 @@ export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGa
     lastUpdatedByUserEmail: data.lastUpdatedByUserEmail || null,
     lastUpdatedByUserId: 1,
     maxWin: data.maxWin || null,
-    minBet: +data.minBet,
-    maxBet: +data.maxBet,
+    minBet: data.minBet,
+    maxBet: data.maxBet,
     rtp: data.rtp || null,
     themesIds: data.gameThemes.map((theme) => theme.id) || null,
     volatilityId: data.volatilityId || null

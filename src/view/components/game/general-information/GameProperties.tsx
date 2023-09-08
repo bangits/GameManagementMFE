@@ -62,14 +62,14 @@ const GameProperties: FC<GamePropertiesProps> = ({ data, onSubmit, isEdit }) => 
           value: data.maxWin && convertToDecimalNumberFixed2(+data.maxWin)
         },
         {
-          title: t.get('maxBet'),
-          variant: 'default',
-          value: data.maxBet && convertToDecimalNumberFixed2(+data.maxBet)
-        },
-        {
           title: t.get('minBet'),
           variant: 'default',
           value: data.minBet && convertToDecimalNumberFixed2(+data.minBet)
+        },
+        {
+          title: t.get('maxBet'),
+          variant: 'default',
+          value: data.maxBet && convertToDecimalNumberFixed2(+data.maxBet)
         }
       ]
     }),
