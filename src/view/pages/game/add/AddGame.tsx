@@ -32,6 +32,8 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
             onChange={(value, event, options) => {
               props.onChange(value, event, options);
               form.setFieldValue('categoryId', value);
+              form.setFieldValue('typeId', null);
+              form.setFieldValue('subTypeId', null);
             }}
           />
         );
@@ -54,6 +56,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
             onChange={(value, event, options) => {
               props.onChange(value, event, options);
               form.setFieldValue('typeId', value);
+              form.setFieldValue('subTypeId', null);
             }}
           />
         );
