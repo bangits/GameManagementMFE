@@ -80,6 +80,12 @@ export class Game extends BaseEntity {
   @AutoMap()
   providerAbsoluteDemoUrl: string;
 
+  @AutoMap()
+  minBet: number;
+
+  @AutoMap()
+  maxBet: number;
+
   releaseDate: string;
 
   status: {
