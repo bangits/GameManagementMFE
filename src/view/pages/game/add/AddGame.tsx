@@ -17,6 +17,27 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
   const t = useTranslation();
 
   const atomFormFields = useMemo(() => {
+    const categoryId = {
+      name: 'categoryId' as keyof AddGameViewModel,
+      type: 'select' as const,
+      inputLabel: t.get('category'),
+      component: (props: CustomSelectProps) => {
+        const form = useFormikContext<AddGameViewModel>();
+
+        return (
+          <GameTypesSelect
+            {...props}
+            fullWidth
+            inputLabel={t.get('category')}
+            onChange={(value, event, options) => {
+              props.onChange(value, event, options);
+              form.setFieldValue('categoryId', value);
+            }}
+          />
+        );
+      }
+    };
+
     const typeId = {
       name: 'typeId' as keyof AddGameViewModel,
       type: 'select' as const,
@@ -28,10 +49,11 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
           <GameTypesSelect
             {...props}
             fullWidth
+            gameTypeId={form.values.categoryId}
             inputLabel={t.get('type')}
             onChange={(value, event, options) => {
               props.onChange(value, event, options);
-              form.setFieldValue('subTypeId', null);
+              form.setFieldValue('typeId', value);
             }}
           />
         );
@@ -88,7 +110,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
         type: 'input' as const,
         label: t.get('gameName')
       },
-      ...(!providerId ? [releaseDate, typeId, subTypeId] : [typeId, subTypeId, releaseDate]),
+      ...(!providerId ? [releaseDate, categoryId, typeId, subTypeId] : [typeId, categoryId, subTypeId, releaseDate]),
       {
         name: 'rtp' as keyof AddGameViewModel,
         type: 'input' as const,
