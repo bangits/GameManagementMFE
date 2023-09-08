@@ -49,7 +49,6 @@ export class GetGameRequestModel extends PagedModel {
   rtpFrom: number;
   rtpTo: number;
   statusId: GameStatusesEnum;
-  subTypeId: PrimaryKey;
 
   @AutoMap()
   statusIds: PrimaryKey[];
