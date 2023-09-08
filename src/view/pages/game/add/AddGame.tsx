@@ -51,7 +51,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
           <GameTypesSelect
             {...props}
             fullWidth
-            gameTypeId={form.values.categoryId}
+            gameTypeIds={[form.values.categoryId]}
             inputLabel={t.get('type')}
             onChange={(value, event, options) => {
               props.onChange(value, event, options);
@@ -74,7 +74,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
             {...props}
             fullWidth
             isDisabled={!form.values.typeId}
-            gameTypeId={form.values.typeId}
+            gameTypeIds={[form.values.typeId]}
             inputLabel={t.get('subType')}
           />
         );

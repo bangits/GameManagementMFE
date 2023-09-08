@@ -61,8 +61,9 @@ const GameListContainer = () => {
       gameUiLanguageIds: [],
       gameOperatingLanguageIds: [],
       statusIds: [],
+      categoryIds: [],
       subTypeIds: [],
-      type: '',
+      typeIds: [],
       pagination: {
         page: 1,
         pageSize: 20

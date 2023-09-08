@@ -28,7 +28,7 @@ export interface IGameRepository {
   getGameById(id: PrimaryKey): Promise<GetGameByIdResponseModel>;
   getGameNames(isActive?: boolean): Promise<GetGameNamesResponseModel>;
 
-  getGameTypes(parentTypeId?: PrimaryKey): Promise<GetGameTypesResponseModel>;
+  getGameTypes(parentTypeId?: PrimaryKey[]): Promise<GetGameTypesResponseModel>;
   getClassNames(): Promise<GetClassNamesResponseModel>;
   getGameThemes(): Promise<GetGameThemesResponseModel>;
   getGameFeatures(): Promise<GetGameFeaturesResponseModel>;

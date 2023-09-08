@@ -204,17 +204,33 @@ function GameList({
         )
       },
       {
-        name: 'type' as keyof GamesFiltersViewModel,
+        name: 'categoryIds' as keyof GamesFiltersViewModel,
+        type: 'custom' as const,
+        label: t.get('category'),
+        component: ({ onChange, filterValues }) => (
+          <GameTypesSelect
+            selectAll
+            fullWidth
+            isMulti
+            inputLabel={t.get('category')}
+            onChange={(changedValue) => onChange('categoryIds', changedValue)}
+            value={filterValues.categoryIds}
+          />
+        )
+      },
+      {
+        name: 'typeIds' as keyof GamesFiltersViewModel,
         type: 'custom' as const,
         label: t.get('type'),
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
             selectAll
-            inputLabel={t.get('type')}
             fullWidth
             isMulti
-            onChange={(changedValue) => onChange('type', changedValue)}
-            value={filterValues.type}
+            inputLabel={t.get('type')}
+            gameTypeIds={filterValues.categoryIds}
+            onChange={(changedValue) => onChange('typeIds', changedValue)}
+            value={filterValues.typeIds}
           />
         )
       },
@@ -225,12 +241,12 @@ function GameList({
         component: ({ onChange, filterValues }) => (
           <GameTypesSelect
             selectAll
-            inputLabel={t.get('subType')}
             fullWidth
             isMulti
+            inputLabel={t.get('subType')}
             value={filterValues.subTypeIds}
             onChange={(changedValue) => onChange('subTypeIds', changedValue)}
-            gameTypeId={filterValues.type}
+            gameTypeIds={filterValues.typeIds}
           />
         )
       },

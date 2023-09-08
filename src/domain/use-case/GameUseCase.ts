@@ -63,10 +63,10 @@ export class GameUseCase {
     return mapper.map(getGameResponseModel, GamesDetailsViewModel, GetGameByIdResponseModel);
   };
 
-  getGameTypes = async (parentTypeId?: PrimaryKey): Promise<GetGameTypesViewModel> => {
-    if (parentTypeId !== undefined && !parentTypeId) return [];
+  getGameTypes = async (parentTypeIds?: PrimaryKey[]): Promise<GetGameTypesViewModel> => {
+    if (parentTypeIds !== undefined && !parentTypeIds) return [];
 
-    const getGameTypesResponse = await this.gameRepository.getGameTypes(parentTypeId);
+    const getGameTypesResponse = await this.gameRepository.getGameTypes(parentTypeIds);
 
     return getGameTypesResponse.results.map((r) => ({ value: r.id, label: r.name }));
   };

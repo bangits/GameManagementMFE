@@ -3,7 +3,7 @@ import { GetGameNamesViewModel } from '@/view/models/view-models';
 import { CustomSelect, CustomSelectProps, PrimaryKey } from '@atom/common';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
-export const GameTypesSelect = (props: CustomSelectProps & { gameTypeId?: PrimaryKey }) => {
+export const GameTypesSelect = (props: CustomSelectProps & { gameTypeIds?: PrimaryKey[] }) => {
   const { gameUseCase } = useContext(GameManagementContext);
 
   const [gameTypes, setGameTypes] = useState<GetGameNamesViewModel>([]);
@@ -11,8 +11,8 @@ export const GameTypesSelect = (props: CustomSelectProps & { gameTypeId?: Primar
   const selectOptions = useMemo(() => gameTypes.map((c) => ({ value: c.value, label: c.label })), [gameTypes]);
 
   useEffect(() => {
-    gameUseCase.getGameTypes(props.gameTypeId).then(setGameTypes);
-  }, [props.gameTypeId]);
+    gameUseCase.getGameTypes(props.gameTypeIds).then(setGameTypes);
+  }, [props.gameTypeIds]);
 
   return (
     <>
