@@ -49,6 +49,11 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
           value: data?.externalId
         },
         {
+          title: t.get('category'),
+          variant: 'default',
+          value: data.category?.name
+        },
+        {
           title: t.get('type'),
           variant: 'default',
           value: data.type?.name

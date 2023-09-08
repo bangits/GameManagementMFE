@@ -96,10 +96,15 @@ export class Game extends BaseEntity {
   type: {
     id: PrimaryKey;
     name: string;
-  };
-  subType: {
-    id: PrimaryKey;
-    name: string;
+    parentType?: {
+      id: PrimaryKey;
+      name: string;
+      parentType?: {
+        id: PrimaryKey;
+        name: string;
+        parentType: null;
+      };
+    };
   };
   gameCurrencies: Currency[];
   gameUILanguages: {

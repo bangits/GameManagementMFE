@@ -80,6 +80,11 @@ export class GamesDetailsViewModel {
   gameId: PrimaryKey;
   statusId: GameStatusesEnum;
 
+  category: {
+    name: string;
+    id: PrimaryKey;
+  };
+
   type: {
     name: string;
     id: PrimaryKey;

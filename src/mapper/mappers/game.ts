@@ -193,13 +193,50 @@ export const generateGameMappings = (mapper: Mapper) => {
       mapFrom((source) => source.status.id)
     )
     .forMember(
+      (destination) => destination.category,
+      mapFrom((source) => {
+        const layerCount = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+
+        if (layerCount === 3) {
+          return source.type?.parentType?.parentType;
+        }
+
+        if (layerCount === 2) {
+          return source.type?.parentType;
+        }
+
+        return source.type;
+      })
+    )
+    .forMember(
       (destination) => destination.type,
-      mapFrom((source) => source.type)
+      mapFrom((source) => {
+        const layerCount = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+
+        if (layerCount === 3) {
+          return source.type?.parentType;
+        }
+
+        if (layerCount === 2) {
+          return source.type;
+        }
+
+        return null;
+      })
     )
     .forMember(
       (destination) => destination.subType,
-      mapFrom((source) => source.subType)
+      mapFrom((source) => {
+        const layerCount = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+
+        if (layerCount === 3) {
+          return source.type;
+        }
+
+        return null;
+      })
     )
+
     .forMember(
       (destination) => destination.gameCurrencies,
       mapFrom(
