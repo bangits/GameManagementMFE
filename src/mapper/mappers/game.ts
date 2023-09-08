@@ -35,7 +35,7 @@ export const generateGameMappings = (mapper: Mapper) => {
     .createMap(GamesFiltersViewModel, GetGameRequestModel)
     .forMember(
       (destination) => destination.parentTypeIds,
-      mapFrom((source) => [...source.categoryIds, ...source.typeIds, ...source.categoryIds])
+      mapFrom((source) => [...source.categoryIds, ...source.typeIds, ...source.subTypeIds])
     )
     .forMember(
       (destination) => destination.statusId,
