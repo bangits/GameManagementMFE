@@ -195,45 +195,43 @@ export const generateGameMappings = (mapper: Mapper) => {
     .forMember(
       (destination) => destination.category,
       mapFrom((source) => {
-        const layerCount = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+        const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
 
-        if (layerCount === 3) {
-          return source.type?.parentType?.parentType;
-        }
+        const variants = {
+          1: source.type,
+          2: source.type?.parentType,
+          3: source.type?.parentType?.parentType
+        };
 
-        if (layerCount === 2) {
-          return source.type?.parentType;
-        }
-
-        return source.type;
+        return variants[depth];
       })
     )
     .forMember(
       (destination) => destination.type,
       mapFrom((source) => {
-        const layerCount = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+        const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
 
-        if (layerCount === 3) {
-          return source.type?.parentType;
-        }
+        const variants = {
+          1: null,
+          2: source.type,
+          3: source.type?.parentType
+        };
 
-        if (layerCount === 2) {
-          return source.type;
-        }
-
-        return null;
+        return variants[depth];
       })
     )
     .forMember(
       (destination) => destination.subType,
       mapFrom((source) => {
-        const layerCount = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+        const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
 
-        if (layerCount === 3) {
-          return source.type;
-        }
+        const variants = {
+          1: null,
+          2: null,
+          3: source.type
+        };
 
-        return null;
+        return variants[depth];
       })
     )
 
