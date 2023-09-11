@@ -11,5 +11,6 @@ export enum GameStatusesSortingEnum {
   CLASS,
   CREATION_DATE,
   CREATED_BY,
-  RELEASE_DATE
+  RELEASE_DATE,
+  CATEGORY
 }

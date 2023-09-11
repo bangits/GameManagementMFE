@@ -104,6 +104,11 @@ function GameList({
         sortingId: GameStatusesSortingEnum.PROVIDER_ID
       },
       {
+        Header: t.get('category'),
+        accessor: 'categoryName' as keyof GamesViewModel,
+        sortingId: GameStatusesSortingEnum.CATEGORY
+      },
+      {
         Header: t.get('type'),
         accessor: 'typeName' as keyof GamesViewModel,
         sortingId: GameStatusesSortingEnum.TYPE
@@ -148,7 +153,8 @@ function GameList({
         accessor: 'statusId' as keyof GamesViewModel,
         variant: 'status' as const,
         getVariant: (value: GameStatusesEnum) => gameStatusesConfig[value].variant,
-        getVariantName: (value: GameStatusesEnum) => t.get(gameStatusesConfig[value].translationKey)
+        getVariantName: (value: GameStatusesEnum) => t.get(gameStatusesConfig[value].translationKey),
+        disableSortBy: true
       }
     ],
     [t]

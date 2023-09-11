@@ -33,6 +33,9 @@ export class Game extends BaseEntity {
   typeName: string;
 
   @AutoMap()
+  categoryName: string;
+
+  @AutoMap()
   createdByUserEmail: string;
 
   @AutoMap()

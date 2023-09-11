@@ -24,6 +24,8 @@ export class GamesViewModel {
   @AutoMap()
   typeName: string;
   @AutoMap()
+  categoryName: string;
+  @AutoMap()
   createdByUserEmail: string;
 
   releaseDate: string;
