@@ -212,6 +212,7 @@ function GameList({
             selectAll
             fullWidth
             isMulti
+            clearButton
             inputLabel={t.get('category')}
             onChange={(changedValue) => onChange('categoryIds', changedValue)}
             value={filterValues.categoryIds}
@@ -227,6 +228,7 @@ function GameList({
             selectAll
             fullWidth
             isMulti
+            clearButton
             showEmptyOptions={!filterValues.categoryIds.length}
             inputLabel={t.get('type')}
             gameTypeIds={filterValues.categoryIds}
@@ -244,6 +246,7 @@ function GameList({
             selectAll
             fullWidth
             isMulti
+            clearButton
             showEmptyOptions={!filterValues.typeIds.length}
             gameTypeIds={filterValues.typeIds}
             inputLabel={t.get('subType')}
