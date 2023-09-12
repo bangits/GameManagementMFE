@@ -48,7 +48,6 @@ export class GameUseCase {
     const getGameRequestModel = mapper.map(gamesFiltersViewModel, GetGameRequestModel, GamesFiltersViewModel);
 
     const getGameResponseModel = await this.gameRepository.getGames(getGameRequestModel);
-    console.log(mapper.map(getGameResponseModel, GetGamesViewModel, GetGameResponseModel));
 
     return mapper.map(getGameResponseModel, GetGamesViewModel, GetGameResponseModel);
   };

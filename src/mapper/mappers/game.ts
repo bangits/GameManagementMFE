@@ -34,7 +34,7 @@ const typeMappings = {
     const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
 
     const variants = {
-      1: null,
+      1: source.type,
       2: source.type?.parentType,
       3: source.type?.parentType?.parentType
     };
