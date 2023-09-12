@@ -27,15 +27,6 @@ export class Game extends BaseEntity {
   volatilityName: string;
 
   @AutoMap()
-  subTypeName: string;
-
-  @AutoMap()
-  typeName: string;
-
-  @AutoMap()
-  categoryName: string;
-
-  @AutoMap()
   createdByUserEmail: string;
 
   @AutoMap()

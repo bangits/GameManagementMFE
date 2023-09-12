@@ -105,18 +105,21 @@ function GameList({
       },
       {
         Header: t.get('category'),
-        accessor: 'categoryName' as keyof GamesViewModel,
-        sortingId: GameStatusesSortingEnum.CATEGORY
+        accessor: 'category' as keyof GamesViewModel,
+        sortingId: GameStatusesSortingEnum.CATEGORY,
+        renderColumn: (_, v) => v?.name || t.get('emptyValue')
       },
       {
         Header: t.get('type'),
-        accessor: 'typeName' as keyof GamesViewModel,
-        sortingId: GameStatusesSortingEnum.TYPE
+        accessor: 'type' as keyof GamesViewModel,
+        sortingId: GameStatusesSortingEnum.TYPE,
+        renderColumn: (_, v) => v?.name || t.get('emptyValue')
       },
       {
         Header: t.get('subtype'),
-        accessor: 'subTypeName' as keyof GamesViewModel,
-        sortingId: GameStatusesSortingEnum.SUBTYPE
+        accessor: 'subType' as keyof GamesViewModel,
+        sortingId: GameStatusesSortingEnum.SUBTYPE,
+        renderColumn: (_, v) => v?.name || t.get('emptyValue')
       },
       {
         Header: t.get('volatility'),

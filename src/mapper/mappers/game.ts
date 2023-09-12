@@ -29,6 +29,57 @@ import autoMapper, { Mapper } from '@automapper/core';
 
 const { mapFrom, mapWith } = autoMapper;
 
+const typeMappings = {
+  category: (source) => {
+    const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+
+    const variants = {
+      1: null,
+      2: source.type?.parentType,
+      3: source.type?.parentType?.parentType
+    };
+
+    return variants[depth]
+      ? {
+          id: variants[depth].id,
+          name: variants[depth].name
+        }
+      : null;
+  },
+  type: (source) => {
+    const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+
+    const variants = {
+      1: null,
+      2: source.type,
+      3: source.type?.parentType
+    };
+
+    return variants[depth]
+      ? {
+          id: variants[depth].id,
+          name: variants[depth].name
+        }
+      : null;
+  },
+  subType: (source) => {
+    const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
+
+    const variants = {
+      1: null,
+      2: null,
+      3: source.type
+    };
+
+    return variants[depth]
+      ? {
+          id: variants[depth].id,
+          name: variants[depth].name
+        }
+      : null;
+  }
+};
+
 export const generateGameMappings = (mapper: Mapper) => {
   //#region Get Game Filters Mapping
   mapper
@@ -106,7 +157,10 @@ export const generateGameMappings = (mapper: Mapper) => {
     .forMember(
       (destination) => destination.releaseDate,
       mapFrom((source) => (source.releaseDate ? `${convertDate(source.releaseDate, 'MM/DD/YYYY')}` : 'N/A'))
-    );
+    )
+    .forMember((destination) => destination.category, mapFrom(typeMappings.category))
+    .forMember((destination) => destination.type, mapFrom(typeMappings.type))
+    .forMember((destination) => destination.subType, mapFrom(typeMappings.subType));
   //#endregion
 
   //#region Get Game List Mapping
@@ -192,48 +246,9 @@ export const generateGameMappings = (mapper: Mapper) => {
       (destination) => destination.statusId,
       mapFrom((source) => source.status.id)
     )
-    .forMember(
-      (destination) => destination.category,
-      mapFrom((source) => {
-        const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
-
-        const variants = {
-          1: source.type,
-          2: source.type?.parentType,
-          3: source.type?.parentType?.parentType
-        };
-
-        return variants[depth];
-      })
-    )
-    .forMember(
-      (destination) => destination.type,
-      mapFrom((source) => {
-        const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
-
-        const variants = {
-          1: null,
-          2: source.type,
-          3: source.type?.parentType
-        };
-
-        return variants[depth];
-      })
-    )
-    .forMember(
-      (destination) => destination.subType,
-      mapFrom((source) => {
-        const depth = source.type?.parentType?.parentType ? 3 : source.type.parentType ? 2 : 1;
-
-        const variants = {
-          1: null,
-          2: null,
-          3: source.type
-        };
-
-        return variants[depth];
-      })
-    )
+    .forMember((destination) => destination.category, mapFrom(typeMappings.category))
+    .forMember((destination) => destination.type, mapFrom(typeMappings.type))
+    .forMember((destination) => destination.subType, mapFrom(typeMappings.subType))
 
     .forMember(
       (destination) => destination.gameCurrencies,

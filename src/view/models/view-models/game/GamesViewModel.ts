@@ -20,13 +20,20 @@ export class GamesViewModel {
   @AutoMap()
   volatilityName: string;
   @AutoMap()
-  subTypeName: string;
-  @AutoMap()
-  typeName: string;
-  @AutoMap()
-  categoryName: string;
-  @AutoMap()
   createdByUserEmail: string;
+
+  subType: {
+    id: PrimaryKey;
+    name: string;
+  };
+  type: {
+    id: PrimaryKey;
+    name: string;
+  };
+  category: {
+    id: PrimaryKey;
+    name: string;
+  };
 
   releaseDate: string;
   creationDate: string;
