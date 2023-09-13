@@ -135,6 +135,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
               <GameTypesSelect
                 {...props}
                 fullWidth
+                isDisabled={!form.values.categoryId}
                 gameTypeIds={[form.values.categoryId]}
                 onChange={(value) => {
                   form.setFieldValue('gameTypeId', value);
@@ -156,6 +157,7 @@ const GameInformation: FC<GameInformationProps> = ({ data, onSubmit, isEdit }) =
               <GameTypesSelect
                 {...props}
                 fullWidth
+                isDisabled={!form.values.gameTypeId}
                 gameTypeIds={[form.values.gameTypeId]}
                 inputLabel={t.get('subType')}
                 onChange={(value) => {

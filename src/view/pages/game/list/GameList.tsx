@@ -238,8 +238,8 @@ function GameList({
             fullWidth
             isMulti
             clearButton
-            showEmptyOptions={!filterValues.categoryIds.length}
             inputLabel={t.get('type')}
+            isDisabled={!filterValues.categoryIds.length}
             gameTypeIds={filterValues.categoryIds}
             onChange={(changedValue) => onChange('typeIds', changedValue)}
             value={filterValues.typeIds}
@@ -256,7 +256,7 @@ function GameList({
             fullWidth
             isMulti
             clearButton
-            showEmptyOptions={!filterValues.typeIds.length}
+            isDisabled={!filterValues.typeIds.length}
             gameTypeIds={filterValues.typeIds}
             inputLabel={t.get('subType')}
             value={filterValues.subTypeIds}
