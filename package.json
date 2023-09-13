@@ -1,6 +1,6 @@
 {
   "name": "@atom/game-management",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "",
   "types": "./dist/atom-game-management.d.ts",
   "files": [
