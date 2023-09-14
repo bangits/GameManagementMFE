@@ -55,6 +55,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
             gameTypeIds={[form.values.categoryId]}
             inputLabel={t.get('type')}
             onChange={(value, event, options) => {
+              console.log(11);
               props.onChange(value, event, options);
               form.setFieldValue('typeId', value);
               form.setFieldValue('subTypeId', null);
@@ -114,7 +115,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
         type: 'input' as const,
         label: t.get('gameName')
       },
-      ...(!providerId ? [releaseDate, categoryId, typeId, subTypeId] : [typeId, categoryId, subTypeId, releaseDate]),
+      ...(!providerId ? [releaseDate, categoryId, typeId, subTypeId] : [categoryId, typeId, subTypeId, releaseDate]),
       {
         name: 'rtp' as keyof AddGameViewModel,
         type: 'input' as const,

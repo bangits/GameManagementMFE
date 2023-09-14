@@ -16,7 +16,7 @@ export const GameTypesSelect = (
     if (!props.isDisabled) {
       gameUseCase.getGameTypes(props.gameTypeIds?.filter((type) => !!type)).then(setGameTypes);
     }
-  }, [props.showEmptyOptions, props.gameTypeIds]);
+  }, [props.isDisabled]);
 
   useEffect(() => {
     fetchOptions();
