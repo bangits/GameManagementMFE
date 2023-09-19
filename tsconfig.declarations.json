@@ -16,7 +16,8 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "styled-system/*": ["../styled-system/*"]
     },
     "skipLibCheck": true
   },

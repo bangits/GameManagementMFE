@@ -20,6 +20,12 @@ export class EditGamePropertiesViewModel {
   @AutoMap()
   lastUpdatedByUserEmail: string;
 
+  @AutoMap()
+  minBet: number;
+
+  @AutoMap()
+  maxBet: number;
+
   featureIds: PrimaryKey[];
   themesIds: PrimaryKey[];
 }

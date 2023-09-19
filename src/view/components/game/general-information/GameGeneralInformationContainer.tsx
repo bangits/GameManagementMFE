@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from '@atom/common';
 import { alert } from '@atom/design-system';
 import { gameApi } from '@/adapter/redux/api';
-import { GamesDetailsViewModel } from '@/view/models';
+import { EditGameInformationViewModel, GamesDetailsViewModel } from '@/view/models';
 import GameGeneralInformation from './GameGeneralInformation';
 
 export interface GameGeneralInformationContainer {
@@ -25,9 +25,15 @@ const GameGeneralInformationContainer: FC<GameGeneralInformationContainer> = ({ 
 
   const showErrorAlert = useCallback(() => alert.error({ alertLabel: t.get('errorAlertMessage') }), [t]);
 
-  const onGameInfoSubmit = useCallback((data) => {
-    editGameInfo(data).unwrap().then(showSuccessAlert).catch(showErrorAlert);
-  }, []);
+  const onGameInfoSubmit = useCallback(
+    ({ subTypeId, gameTypeId, categoryId, ...data }: EditGameInformationViewModel) => {
+      editGameInfo({ ...data, subTypeId: subTypeId || gameTypeId || categoryId })
+        .unwrap()
+        .then(showSuccessAlert)
+        .catch(showErrorAlert);
+    },
+    []
+  );
 
   const onGamePropertiesSubmit = useCallback((data) => {
     editGameProperties(data).unwrap().then(showSuccessAlert).catch(showErrorAlert);

@@ -17,6 +17,29 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
   const t = useTranslation();
 
   const atomFormFields = useMemo(() => {
+    const categoryId = {
+      name: 'categoryId' as keyof AddGameViewModel,
+      type: 'select' as const,
+      inputLabel: t.get('category'),
+      component: (props: CustomSelectProps) => {
+        const form = useFormikContext<AddGameViewModel>();
+
+        return (
+          <GameTypesSelect
+            {...props}
+            fullWidth
+            inputLabel={t.get('category')}
+            onChange={(value, event, options) => {
+              props.onChange(value, event, options);
+              form.setFieldValue('categoryId', value);
+              form.setFieldValue('typeId', null);
+              form.setFieldValue('subTypeId', null);
+            }}
+          />
+        );
+      }
+    };
+
     const typeId = {
       name: 'typeId' as keyof AddGameViewModel,
       type: 'select' as const,
@@ -28,9 +51,13 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
           <GameTypesSelect
             {...props}
             fullWidth
+            isDisabled={!form.values.categoryId}
+            gameTypeIds={[form.values.categoryId]}
             inputLabel={t.get('type')}
             onChange={(value, event, options) => {
+              console.log(11);
               props.onChange(value, event, options);
+              form.setFieldValue('typeId', value);
               form.setFieldValue('subTypeId', null);
             }}
           />
@@ -49,7 +76,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
             {...props}
             fullWidth
             isDisabled={!form.values.typeId}
-            gameTypeId={form.values.typeId}
+            gameTypeIds={[form.values.typeId]}
             inputLabel={t.get('subType')}
           />
         );
@@ -88,7 +115,7 @@ const AddGame: FC<AddGameProps> = ({ onSubmit, validationSchema, providerId }) =
         type: 'input' as const,
         label: t.get('gameName')
       },
-      ...(!providerId ? [releaseDate, typeId, subTypeId] : [typeId, subTypeId, releaseDate]),
+      ...(!providerId ? [releaseDate, categoryId, typeId, subTypeId] : [categoryId, typeId, subTypeId, releaseDate]),
       {
         name: 'rtp' as keyof AddGameViewModel,
         type: 'input' as const,

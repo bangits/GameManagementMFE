@@ -15,10 +15,11 @@ export const getEditGameInfoInitialValues = (data: GamesDetailsViewModel): EditG
     lastUpdatedUserId: 1,
     name: data.gameName,
     releaseDate: data.releaseDate && new Date(data.releaseDate),
-    subTypeId: data.subType?.id || null,
+    categoryId: data.category?.id,
     gameTypeId: data.type?.id || null,
     providerId: data.providerId,
-    hasFreeSpin: data.hasFreeSpin
+    hasFreeSpin: data.hasFreeSpin,
+    subTypeId: data.subType?.id || null
   };
 };
 export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGamePropertiesViewModel => {
@@ -28,6 +29,8 @@ export const getEditGamePropertiesValues = (data: GamesDetailsViewModel): EditGa
     lastUpdatedByUserEmail: data.lastUpdatedByUserEmail || null,
     lastUpdatedByUserId: 1,
     maxWin: data.maxWin || null,
+    minBet: data.minBet,
+    maxBet: data.maxBet,
     rtp: data.rtp || null,
     themesIds: data.gameThemes.map((theme) => theme.id) || null,
     volatilityId: data.volatilityId || null

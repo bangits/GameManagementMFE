@@ -4,6 +4,7 @@ export const initialValues: AddGameViewModel = {
   providerId: null,
   externalId: '',
   name: '',
+  categoryId: null,
   typeId: null,
   subTypeId: null,
   releaseDate: null,

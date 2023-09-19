@@ -72,10 +72,21 @@ export class GamesDetailsViewModel {
   @AutoMap()
   providerAbsoluteDemoUrl: string;
 
+  @AutoMap()
+  minBet: number;
+
+  @AutoMap()
+  maxBet: number;
+
   releaseDate: string;
   gameName: string;
   gameId: PrimaryKey;
   statusId: GameStatusesEnum;
+
+  category: {
+    name: string;
+    id: PrimaryKey;
+  };
 
   type: {
     name: string;

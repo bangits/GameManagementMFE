@@ -14,7 +14,8 @@ export const addGameValidationSchema = async (
       // eslint-disable-next-line no-useless-escape
       .matches(/^([0-9a-zA-Z()_\- ])*$/, t.textInput()),
     name: string().trim().required(t.required()).max(50, t.max(50)),
-    typeId: number().typeError(t.required()).required(t.required()),
+    categoryId: number().typeError(t.required()).required(t.required()),
+    typeId: number().nullable(),
     subTypeId: number().nullable(),
     releaseDate: string().nullable(),
     rtp: number().max(100, t.maxValue(100)).min(0.1, t.min(0.1)).nullable(),

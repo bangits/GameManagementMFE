@@ -27,12 +27,6 @@ export class Game extends BaseEntity {
   volatilityName: string;
 
   @AutoMap()
-  subTypeName: string;
-
-  @AutoMap()
-  typeName: string;
-
-  @AutoMap()
   createdByUserEmail: string;
 
   @AutoMap()
@@ -83,6 +77,12 @@ export class Game extends BaseEntity {
   @AutoMap()
   providerAbsoluteDemoUrl: string;
 
+  @AutoMap()
+  minBet: number;
+
+  @AutoMap()
+  maxBet: number;
+
   releaseDate: string;
 
   status: {
@@ -93,10 +93,15 @@ export class Game extends BaseEntity {
   type: {
     id: PrimaryKey;
     name: string;
-  };
-  subType: {
-    id: PrimaryKey;
-    name: string;
+    parentType?: {
+      id: PrimaryKey;
+      name: string;
+      parentType?: {
+        id: PrimaryKey;
+        name: string;
+        parentType: null;
+      };
+    };
   };
   gameCurrencies: Currency[];
   gameUILanguages: {

@@ -22,6 +22,7 @@ export class AddGameViewModel {
   rtp: PrimaryKey | '';
 
   hasDemo: '0' | '1';
-  typeId: PrimaryKey;
+  categoryId?: PrimaryKey;
+  typeId?: PrimaryKey;
   subTypeId: PrimaryKey;
 }

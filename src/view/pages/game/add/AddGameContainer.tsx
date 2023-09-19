@@ -38,8 +38,8 @@ const AddGameContainer: FC = () => {
   );
 
   const onSubmit = useCallback<AddGameProps['onSubmit']>(
-    (data, form) =>
-      addGame(data)
+    ({ categoryId, typeId, subTypeId, ...data }, form) =>
+      addGame({ ...data, subTypeId: subTypeId || typeId || categoryId })
         .unwrap()
         .then(() => form.resetForm())
         .catch((error: { message: AddGameCustomErrorsEnum }) => {
