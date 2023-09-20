@@ -59,7 +59,7 @@ export const gameApi = createApi({
       invalidatesTags: ['Games']
     }),
     getGameTypes: build.query<GetGameTypesViewModel, {}>({
-      query: (parentTypeId?: PrimaryKey) => {
+      query: (parentTypeId?: PrimaryKey[]) => {
         return {
           methodName: 'getGameTypes',
           methodArguments: [parentTypeId]

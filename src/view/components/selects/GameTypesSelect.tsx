@@ -1,30 +1,17 @@
-import { GameManagementContext } from '@/atom-game-management';
-import { GetGameNamesViewModel } from '@/view/models/view-models';
+import { gameApi } from '@/adapter/redux/api';
 import { CustomSelect, CustomSelectProps, PrimaryKey } from '@atom/common';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-export const GameTypesSelect = (
-  props: CustomSelectProps & { gameTypeIds?: PrimaryKey[]; showEmptyOptions?: boolean }
-) => {
-  const { gameUseCase } = useContext(GameManagementContext);
+export const GameTypesSelect = (props: CustomSelectProps & { gameTypeIds?: PrimaryKey[] }) => {
+  const { data } = gameApi.useGetGameTypesQuery(props.gameTypeIds?.filter((type) => !!type));
 
-  const [gameTypes, setGameTypes] = useState<GetGameNamesViewModel>([]);
-
-  const selectOptions = useMemo(() => gameTypes.map((c) => ({ value: c.value, label: c.label })), [gameTypes]);
-
-  const fetchOptions = useCallback(() => {
-    if (!props.isDisabled) {
-      gameUseCase.getGameTypes(props.gameTypeIds?.filter((type) => !!type)).then(setGameTypes);
-    }
-  }, [props.isDisabled]);
-
-  useEffect(() => {
-    fetchOptions();
-  }, [fetchOptions]);
+  const selectOptions = useMemo(() => {
+    return data?.map((c) => ({ value: c.value, label: c.label })) || [];
+  }, [data]);
 
   return (
     <>
-      <CustomSelect {...props} fullWidth options={props.showEmptyOptions ? [] : selectOptions || []} />
+      <CustomSelect {...props} fullWidth options={selectOptions} />
     </>
   );
 };
